@@ -1,0 +1,160 @@
+---
+// Astro
+import { Image } from "astro:assets";
+// Images
+import davidAvatar from "@/images/testimonials/david.png";
+import emilyAvatar from "@/images/testimonials/emily.png";
+import lisaAvatar from "@/images/testimonials/lisa.png";
+import michaelAvatar from "@/images/testimonials/michael.png";
+import robertAvatar from "@/images/testimonials/robert.png";
+import saraAvatar from "@/images/testimonials/sara.png";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+// Icons
+import ArrowLeft from "@/components/fundations/icons/ArrowLeft.astro";
+import ArrowRight from "@/components/fundations/icons/ArrowRight.astro";
+
+const testimonials = [
+  {
+    // Source: Frame 5 - The Payoff
+    quote:
+      "We replaced three aging vending machines with one robotic kiosk and doubled our revenue in the first quarter. It turns a low-margin corner into a destination.",
+    author: "David Park", // Fits perfectly with the high-tech retail culture in KR
+    role: "Vending Operator",
+    location: "Seoul, South Korea",
+    avatar: davidAvatar,
+  },
+  {
+     // Source: Master Narrative Part 3 - "24/7 Service"
+    quote:
+      "Our guests demand premium coffee at 3 AM, but staffing a cafe overnight was financial suicide. Artidyn solved the 'off-peak' problem instantly.",
+    author: "Emma Rodriguez", 
+    role: "General Manager",
+    location: "Barcelona, Spain", // Represents European boutique hospitality
+    avatar: emilyAvatar,
+  },
+  {
+    // Source: Frame 3 - "High Volume Barista"
+    quote:
+      "Speed is everything in our terminal. The high-volume unit handles the morning rush flawlessly. It never calls in sick and the quality never drifts.",
+    author: "Michael Chen", 
+    role: "Concessions Director",
+    location: "Singapore", // Represents the "Gold Standard" of airport retail
+    avatar: michaelAvatar,
+  },
+  {
+    // Source: Business Plan - "The Wild West" / Trust
+    quote:
+      "I was terrified of buying a 'science project' from an unverified vendor. The Artidyn Certified seal gave me the confidence to finally invest in automation.",
+    author: "Sarah Johnson",
+    role: "Franchise Owner",
+    location: "London, UK", // Mature Western Market
+    avatar: saraAvatar,
+  },
+  {
+    // Source: Frame 3 - "Compact & Versatile"
+    quote:
+      "We needed a perk to get people back to the office. The compact bar fit perfectly in our lobby and became the hub of our company culture.",
+    author: "Lisa Thompson", 
+    role: "Facilities Manager",
+    location: "Sydney, Australia", // Huge coffee culture market
+    avatar: lisaAvatar,
+  },
+  {
+    // Source: Master Narrative Part 5 - "ROI in Months"
+    quote:
+      "Artidyn didn't just sell me a robot; they gave me a business plan. We hit our ROI targets in month 9, exactly as they projected.",
+    author: "Robert Martinez", 
+    role: "Operations Director",
+    location: "Dubai, UAE", // High-growth, investment-heavy market
+    avatar: robertAvatar,
+  },
+];
+---
+
+<section class="overflow-hidden">
+  <Wrapper variant="paddingless" class="py-12">
+    <div
+      class="grid grid-cols-1 lg:grid-cols-3 items-start gap-y-4 xl:ml-8 gap-4"
+    >
+      <div
+        class="order-last p-4 xl:p-8 lg:bg-white lg:rounded-2xl justify-between flex flex-col h-full lg:order-first max-w-screen lg:h-[500px]"
+      >
+        <div>
+          <Text
+            tag="h2"
+            variant="textXL"
+            class="text-base-900 mt-4 text-balance font-medium"
+          >
+            Real ROI, validated globally. See how Artidyn partners are uncapping their growth worldwide.
+          </Text>
+        </div>
+        <div class="flex items-center gap-4 mt-8">
+          <Button
+            size="sm"
+            variant="muted"
+            iconOnly
+            aria-label="Previous testimonial"
+            id="testimonials-previous"
+          >
+            <ArrowLeft size="base" slot="icon" />
+          </Button>
+          <Button
+            size="sm"
+            variant="muted"
+            iconOnly
+            aria-label="Next testimonial"
+            id="testimonials-next"
+          >
+            <ArrowRight size="base" slot="icon" />
+          </Button>
+        </div>
+      </div>
+      <div
+        id="testimonials-slider"
+        class="keen-slider lg:col-span-2 pl-4 lg:pl-0 h-full"
+      >
+        {
+          testimonials.map((testimonial) => (
+            <div class="keen-slider__slide h-full flex flex-col justify-between rounded-2xl h-full overflow-hidden bg-white p-8">
+              <blockquote>
+                <span aria-hidden="true" class="text-9xl italic">
+                  "
+                </span>
+                <Text
+                  tag="p"
+                  variant="displayMD"
+                  class="text-base-900 font-medium tracking-tight italic"
+                >
+                  "{testimonial.quote}"
+                </Text>
+              </blockquote>
+              <div class="flex items-center gap-2  mt-12 lg:mt-24">
+                <Image
+                  src={testimonial.avatar}
+                  alt={`${testimonial.author} avatar`}
+                  class="size-12 rounded-full object-cover "
+                />
+                <div>
+                  <Text
+                    tag="p"
+                    variant="textLG"
+                    class="text-base-900 font-medium"
+                  >
+                    {testimonial.author}
+                  </Text>
+                  <Text tag="p" variant="textSM" class="text-base-600">
+                    {testimonial.role}, {testimonial.location}
+                  </Text>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Wrapper>
+</section>

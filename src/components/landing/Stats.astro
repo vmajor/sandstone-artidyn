@@ -1,0 +1,111 @@
+---
+// Assets
+import { Image } from "astro:assets";
+// TODO: Replace this image with your "Certified Seal" or a "Robot Close-up"
+import Team from "@/images/assets/team.png"; 
+
+// Fundations
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+
+// Mapped from your "Master Narrative" & "Business Plan"
+const stats = [
+  {
+    number: "< 12 Mo",
+    label:
+      "Start seeing your ROI in months, not years. By replacing limited staffing with 24/7 automated reliability, most operators break even in their first year.", 
+      // Source: Frame 5 - "Start Seeing Your ROI in Months"
+  },
+  {
+    number: "24/7",
+    label:
+      "Unlock revenue streams that don't sleep. Turn 'off-peak' hours into profitable service windows without incurring overtime staffing costs.",
+      // Source: Frame 5 - "Unlock 24/7 Revenue Streams"
+  },
+  {
+    number: "100%",
+    label:
+      "Certified. We are the antithesis of the 'Wild West.' Every robot we sell is vetted, tested, and backed by the Artidyn Seal of Quality.",
+      // Source: Frame 2 - "The Antithesis of the Wild West"
+  },
+  {
+    number: "2x",
+    label:
+      "Double your revenue potential. Case studies show that replacing aging vending machines with our robotic kiosks can double quarterly revenue.",
+      // Source: Frame 5 - Testimonial "Doubled our revenue"
+  },
+  {
+    number: "Zero",
+    label:
+      "Zero guesswork. We don't just sell you a machine; we provide a transparent, data-driven business model before you sign a single contract.",
+      // Source: Frame 4 - "Transparent pricing and clear ROI projections"
+  }
+];
+---
+
+<section>
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div>
+        <!-- <div class="lg:sticky lg:top-24 max-w-sm">
+          <Image
+            src={Team}
+            alt="Artidyn Certified Robot"
+            width={800}
+            height={1080}
+            loading="eager"
+            decoding="async"
+            class="object-cover aspect-square rounded-xl"
+          />
+          <Text
+            tag="p"
+            variant="textSM"
+            class="text-base-600 mt-4 text-balance font-medium"
+          >
+            Engineered for reliability. Certified for growth. 
+          </Text>
+        </div> -->
+      </div>
+      <div class="lg:col-span-2">
+        <Text
+          tag="p"
+          variant="displaySM"
+          class="text-base-900 font-medium tracking-tight"
+        >
+          The robotics market is a "wild west" of unverified claims and unreliable hardware. We are here to change that. 
+          We believe automation should be a business model upgrade, not a science experiment. 
+          When you partner with Artidyn, you aren't just buying a machine—you are gaining a certified partner 
+          dedicated to uncapping your growth potential.
+        </Text>
+        <Text tag="p" variant="textSM" class="text-base-600 mt-8">
+          We don't just resell hardware; we curate success. Our team engineers, vets, and certifies 
+          best-in-class solutions so you don't have to. Whether you need high-volume throughput for an airport 
+          or a craft experience for a boutique hotel, our goal is simple: to provide a reliable, 
+          revenue-generating asset from Day 1.
+        </Text>
+        <div class="divide-y divide-base-200 border-y border-base-200 mt-8">
+          {
+            stats.map((stat) => (
+              <div class="grid grid-cols-1 lg:grid-cols-3 items-start gap-4 pb-8 pt-8 lg:sticky lg:top-0 bg-base-100">
+                <Text
+                  tag="p"
+                  variant="display2XL"
+                  class="text-base-900 font-semibold  italic"
+                >
+                  {stat.number}
+                </Text>
+                <Text
+                  tag="p"
+                  variant="textBase"
+                  class="text-base-600 lg:col-span-2 text-balance"
+                >
+                  {stat.label}
+                </Text>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </Wrapper>
+</section>

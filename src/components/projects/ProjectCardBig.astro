@@ -1,0 +1,45 @@
+---
+// Assets
+import { Image } from "astro:assets";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+const { post } = Astro.props;
+const { url, title, image, throughput, client } = {
+  url: "/projects/" + post.slug,
+  title: post.data.title,
+  image: post.data.cover?.url || "/images/placeholder.jpg",
+  throughput: post.data.throughput,
+  client: post.data.client,
+};
+---
+
+<article class="relative group">
+  <a
+    href={url}
+    title={`View robot: ${title}`}
+    aria-label={`View robot: ${title}`}
+    class="absolute inset-0 z-10"></a>
+
+  <div class="bg-base-100 rounded-2xl p-8 lg:p-12 border border-base-200 group-hover:border-base-300 transition-colors shadow-sm">
+    <Image
+      src={image}
+      alt={title}
+      width={1000}
+      height={1000}
+      class="object-contain object-center w-full aspect-square lg:aspect-16/9"
+    />
+  </div>
+
+  <div class="mt-6 px-2">
+    <div class="flex items-center gap-2 text-base-400 text-xs mb-2 uppercase tracking-widest font-bold">
+      <span>{client}</span>
+      <span>•</span>
+      <span>{throughput}</span>
+    </div>
+    <Text
+      tag="h3"
+      variant="textXLG"
+      class="text-base-900 text-balance font-medium tracking-tight group-hover:text-base-600 transition-colors">{title}</Text
+    >
+  </div>
+</article>

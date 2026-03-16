@@ -1,0 +1,50 @@
+---
+import { AstroSeo } from "@astrolib/seo";
+
+// Define default metadata based on your Master Narrative & Storyboard
+const defaultTitle = "Artidyn Robotics | The Beverage Automation Partner";
+const defaultDescription = "Your growth is capped by staffing. We uncap it. Artidyn Robotics provides certified beverage automation solutions to unlock new revenue and premium experiences.";
+const defaultImage = "https://artidyn.ai/og.image.jpg"; // Absolute URL is safer for social sharing
+
+// Allow individual pages to override these
+const { 
+  title = defaultTitle, 
+  description = defaultDescription,
+  image = defaultImage,
+  ...props 
+} = Astro.props;
+
+// Construct the full canonical URL for the current page
+const canonicalURL = new URL(Astro.url.pathname, "https://artidyn.ai").toString();
+---
+
+<AstroSeo
+  title={title}
+  description={description}
+  canonical={canonicalURL}
+  openGraph={{
+    url: canonicalURL,
+    title: title,
+    description: description,
+    images: [
+      {
+        url: image,
+        // Assuming your og.image.jpg is standard size, otherwise adjust
+        width: 1200, 
+        height: 630,
+        alt: "Artidyn Robotics - Certified Beverage Automation",
+        type: "image/jpeg",
+      },
+    ],
+    site_name: "Artidyn Robotics",
+    type: "website",
+    locale: "en_US",
+  }}
+  twitter={{
+    // Update these if/when you claim the handles
+    handle: "@artidynrobotics", 
+    site: "@artidynrobotics",
+    cardType: "summary_large_image",
+  }}
+  {...props}
+/>

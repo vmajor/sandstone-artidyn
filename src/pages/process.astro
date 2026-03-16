@@ -1,0 +1,27 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+// Components
+// Note: Ensure this path points to where your updated Process.astro actually lives.
+// If it was the one we edited previously, it might be in @/components/landing/Process.astro
+import ProcessSteps from "@/components/landing/Process.astro"; 
+---
+
+<BaseLayout>
+  <section class="pt-32 pb-12">
+    <Wrapper variant="standard">
+      <Text
+        tag="h1"
+        variant="displayXL"
+        class="text-base-900 font-medium tracking-tight text-pretty mb-12"
+      >
+        From <span class="text-base-500 font-light italic">analysis</span> to <span class="text-base-500 font-light italic">deployment</span>.
+      </Text>
+      
+      <ProcessSteps />
+      
+    </Wrapper>
+  </section>
+</BaseLayout>

@@ -1,0 +1,149 @@
+---
+// Assets
+import { Image } from "astro:assets";
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import RollingLink from "@/components/fundations/elements/RollingLink.astro";
+const { frontmatter } = Astro.props;
+
+const specs = [
+  { label: "Price", value: frontmatter.price ? `$${frontmatter.price.toLocaleString()}` : null },
+  { label: "Dimensions", value: frontmatter.dimensions },
+  { label: "Weight", value: frontmatter.weight },
+  { label: "Kinematics", value: frontmatter.kinematics },
+  { label: "Espresso Unit", value: frontmatter.espressoUnit },
+  { label: "Power", value: frontmatter.power },
+  { label: "Production Time", value: frontmatter.productionTime },
+  { label: "Throughput", value: frontmatter.throughput },
+  { label: "Cup Capacity", value: frontmatter.cupCapacity },
+  { label: "Flavor Matrix", value: frontmatter.flavorMatrix },
+  { label: "Latte Art / Print", value: frontmatter.latteArt },
+  { label: "Enclosure", value: frontmatter.enclosureType },
+].filter(spec => spec.value);
+
+const gallery = frontmatter.gallery || [];
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="wide" class="pt-4 pb-8">
+      <div class="relative rounded-3xl h-[calc(100vh-2rem)] overflow-hidden bg-base-100">
+        {frontmatter.cover && (
+          <Image
+            width={1440}
+            height={1080}
+            loading="eager"
+            decoding="async"
+            alt={frontmatter.cover.alt}
+            src={frontmatter.cover.url}
+            class="object-contain size-full absolute inset-0 object-center p-8 lg:p-16"
+          />
+        )}
+
+        <div class="absolute bottom-4 left-4 right-4 max-w-sm flex flex-col">
+          <div class="p-8 bg-base-100/80 backdrop-blur-md rounded-2xl w-fit border border-base-200 shadow-xl">
+            <div class="mb-4">
+               <a href="/projects" class="text-xs font-bold uppercase tracking-widest text-base-400 hover:text-base-900 transition-colors">← Back to Catalog</a>
+            </div>
+            <div>
+              <Text
+                tag="h1"
+                variant="textLG"
+                class="text-base-900 tracking-tight 2xl:text-2xl text-balance font-medium"
+              >
+                {frontmatter.title}
+              </Text>
+              <div class="space-y-1 mt-8">
+                <Text tag="p" variant="textSM" class="text-base-600 font-bold uppercase tracking-wider">
+                  {frontmatter.category?.replace("-", " ")}
+                </Text>
+                <Text tag="p" variant="textSM" class="text-base-500">
+                  {frontmatter.throughput}
+                </Text>
+                <Text tag="p" variant="textSM" class="text-base-500">
+                  {frontmatter.client}
+                </Text>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2 space-y-12">
+          <div class="prose prose-base max-w-none text-base-500">
+            <slot />
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {frontmatter.features && (
+              <div>
+                <Text tag="h3" variant="textBase" class="font-bold mb-4 uppercase tracking-wider text-base-900">Key Features</Text>
+                <ul class="space-y-2">
+                  {frontmatter.features.map(feature => (
+                    <li class="flex items-center gap-2 text-base-500">
+                      <span class="size-1.5 rounded-full bg-base-300"></span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {frontmatter.scenarios && (
+              <div>
+                <Text tag="h3" variant="textBase" class="font-bold mb-4 uppercase tracking-wider text-base-900">Best For</Text>
+                <ul class="space-y-2">
+                  {frontmatter.scenarios.map(scenario => (
+                    <li class="flex items-center gap-2 text-base-500">
+                      <span class="size-1.5 rounded-full bg-base-300"></span>
+                      {scenario}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+
+          {gallery.length > 1 && (
+            <div class="space-y-8 mt-12">
+              <Text tag="h3" variant="textBase" class="font-bold uppercase tracking-wider text-base-900">Product Gallery</Text>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {gallery.map((image, index) => (
+                  <Image
+                    alt={image.alt || `Project image ${index + 1}`}
+                    src={image.url}
+                    width={800}
+                    height={600}
+                    loading="lazy"
+                    decoding="async"
+                    class="w-full aspect-square rounded-2xl object-center object-contain bg-base-50 border border-base-100 p-4"
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div class="lg:sticky lg:top-24 h-fit">
+          <div class="p-8 rounded-2xl bg-base-50 border border-base-200">
+            <Text tag="h3" variant="textBase" class="font-bold mb-6 uppercase tracking-wider text-base-900">Technical Specifications</Text>
+            <dl class="space-y-4">
+              {specs.map(spec => (
+                <div class="flex flex-col border-b border-base-200 pb-2 last:border-0">
+                  <dt class="text-xs text-base-400 uppercase font-medium">{spec.label}</dt>
+                  <dd class="text-sm text-base-700 font-medium">{spec.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

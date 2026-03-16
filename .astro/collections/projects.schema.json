@@ -1,0 +1,151 @@
+{
+  "$ref": "#/definitions/projects",
+  "definitions": {
+    "projects": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "pubDate": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "integer",
+              "format": "unix-time"
+            }
+          ]
+        },
+        "price": {
+          "type": "number"
+        },
+        "dimensions": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "string"
+        },
+        "kinematics": {
+          "type": "string"
+        },
+        "espressoUnit": {
+          "type": "string"
+        },
+        "power": {
+          "type": "string"
+        },
+        "productionTime": {
+          "type": "string"
+        },
+        "throughput": {
+          "type": "string"
+        },
+        "cupCapacity": {
+          "type": "string"
+        },
+        "flavorMatrix": {
+          "type": "string"
+        },
+        "latteArt": {
+          "type": "string"
+        },
+        "enclosureType": {
+          "type": "string"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scenarios": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "high-volume",
+            "craft",
+            "compact",
+            "certified"
+          ]
+        },
+        "client": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "year": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "high-volume",
+            "craft",
+            "compact",
+            "certified"
+          ]
+        },
+        "area": {
+          "type": "string"
+        },
+        "cover": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string"
+            },
+            "alt": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "url",
+            "alt"
+          ],
+          "additionalProperties": false
+        },
+        "gallery": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string"
+              },
+              "alt": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "url"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "cover"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

@@ -1,0 +1,99 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import one from "@/images/services/1.png";
+import two from "@/images/services/2.png";
+import three from "@/images/services/3.png";
+// Keeping these imports to avoid build errors, but they are unused in the array below
+import implementationImg from "@/images/services/4.png";
+import five from "@/images/services/5.png";
+import six from "@/images/services/6.png";
+
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+const processSteps = [
+  {
+    // Source: Frame 4, Step 1 [cite: 187]
+    title: "Discovery Consultation",
+    description:
+      "We start with a free call to understand your business goals, ideal locations, and budget. We assess your specific constraints—staffing, space, or throughput—to define the problem.", // [cite: 189]
+    image: one,
+  },
+  {
+    // Source: Frame 4, Step 2 [cite: 190]
+    title: "Tailored Solution",
+    description:
+      "We match you with the perfect robot from our Certified Range. No guesswork—just transparent pricing, clear ROI projections, and a system vetted for your specific use case.", // [cite: 192]
+    image: two,
+  },
+  {
+    // Source: Frame 4, Step 3 [cite: 193]
+    title: "Launch & Support",
+    description:
+      "We guide you through delivery, installation, customization, and training. We ensure your team is ready and your robot is calibrated for 24/7 reliability from Day 1.", // 
+    image: three,
+  },
+];
+---
+
+<section>
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div>
+        <div
+          class="p-8 bg-white rounded-xl lg:sticky lg:top-24 max-w-sm flex flex-col"
+        >
+          <Kicker copy="The Process" />
+          <Text
+            tag="h3"
+            variant="textXLG"
+            class="text-base-900 text-balance mt-12 font-medium"
+          >
+            We are invested in your success. Our 3-step process is designed to ensure you not only launch an automated business, but thrive.
+          </Text>
+        </div>
+      </div>
+      <div
+        class="lg:col-span-2 divide-y divide-base-200 border-y border-base-200"
+      >
+        {
+          processSteps.map((step, index) => (
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 py-8 lg:sticky lg:top-0 bg-base-100">
+              <Text
+                tag="p"
+                variant="display2XL"
+                class="text-base-900 font-semibold  italic"
+              >
+                0{index + 1}.
+              </Text>
+              <div class="lg:col-span-2 text-balance">
+                <Text
+                  tag="h3"
+                  variant="displaySM"
+                  class="text-base-900 font-medium tracking-tight lg:text-balance"
+                >
+                  {step.title}
+                </Text>
+                <Text tag="p" variant="textSM" class="text-base-600 mt-2">
+                  {step.description}
+                </Text>
+              </div>
+              <Image
+                src={step.image}
+                alt={step.title}
+                width={500}
+                height={500}
+                loading="eager"
+                decoding="async"
+                class="w-full h-48 object-cover rounded-xl "
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Wrapper>
+</section>
