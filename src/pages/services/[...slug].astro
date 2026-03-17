@@ -1,7 +1,7 @@
 ---
 import ServicesLayout from "@/layouts/ServicesLayout.astro";
 import { getCollection } from "astro:content";
-import RollingLink from "@/components/fundations/elements/RollingLink.astro";
+import RollingLink from "@/components/foundations/elements/RollingLink.astro";
 
 export async function getStaticPaths() {
   const services = await getCollection("services");
