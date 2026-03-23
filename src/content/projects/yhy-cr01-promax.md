@@ -5,7 +5,7 @@ price: 31500
 dimensions: "1500x1450x2020 mm"
 weight: "720 kg"
 kinematics: "6-Axis Collaborative Robot"
-espressoUnit: "Barluoto BTB-302"
+espressoUnit: "BTB-302"
 power: "5200W"
 productionTime: "72 seconds"
 throughput: "50 cups/hr"
