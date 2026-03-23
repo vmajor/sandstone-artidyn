@@ -1,26 +1,36 @@
 ---
 title: "YHY-CR01Pro Collaborative Vending Station"
-pubDate: 2024-05-01
-price: 19500
+pubDate: 2026-03-23
+price: 29500
 dimensions: "1300x1450x2020 mm"
 weight: "720 kg"
-kinematics: "Dobot 6-Axis Collaborative Robot"
-espressoUnit: "BTB-302 (Superior Milk Foam)"
+kinematics: "6-Axis Collaborative Robot"
+espressoUnit: "BTB-302"
 power: "5000W"
 productionTime: "51 seconds"
 throughput: "70 cups/hr"
 cupCapacity: "150"
-flavorMatrix: "24 Flavors, 4 Syrups"
+recipes: "24 Presets"
+syrups: "4 Flavors"
+toppings: "Not Equipped"
+iceCapacity: "90 kg/day"
+milkRefrigeration: "Large Undercounter Refrigerator"
+milkFrothingTemp: "Not Specified"
+cleaningSystem: "Automated Pipe Cleaning"
 latteArt: "No"
 enclosureType: "Fully Enclosed Kiosk"
-features: ["Compact Width", "BTB-302 Core", "Superior Milk Foam", "High Throughput"]
+display: "13.3-inch Touchscreen"
+paymentSystems: ["Mobile/QR"]
+fleetManagement: "Merchant Operation Management Platform & Applet"
+mobility: "Universal Casters"
+certifications: ["Not Specified"]
+features: ["Compact Width", "Dobot Cobot arm", "BTB-302 Espresso Machine", "Superior Milk Foam", "High Throughput"]
 scenarios: ["Narrow Architectural Alcoves", "Tight Institutional Hallways", "Hospitals"]
 category: "compact"
 status: "compact"
-client: "YHY / BTB-302"
 location: "Narrow Alcoves, Institutions"
-year: "70 cups/hr"
-area: "1300x1450x2020mm"
+year: "2026"
+area: "1.89 sqm"
 cover:
   url: "../../images/products/CR01Pro_square_plain.png"
   alt: "YHY-CR01Pro Collaborative Vending Station"
@@ -29,6 +39,6 @@ gallery:
     alt: "YHY-CR01Pro Front View"
 ---
 
-The YHY-CR01Pro elevates the raw speed of the baseline model by integrating a superior thermodynamic extraction core while shrinking its physical width. By upgrading the internal brewing engine to the premium BTB-302 commercial coffee machine, the CR01Pro requires a heavier 5000W power draw but delivers a noticeably denser, higher-quality milk mouthfeel that rivals specialty human baristas.
+The YHY-CR01Pro elevates the raw speed of the baseline model by integrating a superior espresso machine while shrinking its physical width. By upgrading the internal hardware to the premium Barluoto BTB-302 commercial espresso machine, the CR01Pro requires a heavier 5000W power draw but delivers a noticeably denser, higher-quality milk mouthfeel that rivals specialty human baristas.
 
-By strategically relocating internal components like the milk refrigeration unit, YHY condensed the machine's width to 1300mm, allowing this 70-cup-per-hour, Dobot-powered workhorse to fit seamlessly into narrower architectural alcoves and tight institutional hallways without sacrificing its blistering 51-second service speed.
+By strategically relocating internal components like the milk refrigeration unit, the machine's width is condensed to 1300mm. This allows the 70-cup-per-hour, Dobot-powered workhorse to fit seamlessly into narrower architectural alcoves and tight institutional hallways without sacrificing its blistering 51-second service speed.

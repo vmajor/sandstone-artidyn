@@ -1,26 +1,36 @@
 ---
 title: "Robot Anno Latte Art Print"
-pubDate: 2024-05-01
-price: 28000
+pubDate: 2026-03-23
+price: 42000
 dimensions: "1600x1200x800 mm"
 weight: "700 kg"
-kinematics: "Proprietary SJ-Series 6-Axis (Dual-Pump System)"
-espressoUnit: "F3 or Dr. Coffee"
+kinematics: "6-axis"
+espressoUnit: "Dr. Coffee F3"
 power: "4000W (5500W Peak)"
-productionTime: "90+ seconds"
+productionTime: "90 seconds"
 throughput: "40 cups/hr"
-cupCapacity: "200"
-flavorMatrix: "5-10 Flavors, 2-4 Syrups"
-latteArt: "Yes (Physical Latte Art + Print)"
+cupCapacity: "160"
+recipes: "5-10 Presets (e.g., Americano, Latte, Mocha, Cappuccino, Flat White)"
+syrups: "Not Equipped"
+toppings: "Not Equipped"
+iceCapacity: "100 kg/day"
+milkRefrigeration: "2°C - 4°C (Adjustable)"
+milkFrothingTemp: "60°C - 70°C"
+cleaningSystem: "Automatic High-Pressure Cylinder Rinsing"
+latteArt: "4-6 Physical Pour Patterns + Custom Image Printing"
 enclosureType: "Open Bar (Low Profile)"
-features: ["Physical Latte Art", "3D Printing", "Dual-Pump System", "Open Bar Design"]
+display: "13.3-inch Touchscreen"
+paymentSystems: ["Mobile/QR", "Credit Card", "Cash", "Coin"]
+fleetManagement: "Multi-device app with real-time alerts"
+mobility: "Universal Casters"
+certifications: ["CE", "FCC", "ISO9001"]
+features: ["6-Axis Cobot Arm", "Physical Latte Art", "Custom Image Printing", "Automated Cup Lifting Module", "Self-Cleaning Arm"]
 scenarios: ["Flagship Retail", "Specialty Coffee Shops", "High-End Events"]
 category: "craft"
 status: "craft"
-client: "Robot Anno / SJ-Series"
 location: "Flagship Retail, Events"
-year: "40 cups/hr"
-area: "1600x1200x800mm"
+year: "2026"
+area: "1.92 sqm"
 cover:
   url: "../../images/products/CFFO-ANO1-03_plain.png"
   alt: "Robot Anno Latte Art Print"
