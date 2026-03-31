@@ -53,11 +53,53 @@
         "flavorMatrix": {
           "type": "string"
         },
+        "recipes": {
+          "type": "string"
+        },
+        "syrups": {
+          "type": "string"
+        },
+        "toppings": {
+          "type": "string"
+        },
+        "iceCapacity": {
+          "type": "string"
+        },
+        "milkRefrigeration": {
+          "type": "string"
+        },
+        "milkFrothingTemp": {
+          "type": "string"
+        },
+        "cleaningSystem": {
+          "type": "string"
+        },
         "latteArt": {
           "type": "string"
         },
         "enclosureType": {
           "type": "string"
+        },
+        "display": {
+          "type": "string"
+        },
+        "paymentSystems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fleetManagement": {
+          "type": "string"
+        },
+        "mobility": {
+          "type": "string"
+        },
+        "certifications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "features": {
           "type": "array",

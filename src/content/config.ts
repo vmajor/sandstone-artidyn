@@ -63,28 +63,36 @@ const projects = defineCollection({
       productionTime: z.string().optional(),
       throughput: z.string().optional(),
       cupCapacity: z.string().optional(),
-      flavorMatrix: z.string().optional(),
+      
+      // Legacy flavor matrix
+      flavorMatrix: z.string().optional(), 
+      
+      // New Detailed Spec Fields
+      recipes: z.string().optional(),
+      syrups: z.string().optional(),
+      toppings: z.string().optional(),
+      iceCapacity: z.string().optional(),
+      milkRefrigeration: z.string().optional(),
+      milkFrothingTemp: z.string().optional(),
+      cleaningSystem: z.string().optional(),
       latteArt: z.string().optional(),
       enclosureType: z.string().optional(),
+      display: z.string().optional(),
+      paymentSystems: z.array(z.string()).optional(),
+      fleetManagement: z.string().optional(),
+      mobility: z.string().optional(),
+      certifications: z.array(z.string()).optional(),
 
       // Filtering fields
       features: z.array(z.string()).optional(),
       scenarios: z.array(z.string()).optional(),
       category: z.enum(["high-volume", "craft", "compact", "certified"]).optional(),
 
-      // Mapped to "Manufacturer / Engine"
+      // Legacy / Mapped fields
       client: z.string().optional(), 
-      
-      // Mapped to "Best For / Use Case"
       location: z.string().optional(), 
-      
-      // Mapped to "Throughput / Specs"
       year: z.string().optional(), 
-      
-      // Mapped to "Category" - We kept this for backward compatibility if needed
       status: z.enum(["high-volume", "craft", "compact", "certified"]).optional(), 
-      
-      // Mapped to "Footprint"
       area: z.string().optional(), 
       
       cover: z.object({

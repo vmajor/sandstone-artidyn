@@ -19,7 +19,19 @@ const specs = [
   { label: "Throughput", value: frontmatter.throughput },
   { label: "Cup Capacity", value: frontmatter.cupCapacity },
   { label: "Flavor Matrix", value: frontmatter.flavorMatrix },
+  { label: "Recipes", value: frontmatter.recipes },
+  { label: "Syrups", value: frontmatter.syrups },
+  { label: "Toppings", value: frontmatter.toppings },
+  { label: "Ice Capacity", value: frontmatter.iceCapacity },
+  { label: "Milk Refrigeration", value: frontmatter.milkRefrigeration },
+  { label: "Frothing Temp", value: frontmatter.milkFrothingTemp },
+  { label: "Cleaning System", value: frontmatter.cleaningSystem },
   { label: "Latte Art / Print", value: frontmatter.latteArt },
+  { label: "Display", value: frontmatter.display },
+  { label: "Payment Systems", value: frontmatter.paymentSystems?.join(", ") },
+  { label: "Fleet Management", value: frontmatter.fleetManagement },
+  { label: "Mobility", value: frontmatter.mobility },
+  { label: "Certifications", value: frontmatter.certifications?.join(", ") },
   { label: "Enclosure", value: frontmatter.enclosureType },
 ].filter(spec => spec.value);
 
@@ -62,9 +74,11 @@ const gallery = frontmatter.gallery || [];
                 <Text tag="p" variant="textSM" class="text-base-500">
                   {frontmatter.throughput}
                 </Text>
-                <Text tag="p" variant="textSM" class="text-base-500">
-                  {frontmatter.client}
-                </Text>
+                {frontmatter.client && (
+                  <Text tag="p" variant="textSM" class="text-base-500">
+                    {frontmatter.client}
+                  </Text>
+                )}
               </div>
             </div>
           </div>
