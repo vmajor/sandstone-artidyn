@@ -1,0 +1,24 @@
+# Build output
+dist/
+bin/
+obj/
+
+# Dependencies
+node_modules/
+
+# macOS "Psychopath" junk
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
