@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";  
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
+
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
@@ -17,6 +18,9 @@ export default defineConfig({
     skipInline: false,
     drafts: true,
   },
-  site: "https://lexingtonthemes.com",
+  site: "https://artidyn.ai",
   integrations: [tailwindcss(), sitemap(), mdx()],
+  image: {
+    domains: ["artidyn.ai"],
+  },
 });

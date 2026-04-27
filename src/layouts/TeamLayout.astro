@@ -1,6 +1,5 @@
 ---
 // Assets
-import { Image } from "astro:assets";
 // Foundations
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Text from "@/components/foundations/elements/Text.astro";
@@ -27,7 +26,7 @@ const data = teamMember ? teamMember.data : Astro.props.frontmatter;
           <div class="p-8 bg-base-100 rounded-2xl w-full sticky top-24">
             
             <div class="mb-8 rounded-xl overflow-hidden">
-               <Image
+               <img
                  src={data.image.url} 
                  alt={data.image.alt}
                  class="w-full h-auto object-cover"

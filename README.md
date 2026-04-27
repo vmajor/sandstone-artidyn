@@ -95,8 +95,8 @@ Your content goes here
 
 ---
 
-### [Support](https://lexingtonthemes.com/legal/support/)
+### [Support](https://artidynthemes.com/legal/support/)
 
-### [Documentation](https://lexingtonthemes.com/documentation/)
+### [Documentation](https://artidynthemes.com/documentation/)
 
-### [Get your bundle](https://lexingtonthemes.com)
+### [Get your bundle](https://artidynthemes.com)
