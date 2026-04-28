@@ -50,9 +50,6 @@
         "cupCapacity": {
           "type": "string"
         },
-        "flavorMatrix": {
-          "type": "string"
-        },
         "recipes": {
           "type": "string"
         },

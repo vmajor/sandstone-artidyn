@@ -1,6 +1,5 @@
 ---
 // Assets
-import { Image } from "astro:assets";
 // Foundations
 import Text from "@/components/foundations/elements/Text.astro";
 import RollingLink from "@/components/foundations/elements/RollingLink.astro";
@@ -15,7 +14,7 @@ const { title, description, url, image, pubDate } = {
 ---
 
 <article class="relative">
-  <Image
+  <img
     src={image}
     alt={title}
     width={800}

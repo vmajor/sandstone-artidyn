@@ -4,27 +4,7 @@ import Logo from "@/components/assets/Logo.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Text from "@/components/foundations/elements/Text.astro";
 import Wrapper from "@/components/foundations/containers/Wrapper.astro";
-// Content
-import { getCollection } from "astro:content";
 import Footer from "@/components/global/Footer.astro";
-
-const socials = [
-  {
-    name: "Instagram",
-    handle: "@sandstone",
-    url: "#_",
-  },
-  {
-    name: "LinkedIn",
-    handle: "sandstone Interior Design",
-    url: "_#",
-  },
-  {
-    name: "Twitter",
-    handle: "@sandstone",
-    url: "_#",
-  },
-];
 ---
 
 <BaseLayout hideFooter={Footer}>
@@ -44,72 +24,93 @@ const socials = [
 
         <div class="relative lg:max-w-xl lg:ml-auto flex flex-col h-full">
           <div
-            class="p-8 bg-base-100 m-4 rounded-2xl h-full justify-between flex flex-col"
+            class="p-8 bg-white m-4 rounded-2xl h-full overflow-y-auto"
           >
             <div>
-              <Logo
-                class="text-base tracking-tighter uppercase focus:outline-none text-base-900 font-semibold"
-              />
+              <a href="/">
+                <Logo
+                  class="text-base tracking-tighter uppercase focus:outline-none text-base-900 font-semibold"
+                />
+              </a>
               <Text
                 tag="h2"
                 variant="textLG"
-                class="text-base-600 tracking-tight 2xl:text-2xl text-balance mt-12 font-medium"
+                class="text-base-600 tracking-tight 2xl:text-2xl text-balance mt-8 font-medium"
               >
-                Get in Touch
+                Schedule a Consultation
               </Text>
-              <div class="mt-8 space-y-8">
-                <div>
-                  <Text
-                    tag="p"
-                    variant="textSM"
-                    class="text-base-600 font-medium"
-                  >
-                    Email
-                  </Text>
-                  <a
-                    href="#_"
-                    class="text-base-500 hover:text-base-900 block text-xs"
-                  >
-                    sandstone@exmaple.com
-                  </a>
-                </div>
-                <div>
-                  <Text
-                    tag="p"
-                    variant="textSM"
-                    class="text-base-600 font-medium"
-                  >
-                    Phone
-                  </Text>
-                  <a
-                    href="#_"
-                    class="text-base-500 hover:text-base-900 block text-xs"
-                  >
-                    +1 (555) 123-4567
-                  </a>
-                </div>
-                <div>
-                  <Text
-                    tag="p"
-                    variant="textSM"
-                    class="text-base-600 font-medium"
-                  >
-                    Social Media
-                  </Text>
-                  <div class="space-y-2">
-                    {
-                      socials.map((social) => (
-                        <a
-                          href={social.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="text-base-500 hover:text-base-900 block text-xs"
-                        >
-                          {social.name}: {social.handle}
-                        </a>
-                      ))
-                    }
+              <Text tag="p" variant="textSM" class="text-base-500 mt-2">
+                Let's discuss how Artidyn's beverage robots can uncap your business growth.
+              </Text>
+
+              <form
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                class="mt-8 space-y-4"
+              >
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="name" class="block text-xs font-bold text-base-900 uppercase tracking-wider mb-1">Full Name</label>
+                    <input type="text" name="name" id="name" required class="w-full bg-base-50 border border-base-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-base-900 transition-all" placeholder="John Doe" />
                   </div>
+                  <div>
+                    <label for="company" class="block text-xs font-bold text-base-900 uppercase tracking-wider mb-1">Company</label>
+                    <input type="text" name="company" id="company" required class="w-full bg-base-50 border border-base-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-base-900 transition-all" placeholder="Artidyn Corp" />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="email" class="block text-xs font-bold text-base-900 uppercase tracking-wider mb-1">Business Email</label>
+                    <input type="email" name="email" id="email" required class="w-full bg-base-50 border border-base-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-base-900 transition-all" placeholder="john@example.com" />
+                  </div>
+                  <div>
+                    <label for="industry" class="block text-xs font-bold text-base-900 uppercase tracking-wider mb-1">Industry</label>
+                    <select name="industry" id="industry" required class="w-full bg-base-50 border border-base-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-base-900 transition-all appearance-none">
+                      <option value="">Select Industry</option>
+                      <option value="hospitality">Hospitality</option>
+                      <option value="retail">Retail</option>
+                      <option value="corporate">Corporate Office</option>
+                      <option value="healthcare">Healthcare</option>
+                      <option value="education">Education</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="timeline" class="block text-xs font-bold text-base-900 uppercase tracking-wider mb-1">Project Timeline</label>
+                  <select name="timeline" id="timeline" required class="w-full bg-base-50 border border-base-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-base-900 transition-all appearance-none">
+                    <option value="">Select Timeline</option>
+                    <option value="immediate">Immediate (1-3 months)</option>
+                    <option value="planning">Planning (3-6 months)</option>
+                    <option value="future">Future exploration (6+ months)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label for="message" class="block text-xs font-bold text-base-900 uppercase tracking-wider mb-1">Message</label>
+                  <textarea name="message" id="message" rows="4" required class="w-full bg-base-50 border border-base-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-base-900 transition-all resize-none" placeholder="How can we help you?"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-base-900 text-white font-bold uppercase tracking-widest text-xs py-4 rounded-xl hover:bg-base-800 transition-all shadow-lg active:scale-[0.98]">
+                  Send Inquiry
+                </button>
+              </form>
+
+              <div class="mt-12 pt-8 border-t border-base-100 flex flex-col sm:flex-row justify-between items-start gap-8">
+                <div>
+                   <Text tag="p" variant="textXS" class="text-base-900 font-bold uppercase tracking-wider">Connect</Text>
+                   <a href="https://www.linkedin.com/company/artidyn-robotics-llc/" target="_blank" rel="noopener noreferrer" class="text-base-500 hover:text-base-900 block text-xs mt-2 transition-colors">
+                     LinkedIn
+                   </a>
+                </div>
+                <div>
+                   <Text tag="p" variant="textXS" class="text-base-900 font-bold uppercase tracking-wider">Email</Text>
+                   <a href="mailto:hi@artidyn.ai" class="text-base-500 hover:text-base-900 block text-xs mt-2 transition-colors">
+                     hi@artidyn.ai
+                   </a>
                 </div>
               </div>
             </div>

@@ -1,6 +1,5 @@
 ---
 // Assets
-import { Image } from "astro:assets";
 // Foundations
 import Text from "@/components/foundations/elements/Text.astro";
 const { post } = Astro.props;
@@ -21,7 +20,7 @@ const { url, title, image, throughput, client } = {
     class="absolute inset-0 z-10"></a>
 
   <div class="bg-base-100 rounded-2xl p-8 lg:p-12 border border-base-200 group-hover:border-base-300 transition-colors shadow-sm">
-    <Image
+    <img
       src={image}
       alt={title}
       width={1000}

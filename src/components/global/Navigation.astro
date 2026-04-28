@@ -4,9 +4,7 @@ import Logo from "@/components/assets/Logo.astro";
 // Foundations
 import Text from "@/components/foundations/elements/Text.astro";
 import Wrapper from "@/components/foundations/containers/Wrapper.astro";
-// Icons
-import DotsThree from "@/components/foundations/icons/DotsThree.astro";
-import DotsNine from "@/components/foundations/icons/DotsNine.astro";
+
 const navGroups = [
   {
     title: "Solutions",
@@ -34,28 +32,27 @@ const navGroups = [
 <header class="fixed w-full top-8 z-100 pointer-events-none">
   <Wrapper variant="wide">
     <nav
-      class="flex items-center gap-2 lg:max-w-sm justify-between bg-white rounded-xl mx-4 p-4 pointer-events-auto"
+      class="flex items-center gap-2 lg:max-w-sm justify-between bg-white rounded-xl mx-4 p-4 pointer-events-auto shadow-md"
     >
-      <a href="/">
+      <a href="/" class="flex items-center">
         <Logo
           class="text-base tracking-tighter uppercase focus:outline-none transition-colors text-base-900 font-semibold"
         />
       </a>
       <button
         id="mobile-menu-toggle"
-        class="text-base-900 inline-flex items-center gap-1 focus:outline-none"
+        class="text-base-900 inline-flex items-center justify-center p-2 focus:outline-none hover:bg-base-50 rounded-lg transition-colors group"
         type="button"
         aria-label="Toggle menu"
         aria-expanded="false"
         data-menu-state="closed"
       >
         <span class="sr-only">Toggle navigation menu</span>
-        <span aria-hidden="true" class="rotate-45" data-closed-icon>
-          <DotsNine size="base" class="text-base-900" />
-        </span>
-        <span class="hidden" aria-hidden="true" data-open-icon>
-          <DotsThree size="base" class="text-base-900" />
-        </span>
+        <div class="relative w-6 h-5 flex flex-col justify-between items-center pointer-events-none">
+          <span class="block w-6 h-0.5 bg-current transition-all duration-300 origin-center" data-line-1></span>
+          <span class="block w-6 h-0.5 bg-current transition-all duration-300" data-line-2></span>
+          <span class="block w-6 h-0.5 bg-current transition-all duration-300 origin-center" data-line-3></span>
+        </div>
       </button>
     </nav>
     <!-- Mobile Navigation rendered outside header to avoid blend effects -->
@@ -63,26 +60,26 @@ const navGroups = [
       id="mobile-menu"
       aria-hidden="true"
       data-menu-state="closed"
-      class="fixed left-4 z-40 mt-9 mx-4  lg:max-w-sm top-0 transition-opacity duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] data-[menu-state=closed]:opacity-0 data-[menu-state=closed]:pointer-events-none data-[menu-state=open]:opacity-100 data-[menu-state=open]:pointer-events-auto"
+      class="fixed left-4 z-40 mt-9 mx-4 lg:max-w-sm top-0 transition-opacity duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] data-[menu-state=closed]:opacity-0 data-[menu-state=closed]:pointer-events-none data-[menu-state=open]:opacity-100 data-[menu-state=open]:pointer-events-auto"
     >
       <div
         id="mobile-menu-inner"
         class="h-0 overflow-hidden transition-[height] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
       >
         <div
-          class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white rounded-xl p-4"
+          class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white rounded-xl p-4 shadow-xl border border-base-100"
         >
           {
             navGroups.map((group) => (
               <div class="space-y-3">
-                <Text tag="h3" variant="textXS" class="text-base-900">
+                <Text tag="h3" variant="textXS" class="text-base-900 font-bold uppercase tracking-wider">
                   {group.title}
                 </Text>
                 <div class="space-y-1">
                   {group.items?.map((item) => (
                     <a
                       href={item.href}
-                      class="block text-base-500 text-xs  tracking-wide hover:text-base-900 transition-colors focus:outline-none"
+                      class="block text-base-500 text-xs tracking-wide hover:text-base-900 transition-colors focus:outline-none py-1"
                       rel={
                         group.type === "external"
                           ? "noopener noreferrer"
@@ -99,27 +96,17 @@ const navGroups = [
           }
         </div>
         <div
-          class="mt-1 bg-white rounded-xl p-4 flex flex-col lg:items-center justify-between gap-2"
+          class="mt-1 bg-white rounded-xl p-4 flex flex-col lg:items-center justify-between gap-2 shadow-lg border border-base-100"
         >
-          <Text tag="p" variant="textXS" class="text-base-900">
-            <span class="sr-only">Phone:</span>
+           <Text tag="p" variant="textXS" class="text-base-900">
+            <span class="sr-only">LinkedIn:</span>
             <a
-              href="#_"
-              aria-label="Call us at 415 555 1234"
-              class="hover:text-base-900 transition-colors text-xs text-base-500"
+              href="https://www.linkedin.com/company/artidyn-robotics-llc/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-base-900 transition-colors text-xs text-base-500 font-medium"
             >
-              (415) 555-1234
-            </a>
-          </Text>
-          <span aria-hideen="true" class="text-base-900 hidden lg:inline-flex">·</span>
-          <Text tag="p" variant="textXS" class="text-base-900">
-            <span class="sr-only">Email:</span>
-            <a
-              href="#_"
-              aria-label="Email hi at artidyn dot com"
-              class="hover:text-base-900 transition-colors text-xs text-base-500"
-            >
-              hi@artidyn.com
+              Follow us on LinkedIn
             </a>
           </Text>
         </div>
@@ -129,6 +116,11 @@ const navGroups = [
       const toggle = document.getElementById("mobile-menu-toggle");
       const menu = document.getElementById("mobile-menu");
       const inner = document.getElementById("mobile-menu-inner");
+
+      const line1 = toggle?.querySelector("[data-line-1]");
+      const line2 = toggle?.querySelector("[data-line-2]");
+      const line3 = toggle?.querySelector("[data-line-3]");
+
       let isOpen = false;
 
       function setMenuState(open) {
@@ -141,13 +133,18 @@ const navGroups = [
         menu?.setAttribute("data-menu-state", state);
         toggle?.setAttribute("data-menu-state", state);
 
-        // Toggle icons
-        toggle
-          ?.querySelector("[data-closed-icon]")
-          ?.classList.toggle("hidden", open);
-        toggle
-          ?.querySelector("[data-open-icon]")
-          ?.classList.toggle("hidden", !open);
+        // Hamburger animation
+        if (line1 && line2 && line3) {
+          if (open) {
+            line1.style.transform = "translateY(9px) rotate(45deg)";
+            line2.style.opacity = "0";
+            line3.style.transform = "translateY(-9px) rotate(-45deg)";
+          } else {
+            line1.style.transform = "translateY(0) rotate(0)";
+            line2.style.opacity = "1";
+            line3.style.transform = "translateY(0) rotate(0)";
+          }
+        }
 
         // Animate height
         if (inner) {

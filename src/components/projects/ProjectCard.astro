@@ -1,6 +1,5 @@
 ---
 // Assets
-import { Image } from "astro:assets";
 // Foundations
 
 const { url, title, image } = {
@@ -18,7 +17,7 @@ const { url, title, image } = {
     class="absolute inset-0 z-10"></a>
 
   <div class="bg-base-100 rounded-xl p-4 size-full flex items-center justify-center border border-base-200 group-hover:border-base-300 transition-colors">
-    <Image
+    <img
       src={image}
       alt={title}
       width={1000}
