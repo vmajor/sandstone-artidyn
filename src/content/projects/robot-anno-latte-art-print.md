@@ -32,10 +32,10 @@ location: "Flagship Retail, Events"
 year: "2026"
 area: "1.92 sqm"
 cover:
-  url: "../../images/products/CFFO-ANO1-03_plain.png"
+  url: "/images/products/robot-anno-latte-art-print/cover.png"
   alt: "Robot Anno Latte Art Print"
 gallery:
-  - url: "../../images/products/CFFO-ANO1-03_plain.png"
+  - url: "/images/products/robot-anno-latte-art-print/cover.png"
     alt: "Robot Anno Latte Art Print Front View"
 ---
 

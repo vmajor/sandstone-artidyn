@@ -11,7 +11,11 @@
 2. **No Netlify Functions:** For interactivity (like forms), use Netlify's built-in `data-netlify="true"` attribute or a third-party POST endpoint.
 3. **Native APIs First:** Prioritize native HTML/CSS/JS (e.g., `<dialog>` for modals, View Transitions API) over heavy 3rd-party libraries.
 4. **SEO Priority:** Ensure all content is present in the initial HTML. Use the `@astrojs/sitemap` integration and keep metadata synchronized with the Artidyn brand.
-5. **Image Handling:** Due to corrupted image metadata in the current LFS setup, avoid using `astro:assets`. Use standard `<img>` tags and manage image URLs as strings in content schemas.
+5. **Image Management:**
+   - **Storage:** All images must be placed in the `public/images/` directory.
+   - **Organization:** Product images should be organized in per-product subdirectories (e.g., `public/images/products/[robot-slug]/`).
+   - **Referencing:** Use absolute paths starting with `/images/` (e.g., `src="/images/products/yhy-cr01-pro/cover.png"`).
+   - **Astro Assets:** Avoid using `astro:assets` and the `<Image />` component due to compatibility issues with some image formats in this environment. Use standard `<img>` tags.
 
 ## Operational Rules
 1. **Never Suicide:** If a command fails, do not exit the session or enter a debug loop. Report the error and wait for user input.

@@ -32,10 +32,10 @@ location: "Narrow Alcoves, Institutions"
 year: "2026"
 area: "1.89 sqm"
 cover:
-  url: "../../images/products/CR01Pro_square_plain.png"
+  url: "/images/products/yhy-cr01-pro/cover.png"
   alt: "YHY-CR01Pro Collaborative Vending Station"
 gallery:
-  - url: "../../images/products/CR01Pro_square_plain.png"
+  - url: "/images/products/yhy-cr01-pro/cover.png"
     alt: "YHY-CR01Pro Front View"
 ---
 

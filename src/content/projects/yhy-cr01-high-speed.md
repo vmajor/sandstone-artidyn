@@ -32,10 +32,10 @@ location: "Transit Hubs, Airports, Universities"
 year: "2026"
 area: "2.18 sqm"
 cover:
-  url: "../../images/products/CR01_square_plain.png"
+  url: "/images/products/yhy-cr01-high-speed/cover.png"
   alt: "YHY-CR01 High-Speed Cafe Robot"
 gallery:
-  - url: "../../images/products/CR01_square_plain.png"
+  - url: "/images/products/yhy-cr01-high-speed/cover.png"
     alt: "YHY-CR01 Front View"
 ---
 
