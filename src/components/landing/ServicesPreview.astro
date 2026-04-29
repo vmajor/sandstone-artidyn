@@ -1,9 +1,4 @@
 ---
-// Assets
-import { Image } from "astro:assets";
-import i1 from "/src/images/services/1.png";
-import i2 from "/src/images/services/2.png";
-import i3 from "/src/images/services/3.png";
 // Foundations
 import Text from "@/components/foundations/elements/Text.astro";
 import Kicker from "@/components/foundations/elements/Kicker.astro";
@@ -13,15 +8,14 @@ import RollingLink from "@/components/foundations/elements/RollingLink.astro";
 import { getCollection } from "astro:content";
 const allServices = await getCollection("services");
 
-// We keep the logic: Sort by Title.
-// Fortunately, your robot tiers sort alphabetically in a logical order:
-// 1. "Compact..."
-// 2. "Craft..."
-// 3. "High-Volume..."
 const sortedServices = allServices
   .sort((a, b) => a.data.title.localeCompare(b.data.title))
   .slice(0, 3);
-const serviceImages = [i1, i2, i3];
+const serviceImages = [
+  "/images/services/1.png",
+  "/images/services/2.png",
+  "/images/services/3.png"
+];
 ---
 
 <footer class="overflow-hidden">
@@ -30,12 +24,12 @@ const serviceImages = [i1, i2, i3];
       <div>
         {
           serviceImages.map((img, index) => (
-            <Image
+            <img
               id={`service-image-${index}`}
               src={img}
               alt={sortedServices[index]?.data.title}
-              width={1440}
-              height={1440}
+              width="1440"
+              height="1440"
               class="object-cover size-full absolute inset-0 object-center"
               style={`display: ${index === 0 ? "block" : "none"}`}
             />

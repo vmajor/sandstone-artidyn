@@ -1,6 +1,5 @@
 ---
 // Assets
-import { Image } from "astro:assets";
 // Foundations
 import Text from "@/components/foundations/elements/Text.astro";
 import RollingLink from "@/components/foundations/elements/RollingLink.astro";
@@ -37,7 +36,7 @@ const { url, title, description, image } = {
       initialText="More Details"
     />
   </div>
-  <Image
+  <img
     src={image}
     alt={title}
     width={500}

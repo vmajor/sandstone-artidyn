@@ -32,10 +32,10 @@ location: "24/7 Secure Environments"
 year: "2026"
 area: "2.18 sqm"
 cover:
-  url: "../../images/products/CR01ProMax_square_plain.png"
+  url: "/images/products/yhy-cr01-promax/cover.png"
   alt: "YHY-CR01ProMax Vending & Printing Station"
 gallery:
-  - url: "../../images/products/CR01ProMax_square_plain.png"
+  - url: "/images/products/yhy-cr01-promax/cover.png"
     alt: "YHY-CR01ProMax Front View"
 ---
 

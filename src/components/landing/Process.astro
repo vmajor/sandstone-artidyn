@@ -1,13 +1,12 @@
 ---
 // Assets
-import { Image } from "astro:assets";
-import one from "@/images/services/1.png";
-import two from "@/images/services/2.png";
-import three from "@/images/services/3.png";
-// Keeping these imports to avoid build errors, but they are unused in the array below
-import implementationImg from "@/images/services/4.png";
-import five from "@/images/services/5.png";
-import six from "@/images/services/6.png";
+//  // import one from "@/images/services/1.png";
+//  // import two from "@/images/services/2.png";
+//  // import three from "@/images/services/3.png";
+// // Keeping these imports to avoid build errors, but they are unused in the array below
+//  // import implementationImg from "@/images/services/4.png";
+//  // import five from "@/images/services/5.png";
+//  // import six from "@/images/services/6.png";
 
 // Foundations
 import Text from "@/components/foundations/elements/Text.astro";
@@ -16,25 +15,22 @@ import Wrapper from "@/components/foundations/containers/Wrapper.astro";
 
 const processSteps = [
   {
-    // Source: Frame 4, Step 1 [cite: 187]
     title: "Discovery Consultation",
     description:
-      "We start with a free call to understand your business goals, ideal locations, and budget. We assess your specific constraints—staffing, space, or throughput—to define the problem.", // [cite: 189]
-    image: one,
+      "We start with a free call to understand your business goals, ideal locations, and budget. We assess your specific constraints—staffing, space, or throughput—to define the problem.",
+    image: "/images/services/1.png",
   },
   {
-    // Source: Frame 4, Step 2 [cite: 190]
     title: "Tailored Solution",
     description:
-      "We match you with the perfect robot from our Certified Range. No guesswork—just transparent pricing, clear ROI projections, and a system vetted for your specific use case.", // [cite: 192]
-    image: two,
+      "We match you with the perfect robot from our Certified Range. No guesswork—just transparent pricing, clear ROI projections, and a system vetted for your specific use case.",
+    image: "/images/services/2.png",
   },
   {
-    // Source: Frame 4, Step 3 [cite: 193]
     title: "Launch & Support",
     description:
-      "We guide you through delivery, installation, customization, and training. We ensure your team is ready and your robot is calibrated for 24/7 reliability from Day 1.", // 
-    image: three,
+      "We guide you through delivery, installation, customization, and training. We ensure your team is ready and your robot is calibrated for 24/7 reliability from Day 1.",
+    image: "/images/services/3.png",
   },
 ];
 ---
@@ -81,15 +77,14 @@ const processSteps = [
                   {step.description}
                 </Text>
               </div>
-              <Image
-                src={step.image}
-                alt={step.title}
-                width={500}
-                height={500}
-                loading="eager"
-                decoding="async"
-                class="w-full h-48 object-cover rounded-xl "
-              />
+              <div class="w-full h-48 bg-base-200 rounded-xl flex items-center justify-center overflow-hidden">
+                <img
+                  src={step.image}
+                  alt={step.title}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
             </div>
           ))
         }

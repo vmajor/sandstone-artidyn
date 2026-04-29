@@ -1,13 +1,12 @@
 import { defineCollection, z } from "astro:content";
 
 const team = defineCollection({
-  schema: ({ image }) =>
-    z.object({
+  schema: z.object({
       name: z.string(),
       role: z.string().optional(),
       bio: z.string().optional(),
       image: z.object({
-        url: image(),
+        url: z.string(),
         alt: z.string(),
       }),
       socials: z
@@ -23,16 +22,14 @@ const team = defineCollection({
     }),
 });
 
-// Use 'posts' for your "Wild West" narrative and "Case Studies"
 const postsCollection = defineCollection({
-  schema: ({ image }) =>
-    z.object({
+  schema: z.object({
       title: z.string(),
       pubDate: z.date(),
       description: z.string(),
-      team: z.string(), // This matches the author name
+      team: z.string(),
       image: z.object({
-        url: image(),
+        url: z.string(),
         alt: z.string(),
       }),
       tags: z.array(z.string()),
@@ -46,14 +43,10 @@ const legal = defineCollection({
   }),
 });
 
-// THE BIG CHANGE: Hijacking Projects for Robots
 const projects = defineCollection({
-  schema: ({ image }) =>
-    z.object({
+  schema: z.object({
       title: z.string(),
       pubDate: z.date().optional(),
-      
-      // Detailed Robot Specifications
       price: z.number().optional(),
       dimensions: z.string().optional(),
       weight: z.string().optional(),
@@ -63,11 +56,6 @@ const projects = defineCollection({
       productionTime: z.string().optional(),
       throughput: z.string().optional(),
       cupCapacity: z.string().optional(),
-      
-      // Legacy flavor matrix
-      flavorMatrix: z.string().optional(), 
-      
-      // New Detailed Spec Fields
       recipes: z.string().optional(),
       syrups: z.string().optional(),
       toppings: z.string().optional(),
@@ -82,26 +70,21 @@ const projects = defineCollection({
       fleetManagement: z.string().optional(),
       mobility: z.string().optional(),
       certifications: z.array(z.string()).optional(),
-
-      // Filtering fields
       features: z.array(z.string()).optional(),
       scenarios: z.array(z.string()).optional(),
       category: z.enum(["high-volume", "craft", "compact", "certified"]).optional(),
-
-      // Legacy / Mapped fields
       client: z.string().optional(), 
       location: z.string().optional(), 
       year: z.string().optional(), 
       status: z.enum(["high-volume", "craft", "compact", "certified"]).optional(), 
       area: z.string().optional(), 
-      
       cover: z.object({
-        url: image(),
+        url: z.string(),
         alt: z.string(),
       }),
       gallery: z.array(
         z.object({
-          url: image(),
+          url: z.string(),
           alt: z.string().optional(),
         })
       ).default([]),
@@ -109,14 +92,13 @@ const projects = defineCollection({
 });
 
 const services = defineCollection({
-  schema: ({ image }) =>
-    z.object({
+  schema: z.object({
       title: z.string(),
       description: z.string().optional(),
       category: z.string().optional(),
       image: z
         .object({
-          url: image(),
+          url: z.string(),
           alt: z.string(),
         })
         .optional(),

@@ -1,11 +1,9 @@
 ---
 // Assets
-import { Image } from "astro:assets";
 // Foundations
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Text from "@/components/foundations/elements/Text.astro";
 import Wrapper from "@/components/foundations/containers/Wrapper.astro";
-import RollingLink from "@/components/components/RollingLink.astro";
 
 const { frontmatter } = Astro.props;
 
@@ -48,7 +46,7 @@ const gallery = frontmatter.gallery || [];
     <Wrapper variant="wide" class="pt-4 pb-8">
       <div class="relative rounded-3xl min-h-[500px] h-fit overflow-hidden bg-base-100">
         {frontmatter.cover && (
-          <Image
+          <img
             width={1440}
             height={1080}
             loading="eager"
@@ -60,7 +58,7 @@ const gallery = frontmatter.gallery || [];
         )}
 
         <div class="absolute bottom-4 left-4 right-4 max-w-sm flex flex-col">
-          <div class="p-8 bg-base-100/80 backdrop-blur-md rounded-2xl w-fit border border-base-200 shadow-xl">
+          <div class="p-8 bg-white/80 backdrop-blur-md rounded-2xl w-fit border border-base-200 shadow-xl">
             <div class="mb-4">
                <a href="/projects" class="text-xs font-bold uppercase tracking-widest text-base-400 hover:text-base-900 transition-colors">← Back to Catalog</a>
             </div>
@@ -79,11 +77,6 @@ const gallery = frontmatter.gallery || [];
                 <Text tag="p" variant="textSM" class="text-base-500">
                   {frontmatter.location}
                 </Text>
-                {frontmatter.client && (
-                  <Text tag="p" variant="textSM" class="text-base-500">
-                    {frontmatter.client}
-                  </Text>
-                )}
               </div>
             </div>
           </div>
@@ -132,8 +125,8 @@ const gallery = frontmatter.gallery || [];
             )}
           </div>
 
-          {/* NEW: Full Specifications Table moved to the main column */}
-          <div class="p-8 rounded-2xl bg-base-50 border border-base-200 mt-12">
+          {/* Specifications Table */}
+          <div class="p-8 rounded-2xl bg-base-50 border border-base-200 mt-12 shadow-sm">
             <Text tag="h3" variant="textBase" class="font-bold mb-6 uppercase tracking-wider text-base-900">Full Specifications</Text>
             <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
               {allSpecs.map(spec => (
@@ -145,20 +138,61 @@ const gallery = frontmatter.gallery || [];
             </dl>
           </div>
 
-          {gallery.length > 1 && (
+          {/* Enhanced Product Gallery */}
+          {gallery.length > 0 && (
             <div class="space-y-8 mt-12">
               <Text tag="h3" variant="textBase" class="font-bold uppercase tracking-wider text-base-900">Product Gallery</Text>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {gallery.map((image, index) => (
-                  <Image
-                    alt={image.alt || `Project image ${index + 1}`}
-                    src={image.url}
-                    width={800}
-                    height={600}
-                    loading="lazy"
-                    decoding="async"
-                    class="max-h-[800px] w-auto mx-auto rounded-2xl object-center object-contain bg-base-50 border border-base-100 p-4"
-                  />
+                  <>
+                  <button
+                    class="group relative aspect-square overflow-hidden rounded-2xl bg-base-50 border border-base-100 p-2 cursor-zoom-in"
+                    onclick={`document.getElementById('gallery-dialog-${index}').showModal()`}
+                  >
+                    <img
+                      alt={image.alt || `Project image ${index + 1}`}
+                      src={image.url}
+                      width={400}
+                      height={400}
+                      loading="lazy"
+                      decoding="async"
+                      class="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div class="absolute inset-0 bg-base-900/0 group-hover:bg-base-900/5 transition-colors duration-300"></div>
+                  </button>
+
+                  <dialog
+                    id={`gallery-dialog-${index}`}
+                    class="backdrop:bg-base-900/80 backdrop:backdrop-blur-sm p-0 rounded-3xl border-none bg-transparent max-w-[95vw] max-h-[95vh] overflow-hidden"
+                  >
+                    <div class="relative bg-white p-4 md:p-8 rounded-3xl shadow-2xl flex flex-col items-center">
+                      <button
+                        onclick={`this.closest('dialog').close()`}
+                        class="absolute top-4 right-4 size-10 flex items-center justify-center rounded-full bg-base-100 text-base-900 hover:bg-base-200 transition-colors z-10"
+                        aria-label="Close"
+                      >
+                        ✕
+                      </button>
+                      <div class="max-h-[80vh] overflow-auto">
+                        <img
+                          alt={image.alt || `Project image ${index + 1}`}
+                          src={image.url}
+                          width={1600}
+                          height={1200}
+                          class="max-h-[75vh] w-auto object-contain rounded-xl"
+                        />
+                      </div>
+                      {image.alt && (
+                        <Text tag="p" variant="textSM" class="mt-4 text-base-500 font-medium">
+                          {image.alt}
+                        </Text>
+                      )}
+                    </div>
+                    <form method="dialog" class="fixed inset-0 -z-10">
+                      <button class="size-full cursor-default"><span class="sr-only">Close</span></button>
+                    </form>
+                  </dialog>
+                  </>
                 ))}
               </div>
             </div>
@@ -179,7 +213,7 @@ const gallery = frontmatter.gallery || [];
             </dl>
             
             <div class="mt-8 pt-6 border-t border-base-200">
-              <a href="/contact" class="flex w-full items-center justify-center rounded-xl bg-base-900 px-4 py-3 text-sm font-semibold text-white hover:bg-base-800 transition-colors shadow-sm">
+              <a href="/contact" class="flex w-full items-center justify-center rounded-xl bg-base-900 px-4 py-3 text-sm font-semibold text-white hover:bg-base-800 transition-all shadow-sm uppercase tracking-widest text-[10px] active:scale-[0.98]">
                  Request More Information
               </a>
             </div>

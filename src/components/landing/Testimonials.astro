@@ -1,13 +1,12 @@
 ---
 // Astro
-import { Image } from "astro:assets";
 // Images
-import davidAvatar from "@/images/testimonials/david.png";
-import emilyAvatar from "@/images/testimonials/emily.png";
-import lisaAvatar from "@/images/testimonials/lisa.png";
-import michaelAvatar from "@/images/testimonials/michael.png";
-import robertAvatar from "@/images/testimonials/robert.png";
-import saraAvatar from "@/images/testimonials/sara.png";
+ // import davidAvatar from "@/images/testimonials/david.png";
+ // import emilyAvatar from "@/images/testimonials/emily.png";
+ // import lisaAvatar from "@/images/testimonials/lisa.png";
+ // import michaelAvatar from "@/images/testimonials/michael.png";
+ // import robertAvatar from "@/images/testimonials/robert.png";
+ // import saraAvatar from "@/images/testimonials/sara.png";
 // Foundations
 import Text from "@/components/foundations/elements/Text.astro";
 import Kicker from "@/components/foundations/elements/Kicker.astro";
@@ -25,7 +24,7 @@ const testimonials = [
     author: "David Park", // Fits perfectly with the high-tech retail culture in KR
     role: "Vending Operator",
     location: "Seoul, South Korea",
-    avatar: davidAvatar,
+    avatar: "/images/testimonials/david.png",
   },
   {
      // Source: Master Narrative Part 3 - "24/7 Service"
@@ -34,7 +33,7 @@ const testimonials = [
     author: "Emma Rodriguez", 
     role: "General Manager",
     location: "Barcelona, Spain", // Represents European boutique hospitality
-    avatar: emilyAvatar,
+    avatar: "/images/testimonials/emily.png",
   },
   {
     // Source: Frame 3 - "High Volume Barista"
@@ -43,7 +42,7 @@ const testimonials = [
     author: "Michael Chen", 
     role: "Concessions Director",
     location: "Singapore", // Represents the "Gold Standard" of airport retail
-    avatar: michaelAvatar,
+    avatar: "/images/testimonials/michael.png",
   },
   {
     // Source: Business Plan - "The Wild West" / Trust
@@ -52,7 +51,7 @@ const testimonials = [
     author: "Sarah Johnson",
     role: "Franchise Owner",
     location: "London, UK", // Mature Western Market
-    avatar: saraAvatar,
+    avatar: "/images/testimonials/sara.png",
   },
   {
     // Source: Frame 3 - "Compact & Versatile"
@@ -61,7 +60,7 @@ const testimonials = [
     author: "Lisa Thompson", 
     role: "Facilities Manager",
     location: "Sydney, Australia", // Huge coffee culture market
-    avatar: lisaAvatar,
+    avatar: "/images/testimonials/lisa.png",
   },
   {
     // Source: Master Narrative Part 5 - "ROI in Months"
@@ -70,7 +69,7 @@ const testimonials = [
     author: "Robert Martinez", 
     role: "Operations Director",
     location: "Dubai, UAE", // High-growth, investment-heavy market
-    avatar: robertAvatar,
+    avatar: "/images/testimonials/robert.png",
   },
 ];
 ---
@@ -133,7 +132,7 @@ const testimonials = [
                 </Text>
               </blockquote>
               <div class="flex items-center gap-2  mt-12 lg:mt-24">
-                <Image
+                <img
                   src={testimonial.avatar}
                   alt={`${testimonial.author} avatar`}
                   class="size-12 rounded-full object-cover "

@@ -1,6 +1,5 @@
 ---
 // Assets
-import { Image } from "astro:assets";
 // Foundations
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Text from "@/components/foundations/elements/Text.astro";
@@ -37,7 +36,7 @@ const authorHref = teamEntry ? `/team/${teamEntry.slug}` : undefined;
   <section>
     <Wrapper variant="wide" class="pt-4 pb-8">
       <div class="relative rounded-3xl h-[calc(100vh-2rem)] overflow-hidden">
-        <Image
+        <img
           width={1440}
           height={1080}
           loading="eager"

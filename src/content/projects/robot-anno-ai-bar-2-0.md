@@ -32,10 +32,10 @@ location: "Mall Concourses, Luxury Lobbies"
 year: "2026"
 area: "1.92 sqm"
 cover:
-  url: "../../images/products/CF-C-SJANO02-04_plain.png"
+  url: "/images/products/robot-anno-ai-bar-2-0/cover.png"
   alt: "Robot Anno AI Bar 2.0"
 gallery:
-  - url: "../../images/products/CF-C-SJANO02-04_plain.png"
+  - url: "/images/products/robot-anno-ai-bar-2-0/cover.png"
     alt: "Robot Anno AI Bar 2.0 Front View"
 ---
 
