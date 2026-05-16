@@ -19,10 +19,10 @@ const { chromium } = require('playwright');
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.screenshot({ path: 'catalog.png', fullPage: true });
 
-  await page.goto('http://localhost:4321/projects/robot-anno-ai-bar-2-0');
+  await page.goto('http://localhost:4321/projects/argus-axis');
   await page.screenshot({ path: 'product_anno.png', fullPage: true });
 
-  await page.goto('http://localhost:4321/projects/yhy-cr01-promax');
+  await page.goto('http://localhost:4321/projects/iris-max');
   await page.screenshot({ path: 'product_yhy.png', fullPage: true });
 
   await browser.close();

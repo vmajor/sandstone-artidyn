@@ -1,5 +1,5 @@
 ---
-title: "YHY-CR01 High-Speed Cafe Robot"
+title: "Iris High-Speed Cafe Robot"
 pubDate: 2026-03-23
 price: 27000
 dimensions: "1500x1450x2020 mm"
@@ -32,13 +32,13 @@ location: "Transit Hubs, Airports, Universities"
 year: "2026"
 area: "2.18 sqm"
 cover:
-  url: "/images/products/yhy-cr01-high-speed/cover.png"
-  alt: "YHY-CR01 High-Speed Cafe Robot"
+  url: "/images/products/iris/cover.png"
+  alt: "Iris High-Speed Cafe Robot"
 gallery:
-  - url: "/images/products/yhy-cr01-high-speed/cover.png"
-    alt: "YHY-CR01 Front View"
+  - url: "/images/products/iris/cover.png"
+    alt: "Iris Front View"
 ---
 
-Built for relentless, high-volume environments, the YHY-CR01 is a towering, fully enclosed robotic kiosk designed for absolute maximum throughput. Encapsulating a rapid-movement Dobot collaborative arm and a commercial Dr. Coffee M12 espresso machine, this powerhouse can produce a finished beverage in just 51 seconds—achieving a theoretical throughput of 70 cups per hour.
+Built for relentless, high-volume environments, the Iris is a towering, fully enclosed robotic kiosk designed for absolute maximum throughput. Encapsulating a rapid-movement Dobot collaborative arm and a commercial Dr. Coffee M12 espresso machine, this powerhouse can produce a finished beverage in just 51 seconds—achieving a theoretical throughput of 70 cups per hour.
 
 Standing over two meters tall and weighing 750kg, its rugged sheet-metal enclosure protects the machinery from vandalism while providing immense internal storage for up to 32 distinct flavor profiles and 6 syrup lines. It is the premier hardware choice for high-stress transit hubs, international airports, and busy university campuses.

@@ -25,8 +25,8 @@ async def run():
 
             # 2. Check a Product Page (Anno AI Bar 2.0)
             print("Checking Anno AI Bar 2.0 Detail Page...")
-            await page.goto("http://localhost:4321/projects/robot-anno-ai-bar-2-0")
-            await page.wait_for_selector("h1:has-text('Robot Anno AI Bar 2.0')")
+            await page.goto("http://localhost:4321/projects/argus-axis")
+            await page.wait_for_selector("h1:has-text('Argus Axis')")
 
             # Check for Spec Table
             await page.wait_for_selector("text=Technical Specifications")

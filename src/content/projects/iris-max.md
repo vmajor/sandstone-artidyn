@@ -1,5 +1,5 @@
 ---
-title: "YHY-CR01ProMax Vending & Printing Station"
+title: "Iris Max Vending & Printing Station"
 pubDate: 2026-03-23
 price: 31500
 dimensions: "1500x1450x2020 mm"
@@ -32,13 +32,13 @@ location: "24/7 Secure Environments"
 year: "2026"
 area: "2.18 sqm"
 cover:
-  url: "/images/products/yhy-cr01-promax/cover.png"
-  alt: "YHY-CR01ProMax Vending & Printing Station"
+  url: "/images/products/iris-max/cover.png"
+  alt: "Iris Max Vending & Printing Station"
 gallery:
-  - url: "/images/products/yhy-cr01-promax/cover.png"
-    alt: "YHY-CR01ProMax Front View"
+  - url: "/images/products/iris-max/cover.png"
+    alt: "Iris Max Front View"
 ---
 
-The YHY-CR01ProMax represents the ultimate all-in-one station, merging heavy-industrial kiosk security with high-end aesthetic consumer engagement. It retains the premium Barluoto BTB-302 commercial espresso machine for superior beverage quality but reverts to the wider 1500mm chassis to make room for an integrated foam printing module.
+The Iris Max represents the ultimate all-in-one station, merging heavy-industrial kiosk security with high-end aesthetic consumer engagement. It retains the premium Barluoto BTB-302 commercial espresso machine for superior beverage quality but reverts to the wider 1500mm chassis to make room for an integrated foam printing module.
 
 While the printing process extends the production time slightly to 72 seconds, it allows the machine to customize the milk foam surface with intricate designs or user-uploaded images. Powered by a 5200W electrical backbone and actuated by a highly reliable Dobot collaborative arm, the ProMax brings highly viral "internet celebrity" appeal to secure, fully enclosed, 24/7 environments.

@@ -12,7 +12,7 @@ This comprehensive report evaluates the technical specifications, operational co
 
 To effectively showcase a rapidly expanding portfolio of automated robotic coffee machines—projected to scale to an initial deployment of 15 distinct hardware models—the underlying digital architecture of the exhibition platform must be highly structured and rigorously standardized. Utilizing a modern static site generator such as Astro requires the implementation of a strict YAML Markdown frontmatter schema. This schema acts as the foundational database for the website, enabling complex frontend filtering logic based on physical dimensions, kinematic capabilities, thermodynamic power requirements, and financial investment profiles.
 
-The digital representation of physical hardware requires translating mechanical specifications into queryable data types (booleans, integers, floats, and strings). When a facility manager filters a digital catalog for a machine with a maximum power draw of less than 4000W, the Astro routing logic must instantly exclude machines like the Robot Anno Latte Art Print Machine or the YHY-CR01ProMax, both of which require dedicated heavy-duty electrical circuits exceeding 5000W.4
+The digital representation of physical hardware requires translating mechanical specifications into queryable data types (booleans, integers, floats, and strings). When a facility manager filters a digital catalog for a machine with a maximum power draw of less than 4000W, the Astro routing logic must instantly exclude machines like the Argus Art Machine or the Iris Max, both of which require dedicated heavy-duty electrical circuits exceeding 5000W.4
 
 ### **Proposed Astro Frontmatter Schema**
 
@@ -111,25 +111,25 @@ Priced at a premium of $28,000, this machine elevates the baseline functionality
 
 The YHY robotic coffee machines embody a fundamentally different engineering philosophy. Where Robot Anno prioritizes the open-bar spectacle, the YHY CR01 series is defined by massive volumetric capacity, hyper-accelerated beverage throughput, and the implementation of Dobot collaborative robots (cobots). These systems operate flawlessly within fully enclosed high-capacity vending structures.16
 
-### **YHY-CR01 High-Speed Cafe Robot (Baseline)**
+### **Iris High-Speed Cafe Robot (Baseline)**
 
-Priced highly competitively at $18,000, the baseline YHY-CR01 is an industrial-grade, high-volume hardware solution.4
+Priced highly competitively at $18,000, the baseline Iris is an industrial-grade, high-volume hardware solution.4
 
 **Physical Architecture and Extraction Core:** The structural envelope is fully enclosed, measuring 1500mm in length, 1450mm in width, and an extraordinary 2020mm in height.4 Consequently, the unit weighs a formidable 750kg.4 The system operates on a 4000W electrical backbone. Crucially, this baseline model utilizes the Dr. Coffee M12 commercial extraction unit as its core.4
 
 **Operational Kinematics and Beverage Performance:** The robotic actuation is handled by a 6-axis Dobot collaborative robot. The kinematic programming of the cobot and the thermal recovery of the Dr. Coffee M12 core work in synchronization to produce a completed beverage in an average of 51 seconds, resulting in a theoretical maximum throughput of approximately 70 cups per hour.4 The machine offers unparalleled menu depth, supporting 32 distinct flavor profiles augmented by 6 internal programmable syrup lines.4
 
-### **YHY-CR01Pro Collaborative Vending Station**
+### **Iris Pro Collaborative Vending Station**
 
-The YHY-CR01Pro, positioned at $19,500, refines the heavy-industrial architecture into a slightly more compact, yet vastly more powerful system by integrating a higher-end extraction core.4
+The Iris Pro, positioned at $19,500, refines the heavy-industrial architecture into a slightly more compact, yet vastly more powerful system by integrating a higher-end extraction core.4
 
 **Physical Architecture and Extraction Core:** The spatial footprint is condensed slightly to 1300mm in length, while maintaining the 1450mm depth and 2020mm height. This 200mm reduction in width is achieved by strategically relocating internal fluidics and the milk refrigeration unit.4 The electrical architecture is aggressively upgraded to a 5000W system to directly support the new commercial espresso core: the BTB-302, manufactured by Shanghai Baolutong Coffee Machine Co., Ltd.4 The transition to the BTB-302 commercial machine is significant; it utilizes a high-temperature milk pump foaming system, resulting in a dramatically denser and higher-quality milk microfoam compared to the baseline model.
 
 **Operational Kinematics and Beverage Performance:** Driven by the Dobot cobot, the CR01Pro maintains the exceptional 51-second production time (70-cup-per-hour throughput).4 To accommodate the narrower physical footprint, the flavor matrix is slightly reduced to 24 distinct flavors and 4 internal syrup lines.4
 
-### **YHY-CR01ProMax Hybrid Printing Station**
+### **Iris Max Hybrid Printing Station**
 
-The apex of the YHY lineup is the YHY-CR01ProMax. Priced at $21,000, this machine is a strategic engineering attempt to bridge the commercial gap between YHY's high-throughput industrial philosophy and Robot Anno's visual-experiential focus by integrating advanced printing functionalities.4
+The apex of the YHY lineup is the Iris Max. Priced at $21,000, this machine is a strategic engineering attempt to bridge the commercial gap between YHY's high-throughput industrial philosophy and Robot Anno's visual-experiential focus by integrating advanced printing functionalities.4
 
 **Physical Architecture and Extraction Core:** To provide the physical internal volume necessary to house the additional optical and printing hardware arrays alongside the milk refrigeration system, the dimensions revert to the wider 1500x1450x2020mm envelope of the baseline CR01.4 It retains the premium BTB-302 commercial extraction core for superior mouthfeel but pushes the electrical system to a formidable 5200W sustained capacity to simultaneously run the BTB-302, the Dobot kinematics, the integrated ice maker, and the specialized thermal printing modules.4
 
@@ -139,7 +139,7 @@ The apex of the YHY lineup is the YHY-CR01ProMax. Priced at $21,000, this machin
 
 The following table synthesizes the verified mechanical, thermodynamic, and component-level data. This matrix serves as the definitive reference for digital taxonomy, correcting initial broad marketing terms to reflect the actual robotic and thermodynamic components verified through engineering assessments.
 
-| Specification Field | Robot Anno AI Bar 2.0 | Robot Anno Latte Art Print | YHY-CR01 (Baseline) | YHY-CR01Pro | YHY-CR01ProMax |
+| Specification Field | Argus Axis | Argus Art | Iris (Baseline) | Iris Pro | Iris Max |
 | :---- | :---- | :---- | :---- | :---- | :---- |
 | **Base Price (USD)** | $18,000 | $28,000 | $18,000 | $19,500 | $21,000 |
 | **Dimensions (L x W x H mm)** | 1600x1200x800 | 1600x1200x800 | 1500x1450x2020 | 1300x1450x2020 | 1500x1450x2020 |
@@ -166,15 +166,15 @@ The AI Robot Coffee Bar 2.0 by Robot Anno is the ultimate experiential retail ce
 
 Representing the pinnacle of visual beverage engagement, the Robot Anno Latte Art machine justifies its premium tier by transforming coffee into an interactive canvas. Retaining the captivating open-bar aesthetic, this unit houses upgraded dual imported ARS pumps and a massive 5500W peak electrical system to maintain the precise 60°C–70°C thermodynamics required for micro-foam. Equipped with intelligent visual capture technology, the 6-axis arm can either physically pour intricate latte art (like swans and tulips) or print a customer's uploaded selfie directly onto the foam in under 90 seconds. It is the definitive choice for flagship retail deployments where organic digital marketing and consumer spectacle are paramount.
 
-**YHY-CR01 High-Speed Cafe Robot**
+**Iris High-Speed Cafe Robot**
 
-Built for relentless, high-volume environments, the YHY-CR01 is a towering, fully enclosed robotic kiosk designed for absolute maximum throughput. Encapsulating a rapid-movement Dobot collaborative arm and a commercial Dr. Coffee M12 extraction core, this powerhouse can produce a finished beverage in just 51 seconds—achieving a theoretical throughput of 70 cups per hour. Standing over two meters tall and weighing 750kg, its rugged sheet-metal enclosure protects the machinery from vandalism while providing immense internal storage for up to 32 distinct flavor profiles and 6 syrup lines. It is the premier hardware choice for high-stress transit hubs, international airports, and busy university campuses.
+Built for relentless, high-volume environments, the Iris is a towering, fully enclosed robotic kiosk designed for absolute maximum throughput. Encapsulating a rapid-movement Dobot collaborative arm and a commercial Dr. Coffee M12 extraction core, this powerhouse can produce a finished beverage in just 51 seconds—achieving a theoretical throughput of 70 cups per hour. Standing over two meters tall and weighing 750kg, its rugged sheet-metal enclosure protects the machinery from vandalism while providing immense internal storage for up to 32 distinct flavor profiles and 6 syrup lines. It is the premier hardware choice for high-stress transit hubs, international airports, and busy university campuses.
 
-**YHY-CR01Pro Collaborative Vending Station**
+**Iris Pro Collaborative Vending Station**
 
-The YHY-CR01Pro elevates the raw speed of the baseline model by integrating a superior thermodynamic extraction core while shrinking its physical width. By upgrading the internal brewing engine to the premium BTB-302 commercial coffee machine, the CR01Pro requires a heavier 5000W power draw but delivers a noticeably denser, higher-quality milk mouthfeel that rivals specialty human baristas. By strategically relocating internal components like the milk refrigeration unit, YHY condensed the machine's width to 1300mm, allowing this 70-cup-per-hour, Dobot-powered workhorse to fit seamlessly into narrower architectural alcoves and tight institutional hallways without sacrificing its blistering 51-second service speed.
+The Iris Pro elevates the raw speed of the baseline model by integrating a superior thermodynamic extraction core while shrinking its physical width. By upgrading the internal brewing engine to the premium BTB-302 commercial coffee machine, the CR01Pro requires a heavier 5000W power draw but delivers a noticeably denser, higher-quality milk mouthfeel that rivals specialty human baristas. By strategically relocating internal components like the milk refrigeration unit, YHY condensed the machine's width to 1300mm, allowing this 70-cup-per-hour, Dobot-powered workhorse to fit seamlessly into narrower architectural alcoves and tight institutional hallways without sacrificing its blistering 51-second service speed.
 
-**YHY-CR01ProMax Hybrid Printing Station**
+**Iris Max Hybrid Printing Station**
 
-The YHY-CR01ProMax represents the ultimate hybrid solution, merging heavy-industrial kiosk security with high-end aesthetic consumer engagement. It retains the premium BTB-302 commercial extraction core for superior beverage quality but reverts to the wider 1500mm chassis to make room for a sophisticated thermal optical printing module. While the complex printing process extends the production time slightly to 72 seconds, it allows the machine to customize the milk foam surface with intricate designs or user-uploaded images. Powered by a massive 5200W electrical backbone and actuated by a highly reliable Dobot collaborative arm, the ProMax brings highly viral "internet celebrity" appeal to secure, fully enclosed, 24/7 environments.
+The Iris Max represents the ultimate hybrid solution, merging heavy-industrial kiosk security with high-end aesthetic consumer engagement. It retains the premium BTB-302 commercial extraction core for superior beverage quality but reverts to the wider 1500mm chassis to make room for a sophisticated thermal optical printing module. While the complex printing process extends the production time slightly to 72 seconds, it allows the machine to customize the milk foam surface with intricate designs or user-uploaded images. Powered by a massive 5200W electrical backbone and actuated by a highly reliable Dobot collaborative arm, the ProMax brings highly viral "internet celebrity" appeal to secure, fully enclosed, 24/7 environments.
 

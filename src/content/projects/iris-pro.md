@@ -1,5 +1,5 @@
 ---
-title: "YHY-CR01Pro Collaborative Vending Station"
+title: "Iris Pro Collaborative Vending Station"
 pubDate: 2026-03-23
 price: 29500
 dimensions: "1300x1450x2020 mm"
@@ -32,13 +32,13 @@ location: "Narrow Alcoves, Institutions"
 year: "2026"
 area: "1.89 sqm"
 cover:
-  url: "/images/products/yhy-cr01-pro/cover.png"
-  alt: "YHY-CR01Pro Collaborative Vending Station"
+  url: "/images/products/iris-pro/cover.png"
+  alt: "Iris Pro Collaborative Vending Station"
 gallery:
-  - url: "/images/products/yhy-cr01-pro/cover.png"
-    alt: "YHY-CR01Pro Front View"
+  - url: "/images/products/iris-pro/cover.png"
+    alt: "Iris Pro Front View"
 ---
 
-The YHY-CR01Pro elevates the raw speed of the baseline model by integrating a superior espresso machine while shrinking its physical width. By upgrading the internal hardware to the premium Barluoto BTB-302 commercial espresso machine, the CR01Pro requires a heavier 5000W power draw but delivers a noticeably denser, higher-quality milk mouthfeel that rivals specialty human baristas.
+The Iris Pro elevates the raw speed of the baseline model by integrating a superior espresso machine while shrinking its physical width. By upgrading the internal hardware to the premium Barluoto BTB-302 commercial espresso machine, the CR01Pro requires a heavier 5000W power draw but delivers a noticeably denser, higher-quality milk mouthfeel that rivals specialty human baristas.
 
 By strategically relocating internal components like the milk refrigeration unit, the machine's width is condensed to 1300mm. This allows the 70-cup-per-hour, Dobot-powered workhorse to fit seamlessly into narrower architectural alcoves and tight institutional hallways without sacrificing its blistering 51-second service speed.

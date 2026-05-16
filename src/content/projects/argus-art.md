@@ -1,5 +1,5 @@
 ---
-title: "Robot Anno Latte Art Print"
+title: "Argus Art"
 pubDate: 2026-03-23
 price: 42000
 dimensions: "1600x1200x800 mm"
@@ -32,13 +32,13 @@ location: "Flagship Retail, Events"
 year: "2026"
 area: "1.92 sqm"
 cover:
-  url: "/images/products/robot-anno-latte-art-print/cover.png"
-  alt: "Robot Anno Latte Art Print"
+  url: "/images/products/argus-art/cover.png"
+  alt: "Argus Art"
 gallery:
-  - url: "/images/products/robot-anno-latte-art-print/cover.png"
-    alt: "Robot Anno Latte Art Print Front View"
+  - url: "/images/products/argus-art/cover.png"
+    alt: "Argus Art Front View"
 ---
 
-Representing the pinnacle of visual beverage engagement, the Robot Anno Latte Art machine justifies its premium tier by transforming coffee into an interactive canvas. Retaining the captivating open-bar aesthetic, this unit houses upgraded dual imported ARS pumps and a massive 5500W peak electrical system to maintain the precise 60°C–70°C thermodynamics required for micro-foam.
+Representing the pinnacle of visual beverage engagement, the Argus Art machine justifies its premium tier by transforming coffee into an interactive canvas. Retaining the captivating open-bar aesthetic, the coffe brewing unit houses upgraded dual ARS pumps and a massive 5500W peak electrical system to maintain the precise 60°C–70°C thermodynamics required for micro-foam.
 
 Equipped with intelligent visual capture technology, the 6-axis arm can either physically pour intricate latte art (like swans and tulips) or print a customer's uploaded selfie directly onto the foam in under 90 seconds. It is the definitive choice for flagship retail deployments where organic digital marketing and consumer spectacle are paramount.

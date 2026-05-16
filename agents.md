@@ -14,7 +14,7 @@
 5. **Image Management:**
    - **Storage:** All images must be placed in the `public/images/` directory.
    - **Organization:** Product images should be organized in per-product subdirectories (e.g., `public/images/products/[robot-slug]/`).
-   - **Referencing:** Use absolute paths starting with `/images/` (e.g., `src="/images/products/yhy-cr01-pro/cover.png"`).
+   - **Referencing:** Use absolute paths starting with `/images/` (e.g., `src="/images/products/iris-pro/cover.png"`).
    - **Astro Assets:** Avoid using `astro:assets` and the `<Image />` component due to compatibility issues with some image formats in this environment. Use standard `<img>` tags.
 
 ## Operational Rules
