@@ -1,11 +1,14 @@
 ---
+import fs from "node:fs";
+import path from "node:path";
+
 // Assets
 // Foundations
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Text from "@/components/foundations/elements/Text.astro";
 import Wrapper from "@/components/foundations/containers/Wrapper.astro";
 
-const { frontmatter } = Astro.props;
+const { frontmatter, slug } = Astro.props;
 
 // 1. ALL SPECS (For the main 2-column table)
 const allSpecs = [
@@ -38,7 +41,39 @@ const allSpecs = [
 const quickSpecLabels = ["Price", "Dimensions", "Weight", "Power", "Throughput"];
 const quickSpecs = allSpecs.filter(spec => quickSpecLabels.includes(spec.label));
 
-const gallery = frontmatter.gallery || [];
+// 3. AUTO-HYDRATE GALLERY
+let gallery = [];
+const galleryDir = path.join(process.cwd(), "public/images/products", slug, "gallery");
+
+if (fs.existsSync(galleryDir)) {
+  const files = fs.readdirSync(galleryDir);
+  gallery = files
+    .filter(file => !file.startsWith('.') && file !== 'cover.png')
+    .map(file => {
+      const ext = path.extname(file).toLowerCase();
+      const isVideo = ['.mp4', '.webm', '.ogg'].includes(ext);
+      const isImage = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg'].includes(ext);
+
+      if (!isImage && !isVideo) return null;
+
+      return {
+        url: `/images/products/${slug}/gallery/${file}`,
+        alt: `Gallery image for ${frontmatter.title} - ${file.replace(path.extname(file), "")}`,
+        isVideo,
+        type: isVideo ? 'video' : 'image'
+      };
+    })
+    .filter(Boolean);
+}
+
+// Fallback to frontmatter gallery if filesystem gallery is empty (for backward compatibility or specific overrides)
+if (gallery.length === 0 && frontmatter.gallery) {
+  gallery = frontmatter.gallery.map(item => ({
+    ...item,
+    isVideo: item.url.match(/\.(mp4|webm|ogg)$/i),
+    type: item.url.match(/\.(mp4|webm|ogg)$/i) ? 'video' : 'image'
+  }));
+}
 ---
 
 <BaseLayout>
@@ -143,21 +178,37 @@ const gallery = frontmatter.gallery || [];
             <div class="space-y-8 mt-12">
               <Text tag="h3" variant="textBase" class="font-bold uppercase tracking-wider text-base-900">Product Gallery</Text>
               <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {gallery.map((image, index) => (
+                {gallery.map((item, index) => (
                   <>
                   <button
                     class="group relative aspect-square overflow-hidden rounded-2xl bg-base-50 border border-base-100 p-2 cursor-zoom-in"
                     onclick={`document.getElementById('gallery-dialog-${index}').showModal()`}
                   >
-                    <img
-                      alt={image.alt || `Project image ${index + 1}`}
-                      src={image.url}
-                      width={400}
-                      height={400}
-                      loading="lazy"
-                      decoding="async"
-                      class="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
-                    />
+                    {item.isVideo ? (
+                      <div class="relative h-full w-full">
+                        <video
+                          src={item.url}
+                          class="h-full w-full object-cover rounded-xl"
+                          muted
+                          playsinline
+                        />
+                        <div class="absolute inset-0 flex items-center justify-center">
+                          <div class="size-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white border border-white/30 group-hover:scale-110 transition-transform">
+                            <span class="ml-1">▶</span>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <img
+                        alt={item.alt || `Project image ${index + 1}`}
+                        src={item.url}
+                        width={400}
+                        height={400}
+                        loading="lazy"
+                        decoding="async"
+                        class="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
+                      />
+                    )}
                     <div class="absolute inset-0 bg-base-900/0 group-hover:bg-base-900/5 transition-colors duration-300"></div>
                   </button>
 
@@ -173,18 +224,27 @@ const gallery = frontmatter.gallery || [];
                       >
                         ✕
                       </button>
-                      <div class="max-h-[80vh] overflow-auto">
-                        <img
-                          alt={image.alt || `Project image ${index + 1}`}
-                          src={image.url}
-                          width={1600}
-                          height={1200}
-                          class="max-h-[75vh] w-auto object-contain rounded-xl"
-                        />
+                      <div class="max-h-[80vh] overflow-auto flex items-center justify-center">
+                        {item.isVideo ? (
+                          <video
+                            src={item.url}
+                            controls
+                            autoplay
+                            class="max-h-[75vh] w-auto object-contain rounded-xl"
+                          />
+                        ) : (
+                          <img
+                            alt={item.alt || `Project image ${index + 1}`}
+                            src={item.url}
+                            width={1600}
+                            height={1200}
+                            class="max-h-[75vh] w-auto object-contain rounded-xl"
+                          />
+                        )}
                       </div>
-                      {image.alt && (
+                      {item.alt && (
                         <Text tag="p" variant="textSM" class="mt-4 text-base-500 font-medium">
-                          {image.alt}
+                          {item.alt}
                         </Text>
                       )}
                     </div>
@@ -223,4 +283,14 @@ const gallery = frontmatter.gallery || [];
       </div>
     </Wrapper>
   </section>
+<script is:inline>
+  document.querySelectorAll("dialog").forEach(dialog => {
+    dialog.addEventListener("close", () => {
+      const video = dialog.querySelector("video");
+      if (video) {
+        video.pause();
+      }
+    });
+  });
+</script>
 </BaseLayout>
