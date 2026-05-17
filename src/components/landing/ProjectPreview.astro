@@ -48,7 +48,7 @@ const sortedProjects = allProjects.sort(
         <div class="flex flex-col gap-6">
           <div>
             <span class="block text-[10px] font-bold tracking-widest uppercase text-base-400 mb-1">Performance</span>
-            <span class="text-sm font-medium text-base-900">{sortedProjects[0]?.data.year}</span>
+            <span class="text-sm font-medium text-base-900"><span id="project-year">{sortedProjects[0]?.data.year}</span></span>
           </div>
           
           <h3 id="project-title" class="text-xl font-semibold text-base-900 text-balance">
@@ -57,7 +57,7 @@ const sortedProjects = allProjects.sort(
 
           <div>
             <span class="block text-[10px] font-bold tracking-widest uppercase text-base-400 mb-1">Application</span>
-            <span class="text-sm text-base-700">{sortedProjects[0]?.data.location}</span>
+            <span class="text-sm text-base-700"><span id="project-location">{sortedProjects[0]?.data.location}</span></span>
           </div>
         </div>
 
