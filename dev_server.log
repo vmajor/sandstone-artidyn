@@ -1,0 +1,20 @@
+
+> @artidyn/sandstone@0.0.1 dev
+> astro dev
+
+10:00:46 [types] Generated 1ms
+10:00:47 [content] Syncing content
+10:00:47 [content] Synced content
+10:00:47 [vite] Re-optimizing dependencies because vite config has changed
+
+ astro  v5.16.6 ready in 1226 ms
+
+┃ Local    http://localhost:4321/
+┃ Network  use --host to expose
+
+10:00:47 watching for file changes...
+10:03:26 [200] /projects/argus-axis 398ms
+10:05:25 [200] /projects/argus-axis 41ms
+10:05:30 [200] /projects/argus-art 15ms
+10:15:04 [watch] src/layouts/ProjectsLayout.astro
+10:15:04 [watch] src/layouts/ProjectsLayout.astro
