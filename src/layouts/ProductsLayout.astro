@@ -1,6 +1,5 @@
 ---
-import fs from "node:fs";
-import path from "node:path";
+import { Image } from "astro:assets";
 
 // Assets
 // Foundations
@@ -13,7 +12,7 @@ const { frontmatter, slug } = Astro.props;
 
 // 1. ALL SPECS (For the main 2-column table)
 const allSpecs = [
-  { label: "Price", value: frontmatter.price ? `$${frontmatter.price.toLocaleString()}` : null },
+  { label: "Price", value: frontmatter.price ? "\$${frontmatter.price.toLocaleString()}" : null },
   { label: "Dimensions", value: frontmatter.dimensions },
   { label: "Weight", value: frontmatter.weight },
   { label: "Kinematics", value: frontmatter.kinematics },
@@ -43,38 +42,36 @@ const quickSpecLabels = ["Price", "Dimensions", "Weight", "Power", "Throughput"]
 const quickSpecs = allSpecs.filter(spec => quickSpecLabels.includes(spec.label));
 
 // 3. AUTO-HYDRATE GALLERY
-let gallery = [];
-const galleryDir = path.join(process.cwd(), "public/images/products", slug, "gallery");
+const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/images/products/*/gallery/*.{jpeg,jpg,png,gif,webp,svg}");
+const videos = import.meta.glob("/images/products/*/gallery/*.{mp4,webm,ogg}", { query: '?url', import: 'default' });
 
-if (fs.existsSync(galleryDir)) {
-  const files = fs.readdirSync(galleryDir);
-  gallery = files
-    .filter(file => !file.startsWith('.') && file !== 'cover.png')
-    .map(file => {
-      const ext = path.extname(file).toLowerCase();
-      const isVideo = ['.mp4', '.webm', '.ogg'].includes(ext);
-      const isImage = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg'].includes(ext);
-
-      if (!isImage && !isVideo) return null;
-
+const galleryImages = await Promise.all(
+  Object.keys(images)
+    .filter((key) => key.includes(`/${slug}/`))
+    .map(async (key) => {
+      const image = await images[key]();
+      const filename = key.split("/").pop().split(".")[0];
       return {
-        url: `/images/products/${slug}/gallery/${file}`,
-        alt: `Gallery image for ${frontmatter.title} - ${file.replace(path.extname(file), "")}`,
-        isVideo,
-        type: isVideo ? 'video' : 'image'
+        url: image.default,
+        alt: `Gallery image for ${frontmatter.title} - ${filename}`,
+        isVideo: false,
+        type: "image"
       };
     })
-    .filter(Boolean);
-}
+);
 
-// Fallback to frontmatter gallery if filesystem gallery is empty (for backward compatibility or specific overrides)
-if (gallery.length === 0 && frontmatter.gallery) {
-  gallery = frontmatter.gallery.map(item => ({
-    ...item,
-    isVideo: item.url.match(/\.(mp4|webm|ogg)$/i),
-    type: item.url.match(/\.(mp4|webm|ogg)$/i) ? 'video' : 'image'
-  }));
-}
+const galleryVideos = Object.keys(videos)
+  .filter((key) => key.includes(`/${slug}/`))
+  .map((key) => {
+    return {
+      url: key.replace("/public", ""),
+      alt: `Gallery video for ${frontmatter.title}`,
+      isVideo: true,
+      type: "video"
+    };
+  });
+
+const gallery = [...galleryImages, ...galleryVideos];
 ---
 
 <BaseLayout title={frontmatter.title} description={frontmatter.description}>
@@ -83,7 +80,7 @@ if (gallery.length === 0 && frontmatter.gallery) {
     <Wrapper variant="wide" class="pt-4 pb-8">
       <div class="relative rounded-3xl min-h-[500px] h-fit overflow-hidden bg-base-100">
         {frontmatter.cover && (
-          <img
+          <Image
             width={1440}
             height={1080}
             loading="eager"
@@ -184,7 +181,7 @@ if (gallery.length === 0 && frontmatter.gallery) {
                   <>
                   <button
                     class="group relative aspect-square overflow-hidden rounded-2xl bg-base-50 border border-base-100 p-2 cursor-zoom-in"
-                    onclick={`document.getElementById('gallery-dialog-${index}').showModal()`}
+                    onclick={`document.getElementById('gallery-dialog-${index}').showModal()` }
                   >
                     {item.isVideo ? (
                       <div class="relative h-full w-full">
@@ -201,7 +198,7 @@ if (gallery.length === 0 && frontmatter.gallery) {
                         </div>
                       </div>
                     ) : (
-                      <img
+                      <Image
                         alt={item.alt || `Product image ${index + 1}`}
                         src={item.url}
                         width={400}
@@ -220,7 +217,7 @@ if (gallery.length === 0 && frontmatter.gallery) {
                   >
                     <div class="relative bg-white p-4 md:p-8 rounded-3xl shadow-2xl flex flex-col items-center">
                       <button
-                        onclick={`this.closest('dialog').close()`}
+                        onclick={`this.closest('dialog').close()` }
                         class="absolute top-4 right-4 size-10 flex items-center justify-center rounded-full bg-base-100 text-base-900 hover:bg-base-200 transition-colors z-10"
                         aria-label="Close"
                       >
@@ -235,7 +232,7 @@ if (gallery.length === 0 && frontmatter.gallery) {
                             class="max-h-[75vh] w-auto object-contain rounded-xl"
                           />
                         ) : (
-                          <img
+                          <Image
                             alt={item.alt || `Product image ${index + 1}`}
                             src={item.url}
                             width={1600}

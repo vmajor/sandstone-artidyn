@@ -32,10 +32,10 @@ location: "Mall Concourses, Luxury Lobbies"
 year: "2026"
 area: "1.92 sqm"
 cover:
-  url: "/images/products/argus-axis/cover.png"
+  url: "../../assets/images/products/argus-axis/cover.png"
   alt: "Argus Axis"
 gallery:
-  - url: "/images/products/argus-axis/cover.png"
+  - url: "../../assets/images/products/argus-axis/cover.png"
     alt: "Argus Axis Front View"
 ---
 

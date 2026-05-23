@@ -32,10 +32,10 @@ location: "Transit Hubs, Airports, Universities"
 year: "2026"
 area: "2.18 sqm"
 cover:
-  url: "/images/products/iris/cover.png"
+  url: "../../assets/images/products/iris/cover.png"
   alt: "Iris High-Speed Cafe Robot"
 gallery:
-  - url: "/images/products/iris/cover.png"
+  - url: "../../assets/images/products/iris/cover.png"
     alt: "Iris Front View"
 ---
 

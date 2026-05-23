@@ -1,12 +1,9 @@
 ---
+import { Image } from "astro:assets";
 // Assets
-//  // import one from "@/images/solutions/1.png";
-//  // import two from "@/images/solutions/2.png";
-//  // import three from "@/images/solutions/3.png";
-// // Keeping these imports to avoid build errors, but they are unused in the array below
-//  // import implementationImg from "@/images/solutions/4.png";
-//  // import five from "@/images/solutions/5.png";
-//  // import six from "@/images/solutions/6.png";
+import one from "@/assets/images/solutions/1.png";
+import two from "@/assets/images/solutions/2.png";
+import three from "@/assets/images/solutions/3.png";
 
 // Foundations
 import Text from "@/components/foundations/elements/Text.astro";
@@ -18,19 +15,19 @@ const processSteps = [
     title: "Discovery Consultation",
     description:
       "We start with a free call to understand your business goals, ideal locations, and budget. We assess your specific constraints—staffing, space, or throughput—to define the problem.",
-    image: "/images/solutions/1.png",
+    image: one,
   },
   {
     title: "Tailored Solution",
     description:
       "We match you with the perfect robot from our Certified Range. No guesswork—just transparent pricing, clear ROI productions, and a system vetted for your specific use case.",
-    image: "/images/solutions/2.png",
+    image: two,
   },
   {
     title: "Launch & Support",
     description:
       "We guide you through delivery, installation, customization, and training. We ensure your team is ready and your robot is calibrated for 24/7 reliability from Day 1.",
-    image: "/images/solutions/3.png",
+    image: three,
   },
 ];
 ---
@@ -78,9 +75,11 @@ const processSteps = [
                 </Text>
               </div>
               <div class="w-full h-48 bg-base-200 rounded-xl flex items-center justify-center overflow-hidden">
-                <img
+                <Image
                   src={step.image}
                   alt={step.title}
+                  width={400}
+                  height={200}
                   class="w-full h-full object-cover"
                   loading="lazy"
                 />

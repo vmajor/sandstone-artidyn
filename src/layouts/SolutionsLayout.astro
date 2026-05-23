@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 // Assets
 // Foundations
 import BaseLayout from "@/layouts/BaseLayout.astro";
@@ -11,15 +12,17 @@ const { frontmatter } = Astro.props;
   <section>
     <Wrapper variant="wide" class="pt-4 pb-8">
       <div class="relative rounded-3xl h-[calc(100vh-2rem)] overflow-hidden">
-        <img
-          width={1440}
-          height={1080}
-          loading="eager"
-          decoding="async"
-          alt={frontmatter.image.alt}
-          src={frontmatter.image.url}
-          class="object-cover size-full absolute inset-0 object-center"
-        />
+        {frontmatter.image && (
+          <Image
+            width={1440}
+            height={1080}
+            loading="eager"
+            decoding="async"
+            alt={frontmatter.image.alt}
+            src={frontmatter.image.url}
+            class="object-cover size-full absolute inset-0 object-center"
+          />
+        )}
 
         <div class="absolute bottom-4 left-4 right-4 max-w-sm flex flex-col">
           <div class="p-8 bg-base-100 rounded-2xl w-fit">

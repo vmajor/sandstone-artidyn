@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 // Assets
 // Foundations
 import Text from "@/components/foundations/elements/Text.astro";
@@ -6,7 +7,7 @@ const { post } = Astro.props;
 const { url, title, image, throughput, client } = {
   url: "/products/" + post.slug,
   title: post.data.title,
-  image: post.data.cover?.url || "/images/placeholder.jpg",
+  image: post.data.cover?.url,
   throughput: post.data.throughput,
   client: post.data.client,
 };
@@ -20,13 +21,15 @@ const { url, title, image, throughput, client } = {
     class="absolute inset-0 z-10"></a>
 
   <div class="bg-base-100 rounded-2xl p-8 lg:p-12 border border-base-200 group-hover:border-base-300 transition-colors shadow-sm">
-    <img
-      src={image}
-      alt={title}
-      width={1000}
-      height={1000}
-      class="object-contain object-center max-h-[500px] w-auto mx-auto"
-    />
+    {image && (
+      <Image
+        src={image}
+        alt={title}
+        width={1000}
+        height={1000}
+        class="object-contain object-center max-h-[500px] w-auto mx-auto"
+      />
+    )}
   </div>
 
   <div class="mt-6 px-2">
