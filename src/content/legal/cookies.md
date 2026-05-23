@@ -3,11 +3,11 @@ page: Cookies
 pubDate: 2025-11-12
 ---
 
-# Cookie Policy
+## Cookie Policy
 
 _Last updated: November 12, 2025_
 
-This Cookie Policy explains how Matterhaus uses cookies and similar technologies on our website.
+This Cookie Policy explains how Artidyn Robotics LLC uses cookies and similar technologies on our website.
 
 ## What Are Cookies?
 
@@ -24,7 +24,7 @@ These cookies are necessary for the website to function properly. They enable co
 
 ### Analytics Cookies
 
-We use these cookies to understand how visitors interact with our website. This helps us improve our services and user experience.
+We use these cookies to understand how visitors interact with our website. This helps us improve our solutions and user experience.
 
 - **Google Analytics**: Tracks page views, session duration, and traffic sources
 - **Usage Statistics**: Helps us understand which pages are most popular
@@ -38,7 +38,7 @@ These cookies enable enhanced functionality and personalization.
 
 ## Third-Party Cookies
 
-Some cookies are set by third-party services that appear on our pages:
+Some cookies are set by third-party solutions that appear on our pages:
 
 - **Google Fonts**: For displaying our website typography
 - **Social Media Widgets**: For sharing content on social platforms
@@ -79,6 +79,6 @@ We may update this Cookie Policy from time to time to reflect changes in our pra
 
 If you have any questions about our use of cookies, please contact us:
 
-**Matterhaus**  
-Åland Islands, Finland  
-Email: matterhaus@example.com
+**Artidyn Robotics LLC**
+Sheridan, Wyoming, USA
+Email: info@artidyn.ai

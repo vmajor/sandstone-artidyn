@@ -2,15 +2,39 @@
 > @artidyn/sandstone@0.0.1 dev
 > astro dev
 
-06:28:27 [types] Generated 1ms
-06:28:28 [content] Syncing content
-06:28:28 [content] Synced content
+03:10:03 [types] Generated 3ms
+03:10:03 [content] Syncing content
+03:10:03 [content] Astro config changed
+03:10:03 [content] Content config changed
+03:10:03 [content] Clearing content store
+03:10:04 [content] Synced content
+03:10:04 [vite] Re-optimizing dependencies because vite config has changed
 
- astro  v5.16.6 ready in 1053 ms
+ astro  v5.16.6 ready in 2767 ms
 
 ┃ Local    http://localhost:4321/
 ┃ Network  use --host to expose
 
-06:28:28 watching for file changes...
-06:28:44 [200] / 284ms
-06:28:44 [404] /hero.webm 33ms
+03:10:04 watching for file changes...
+03:11:34 [200] / 588ms
+03:11:36 [404] /hero.webm 15ms
+03:11:37 [200] /products/ 14ms
+03:11:39 [200] /solutions/ 12ms
+03:11:40 [200] /products/iris-pro/ 31ms
+03:11:41 [200] /legal/privacy/ 14ms
+03:13:47 [200] / 44ms
+03:13:47 [404] /hero.webm 28ms
+03:13:48 [200] /products/ 14ms
+03:13:49 [200] /products/iris-pro/ 14ms
+03:13:49 [200] /solutions/1/ 9ms
+03:13:50 [200] /legal/privacy/ 11ms
+03:17:01 [200] / 17ms
+03:17:01 [404] /hero.webm 12ms
+03:21:50 [200] / 23ms
+03:21:50 [404] /hero.webm 13ms
+03:23:43 [200] / 37ms
+03:23:43 [404] /hero.webm 20ms
+03:23:44 [200] /products/ 22ms
+03:23:46 [200] /products/iris-pro/ 42ms
+03:23:47 [200] /solutions/ 21ms
+03:23:48 [200] /legal/privacy/ 25ms

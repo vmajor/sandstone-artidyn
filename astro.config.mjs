@@ -18,9 +18,10 @@ export default defineConfig({
     skipInline: false,
     drafts: true,
   },
-  site: "https://artidyn.ai",
+  site: "https://www.artidyn.ai",
+  trailingSlash: "always",
   integrations: [tailwindcss(), sitemap(), mdx()],
   image: {
-    domains: ["artidyn.ai"],
+    domains: ["www.artidyn.ai", "artidyn.ai"],
   },
 });

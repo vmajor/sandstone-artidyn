@@ -26,22 +26,22 @@
   keenSliderPrevious.addEventListener("click", () => keenSlider.prev());
   keenSliderNext.addEventListener("click", () => keenSlider.next());
 
-  const yearEl = document.getElementById("project-year");
-  const titleEl = document.getElementById("project-title");
-  const locationEl = document.getElementById("project-location");
+  const yearEl = document.getElementById("product-year");
+  const titleEl = document.getElementById("product-title");
+  const locationEl = document.getElementById("product-location");
 
   function updateInfo(slide) {
-    const project = window.sortedProjects[slide];
-    if (project) {
+    const product = window.sortedProducts[slide];
+    if (product) {
       // For Robots, we use 'year' as 'Throughput' and 'location' as 'Application'
-      if (yearEl) yearEl.textContent = project.data.year;
-      if (titleEl) titleEl.textContent = project.data.title;
-      if (locationEl) locationEl.textContent = project.data.location;
+      if (yearEl) yearEl.textContent = product.data.year;
+      if (titleEl) titleEl.textContent = product.data.title;
+      if (locationEl) locationEl.textContent = product.data.location;
     }
   }
 
   keenSlider.on("animationEnded", (s) => {
-    updateInfo(s.track.details.abs % window.sortedProjects.length);
+    updateInfo(s.track.details.abs % window.sortedProducts.length);
   });
 
   // Initialize with first slide

@@ -7,7 +7,7 @@ import Wrapper from "@/components/foundations/containers/Wrapper.astro";
 const { frontmatter } = Astro.props;
 ---
 
-<BaseLayout>
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
   <section>
     <Wrapper variant="wide" class="pt-4 pb-8">
       <div class="relative rounded-3xl h-[calc(100vh-2rem)] overflow-hidden">
@@ -24,7 +24,7 @@ const { frontmatter } = Astro.props;
         <div class="absolute bottom-4 left-4 right-4 max-w-sm flex flex-col">
           <div class="p-8 bg-base-100 rounded-2xl w-fit">
             <Text
-              tag="h2"
+              tag="h1"
               variant="textLG"
               class="text-base-600 tracking-tight 2xl:text-2xl text-balance font-medium"
             >

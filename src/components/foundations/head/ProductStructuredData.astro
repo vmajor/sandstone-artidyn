@@ -1,0 +1,24 @@
+---
+const { product, slug } = Astro.props;
+
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": product.title,
+  "description": product.description || "Certified Beverage Robot from Artidyn",
+  "image": product.cover?.url ? new URL(product.cover.url, "https://www.artidyn.ai").toString() : undefined,
+  "brand": {
+    "@type": "Brand",
+    "name": "Artidyn"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": product.price,
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": new URL(`/products/${slug}/`, "https://www.artidyn.ai").toString()
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(productSchema)} />

@@ -7,6 +7,7 @@ import path from "node:path";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Text from "@/components/foundations/elements/Text.astro";
 import Wrapper from "@/components/foundations/containers/Wrapper.astro";
+import ProductStructuredData from "@/components/foundations/head/ProductStructuredData.astro";
 
 const { frontmatter, slug } = Astro.props;
 
@@ -76,7 +77,8 @@ if (gallery.length === 0 && frontmatter.gallery) {
 }
 ---
 
-<BaseLayout>
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
+  <ProductStructuredData product={frontmatter} slug={slug} />
   <section>
     <Wrapper variant="wide" class="pt-4 pb-8">
       <div class="relative rounded-3xl min-h-[500px] h-fit overflow-hidden bg-base-100">
@@ -95,7 +97,7 @@ if (gallery.length === 0 && frontmatter.gallery) {
         <div class="absolute bottom-4 left-4 right-4 max-w-sm flex flex-col">
           <div class="p-8 bg-white/80 backdrop-blur-md rounded-2xl w-fit border border-base-200 shadow-xl">
             <div class="mb-4">
-               <a href="/projects" class="text-xs font-bold uppercase tracking-widest text-base-400 hover:text-base-900 transition-colors">← Back to Catalog</a>
+               <a href="/products/" class="text-xs font-bold uppercase tracking-widest text-base-400 hover:text-base-900 transition-colors">← Back to Catalog</a>
             </div>
             <div>
               <Text
@@ -200,7 +202,7 @@ if (gallery.length === 0 && frontmatter.gallery) {
                       </div>
                     ) : (
                       <img
-                        alt={item.alt || `Project image ${index + 1}`}
+                        alt={item.alt || `Product image ${index + 1}`}
                         src={item.url}
                         width={400}
                         height={400}
@@ -234,7 +236,7 @@ if (gallery.length === 0 && frontmatter.gallery) {
                           />
                         ) : (
                           <img
-                            alt={item.alt || `Project image ${index + 1}`}
+                            alt={item.alt || `Product image ${index + 1}`}
                             src={item.url}
                             width={1600}
                             height={1200}
@@ -273,7 +275,7 @@ if (gallery.length === 0 && frontmatter.gallery) {
             </dl>
             
             <div class="mt-8 pt-6 border-t border-base-200">
-              <a href="/contact" class="flex w-full items-center justify-center rounded-xl bg-base-900 px-4 py-3 text-sm font-semibold text-white hover:bg-base-800 transition-all shadow-sm uppercase tracking-widest text-[10px] active:scale-[0.98]">
+              <a href="/contact/" class="flex w-full items-center justify-center rounded-xl bg-base-900 px-4 py-3 text-sm font-semibold text-white hover:bg-base-800 transition-all shadow-sm uppercase tracking-widest text-[10px] active:scale-[0.98]">
                  Request More Information
               </a>
             </div>

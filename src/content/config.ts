@@ -43,7 +43,7 @@ const legal = defineCollection({
   }),
 });
 
-const projects = defineCollection({
+const products = defineCollection({
   schema: z.object({
       title: z.string(),
       pubDate: z.date().optional(),
@@ -91,7 +91,7 @@ const projects = defineCollection({
     }),
 });
 
-const services = defineCollection({
+const solutions = defineCollection({
   schema: z.object({
       title: z.string(),
       description: z.string().optional(),
@@ -109,6 +109,6 @@ export const collections = {
   team: team,
   legal: legal,
   posts: postsCollection,
-  projects: projects,
-  services: services,
+  products: products,
+  solutions: solutions,
 };

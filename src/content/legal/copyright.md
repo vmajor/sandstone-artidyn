@@ -3,19 +3,19 @@ page: Copyright
 pubDate: 2025-11-12
 ---
 
-# Copyright Notice
+## Copyright Notice
 
 _Last updated: November 12, 2025_
 
 ## Copyright Protection
 
-All content on this website, including but not limited to architectural designs, drawings, photographs, text, graphics, logos, and software, is protected by copyright law and owned by Matterhaus unless otherwise indicated.
+All content on this website, including but not limited to robot designs, drawings, photographs, text, graphics, logos, and software, is protected by copyright law and owned by Artidyn Robotics LLC unless otherwise indicated.
 
-## Architectural Designs & Drawings
+## Robotics Designs & Drawings
 
 ### Copyright Ownership
 
-Matterhaus retains copyright ownership of all architectural designs, drawings, specifications, and related documents prepared for clients. This includes:
+Artidyn Robotics LLC retains copyright ownership of all robot designs, drawings, specifications, and related documents prepared for clients. This includes:
 
 - Conceptual designs and sketches
 - Construction drawings and documents
@@ -24,7 +24,7 @@ Matterhaus retains copyright ownership of all architectural designs, drawings, s
 
 ### Client Usage Rights
 
-Clients receive a limited license to use the architectural documents solely for the construction and completion of their specific project. This license includes:
+Clients receive a limited license to use the technical documents solely for the deployment and operation of their specific product. This license includes:
 
 - Use by the client and their authorized contractors
 - Reproduction necessary for construction purposes
@@ -35,7 +35,7 @@ Clients receive a limited license to use the architectural documents solely for 
 The following uses are not permitted without express written permission:
 
 - Commercial reproduction or distribution
-- Use for other projects or locations
+- Use for other products or locations
 - Public display or publication
 - Modification or alteration of designs
 - Transfer to third parties
@@ -46,19 +46,19 @@ The following uses are not permitted without express written permission:
 
 All text, photographs, graphics, and other content on this website are copyrighted and may not be reproduced, distributed, or displayed without permission.
 
-### Project Images
+### Product Images
 
-Photographs of completed projects are protected by copyright. Limited use for promotional purposes may be permitted with proper attribution.
+Photographs of completed products are protected by copyright. Limited use for promotional purposes may be permitted with proper attribution.
 
 ## Digital Rights Management
 
 ### Building Information Modeling (BIM)
 
-For projects involving BIM, additional terms apply regarding data sharing, interoperability, and digital rights management.
+For products involving BIM, additional terms apply regarding data sharing, interoperability, and digital rights management.
 
 ### Software and Tools
 
-Any proprietary software, tools, or digital assets developed by Matterhaus remain our intellectual property.
+Any proprietary software, tools, or digital assets developed by Artidyn Robotics LLC remain our intellectual property.
 
 ## Fair Use Policy
 
@@ -83,9 +83,9 @@ Our copyright protection extends to international jurisdictions. We comply with 
 
 For copyright inquiries or permissions:
 
-**Matterhaus**  
-Åland Islands, Finland  
-Email: matterhaus@example.com
+**Artidyn Robotics LLC**
+Sheridan, Wyoming, USA
+Email: info@artidyn.ai
 
 ## Changes to This Notice
 

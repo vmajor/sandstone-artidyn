@@ -41,4 +41,4 @@ gallery:
 
 The Iris Pro elevates the raw speed of the baseline model by integrating a superior espresso machine while shrinking its physical width. By upgrading the internal hardware to the premium Barluoto BTB-302 commercial espresso machine, the CR01Pro requires a heavier 5000W power draw but delivers a noticeably denser, higher-quality milk mouthfeel that rivals specialty human baristas.
 
-By strategically relocating internal components like the milk refrigeration unit, the machine's width is condensed to 1300mm. This allows the 70-cup-per-hour, Dobot-powered workhorse to fit seamlessly into narrower architectural alcoves and tight institutional hallways without sacrificing its blistering 51-second service speed.
+By strategically relocating internal components like the milk refrigeration unit, the machine's width is condensed to 1300mm. This allows the 70-cup-per-hour, Dobot-powered workhorse to fit seamlessly into narrower architectural alcoves and tight institutional hallways without sacrificing its blistering 51-second operation speed.
