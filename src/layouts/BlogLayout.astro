@@ -28,11 +28,11 @@ if (frontmatter.team) {
 }
 
 const authorName =
-  teamEntry?.data.name ?? frontmatter.team ?? "Matterhause Editorial Team";
+  teamEntry?.data.name ?? frontmatter.team ?? "Artidyn Editorial Team";
 const authorHref = teamEntry ? `/team/${teamEntry.slug}` : undefined;
 ---
 
-<BaseLayout>
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
   <section>
     <Wrapper variant="wide" class="pt-4 pb-8">
       <div class="relative rounded-3xl h-[calc(100vh-2rem)] overflow-hidden">
@@ -75,7 +75,7 @@ const authorHref = teamEntry ? `/team/${teamEntry.slug}` : undefined;
               </span>
             </Text>
             <Text
-              tag="h2"
+              tag="h1"
               variant="textLG"
               class="text-base-600 tracking-tight 2xl:text-2xl text-balance font-medium mt-12"
             >

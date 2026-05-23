@@ -4,24 +4,24 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 // Sections
 import Hero from "@/components/landing/Hero.astro";
 import Intro from "@/components/landing/Intro.astro";
-import ProjectPreview from "@/components/landing/ProjectPreview.astro";
+import ProductPreview from "@/components/landing/ProductPreview.astro";
 import Stats from "@/components/landing/Stats.astro";
-import ServicesPreview from "@/components/landing/ServicesPreview.astro";
+import SolutionsPreview from "@/components/landing/SolutionsPreview.astro";
 import Philosophy from "@/components/landing/Philosophy.astro";
 import Process from "@/components/landing/Process.astro";
 import Testimonials from "@/components/landing/Testimonials.astro";
 import BlogPreview from "@/components/landing/BlogPreview.astro";
 // Scripts
 import KeenSliderTestimonials from "@/components/foundations/scripts/KeenSliderTestimonials.astro";
-import KeenSliderProjectCardScript from "@/components/foundations/scripts/KeenSliderProjectCardScript.astro";
+import KeenSliderProductCardScript from "@/components/foundations/scripts/KeenSliderProductCardScript.astro";
 ---
 
 <BaseLayout>
   <Hero />
   <Intro />
-  <ProjectPreview />
+  <ProductPreview />
   <Stats />
-  <ServicesPreview />
+  <SolutionsPreview />
   <Philosophy />
   <Process />
   <Testimonials />
@@ -29,4 +29,4 @@ import KeenSliderProjectCardScript from "@/components/foundations/scripts/KeenSl
 </BaseLayout>
 <!-- Scripts -->
 <KeenSliderTestimonials />
-<KeenSliderProjectCardScript />
+<KeenSliderProductCardScript />

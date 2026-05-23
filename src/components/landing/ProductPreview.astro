@@ -5,15 +5,15 @@ import Kicker from "@/components/foundations/elements/Kicker.astro";
 import Button from "@/components/foundations/elements/Button.astro";
 import Wrapper from "@/components/foundations/containers/Wrapper.astro";
 // Components
-import ProjectCard from "@/components/projects/ProjectCard.astro";
+import ProductCard from "@/components/products/ProductCard.astro";
 // Icons
 import ArrowLeft from "@/components/foundations/icons/ArrowLeft.astro";
 import ArrowRight from "@/components/foundations/icons/ArrowRight.astro";
 // Content
 import { getCollection } from "astro:content";
-const allProjects = await getCollection("projects");
+const allProducts = await getCollection("products");
 // Sort by publication date (newest first)
-const sortedProjects = allProjects.sort(
+const sortedProducts = allProducts.sort(
   (a, b) =>
     new Date(b.data.pubDate || b.data.year || 0).getTime() -
     new Date(a.data.pubDate || a.data.year || 0).getTime()
@@ -31,7 +31,7 @@ const sortedProjects = allProjects.sort(
         Explore our range of certified beverage robots tailored to your business model.
       </h2>
       <Button
-        href="/projects"
+        href="/products/"
         isLink={true}
         size="xl"
         variant="default"
@@ -48,16 +48,16 @@ const sortedProjects = allProjects.sort(
         <div class="flex flex-col gap-6">
           <div>
             <span class="block text-[10px] font-bold tracking-widest uppercase text-base-400 mb-1">Performance</span>
-            <span class="text-sm font-medium text-base-900"><span id="project-year">{sortedProjects[0]?.data.year}</span></span>
+            <span class="text-sm font-medium text-base-900"><span id="product-year">{sortedProducts[0]?.data.year}</span></span>
           </div>
           
-          <h3 id="project-title" class="text-xl font-semibold text-base-900 text-balance">
-            {sortedProjects[0]?.data.title}
+          <h3 id="product-title" class="text-xl font-semibold text-base-900 text-balance">
+            {sortedProducts[0]?.data.title}
           </h3>
 
           <div>
             <span class="block text-[10px] font-bold tracking-widest uppercase text-base-400 mb-1">Application</span>
-            <span class="text-sm text-base-700"><span id="project-location">{sortedProjects[0]?.data.location}</span></span>
+            <span class="text-sm text-base-700"><span id="product-location">{sortedProducts[0]?.data.location}</span></span>
           </div>
         </div>
 
@@ -74,7 +74,7 @@ const sortedProjects = allProjects.sort(
       <div class="lg:col-span-9">
         <div id="keen-slider" class="keen-slider rounded-xl overflow-hidden cursor-grab active:cursor-grabbing h-full">
           {
-            sortedProjects.map((project) => <ProjectCard post={project} />)
+            sortedProducts.map((product) => <ProductCard post={product} />)
           }
         </div>
       </div>
@@ -83,6 +83,6 @@ const sortedProjects = allProjects.sort(
   </Wrapper>
 </section>
 
-<script define:vars={{ sortedProjects }}>
-  window.sortedProjects = sortedProjects;
+<script define:vars={{ sortedProducts }}>
+  window.sortedProducts = sortedProducts;
 </script>

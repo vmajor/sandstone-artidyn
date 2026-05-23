@@ -1,16 +1,15 @@
 ---
-import ServicesLayout from "@/layouts/ServicesLayout.astro";
+import SolutionsLayout from "@/layouts/SolutionsLayout.astro";
 import { getCollection } from "astro:content";
 import RollingLink from "@/components/foundations/elements/RollingLink.astro";
 
 export async function getStaticPaths() {
-  const services = await getCollection("services");
-  const paths = services.map((page) => {
+  const solutions = await getCollection("solutions");
+  const paths = solutions.map((page) => {
     return {
       params: { slug: page.slug },
       props: { page },
 
-      trailingSlash: false,
     };
   });
   return paths;
@@ -19,16 +18,16 @@ const { page } = Astro.props;
 const { Content } = await page.render();
 ---
 
-<ServicesLayout frontmatter={page.data}>
+<SolutionsLayout frontmatter={page.data}>
   <Content />
   
-  {/* THE BRIDGE: Connecting the Service Tier to the Robot Catalog */}
+  {/* THE BRIDGE: Connecting the Solution Tier to the Robot Catalog */}
   <div class="mt-12 pt-8 border-t border-base-200">
     <RollingLink
-      href={page.data.category ? `/projects#category-${page.data.category}` : "/projects"}
+      href={page.data.category ? `/products/#category-${page.data.category}` : "/products/"}
       variant="primary"
       initialText="View Certified Robots"
       hoverText="Open Catalog"
     />
   </div>
-</ServicesLayout>
+</SolutionsLayout>

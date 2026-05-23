@@ -5,13 +5,13 @@ import Text from "@/components/foundations/elements/Text.astro";
 import Kicker from "@/components/foundations/elements/Kicker.astro";
 import Wrapper from "@/components/foundations/containers/Wrapper.astro";
 // Components
-import ServicesCard from "@/components/services/ServiceCard.astro";
+import SolutionsCard from "@/components/solutions/SolutionCard.astro";
 // Content
 import { getCollection } from "astro:content";
-const allServices = await getCollection("services");
+const allSolutions = await getCollection("solutions");
 
 // Sort by Title (Compact, Craft, High-Volume) or keep default
-const sortedServices = allServices.sort((a, b) => 
+const sortedSolutions = allSolutions.sort((a, b) =>
   a.data.title.localeCompare(b.data.title)
 );
 ---
@@ -53,7 +53,7 @@ const sortedServices = allServices.sort((a, b) =>
           <div
             class="lg:col-span-2 divide-y divide-base-200 border-y border-base-200"
           >
-            {sortedServices.map((service) => <ServicesCard post={service} />)}
+            {sortedSolutions.map((solution) => <SolutionsCard post={solution} />)}
           </div>
         </div>
       </Wrapper>

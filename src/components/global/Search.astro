@@ -2,11 +2,11 @@
 import Button from "@/components/foundations/elements/Button.astro";
 import SearchIcon from "@/components/foundations/icons/Search.astro";
 import { getCollection } from "astro:content";
-const [postsCol, projectsCol, servicesCol, teamCol, legalCol] =
+const [postsCol, productsCol, solutionsCol, teamCol, legalCol] =
   await Promise.all([
     getCollection("posts"),
-    getCollection("projects"),
-    getCollection("services"),
+    getCollection("products"),
+    getCollection("solutions"),
     getCollection("team"),
     getCollection("legal"),
   ]);
@@ -20,22 +20,22 @@ const items = [
     collection: "posts",
     url: `/blog/posts/${slug}`,
   })),
-  ...projectsCol.map(({ data, slug }) => ({
+  ...productsCol.map(({ data, slug }) => ({
     title: data.title,
     description:
       [data.client, data.location, data.year].filter(Boolean).join(" • ") || "",
     pubDate: data.pubDate ?? null,
     slug,
-    collection: "projects",
-    url: `/projects/${slug}`,
+    collection: "products",
+    url: `/products/${slug}`,
   })),
-  ...servicesCol.map(({ data, slug }) => ({
+  ...solutionsCol.map(({ data, slug }) => ({
     title: data.title,
     description: data.description ?? "",
     pubDate: null,
     slug,
-    collection: "services",
-    url: `/services/${slug}`,
+    collection: "solutions",
+    url: `/solutions/${slug}`,
   })),
   ...teamCol.map(({ data, slug }) => ({
     title: data.name,

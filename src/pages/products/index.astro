@@ -5,11 +5,11 @@ import Text from "@/components/foundations/elements/Text.astro";
 import Kicker from "@/components/foundations/elements/Kicker.astro";
 import Wrapper from "@/components/foundations/containers/Wrapper.astro";
 // Components
-import ProjectCardBig from "@/components/projects/ProjectCardBig.astro";
+import ProductCardBig from "@/components/products/ProductCardBig.astro";
 // Content
 import { getCollection } from "astro:content";
 
-const allProjects = await getCollection("projects");
+const allProducts = await getCollection("products");
 
 // 1. DEFINE THE TIERS (The "Predefined Categories")
 // This controls the display order on the page.
@@ -34,8 +34,8 @@ const tiers = [
 // 2. GROUPING LOGIC
 // We create a function to fetch and sort robots for a specific tier.
 function getRobotsForTier(tierId) {
-  return allProjects
-    .filter((project) => project.data.category === tierId)
+  return allProducts
+    .filter((product) => product.data.category === tierId)
     // Sort by Price (Low to High), or fallback to Title if no price exists
     .sort((a, b) => (a.data.price || 0) - (b.data.price || 0));
 }
@@ -109,7 +109,7 @@ function getRobotsForTier(tierId) {
                   {/* Grid of Robots in this Category */}
                   <div class="grid grid-cols-1 gap-y-24">
                     {robots.map((robot) => (
-                      <ProjectCardBig post={robot} />
+                      <ProductCardBig post={robot} />
                     ))}
                   </div>
                 </div>

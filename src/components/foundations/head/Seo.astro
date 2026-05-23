@@ -4,7 +4,7 @@ import { AstroSeo } from "@astrolib/seo";
 // Define default metadata based on your Master Narrative & Storyboard
 const defaultTitle = "Artidyn Robotics | The Beverage Automation Partner";
 const defaultDescription = "Your growth is capped by staffing. We uncap it. Artidyn Robotics provides certified beverage automation solutions to unlock new revenue and premium experiences.";
-const defaultImage = "https://artidyn.ai/og.image.jpg"; // Absolute URL is safer for social sharing
+const defaultImage = "https://www.artidyn.ai/og-image.jpg"; // Absolute URL is safer for social sharing
 
 // Allow individual pages to override these
 const { 
@@ -15,7 +15,12 @@ const {
 } = Astro.props;
 
 // Construct the full canonical URL for the current page
-const canonicalURL = new URL(Astro.url.pathname, "https://artidyn.ai").toString();
+// Ensure it ends with a slash if it's not the homepage and doesn't have an extension
+let path = Astro.url.pathname;
+if (path !== "/" && !path.endsWith("/") && !path.includes(".")) {
+  path += "/";
+}
+const canonicalURL = new URL(path, "https://www.artidyn.ai").toString();
 ---
 
 <AstroSeo
@@ -29,7 +34,7 @@ const canonicalURL = new URL(Astro.url.pathname, "https://artidyn.ai").toString(
     images: [
       {
         url: image,
-        // Assuming your og.image.jpg is standard size, otherwise adjust
+        // Assuming your og-image.jpg is standard size, otherwise adjust
         width: 1200, 
         height: 630,
         alt: "Artidyn Robotics - Certified Beverage Automation",

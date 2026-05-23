@@ -4,7 +4,7 @@
 import Text from "@/components/foundations/elements/Text.astro";
 const { post } = Astro.props;
 const { url, title, image, throughput, client } = {
-  url: "/projects/" + post.slug,
+  url: "/products/" + post.slug,
   title: post.data.title,
   image: post.data.cover?.url || "/images/placeholder.jpg",
   throughput: post.data.throughput,

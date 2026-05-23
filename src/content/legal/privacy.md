@@ -3,11 +3,11 @@ page: Privacy
 pubDate: 2025-11-12
 ---
 
-# Privacy Policy
+## Privacy Policy
 
 _Last updated: November 12, 2025_
 
-This Privacy Policy describes how Matterhaus ("we," "us," or "our") collects, uses, and protects your information when you use our website and services.
+This Privacy Policy describes how Artidyn Robotics LLC ("we," "us," or "our") collects, uses, and protects your information when you use our website and solutions.
 
 ## Information We Collect
 
@@ -16,7 +16,7 @@ This Privacy Policy describes how Matterhaus ("we," "us," or "our") collects, us
 We may collect personal information that you provide directly to us, including:
 
 - Name and contact information (email, phone number)
-- Professional information (company, role, project details)
+- Professional information (company, role, product details)
 - Communication preferences
 
 ### Usage Information
@@ -40,9 +40,9 @@ We use cookies and similar technologies to enhance your experience:
 
 We use the information we collect to:
 
-- Provide and maintain our architectural services
-- Communicate with you about projects and services
-- Improve our website and services
+- Provide and maintain our robotics solutions
+- Communicate with you about products and solutions
+- Improve our website and solutions
 - Send marketing communications (with your consent)
 - Comply with legal obligations
 
@@ -89,7 +89,7 @@ Our website may contain links to third-party websites. We are not responsible fo
 
 ## Children's Privacy
 
-Our services are not intended for children under 13. We do not knowingly collect personal information from children under 13.
+Our solutions are not intended for children under 13. We do not knowingly collect personal information from children under 13.
 
 ## Changes to This Policy
 
@@ -99,8 +99,8 @@ We may update this Privacy Policy from time to time. We will notify you of any m
 
 If you have any questions about this Privacy Policy or our data practices, please contact us:
 
-**Matterhaus**  
-Åland Islands, Finland  
-Email: matterhaus@example.com
+**Artidyn Robotics LLC**
+Sheridan, Wyoming, USA
+Email: info@artidyn.ai
 
 We will respond to your inquiry within 30 days.

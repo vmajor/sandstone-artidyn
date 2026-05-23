@@ -3,7 +3,7 @@
 // Foundations
 
 const { url, title, image } = {
-  url: "/projects/" + Astro.props.post.slug,
+  url: "/products/" + Astro.props.post.slug,
   title: Astro.props.post.data.title,
   image: Astro.props.post.data.cover?.url || "/images/placeholder.jpg",
 };
@@ -12,8 +12,8 @@ const { url, title, image } = {
 <article class="relative flex flex-col group keen-slider__slide">
   <a
     href={url}
-    title={`View project: ${title}`}
-    aria-label={`View project: ${title}`}
+    title={`View product: ${title}`}
+    aria-label={`View product: ${title}`}
     class="absolute inset-0 z-10"></a>
 
   <div class="bg-base-100 rounded-xl p-4 size-full flex items-center justify-center border border-base-200 group-hover:border-base-300 transition-colors">

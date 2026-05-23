@@ -6,15 +6,15 @@ import Wrapper from "@/components/foundations/containers/Wrapper.astro";
 import RollingLink from "@/components/foundations/elements/RollingLink.astro";
 // Content
 import { getCollection } from "astro:content";
-const allServices = await getCollection("services");
+const allSolutions = await getCollection("solutions");
 
-const sortedServices = allServices
+const sortedSolutions = allSolutions
   .sort((a, b) => a.data.title.localeCompare(b.data.title))
   .slice(0, 3);
-const serviceImages = [
-  "/images/services/1.png",
-  "/images/services/2.png",
-  "/images/services/3.png"
+const solutionImages = [
+  "/images/solutions/1.png",
+  "/images/solutions/2.png",
+  "/images/solutions/3.png"
 ];
 ---
 
@@ -23,11 +23,11 @@ const serviceImages = [
     <div class="relative rounded-3xl h-[calc(100vh-2rem)] overflow-hidden">
       <div>
         {
-          serviceImages.map((img, index) => (
+          solutionImages.map((img, index) => (
             <img
-              id={`service-image-${index}`}
+              id={`solution-image-${index}`}
               src={img}
-              alt={sortedServices[index]?.data.title}
+              alt={sortedSolutions[index]?.data.title}
               width="1440"
               height="1440"
               class="object-cover size-full absolute inset-0 object-center"
@@ -50,17 +50,17 @@ const serviceImages = [
           </Text>
           <div class="divide-y border-y divide-base-200 border-base-200 mt-8">
             {
-              sortedServices.map((service, index) => (
+              sortedSolutions.map((solution, index) => (
                 <button
                   class={`text-left w-full group transition-all text-base-900 py-2  ${index === 0 ? "" : "opacity-50"}`}
-                  data-service-index={index}
+                  data-solution-index={index}
                 >
                   <Text
                     tag="p"
                     variant="textLG"
                     class="font-medium group-focus:translate-x-4 duration-500 ease-in-out transition-all"
                   >
-                    {service.data.title}
+                    {solution.data.title}
                   </Text>
                 </button>
               ))
@@ -72,10 +72,10 @@ const serviceImages = [
             class="text-base-600 text-balance mt-8"
             id="active-description"
           >
-            {sortedServices[0]?.data.description}
+            {sortedSolutions[0]?.data.description}
           </Text>
           <RollingLink
-            href="/projects" 
+            href="/products/"
             variant="light"
             hoverText="View The Robots"
             initialText="See All Certified Models"
@@ -86,10 +86,10 @@ const serviceImages = [
     </div>
   </Wrapper>
 </footer>
-<script define:vars={{ sortedServices }}>
-  window.sortedServices = sortedServices;
-  const buttons = document.querySelectorAll("[data-service-index]");
-  const images = document.querySelectorAll("[id^='service-image-']");
+<script define:vars={{ sortedSolutions }}>
+  window.sortedSolutions = sortedSolutions;
+  const buttons = document.querySelectorAll("[data-solution-index]");
+  const images = document.querySelectorAll("[id^='solution-image-']");
   const descriptionEl = document.getElementById("active-description");
   buttons.forEach((button, index) => {
     button.addEventListener("click", () => {
@@ -106,7 +106,7 @@ const serviceImages = [
         img.style.display = i === index ? "block" : "none";
       });
       // Update description
-      descriptionEl.textContent = window.sortedServices[index].data.description;
+      descriptionEl.textContent = window.sortedSolutions[index].data.description;
     });
   });
 </script>
