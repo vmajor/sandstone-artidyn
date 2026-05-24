@@ -1,12 +1,13 @@
 ---
+import { Image } from "astro:assets";
 // Astro
 // Images
- // import davidAvatar from "@/images/testimonials/david.png";
- // import emilyAvatar from "@/images/testimonials/emily.png";
- // import lisaAvatar from "@/images/testimonials/lisa.png";
- // import michaelAvatar from "@/images/testimonials/michael.png";
- // import robertAvatar from "@/images/testimonials/robert.png";
- // import saraAvatar from "@/images/testimonials/sara.png";
+import davidAvatar from "@/assets/images/testimonials/david.png";
+import emilyAvatar from "@/assets/images/testimonials/emily.png";
+import lisaAvatar from "@/assets/images/testimonials/lisa.png";
+import michaelAvatar from "@/assets/images/testimonials/michael.png";
+import robertAvatar from "@/assets/images/testimonials/robert.png";
+import saraAvatar from "@/assets/images/testimonials/sara.png";
 // Foundations
 import Text from "@/components/foundations/elements/Text.astro";
 import Kicker from "@/components/foundations/elements/Kicker.astro";
@@ -24,7 +25,7 @@ const testimonials = [
     author: "David Park", // Fits perfectly with the high-tech retail culture in KR
     role: "Vending Operator",
     location: "Seoul, South Korea",
-    avatar: "/images/testimonials/david.png",
+    avatar: davidAvatar,
   },
   {
      // Source: Master Narrative Part 3 - "24/7 Service"
@@ -33,7 +34,7 @@ const testimonials = [
     author: "Emma Rodriguez", 
     role: "General Manager",
     location: "Barcelona, Spain", // Represents European boutique hospitality
-    avatar: "/images/testimonials/emily.png",
+    avatar: emilyAvatar,
   },
   {
     // Source: Frame 3 - "High Volume Barista"
@@ -42,7 +43,7 @@ const testimonials = [
     author: "Michael Chen", 
     role: "Concessions Director",
     location: "Singapore", // Represents the "Gold Standard" of airport retail
-    avatar: "/images/testimonials/michael.png",
+    avatar: michaelAvatar,
   },
   {
     // Source: Business Plan - "The Wild West" / Trust
@@ -51,7 +52,7 @@ const testimonials = [
     author: "Sarah Johnson",
     role: "Franchise Owner",
     location: "London, UK", // Mature Western Market
-    avatar: "/images/testimonials/sara.png",
+    avatar: saraAvatar,
   },
   {
     // Source: Frame 3 - "Compact & Versatile"
@@ -60,7 +61,7 @@ const testimonials = [
     author: "Lisa Thompson", 
     role: "Facilities Manager",
     location: "Sydney, Australia", // Huge coffee culture market
-    avatar: "/images/testimonials/lisa.png",
+    avatar: lisaAvatar,
   },
   {
     // Source: Master Narrative Part 5 - "ROI in Months"
@@ -69,7 +70,7 @@ const testimonials = [
     author: "Robert Martinez", 
     role: "Operations Director",
     location: "Dubai, UAE", // High-growth, investment-heavy market
-    avatar: "/images/testimonials/robert.png",
+    avatar: robertAvatar,
   },
 ];
 ---
@@ -132,9 +133,11 @@ const testimonials = [
                 </Text>
               </blockquote>
               <div class="flex items-center gap-2  mt-12 lg:mt-24">
-                <img
+                <Image
                   src={testimonial.avatar}
                   alt={`${testimonial.author} avatar`}
+                  width={48}
+                  height={48}
                   class="size-12 rounded-full object-cover "
                 />
                 <div>

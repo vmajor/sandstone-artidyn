@@ -1,12 +1,12 @@
 import { defineCollection, z } from "astro:content";
 
 const team = defineCollection({
-  schema: z.object({
+  schema: ({ image }) => z.object({
       name: z.string(),
       role: z.string().optional(),
       bio: z.string().optional(),
       image: z.object({
-        url: z.string(),
+        url: image(),
         alt: z.string(),
       }),
       socials: z
@@ -23,13 +23,13 @@ const team = defineCollection({
 });
 
 const postsCollection = defineCollection({
-  schema: z.object({
+  schema: ({ image }) => z.object({
       title: z.string(),
       pubDate: z.date(),
       description: z.string(),
       team: z.string(),
       image: z.object({
-        url: z.string(),
+        url: image(),
         alt: z.string(),
       }),
       tags: z.array(z.string()),
@@ -44,7 +44,7 @@ const legal = defineCollection({
 });
 
 const products = defineCollection({
-  schema: z.object({
+  schema: ({ image }) => z.object({
       title: z.string(),
       pubDate: z.date().optional(),
       price: z.number().optional(),
@@ -79,12 +79,12 @@ const products = defineCollection({
       status: z.enum(["high-volume", "craft", "compact", "certified"]).optional(), 
       area: z.string().optional(), 
       cover: z.object({
-        url: z.string(),
+        url: image(),
         alt: z.string(),
       }),
       gallery: z.array(
         z.object({
-          url: z.string(),
+          url: z.union([image(), z.string()]),
           alt: z.string().optional(),
         })
       ).default([]),
@@ -92,13 +92,13 @@ const products = defineCollection({
 });
 
 const solutions = defineCollection({
-  schema: z.object({
+  schema: ({ image }) => z.object({
       title: z.string(),
       description: z.string().optional(),
       category: z.string().optional(),
       image: z
         .object({
-          url: z.string(),
+          url: image(),
           alt: z.string(),
         })
         .optional(),

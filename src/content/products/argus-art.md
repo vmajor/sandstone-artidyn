@@ -32,10 +32,10 @@ location: "Flagship Retail, Events"
 year: "2026"
 area: "1.92 sqm"
 cover:
-  url: "/images/products/argus-art/cover.png"
+  url: "../../assets/images/products/argus-art/cover.png"
   alt: "Argus Art"
 gallery:
-  - url: "/images/products/argus-art/cover.png"
+  - url: "../../assets/images/products/argus-art/cover.png"
     alt: "Argus Art Front View"
 ---
 

@@ -32,10 +32,10 @@ location: "Narrow Alcoves, Institutions"
 year: "2026"
 area: "1.89 sqm"
 cover:
-  url: "/images/products/iris-pro/cover.png"
+  url: "../../assets/images/products/iris-pro/cover.png"
   alt: "Iris Pro Collaborative Vending Station"
 gallery:
-  - url: "/images/products/iris-pro/cover.png"
+  - url: "../../assets/images/products/iris-pro/cover.png"
     alt: "Iris Pro Front View"
 ---
 

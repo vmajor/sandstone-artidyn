@@ -1,11 +1,12 @@
 ---
+import { Image } from "astro:assets";
 // Assets
 // Foundations
 
 const { url, title, image } = {
   url: "/products/" + Astro.props.post.slug,
   title: Astro.props.post.data.title,
-  image: Astro.props.post.data.cover?.url || "/images/placeholder.jpg",
+  image: Astro.props.post.data.cover?.url,
 };
 ---
 
@@ -17,12 +18,14 @@ const { url, title, image } = {
     class="absolute inset-0 z-10"></a>
 
   <div class="bg-base-100 rounded-xl p-4 size-full flex items-center justify-center border border-base-200 group-hover:border-base-300 transition-colors">
-    <img
-      src={image}
-      alt={title}
-      width={1000}
-      height={1000}
-      class="object-contain object-center max-h-[500px] w-auto mx-auto"
-    />
+    {image && (
+      <Image
+        src={image}
+        alt={title}
+        width={1000}
+        height={1000}
+        class="object-contain object-center max-h-[500px] w-auto mx-auto"
+      />
+    )}
   </div>
 </article>

@@ -20,7 +20,7 @@ let path = Astro.url.pathname;
 if (path !== "/" && !path.endsWith("/") && !path.includes(".")) {
   path += "/";
 }
-const canonicalURL = new URL(path, "https://www.artidyn.ai").toString();
+const canonicalURL = new URL(path, "https://www.artidyn.ai/").toString();
 ---
 
 <AstroSeo
@@ -46,7 +46,6 @@ const canonicalURL = new URL(path, "https://www.artidyn.ai").toString();
     locale: "en_US",
   }}
   twitter={{
-    // Update these if/when you claim the handles
     handle: "@artidynrobotics", 
     site: "@artidynrobotics",
     cardType: "summary_large_image",

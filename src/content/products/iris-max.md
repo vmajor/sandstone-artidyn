@@ -32,10 +32,10 @@ location: "24/7 Secure Environments"
 year: "2026"
 area: "2.18 sqm"
 cover:
-  url: "/images/products/iris-max/cover.png"
+  url: "../../assets/images/products/iris-max/cover.png"
   alt: "Iris Max Vending & Printing Station"
 gallery:
-  - url: "/images/products/iris-max/cover.png"
+  - url: "../../assets/images/products/iris-max/cover.png"
     alt: "Iris Max Front View"
 ---
 

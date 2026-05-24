@@ -2,39 +2,41 @@
 > @artidyn/sandstone@0.0.1 dev
 > astro dev
 
-03:10:03 [types] Generated 3ms
-03:10:03 [content] Syncing content
-03:10:03 [content] Astro config changed
-03:10:03 [content] Content config changed
-03:10:03 [content] Clearing content store
-03:10:04 [content] Synced content
-03:10:04 [vite] Re-optimizing dependencies because vite config has changed
+22:20:23 [types] Generated 1ms
+22:20:24 [content] Syncing content
+22:20:24 [WARN] [glob-loader] Duplicate id "terms" found in /app/src/content/legal/terms.md. Later items with the same id will overwrite earlier ones.
+22:20:24 [content] Synced content
+22:20:24 [vite] Re-optimizing dependencies because vite config has changed
 
- astro  v5.16.6 ready in 2767 ms
+ astro  v5.16.6 ready in 1338 ms
 
 ┃ Local    http://localhost:4321/
 ┃ Network  use --host to expose
 
-03:10:04 watching for file changes...
-03:11:34 [200] / 588ms
-03:11:36 [404] /hero.webm 15ms
-03:11:37 [200] /products/ 14ms
-03:11:39 [200] /solutions/ 12ms
-03:11:40 [200] /products/iris-pro/ 31ms
-03:11:41 [200] /legal/privacy/ 14ms
-03:13:47 [200] / 44ms
-03:13:47 [404] /hero.webm 28ms
-03:13:48 [200] /products/ 14ms
-03:13:49 [200] /products/iris-pro/ 14ms
-03:13:49 [200] /solutions/1/ 9ms
-03:13:50 [200] /legal/privacy/ 11ms
-03:17:01 [200] / 17ms
-03:17:01 [404] /hero.webm 12ms
-03:21:50 [200] / 23ms
-03:21:50 [404] /hero.webm 13ms
-03:23:43 [200] / 37ms
-03:23:43 [404] /hero.webm 20ms
-03:23:44 [200] /products/ 22ms
-03:23:46 [200] /products/iris-pro/ 42ms
-03:23:47 [200] /solutions/ 21ms
-03:23:48 [200] /legal/privacy/ 25ms
+22:20:24 watching for file changes...
+22:20:37 [200] / 508ms
+22:20:39 [200] /_image/ 1339ms
+22:20:39 [200] /_image/ 1992ms
+22:20:39 [200] /_image/ 1604ms
+22:20:39 [200] /_image/ 1823ms
+22:20:40 [200] /_image/ 3183ms
+22:20:40 [200] /_image/ 2489ms
+22:20:40 [404] /hero.webm 37ms
+22:20:40 [200] /_image/ 1024ms
+22:20:41 [200] /_image/ 1104ms
+22:20:41 [200] /_image/ 1309ms
+22:20:43 [200] /products/ 20ms
+22:20:44 [200] /products/argus-axis/ 134ms
+22:20:44 [200] /_image/ 229ms
+22:20:44 [200] /_image/ 269ms
+22:20:44 [200] /_image/ 269ms
+22:20:45 [200] /_image/ 357ms
+22:20:45 [200] /_image/ 251ms
+22:20:45 [200] /_image/ 332ms
+22:20:45 [200] /_image/ 269ms
+22:20:45 [200] /_image/ 992ms
+22:20:45 [200] /_image/ 866ms
+22:20:45 [200] /_image/ 758ms
+22:20:49 [200] /_image/ 511ms
+22:20:50 [200] /solutions/1/ 20ms
+22:20:50 [200] /_image/ 478ms
