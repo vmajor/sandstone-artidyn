@@ -44,11 +44,13 @@ import Footer from "@/components/global/Footer.astro";
               </Text>
 
               <form
+                id="contact-form"
                 name="contact"
                 method="POST"
                 data-netlify="true"
                 class="mt-8 space-y-4"
               >
+                <input type="hidden" name="form-name" value="contact" />
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label for="name" class="block text-xs font-bold text-base-900 uppercase tracking-wider mb-1">Full Name</label>
@@ -94,8 +96,9 @@ import Footer from "@/components/global/Footer.astro";
                   <textarea name="message" id="message" rows="4" required class="w-full bg-base-50 border border-base-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-base-900 transition-all resize-none" placeholder="How can we help you?"></textarea>
                 </div>
 
-                <button type="submit" class="w-full bg-base-900 text-white font-bold uppercase tracking-widest text-xs py-4 rounded-xl hover:bg-base-800 transition-all shadow-lg active:scale-[0.98]">
-                  Send Inquiry
+                <button type="submit" id="submit-button" class="w-full bg-base-900 text-white font-bold uppercase tracking-widest text-xs py-4 rounded-xl hover:bg-base-800 transition-all shadow-lg active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed">
+                  <span id="button-text">Send Inquiry</span>
+                  <span id="button-loader" class="hidden">Sending...</span>
                 </button>
               </form>
 
@@ -119,4 +122,106 @@ import Footer from "@/components/global/Footer.astro";
       </div>
     </Wrapper>
   </section>
+
+  <dialog id="status-modal" class="backdrop:bg-base-900/50 backdrop:backdrop-blur-sm rounded-2xl p-0 shadow-2xl border-0 overflow-hidden max-w-sm w-full">
+    <div class="p-8 text-center">
+      <div id="modal-icon-success" class="hidden mx-auto size-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+        </svg>
+      </div>
+      <div id="modal-icon-error" class="hidden mx-auto size-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      </div>
+
+      <h3 id="modal-title" class="text-xl font-bold text-base-900 mb-2">Message Sent</h3>
+      <p id="modal-message" class="text-base-500 text-sm mb-6">Thank you for reaching out. We'll get back to you shortly.</p>
+
+      <button onclick="document.getElementById('status-modal').close()" class="w-full bg-base-900 text-white font-bold uppercase tracking-widest text-xs py-3 rounded-xl hover:bg-base-800 transition-all">
+        Dismiss
+      </button>
+    </div>
+  </dialog>
 </BaseLayout>
+
+<script is:inline>
+  const form = document.getElementById('contact-form');
+  const modal = document.getElementById('status-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalMessage = document.getElementById('modal-message');
+  const modalIconSuccess = document.getElementById('modal-icon-success');
+  const modalIconError = document.getElementById('modal-icon-error');
+  const submitButton = document.getElementById('submit-button');
+  const buttonText = document.getElementById('button-text');
+  const buttonLoader = document.getElementById('button-loader');
+
+  let autoCloseTimeout;
+
+  const showModal = (isSuccess) => {
+    modalIconSuccess.classList.toggle('hidden', !isSuccess);
+    modalIconError.classList.toggle('hidden', isSuccess);
+
+    if (isSuccess) {
+      modalTitle.innerText = "Inquiry Received";
+      modalMessage.innerText = "Thank you for reaching out. An Artidyn specialist will contact you shortly.";
+      form.reset();
+    } else {
+      modalTitle.innerText = "Submission Failed";
+      modalMessage.innerText = "We encountered an error. Please try again or email us directly at hi@artidyn.ai.";
+    }
+
+    modal.showModal();
+
+    // Auto-close after 5 seconds
+    clearTimeout(autoCloseTimeout);
+    autoCloseTimeout = setTimeout(() => {
+      modal.close();
+    }, 5000);
+  };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // UI Loading State
+    submitButton.disabled = true;
+    buttonText.classList.add('hidden');
+    buttonLoader.classList.remove('hidden');
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString(),
+      });
+
+      if (response.ok) {
+        showModal(true);
+      } else {
+        showModal(false);
+      }
+    } catch (error) {
+      showModal(false);
+    } finally {
+      submitButton.disabled = false;
+      buttonText.classList.remove('hidden');
+      buttonLoader.classList.add('hidden');
+    }
+  });
+
+  // Close modal when clicking backdrop
+  modal.addEventListener('click', (e) => {
+    const dialogDimensions = modal.getBoundingClientRect();
+    if (
+      e.clientX < dialogDimensions.left ||
+      e.clientX > dialogDimensions.right ||
+      e.clientY < dialogDimensions.top ||
+      e.clientY > dialogDimensions.bottom
+    ) {
+      modal.close();
+    }
+  });
+</script>
