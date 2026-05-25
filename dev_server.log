@@ -2,41 +2,67 @@
 > @artidyn/sandstone@0.0.1 dev
 > astro dev
 
-22:20:23 [types] Generated 1ms
-22:20:24 [content] Syncing content
-22:20:24 [WARN] [glob-loader] Duplicate id "terms" found in /app/src/content/legal/terms.md. Later items with the same id will overwrite earlier ones.
-22:20:24 [content] Synced content
-22:20:24 [vite] Re-optimizing dependencies because vite config has changed
+03:07:42 [types] Generated 1ms
+03:07:43 [content] Syncing content
+03:07:43 [WARN] [glob-loader] Duplicate id "terms" found in /app/src/content/legal/terms.md. Later items with the same id will overwrite earlier ones.
+03:07:43 [content] Synced content
+03:07:43 [vite] Re-optimizing dependencies because vite config has changed
 
- astro  v5.16.6 ready in 1338 ms
+ astro  v5.16.6 ready in 1262 ms
 
 ┃ Local    http://localhost:4321/
 ┃ Network  use --host to expose
 
-22:20:24 watching for file changes...
-22:20:37 [200] / 508ms
-22:20:39 [200] /_image/ 1339ms
-22:20:39 [200] /_image/ 1992ms
-22:20:39 [200] /_image/ 1604ms
-22:20:39 [200] /_image/ 1823ms
-22:20:40 [200] /_image/ 3183ms
-22:20:40 [200] /_image/ 2489ms
-22:20:40 [404] /hero.webm 37ms
-22:20:40 [200] /_image/ 1024ms
-22:20:41 [200] /_image/ 1104ms
-22:20:41 [200] /_image/ 1309ms
-22:20:43 [200] /products/ 20ms
-22:20:44 [200] /products/argus-axis/ 134ms
-22:20:44 [200] /_image/ 229ms
-22:20:44 [200] /_image/ 269ms
-22:20:44 [200] /_image/ 269ms
-22:20:45 [200] /_image/ 357ms
-22:20:45 [200] /_image/ 251ms
-22:20:45 [200] /_image/ 332ms
-22:20:45 [200] /_image/ 269ms
-22:20:45 [200] /_image/ 992ms
-22:20:45 [200] /_image/ 866ms
-22:20:45 [200] /_image/ 758ms
-22:20:49 [200] /_image/ 511ms
-22:20:50 [200] /solutions/1/ 20ms
-22:20:50 [200] /_image/ 478ms
+03:07:43 watching for file changes...
+03:08:25 [200] /solutions/1/ 561ms
+03:08:27 [200] /_image/ 582ms
+03:08:28 [200] /_image/ 1621ms
+03:08:29 [200] /solutions/2/ 57ms
+03:08:30 [200] /_image/ 455ms
+03:08:30 [200] /_image/ 489ms
+03:08:31 [200] /solutions/3/ 58ms
+03:08:31 [200] /_image/ 252ms
+03:08:32 [200] /_image/ 607ms
+03:08:32 [200] /_image/ 1036ms
+03:12:34 [watch] .astro/types.d.ts
+03:12:34 [watch] .astro/types.d.ts
+03:12:35 [watch] .astro/collections/legal.schema.json
+03:12:35 [watch] .astro/collections/legal.schema.json
+03:12:35 [watch] .astro/collections/posts.schema.json
+03:12:35 [watch] .astro/collections/posts.schema.json
+03:12:35 [watch] .astro/collections/products.schema.json
+03:12:35 [watch] .astro/collections/products.schema.json
+03:12:35 [watch] .astro/collections/solutions.schema.json
+03:12:35 [watch] .astro/collections/solutions.schema.json
+03:12:35 [watch] .astro/collections/team.schema.json
+03:12:35 [watch] .astro/collections/team.schema.json
+03:12:35 [watch] .astro/content.d.ts
+03:12:35 [watch] .astro/content.d.ts
+03:12:35 [watch] .astro/content-assets.mjs
+03:12:35 [watch] .astro/content-assets.mjs
+03:12:41 [200] /solutions/1/ 127ms
+03:12:41 [200] /_image/ 461ms
+03:12:42 [200] /_image/ 1184ms
+03:12:46 [200] /solutions/2/ 29ms
+03:12:46 [200] /_image/ 350ms
+03:12:46 [200] /_image/ 468ms
+03:12:49 [200] /solutions/3/ 29ms
+03:12:50 [200] /_image/ 231ms
+03:12:50 [200] /_image/ 293ms
+03:12:50 [200] /_image/ 902ms
+03:14:47 [watch] .astro/collections/legal.schema.json
+03:14:47 [watch] .astro/collections/legal.schema.json
+03:14:47 [watch] .astro/collections/posts.schema.json
+03:14:47 [watch] .astro/collections/posts.schema.json
+03:14:47 [watch] .astro/collections/products.schema.json
+03:14:47 [watch] .astro/collections/products.schema.json
+03:14:47 [watch] .astro/collections/team.schema.json
+03:14:47 [watch] .astro/collections/team.schema.json
+03:14:47 [watch] .astro/collections/solutions.schema.json
+03:14:47 [watch] .astro/collections/solutions.schema.json
+03:14:47 [watch] .astro/content-assets.mjs
+03:14:47 [watch] .astro/content-assets.mjs
+03:14:47 [watch] .astro/content.d.ts
+03:14:47 [watch] .astro/content.d.ts
+03:14:47 [watch] .astro/types.d.ts
+03:14:47 [watch] .astro/types.d.ts
