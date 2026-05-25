@@ -211,9 +211,7 @@ const gallery = [...galleryImages, ...galleryVideos];
                     <div class="absolute inset-0 bg-base-900/0 group-hover:bg-base-900/5 transition-colors duration-300"></div>
                   </button>
 
-                  <dialog
-                    id={`gallery-dialog-${index}`}
-                    class="backdrop:bg-base-900/80 backdrop:backdrop-blur-sm p-0 rounded-3xl border-none bg-transparent max-w-[95vw] max-h-[95vh] overflow-hidden"
+                  <dialog id={`gallery-dialog-${index}`} class="m-auto backdrop:bg-base-900/80 backdrop:backdrop-blur-sm p-0 rounded-3xl border-none bg-transparent max-w-[95vw] max-h-[95vh] overflow-hidden"
                   >
                     <div class="relative bg-white p-4 md:p-8 rounded-3xl shadow-2xl flex flex-col items-center">
                       <button
