@@ -123,7 +123,7 @@ import Footer from "@/components/global/Footer.astro";
     </Wrapper>
   </section>
 
-  <dialog id="status-modal" class="backdrop:bg-base-900/50 backdrop:backdrop-blur-sm rounded-2xl p-0 shadow-2xl border-0 overflow-hidden max-w-sm w-full">
+  <dialog id="status-modal" class="m-auto backdrop:bg-base-900/50 backdrop:backdrop-blur-sm rounded-2xl p-0 shadow-2xl border-0 overflow-hidden max-w-sm w-full">
     <div class="p-8 text-center">
       <div id="modal-icon-success" class="hidden mx-auto size-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-8">
@@ -139,7 +139,7 @@ import Footer from "@/components/global/Footer.astro";
       <h3 id="modal-title" class="text-xl font-bold text-base-900 mb-2">Message Sent</h3>
       <p id="modal-message" class="text-base-500 text-sm mb-6">Thank you for reaching out. We'll get back to you shortly.</p>
 
-      <button onclick="document.getElementById('status-modal').close()" class="w-full bg-base-900 text-white font-bold uppercase tracking-widest text-xs py-3 rounded-xl hover:bg-base-800 transition-all">
+      <button id="dismiss-button" class="w-full bg-base-900 text-white font-bold uppercase tracking-widest text-xs py-3 rounded-xl hover:bg-base-800 transition-all">
         Dismiss
       </button>
     </div>
@@ -174,10 +174,11 @@ import Footer from "@/components/global/Footer.astro";
 
     modal.showModal();
 
-    // Auto-close after 5 seconds
+    // Auto-close after 5 seconds and redirect on success
     clearTimeout(autoCloseTimeout);
     autoCloseTimeout = setTimeout(() => {
       modal.close();
+      if (isSuccess) window.location.href = "/";
     }, 5000);
   };
 
@@ -192,7 +193,7 @@ import Footer from "@/components/global/Footer.astro";
     const formData = new FormData(form);
 
     try {
-      const response = await fetch("/", {
+      const response = await fetch("/contact/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData).toString(),
@@ -210,6 +211,13 @@ import Footer from "@/components/global/Footer.astro";
       buttonText.classList.remove('hidden');
       buttonLoader.classList.add('hidden');
     }
+  });
+
+  // Dismiss button and Success handling
+  document.getElementById('dismiss-button').addEventListener('click', () => {
+    const isSuccess = !modalIconSuccess.classList.contains('hidden');
+    modal.close();
+    if (isSuccess) window.location.href = "/";
   });
 
   // Close modal when clicking backdrop
