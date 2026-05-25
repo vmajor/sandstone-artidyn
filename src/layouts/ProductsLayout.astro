@@ -12,7 +12,7 @@ const { frontmatter, slug } = Astro.props;
 
 // 1. ALL SPECS (For the main 2-column table)
 const allSpecs = [
-  { label: "Price", value: frontmatter.price ? "\$${frontmatter.price.toLocaleString()}" : null },
+  { label: "Price", value: frontmatter.price ? `$${frontmatter.price.toLocaleString()}` : null },
   { label: "Dimensions", value: frontmatter.dimensions },
   { label: "Weight", value: frontmatter.weight },
   { label: "Kinematics", value: frontmatter.kinematics },
