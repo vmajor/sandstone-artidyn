@@ -1,5 +1,5 @@
 ---
-title: "Iris Pro Collaborative Vending Station"
+title: "Iris Pro | Compact Robot Barista for Tech Offices"
 pubDate: 2026-03-23
 price: 29500
 dimensions: "1300x1450x2020 mm"
@@ -39,6 +39,8 @@ gallery:
     alt: "Iris Pro Front View"
 ---
 
-The Iris Pro elevates the raw speed of the baseline model by integrating a superior espresso machine while shrinking its physical width. By upgrading the internal hardware to the premium Barluoto BTB-302 commercial espresso machine, the CR01Pro requires a heavier 5000W power draw but delivers a noticeably denser, higher-quality milk mouthfeel that rivals specialty human baristas.
+The **Iris Pro** elevates the raw speed of the baseline model by integrating a superior espresso machine while shrinking its physical width, making it the ideal **compact robot barista for tech company office pantries**.
 
-By strategically relocating internal components like the milk refrigeration unit, the machine's width is condensed to 1300mm. This allows the 70-cup-per-hour, Dobot-powered workhorse to fit seamlessly into narrower architectural alcoves and tight institutional hallways without sacrificing its blistering 51-second operation speed.
+If you are looking for an **ROI of robotic coffee stations in hotel breakfast rooms** or office spaces, the Iris Pro delivers high throughput with a small footprint. For a flexible deployment, ask about **Artidyn Iris Pro lease options for corporate office buildings**.
+
+By upgrading the internal hardware to the premium Barluoto BTB-302 commercial espresso machine, the system delivers a higher-quality milk mouthfeel that rivals specialty human baristas. The machine's width is condensed to 1300mm, allowing the 70-cup-per-hour, Dobot-powered workhorse to fit seamlessly into narrower architectural alcoves and tight institutional hallways.

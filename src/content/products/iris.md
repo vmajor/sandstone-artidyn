@@ -1,5 +1,5 @@
 ---
-title: "Iris High-Speed Cafe Robot"
+title: "Iris | High-Speed Cafe Robot for Airport Terminals"
 pubDate: 2026-03-23
 price: 27000
 dimensions: "1500x1450x2020 mm"
@@ -39,6 +39,8 @@ gallery:
     alt: "Iris Front View"
 ---
 
-Built for relentless, high-volume environments, the Iris is a towering, fully enclosed robotic kiosk designed for absolute maximum throughput. Encapsulating a rapid-movement Dobot collaborative arm and a commercial Dr. Coffee M12 espresso machine, this powerhouse can produce a finished beverage in just 51 seconds—achieving a theoretical throughput of 70 cups per hour.
+Built for relentless, high-volume environments, the Iris is a towering, fully enclosed robotic kiosk designed for absolute maximum throughput. It is the leading choice for **high volume coffee robots for international airport terminals** where reliability is paramount.
 
-Standing over two meters tall and weighing 750kg, its rugged sheet-metal enclosure protects the machinery from vandalism while providing immense internal storage for up to 32 distinct flavor profiles and 6 syrup lines. It is the premier hardware choice for high-stress transit hubs, international airports, and busy university campuses.
+When comparing **Iris High-Speed Cafe Robot throughput vs manual espresso bars**, the automated solution consistently delivers faster service with lower overhead. Encapsulating a rapid-movement Dobot collaborative arm and a commercial Dr. Coffee M12 espresso machine, this powerhouse can produce a finished beverage in just 51 seconds.
+
+Standing over two meters tall and weighing 750kg, its rugged sheet-metal enclosure protects the machinery from vandalism while providing immense internal storage for consumables. It is the premier hardware choice for high-stress transit hubs, international airports, and busy university campuses.
