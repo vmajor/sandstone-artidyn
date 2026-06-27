@@ -16,13 +16,13 @@ const navGroups = [
       { href: "/studio/", label: "About Artidyn" }, // Points to src/pages/studio.astro
       { href: "/blog/", label: "Industry Insights" },
       { href: "/team/", label: "Our Team" },
-      { href: "/contact/", label: "Contact Us" },
     ],
   },
   {
     title: "Partner",
     type: "external",
     items: [
+      { href: "/contact/", label: "Contact Us", target: "_self" },
       { href: "https://www.linkedin.com/company/artidyn-robotics-llc/", label: "LinkedIn" },
     ],
   },
@@ -81,11 +81,11 @@ const navGroups = [
                       href={item.href}
                       class="block text-base-500 text-xs tracking-wide hover:text-base-900 transition-colors focus:outline-none py-1"
                       rel={
-                        group.type === "external"
+                        group.type === "external" && item.target !== "_self"
                           ? "noopener noreferrer"
                           : undefined
                       }
-                      target={group.type === "external" ? "_blank" : undefined}
+                      target={item.target ?? (group.type === "external" ? "_blank" : undefined)}
                     >
                       {item.label}
                     </a>
