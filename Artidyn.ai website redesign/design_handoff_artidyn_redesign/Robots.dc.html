@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Robot Catalog — Artidyn Robotics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #ffffff; }
+    body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+    button { font-family: 'Inter', sans-serif; }
+  </style>
+</helmet>
+
+<div style="min-height:100vh; background:#ffffff; color:#17201d">
+
+  <!-- ===== Navigation ===== -->
+  <header style="position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.94); backdrop-filter:blur(12px); border-bottom:1px solid #e6e9e7" data-screen-label="Navigation">
+    <nav style="max-width:1240px; margin:0 auto; padding:0 32px; height:68px; display:flex; align-items:center; gap:40px">
+      <a href="Home B - Tech Clarity.dc.html" style="display:flex; align-items:center; gap:10px; text-decoration:none; margin-right:auto">
+        <img src="assets/mark-green.svg" alt="" style="height:26px; width:auto">
+        <span style="font-size:15px; font-weight:700; letter-spacing:0.02em; color:#17201d">Artidyn<span style="color:#0b7a6a"> Robotics</span></span>
+      </a>
+      <a href="Robots.dc.html" style="font-size:14px; font-weight:600; color:#0b7a6a; text-decoration:none">Robots</a>
+      <a href="Solutions.dc.html" style="font-size:14px; font-weight:500; color:#3d4a45; text-decoration:none" style-hover="color:#0b7a6a">Solutions</a>
+      <a href="Home B - Tech Clarity.dc.html#process" style="font-size:14px; font-weight:500; color:#3d4a45; text-decoration:none" style-hover="color:#0b7a6a">Process</a>
+      <a href="About.dc.html" style="font-size:14px; font-weight:500; color:#3d4a45; text-decoration:none" style-hover="color:#0b7a6a">About</a>
+      <a href="Contact.dc.html" style="font-size:14px; font-weight:600; color:#ffffff; background:#0b7a6a; padding:10px 20px; border-radius:8px; text-decoration:none" style-hover="background:#096355">Get a recommendation</a>
+    </nav>
+  </header>
+
+  <!-- ===== Page header ===== -->
+  <section style="background:#fafbfa; border-bottom:1px solid #e6e9e7" data-screen-label="Catalog header">
+    <div style="max-width:1240px; margin:0 auto; padding:72px 32px 56px">
+      <p style="margin:0; font-size:13px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#0b7a6a">The certified range</p>
+      <h1 style="margin:14px 0 0; font-size:clamp(34px, 3.2vw, 48px); font-weight:700; letter-spacing:-0.03em; line-height:1.1; color:#17201d">Five machines, tested by us.</h1>
+      <p style="margin:18px 0 0; font-size:16.5px; line-height:1.65; color:#3d4a45; max-width:600px">Every robot in this catalog has been vetted and certified by our engineering team. The numbers below come from our own testing, not the manufacturer's brochure.</p>
+      <div style="display:flex; gap:8px; margin-top:36px">
+        <sc-for list="{{ filters }}" as="f" hint-placeholder-count="4">
+          <button onClick="{{ f.select }}" style="font-size:14px; font-weight:600; padding:9px 16px; border-radius:8px; border:1px solid {{ f.borderColor }}; background:{{ f.bg }}; color:{{ f.color }}; cursor:pointer">{{ f.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Catalog grid ===== -->
+  <section data-screen-label="Catalog grid">
+    <div style="max-width:1240px; margin:0 auto; padding:56px 32px 80px">
+      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:20px">
+        <sc-for list="{{ robots }}" as="r" hint-placeholder-count="5">
+          <a href="{{ r.href }}" style="display:block; border:1px solid #e6e9e7; border-radius:12px; overflow:hidden; text-decoration:none; color:inherit; background:#ffffff; transition:border-color 0.15s" style-hover="border-color:#0b7a6a">
+            <div style="aspect-ratio:16/10; background:#fafbfa; display:flex; align-items:center; justify-content:center; padding:20px; border-bottom:1px solid #e6e9e7; position:relative">
+              <img src="{{ r.img }}" alt="{{ r.name }}" style="max-width:78%; max-height:100%; object-fit:contain">
+              <span style="position:absolute; top:14px; left:14px; font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:{{ r.tagColor }}; background:{{ r.tagBg }}; padding:4px 9px; border-radius:5px">{{ r.tier }}</span>
+            </div>
+            <div style="padding:20px">
+              <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px">
+                <h3 style="margin:0; font-size:19px; font-weight:700; letter-spacing:-0.01em; color:#17201d">{{ r.name }}</h3>
+                <span style="font-family:'JetBrains Mono', monospace; font-size:14px; color:#3d4a45">{{ r.price }}</span>
+              </div>
+              <p style="margin:6px 0 0; font-size:13.5px; line-height:1.5; color:#6b7a74">{{ r.use }}</p>
+              <div style="margin-top:16px; border-top:1px solid #eef1ef">
+                <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #eef1ef">
+                  <span style="font-size:12.5px; color:#6b7a74">Throughput</span>
+                  <span style="font-family:'JetBrains Mono', monospace; font-size:12.5px; color:#17201d">{{ r.throughput }}</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #eef1ef">
+                  <span style="font-size:12.5px; color:#6b7a74">Serve time</span>
+                  <span style="font-family:'JetBrains Mono', monospace; font-size:12.5px; color:#17201d">{{ r.time }}</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; padding:8px 0">
+                  <span style="font-size:12.5px; color:#6b7a74">Footprint</span>
+                  <span style="font-family:'JetBrains Mono', monospace; font-size:12.5px; color:#17201d">{{ r.area }}</span>
+                </div>
+              </div>
+              <span style="display:inline-block; margin-top:14px; font-size:13.5px; font-weight:600; color:#0b7a6a">View details →</span>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Comparison table ===== -->
+  <section style="background:#fafbfa; border-top:1px solid #e6e9e7" data-screen-label="Comparison table">
+    <div style="max-width:1240px; margin:0 auto; padding:80px 32px 96px">
+      <h2 style="margin:0; font-size:clamp(24px, 2.2vw, 32px); font-weight:700; letter-spacing:-0.02em; color:#17201d">Side by side</h2>
+      <p style="margin:12px 0 0; font-size:15px; color:#6b7a74">All figures verified in Artidyn certification testing.</p>
+      <div style="margin-top:36px; border:1px solid #e6e9e7; border-radius:12px; overflow:hidden; background:#ffffff; overflow-x:auto">
+        <table style="width:100%; border-collapse:collapse; min-width:900px">
+          <thead>
+            <tr>
+              <th style="text-align:left; padding:16px 20px; font-size:12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:#8fa39b; border-bottom:1px solid #e6e9e7; background:#fafbfa"></th>
+              <sc-for list="{{ allRobots }}" as="r" hint-placeholder-count="5">
+                <th style="text-align:left; padding:16px 20px; border-bottom:1px solid #e6e9e7; background:#fafbfa">
+                  <span style="display:block; font-size:15px; font-weight:700; color:#17201d">{{ r.name }}</span>
+                  <span style="display:block; margin-top:2px; font-size:11.5px; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; color:#0b7a6a">{{ r.tier }}</span>
+                </th>
+              </sc-for>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{ specRows }}" as="row" hint-placeholder-count="8">
+              <tr>
+                <td style="padding:13px 20px; font-size:13.5px; font-weight:600; color:#3d4a45; border-bottom:1px solid #eef1ef; white-space:nowrap">{{ row.label }}</td>
+                <sc-for list="{{ row.values }}" as="v" hint-placeholder-count="5">
+                  <td style="padding:13px 20px; font-family:'JetBrains Mono', monospace; font-size:13px; color:#17201d; border-bottom:1px solid #eef1ef">{{ v }}</td>
+                </sc-for>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section data-screen-label="Contact CTA">
+    <div style="max-width:1240px; margin:0 auto; padding:80px 32px">
+      <div style="border:1px solid #e6e9e7; border-radius:16px; background:#fafbfa; padding:56px 64px; display:flex; align-items:center; justify-content:space-between; gap:48px">
+        <div>
+          <h2 style="margin:0; font-size:clamp(24px, 2.2vw, 32px); font-weight:700; letter-spacing:-0.025em; color:#17201d">Not sure which one fits your site?</h2>
+          <p style="margin:12px 0 0; font-size:15.5px; line-height:1.6; color:#3d4a45; max-width:520px">Tell us about your space, power, and traffic — we'll recommend one machine, with the reasoning.</p>
+        </div>
+        <a href="Contact.dc.html" style="font-size:15px; font-weight:600; color:#ffffff; background:#0b7a6a; padding:14px 28px; border-radius:8px; text-decoration:none; white-space:nowrap" style-hover="background:#096355">Get a recommendation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer style="border-top:1px solid #e6e9e7; background:#ffffff" data-screen-label="Footer">
+    <div style="max-width:1240px; margin:0 auto; padding:56px 32px 40px">
+      <div style="display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px">
+        <div>
+          <img src="assets/artidyn_corporate_green_logo.svg" alt="Artidyn Robotics" style="width:128px; height:auto">
+          <p style="margin:18px 0 0; font-size:13.5px; line-height:1.6; color:#6b7a74; max-width:280px">The beverage automation partner. Certified robotic baristas for operators, hotels, airports, and offices.</p>
+        </div>
+        <div>
+          <p style="margin:0 0 12px; font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#8fa39b">Product</p>
+          <div style="display:flex; flex-direction:column; gap:9px">
+            <a href="Robots.dc.html" style="font-size:13.5px; color:#3d4a45; text-decoration:none">Robot catalog</a>
+            <a href="Solutions.dc.html" style="font-size:13.5px; color:#3d4a45; text-decoration:none">Solutions</a>
+            <a href="Home B - Tech Clarity.dc.html#process" style="font-size:13.5px; color:#3d4a45; text-decoration:none">Process</a>
+          </div>
+        </div>
+        <div>
+          <p style="margin:0 0 12px; font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#8fa39b">Company</p>
+          <div style="display:flex; flex-direction:column; gap:9px">
+            <a href="About.dc.html" style="font-size:13.5px; color:#3d4a45; text-decoration:none">About</a>
+            <a href="About.dc.html#team" style="font-size:13.5px; color:#3d4a45; text-decoration:none">Team</a>
+            <a href="Home B - Tech Clarity.dc.html#journal" style="font-size:13.5px; color:#3d4a45; text-decoration:none">Insights</a>
+          </div>
+        </div>
+        <div>
+          <p style="margin:0 0 12px; font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#8fa39b">Contact</p>
+          <div style="display:flex; flex-direction:column; gap:9px">
+            <a href="mailto:hi@artidyn.ai" style="font-size:13.5px; color:#3d4a45; text-decoration:none">hi@artidyn.ai</a>
+            <a href="#" style="font-size:13.5px; color:#3d4a45; text-decoration:none">LinkedIn</a>
+            <span style="font-size:13.5px; color:#8fa39b">Sheridan, WY · Taipei</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; margin-top:48px; padding-top:20px; border-top:1px solid #e6e9e7">
+        <p style="margin:0; font-size:12.5px; color:#8fa39b">© 2026 Artidyn Robotics LLC, Sheridan, Wyoming USA</p>
+        <div style="display:flex; gap:20px">
+          <a href="#" style="font-size:12.5px; color:#8fa39b; text-decoration:none">Privacy policy</a>
+          <a href="#" style="font-size:12.5px; color:#8fa39b; text-decoration:none">Terms of service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { filter: "all" };
+
+  robotsData = [
+    { name: "Iris", tier: "High volume", category: "high-volume", tagColor: "#0b7a6a", tagBg: "#e9f4f1", use: "The workhorse for terminals and transit hubs. 32 recipes, fully enclosed.", throughput: "70 cups/hr", time: "51 s", area: "2.18 m²", price: "$27,000", img: "assets/products/iris.png", href: "Robot - Iris.dc.html" },
+    { name: "Iris Pro", tier: "Compact", category: "compact", tagColor: "#7a5a0b", tagBg: "#f6f0e2", use: "Full-service coffee in a narrow footprint — offices, institutions, hospitals.", throughput: "70 cups/hr", time: "51 s", area: "1.89 m²", price: "$29,500", img: "assets/products/iris-pro.png", href: "Robot - Iris Pro.dc.html" },
+    { name: "Iris Max", tier: "High volume", category: "high-volume", tagColor: "#0b7a6a", tagBg: "#e9f4f1", use: "Maximum internal capacity plus foam printing for 24/7 secure environments.", throughput: "50 cups/hr", time: "72 s", area: "2.18 m²", price: "$31,500", img: "assets/products/iris-max.png", href: "Robot - Iris Max.dc.html" },
+    { name: "Argus Axis", tier: "Craft", category: "craft", tagColor: "#5b3d7a", tagBg: "#f0eaf6", use: "Open-bar barista for lobbies and concourses where the pour is the show.", throughput: "40 cups/hr", time: "90 s", area: "1.92 m²", price: "$27,000", img: "assets/products/argus-axis.png", href: "Robot - Argus Axis.dc.html" },
+    { name: "Argus Art", tier: "Craft", category: "craft", tagColor: "#5b3d7a", tagBg: "#f0eaf6", use: "Poured latte art and photo printing for flagship retail and events.", throughput: "40 cups/hr", time: "90 s", area: "1.92 m²", price: "$42,000", img: "assets/products/argus-art.png", href: "Robot - Argus Art.dc.html" },
+  ];
+
+  filterDefs = [
+    { key: "all", label: "All machines" },
+    { key: "high-volume", label: "High volume" },
+    { key: "compact", label: "Compact" },
+    { key: "craft", label: "Craft" },
+  ];
+
+  specRows = [
+    { label: "Price", values: ["$27,000", "$29,500", "$31,500", "$27,000", "$42,000"] },
+    { label: "Throughput", values: ["70 cups/hr", "70 cups/hr", "50 cups/hr", "40 cups/hr", "40 cups/hr"] },
+    { label: "Serve time", values: ["51 s", "51 s", "72 s", "90 s", "90 s"] },
+    { label: "Recipes", values: ["32 presets", "24 presets", "24 presets", "10–20 presets", "5–10 presets"] },
+    { label: "Latte art", values: ["No", "No", "Image printing", "No", "Poured + printing"] },
+    { label: "Enclosure", values: ["Enclosed kiosk", "Enclosed kiosk", "Enclosed kiosk", "Open bar", "Open bar"] },
+    { label: "Espresso unit", values: ["Dr. Coffee M12", "BTB-302", "BTB-302", "Dr. Coffee F3", "Dr. Coffee F3"] },
+    { label: "Footprint", values: ["2.18 m²", "1.89 m²", "2.18 m²", "1.92 m²", "1.92 m²"] },
+    { label: "Dimensions", values: ["1500×1450×2020 mm", "1300×1450×2020 mm", "1500×1450×2020 mm", "1600×1200×800 mm", "1600×1200×800 mm"] },
+    { label: "Weight", values: ["750 kg", "720 kg", "720 kg", "500 kg", "700 kg"] },
+    { label: "Power", values: ["4000 W", "5000 W", "5200 W", "3500 W", "4000 W"] },
+    { label: "Cup capacity", values: ["150", "150", "150", "150–200", "160"] },
+    { label: "Payments", values: ["Mobile/QR", "Mobile/QR", "Mobile/QR", "QR · Card · Cash", "QR · Card · Cash"] },
+  ];
+
+  renderVals() {
+    const { filter } = this.state;
+    return {
+      filters: this.filterDefs.map((f) => ({
+        label: f.label,
+        select: () => this.setState({ filter: f.key }),
+        bg: f.key === filter ? "#17201d" : "#ffffff",
+        color: f.key === filter ? "#ffffff" : "#3d4a45",
+        borderColor: f.key === filter ? "#17201d" : "#ccd4d0",
+      })),
+      robots: filter === "all" ? this.robotsData : this.robotsData.filter((r) => r.category === filter),
+      allRobots: this.robotsData,
+      specRows: this.specRows,
+    };
+  }
+}
+</script>
+</body>
+</html>

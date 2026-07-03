@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Contact — Artidyn Robotics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #ffffff; }
+    body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+    input, select, textarea, button { font-family: 'Inter', sans-serif; }
+  </style>
+</helmet>
+
+<div style="min-height:100vh; background:#ffffff; color:#17201d">
+
+  <!-- ===== Navigation ===== -->
+  <header style="position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.94); backdrop-filter:blur(12px); border-bottom:1px solid #e6e9e7" data-screen-label="Navigation">
+    <nav style="max-width:1240px; margin:0 auto; padding:0 32px; height:68px; display:flex; align-items:center; gap:40px">
+      <a href="Home B - Tech Clarity.dc.html" style="display:flex; align-items:center; gap:10px; text-decoration:none; margin-right:auto">
+        <img src="assets/mark-green.svg" alt="" style="height:26px; width:auto">
+        <span style="font-size:15px; font-weight:700; letter-spacing:0.02em; color:#17201d">Artidyn<span style="color:#0b7a6a"> Robotics</span></span>
+      </a>
+      <a href="Robots.dc.html" style="font-size:14px; font-weight:500; color:#3d4a45; text-decoration:none" style-hover="color:#0b7a6a">Robots</a>
+      <a href="Solutions.dc.html" style="font-size:14px; font-weight:500; color:#3d4a45; text-decoration:none" style-hover="color:#0b7a6a">Solutions</a>
+      <a href="Home B - Tech Clarity.dc.html#process" style="font-size:14px; font-weight:500; color:#3d4a45; text-decoration:none" style-hover="color:#0b7a6a">Process</a>
+      <a href="About.dc.html" style="font-size:14px; font-weight:500; color:#3d4a45; text-decoration:none" style-hover="color:#0b7a6a">About</a>
+      <span style="font-size:14px; font-weight:600; color:#ffffff; background:#0b7a6a; padding:10px 20px; border-radius:8px">Get a recommendation</span>
+    </nav>
+  </header>
+
+  <!-- ===== Contact ===== -->
+  <section style="background:#fafbfa; border-bottom:1px solid #e6e9e7" data-screen-label="Contact">
+    <div style="max-width:1240px; margin:0 auto; padding:72px 32px 96px; display:grid; grid-template-columns:1fr 1.2fr; gap:80px; align-items:start">
+      <div>
+        <p style="margin:0; font-size:13px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#0b7a6a">Get a recommendation</p>
+        <h1 style="margin:14px 0 0; font-size:clamp(32px, 3vw, 44px); font-weight:700; letter-spacing:-0.03em; line-height:1.12; color:#17201d">Tell us about your site.</h1>
+        <p style="margin:18px 0 0; font-size:16px; line-height:1.65; color:#3d4a45">One 30-minute call: your space, power, and traffic in — a specific machine, price, and ROI projection out. If a robot doesn't make sense for your site, we'll say so.</p>
+        <div style="margin-top:40px; display:flex; flex-direction:column; gap:24px">
+          <div style="display:flex; gap:14px; align-items:baseline">
+            <span style="font-family:'JetBrains Mono', monospace; font-size:13px; color:#0b7a6a">01</span>
+            <p style="margin:0; font-size:14.5px; line-height:1.6; color:#3d4a45">We reply within one business day.</p>
+          </div>
+          <div style="display:flex; gap:14px; align-items:baseline">
+            <span style="font-family:'JetBrains Mono', monospace; font-size:13px; color:#0b7a6a">02</span>
+            <p style="margin:0; font-size:14.5px; line-height:1.6; color:#3d4a45">Your call is with a founder, not a sales team.</p>
+          </div>
+          <div style="display:flex; gap:14px; align-items:baseline">
+            <span style="font-family:'JetBrains Mono', monospace; font-size:13px; color:#0b7a6a">03</span>
+            <p style="margin:0; font-size:14.5px; line-height:1.6; color:#3d4a45">The recommendation is free, whether or not you buy.</p>
+          </div>
+        </div>
+        <div style="margin-top:48px; padding-top:28px; border-top:1px solid #e6e9e7">
+          <p style="margin:0; font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#8fa39b">Or write directly</p>
+          <a href="mailto:hi@artidyn.ai" style="display:inline-block; margin-top:8px; font-size:16px; font-weight:600; color:#0b7a6a; text-decoration:none">hi@artidyn.ai</a>
+          <p style="margin:16px 0 0; font-size:13.5px; color:#8fa39b">Artidyn Robotics LLC · Sheridan, WY · Taipei, Taiwan</p>
+        </div>
+      </div>
+
+      <div style="border:1px solid #e6e9e7; border-radius:16px; background:#ffffff; padding:40px">
+        <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center; padding:48px 0">
+            <p style="margin:0; font-size:40px">✓</p>
+            <h2 style="margin:16px 0 0; font-size:22px; font-weight:700; color:#17201d">Thanks — we've got it.</h2>
+            <p style="margin:10px 0 0; font-size:15px; line-height:1.6; color:#3d4a45">We'll reply within one business day to set up the call.</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex; flex-direction:column; gap:20px">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px">
+              <div>
+                <label for="c-name" style="display:block; font-size:13px; font-weight:600; color:#3d4a45; margin-bottom:6px">Name</label>
+                <input id="c-name" type="text" placeholder="Your name" style="width:100%; box-sizing:border-box; font-size:14.5px; padding:11px 14px; border:1px solid #ccd4d0; border-radius:8px; color:#17201d; background:#ffffff" style-focus="border-color:#0b7a6a; outline:none"></input>
+              </div>
+              <div>
+                <label for="c-email" style="display:block; font-size:13px; font-weight:600; color:#3d4a45; margin-bottom:6px">Work email</label>
+                <input id="c-email" type="email" placeholder="you@company.com" style="width:100%; box-sizing:border-box; font-size:14.5px; padding:11px 14px; border:1px solid #ccd4d0; border-radius:8px; color:#17201d; background:#ffffff" style-focus="border-color:#0b7a6a; outline:none"></input>
+              </div>
+            </div>
+            <div>
+              <label for="c-env" style="display:block; font-size:13px; font-weight:600; color:#3d4a45; margin-bottom:6px">Where would the machine live?</label>
+              <select id="c-env" style="width:100%; box-sizing:border-box; font-size:14.5px; padding:11px 14px; border:1px solid #ccd4d0; border-radius:8px; color:#17201d; background:#ffffff">
+                <option>Vending / kiosk location</option>
+                <option>Hotel or resort</option>
+                <option>Airport or transit hub</option>
+                <option>Corporate office</option>
+                <option>Somewhere else</option>
+              </select>
+            </div>
+            <div>
+              <label for="c-msg" style="display:block; font-size:13px; font-weight:600; color:#3d4a45; margin-bottom:6px">About the site</label>
+              <textarea id="c-msg" rows="{{ four }}" placeholder="Location, expected traffic, space available, timeline…" style="width:100%; box-sizing:border-box; font-size:14.5px; padding:11px 14px; border:1px solid #ccd4d0; border-radius:8px; color:#17201d; background:#ffffff; resize:vertical" style-focus="border-color:#0b7a6a; outline:none"></textarea>
+            </div>
+            <button onClick="{{ submit }}" style="font-size:15px; font-weight:600; color:#ffffff; background:#0b7a6a; padding:14px 28px; border-radius:8px; border:none; cursor:pointer" style-hover="background:#096355">Request the call</button>
+            <p style="margin:0; font-size:12.5px; color:#8fa39b">No newsletter, no drip campaign — just a reply about your site.</p>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer style="background:#ffffff" data-screen-label="Footer">
+    <div style="max-width:1240px; margin:0 auto; padding:56px 32px 40px">
+      <div style="display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px">
+        <div>
+          <img src="assets/artidyn_corporate_green_logo.svg" alt="Artidyn Robotics" style="width:128px; height:auto">
+          <p style="margin:18px 0 0; font-size:13.5px; line-height:1.6; color:#6b7a74; max-width:280px">The beverage automation partner. Certified robotic baristas for operators, hotels, airports, and offices.</p>
+        </div>
+        <div>
+          <p style="margin:0 0 12px; font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#8fa39b">Product</p>
+          <div style="display:flex; flex-direction:column; gap:9px">
+            <a href="Robots.dc.html" style="font-size:13.5px; color:#3d4a45; text-decoration:none">Robot catalog</a>
+            <a href="Solutions.dc.html" style="font-size:13.5px; color:#3d4a45; text-decoration:none">Solutions</a>
+            <a href="Home B - Tech Clarity.dc.html#process" style="font-size:13.5px; color:#3d4a45; text-decoration:none">Process</a>
+          </div>
+        </div>
+        <div>
+          <p style="margin:0 0 12px; font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#8fa39b">Company</p>
+          <div style="display:flex; flex-direction:column; gap:9px">
+            <a href="About.dc.html" style="font-size:13.5px; color:#3d4a45; text-decoration:none">About</a>
+            <a href="About.dc.html#team" style="font-size:13.5px; color:#3d4a45; text-decoration:none">Team</a>
+            <a href="Home B - Tech Clarity.dc.html#journal" style="font-size:13.5px; color:#3d4a45; text-decoration:none">Insights</a>
+          </div>
+        </div>
+        <div>
+          <p style="margin:0 0 12px; font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#8fa39b">Contact</p>
+          <div style="display:flex; flex-direction:column; gap:9px">
+            <a href="mailto:hi@artidyn.ai" style="font-size:13.5px; color:#3d4a45; text-decoration:none">hi@artidyn.ai</a>
+            <a href="#" style="font-size:13.5px; color:#3d4a45; text-decoration:none">LinkedIn</a>
+            <span style="font-size:13.5px; color:#8fa39b">Sheridan, WY · Taipei</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; margin-top:48px; padding-top:20px; border-top:1px solid #e6e9e7">
+        <p style="margin:0; font-size:12.5px; color:#8fa39b">© 2026 Artidyn Robotics LLC, Sheridan, Wyoming USA</p>
+        <div style="display:flex; gap:20px">
+          <a href="#" style="font-size:12.5px; color:#8fa39b; text-decoration:none">Privacy policy</a>
+          <a href="#" style="font-size:12.5px; color:#8fa39b; text-decoration:none">Terms of service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { submitted: false };
+  renderVals() {
+    return {
+      submitted: this.state.submitted,
+      notSubmitted: !this.state.submitted,
+      four: 4,
+      submit: () => this.setState({ submitted: true }),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Artidyn Robotics | The Beverage Automation Partner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: oklch(0.97 0 0); }
+    body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+    @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
+    button { font-family: 'Inter', sans-serif; }
+  </style>
+</helmet>
+
+<div style="min-height:100vh; background:oklch(0.97 0 0); color:oklch(0.205 0 0)">
+
+  <!-- ===== Fixed navigation ===== -->
+  <div style="position:fixed; top:32px; left:0; right:0; z-index:100; pointer-events:none; padding:0 16px" data-screen-label="Navigation">
+    <nav style="display:flex; align-items:center; justify-content:space-between; gap:8px; max-width:384px; background:#ffffff; border-radius:12px; margin:0 16px; padding:16px; pointer-events:auto; box-shadow:0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1)">
+      <a href="#" style="font-size:16px; letter-spacing:-0.05em; text-transform:uppercase; font-weight:600; color:oklch(0.205 0 0); text-decoration:none">Artidyn Robotics</a>
+      <button onClick="{{ toggleMenu }}" aria-label="Toggle menu" style="background:none; border:none; cursor:pointer; padding:8px; border-radius:8px; display:flex; flex-direction:column; justify-content:space-between; height:36px; width:40px">
+        <span style="display:block; width:24px; height:2px; background:oklch(0.205 0 0)"></span>
+        <span style="display:block; width:24px; height:2px; background:oklch(0.205 0 0)"></span>
+        <span style="display:block; width:24px; height:2px; background:oklch(0.205 0 0)"></span>
+      </button>
+    </nav>
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="margin:8px 16px 0; max-width:384px; pointer-events:auto">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; background:#ffffff; border-radius:12px; padding:16px; box-shadow:0 20px 25px -5px rgba(0,0,0,0.1); border:1px solid oklch(0.97 0 0)">
+          <div style="display:flex; flex-direction:column; gap:12px">
+            <h3 style="margin:0; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:oklch(0.205 0 0)">Solutions</h3>
+            <div style="display:flex; flex-direction:column; gap:4px">
+              <a href="#" style="display:block; color:oklch(0.52 0 0); font-size:12px; letter-spacing:0.025em; text-decoration:none; padding:4px 0">Robot Categories</a>
+              <a href="#" style="display:block; color:oklch(0.52 0 0); font-size:12px; letter-spacing:0.025em; text-decoration:none; padding:4px 0">Robot Catalog</a>
+              <a href="#" style="display:block; color:oklch(0.52 0 0); font-size:12px; letter-spacing:0.025em; text-decoration:none; padding:4px 0">How It Works</a>
+              <a href="#" style="display:block; color:oklch(0.52 0 0); font-size:12px; letter-spacing:0.025em; text-decoration:none; padding:4px 0">About Artidyn</a>
+              <a href="#" style="display:block; color:oklch(0.52 0 0); font-size:12px; letter-spacing:0.025em; text-decoration:none; padding:4px 0">Industry Insights</a>
+              <a href="#" style="display:block; color:oklch(0.52 0 0); font-size:12px; letter-spacing:0.025em; text-decoration:none; padding:4px 0">Our Team</a>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:12px">
+            <h3 style="margin:0; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:oklch(0.205 0 0)">Partner</h3>
+            <div style="display:flex; flex-direction:column; gap:4px">
+              <a href="#" style="display:block; color:oklch(0.52 0 0); font-size:12px; letter-spacing:0.025em; text-decoration:none; padding:4px 0">Contact Us</a>
+              <a href="#" style="display:block; color:oklch(0.52 0 0); font-size:12px; letter-spacing:0.025em; text-decoration:none; padding:4px 0">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:4px; background:#ffffff; border-radius:12px; padding:16px; display:flex; justify-content:center; box-shadow:0 10px 15px -3px rgba(0,0,0,0.1); border:1px solid oklch(0.97 0 0)">
+          <a href="#" style="font-size:12px; color:oklch(0.52 0 0); font-weight:500; text-decoration:none">Follow us on LinkedIn</a>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+
+  <!-- ===== Hero ===== -->
+  <section style="overflow:hidden; padding:16px" data-screen-label="Hero">
+    <div style="position:relative; overflow:hidden; border-radius:24px; height:calc(100vh - 240px); min-height:480px; display:flex; align-items:flex-start; justify-content:flex-start">
+      <video src="assets/hero.mp4" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="object-fit:cover; width:100%; height:100%; position:absolute; inset:0; object-position:center"></video>
+      <div style="position:absolute; inset:0; z-index:10; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 32px; mix-blend-mode:difference; pointer-events:none" aria-hidden="true">
+        <img src="assets/biglogo.svg" alt="" style="width:min(55vw, 760px); height:auto; opacity:0.9">
+      </div>
+      <div style="position:relative; z-index:20; padding:32px 16px; overflow:hidden; width:100%">
+        <div style="display:flex; align-items:center; width:max-content; white-space:nowrap; font-size:14px; font-weight:300; color:oklch(0.205 0 0); animation:marquee 92s linear infinite">
+          Your growth is capped. We can uncap it. // hi@artidyn.ai // Sheridan, WY // Taipei, Taiwan // Your growth is capped. We can uncap it. // hi@artidyn.ai // Sheridan, WY // Taipei, Taiwan // Your growth is capped. We can uncap it. // hi@artidyn.ai // Sheridan, WY // Taipei, Taiwan // Your growth is capped. We can uncap it. // hi@artidyn.ai // Sheridan, WY // Taipei, Taiwan // Your growth is capped. We can uncap it. // hi@artidyn.ai // Sheridan, WY // Taipei, Taiwan // Your growth is capped. We can uncap it. // hi@artidyn.ai // Sheridan, WY // Taipei, Taiwan //
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Intro statement ===== -->
+  <section style="padding:96px 32px" data-screen-label="Intro">
+    <p style="margin:0; font-size:clamp(44px, 4.3vw, 76px); font-weight:500; letter-spacing:-0.035em; line-height:1.1; color:oklch(0.205 0 0)">
+      We are the <span style="color:oklch(0.52 0 0); font-weight:300; font-style:italic">Beverage Automation Partner</span> dedicated to <span style="color:oklch(0.52 0 0); font-weight:300; font-style:italic">uncapping your growth</span> with certified, reliable robotic solutions.
+    </p>
+  </section>
+
+  <!-- ===== Product preview ===== -->
+  <section style="overflow:hidden; padding:48px 32px" data-screen-label="Certified Robots">
+    <div style="display:flex; flex-direction:column; align-items:flex-start; gap:16px">
+      <span style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:oklch(0.52 0 0)">Certified Robots</span>
+      <h2 style="margin:0; font-size:clamp(30px, 2.7vw, 48px); font-weight:500; letter-spacing:-0.025em; line-height:1.15; color:oklch(0.205 0 0); max-width:768px">Explore our range of certified beverage robots tailored to your business model.</h2>
+      <a href="#" style="margin-top:16px; display:inline-flex; align-items:center; background:oklch(0.205 0 0); color:#ffffff; border-radius:9999px; padding:16px 32px; font-size:14px; font-weight:500; text-decoration:none">View Robot Catalog</a>
+    </div>
+    <div style="display:grid; grid-template-columns:minmax(240px, 3fr) 9fr; gap:16px; margin-top:64px; align-items:stretch">
+      <div style="padding:32px; background:#ffffff; border-radius:12px; border:1px solid oklch(0.922 0 0); display:flex; flex-direction:column; justify-content:space-between; min-height:300px">
+        <div style="display:flex; flex-direction:column; gap:24px">
+          <div>
+            <span style="display:block; font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:oklch(0.6 0 0); margin-bottom:4px">Performance</span>
+            <span style="font-size:14px; font-weight:500; color:oklch(0.205 0 0); font-variant-numeric:tabular-nums">{{ activeProductYear }}</span>
+          </div>
+          <h3 style="margin:0; font-size:20px; font-weight:600; color:oklch(0.205 0 0)">{{ activeProductTitle }}</h3>
+          <div>
+            <span style="display:block; font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:oklch(0.6 0 0); margin-bottom:4px">Application</span>
+            <span style="font-size:14px; color:oklch(0.371 0 0)">{{ activeProductLocation }}</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px; margin-top:32px">
+          <button onClick="{{ prevProduct }}" aria-label="Previous robot" style="width:36px; height:36px; border-radius:9999px; border:none; background:oklch(0.922 0 0); color:oklch(0.205 0 0); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:15px">←</button>
+          <button onClick="{{ nextProduct }}" aria-label="Next robot" style="width:36px; height:36px; border-radius:9999px; border:none; background:oklch(0.922 0 0); color:oklch(0.205 0 0); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:15px">→</button>
+        </div>
+      </div>
+      <div style="border-radius:12px; overflow:hidden; position:relative">
+        <div style="display:flex; height:100%; transition:transform 0.5s cubic-bezier(0.22,1,0.36,1); transform:translateX({{ productShift }})">
+          <sc-for list="{{ products }}" as="p" hint-placeholder-count="1">
+            <div style="min-width:100%; background:#ffffff; display:flex; align-items:center; justify-content:center; padding:48px">
+              <img src="{{ p.img }}" alt="{{ p.title }}" style="max-height:560px; max-width:70%; object-fit:contain">
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Stats / mission ===== -->
+  <section style="padding:48px 32px" data-screen-label="Stats">
+    <div style="display:grid; grid-template-columns:1fr 2fr; gap:32px">
+      <div></div>
+      <div>
+        <p style="margin:0; font-size:clamp(24px, 2vw, 32px); font-weight:500; letter-spacing:-0.02em; line-height:1.35; color:oklch(0.205 0 0)">The robotics market is a "wild west" of unverified claims and unreliable hardware. We are here to change that. We believe automation should be a business model upgrade, not a science experiment. When you partner with Artidyn, you aren't just buying a machine—you are gaining a certified partner dedicated to uncapping your growth potential.</p>
+        <p style="margin:32px 0 0; font-size:14px; line-height:1.6; color:oklch(0.4 0 0)">We don't just resell hardware; we curate success. Our team engineers, vets, and certifies best-in-class solutions so you don't have to. Whether you need high-volume throughput for an airport or a craft experience for a boutique hotel, our goal is simple: to provide a reliable, revenue-generating asset from Day 1.</p>
+        <div style="border-top:1px solid oklch(0.922 0 0); border-bottom:1px solid oklch(0.922 0 0); margin-top:32px">
+          <div style="display:grid; grid-template-columns:1fr 2fr; align-items:start; gap:16px; padding:32px 0; border-bottom:1px solid oklch(0.922 0 0)">
+            <p style="margin:0; font-size:clamp(44px, 3.8vw, 68px); font-weight:600; font-style:italic; letter-spacing:-0.02em; color:oklch(0.205 0 0); font-variant-numeric:tabular-nums">&lt; 12 Mo</p>
+            <p style="margin:0; font-size:16px; line-height:1.6; color:oklch(0.4 0 0)">Start seeing your ROI in months, not years. By replacing limited staffing with 24/7 automated reliability, most operators break even in their first year.</p>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 2fr; align-items:start; gap:16px; padding:32px 0; border-bottom:1px solid oklch(0.922 0 0)">
+            <p style="margin:0; font-size:clamp(44px, 3.8vw, 68px); font-weight:600; font-style:italic; letter-spacing:-0.02em; color:oklch(0.205 0 0); font-variant-numeric:tabular-nums">24/7</p>
+            <p style="margin:0; font-size:16px; line-height:1.6; color:oklch(0.4 0 0)">Unlock revenue streams that don't sleep. Turn 'off-peak' hours into profitable service windows without incurring overtime staffing costs.</p>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 2fr; align-items:start; gap:16px; padding:32px 0; border-bottom:1px solid oklch(0.922 0 0)">
+            <p style="margin:0; font-size:clamp(44px, 3.8vw, 68px); font-weight:600; font-style:italic; letter-spacing:-0.02em; color:oklch(0.205 0 0); font-variant-numeric:tabular-nums">100%</p>
+            <p style="margin:0; font-size:16px; line-height:1.6; color:oklch(0.4 0 0)">Certified. We are the antithesis of the 'Wild West.' Every robot we sell is vetted, tested, and backed by the Artidyn Seal of Quality.</p>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 2fr; align-items:start; gap:16px; padding:32px 0; border-bottom:1px solid oklch(0.922 0 0)">
+            <p style="margin:0; font-size:clamp(44px, 3.8vw, 68px); font-weight:600; font-style:italic; letter-spacing:-0.02em; color:oklch(0.205 0 0); font-variant-numeric:tabular-nums">2x</p>
+            <p style="margin:0; font-size:16px; line-height:1.6; color:oklch(0.4 0 0)">Double your revenue potential. Case studies show that replacing aging vending machines with our robotic kiosks can double quarterly revenue.</p>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 2fr; align-items:start; gap:16px; padding:32px 0">
+            <p style="margin:0; font-size:clamp(44px, 3.8vw, 68px); font-weight:600; font-style:italic; letter-spacing:-0.02em; color:oklch(0.205 0 0)">Zero</p>
+            <p style="margin:0; font-size:16px; line-height:1.6; color:oklch(0.4 0 0)">Zero guesswork. We don't just sell you a machine; we provide a transparent, data-driven business model before you sign a single contract.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Solutions preview ===== -->
+  <section style="overflow:hidden; padding:16px" data-screen-label="Automation Solutions">
+    <div style="position:relative; border-radius:24px; height:calc(100vh - 32px); min-height:640px; overflow:hidden">
+      <img src="{{ activeSolutionImg }}" alt="{{ activeSolutionTitle }}" style="object-fit:cover; width:100%; height:100%; position:absolute; inset:0; object-position:center">
+      <div style="position:relative; max-width:576px; margin-left:auto; display:flex; flex-direction:column; height:100%">
+        <div style="padding:32px; background:oklch(0.97 0 0); margin:16px; border-radius:16px; flex:1; display:flex; flex-direction:column; justify-content:space-between">
+          <p style="margin:0; font-size:16px; font-weight:500; color:oklch(0.205 0 0)">Automation Solutions</p>
+          <p style="margin:48px 0 0; font-size:clamp(24px, 1.8vw, 30px); font-weight:500; letter-spacing:-0.02em; line-height:1.3; color:oklch(0.205 0 0)">Explore our range of certified beverage robots. Whether your goal is maximum volume or a premium craft experience, we have a solution tailored to your vision.</p>
+          <div style="border-top:1px solid oklch(0.922 0 0); border-bottom:1px solid oklch(0.922 0 0); margin-top:32px">
+            <sc-for list="{{ solutions }}" as="s" hint-placeholder-count="3">
+              <button onClick="{{ s.select }}" style="display:block; text-align:left; width:100%; background:none; border:none; border-bottom:1px solid oklch(0.922 0 0); cursor:pointer; color:oklch(0.205 0 0); padding:10px 0; opacity:{{ s.opacity }}">
+                <span style="font-size:18px; font-weight:500">{{ s.title }}</span>
+              </button>
+            </sc-for>
+          </div>
+          <p style="margin:32px 0 0; font-size:16px; line-height:1.6; color:oklch(0.4 0 0)">{{ activeSolutionDesc }}</p>
+          <a href="#" style="margin-top:32px; display:inline-block; font-size:16px; font-weight:500; color:oklch(0.205 0 0); text-decoration:none">See All Certified Models</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Philosophy ===== -->
+  <section style="padding:96px 32px" data-screen-label="Philosophy">
+    <p style="margin:0; font-size:clamp(34px, 3.3vw, 58px); font-weight:500; letter-spacing:-0.03em; line-height:1.2; color:oklch(0.205 0 0); text-indent:168px; text-wrap:pretty">
+      At Artidyn, we believe automation is a <span style="color:oklch(0.52 0 0); font-weight:300; font-style:italic">business model upgrade</span>, not a science experiment. We tame the <span style="color:oklch(0.52 0 0); font-weight:300; font-style:italic">wild west</span> of unverified claims with <span style="color:oklch(0.52 0 0); font-weight:300; font-style:italic">certified reliability</span>, ensuring every robot delivers ROI, not just novelty.
+    </p>
+  </section>
+
+  <!-- ===== Process ===== -->
+  <section style="padding:48px 32px" data-screen-label="The Process">
+    <div style="display:grid; grid-template-columns:1fr 2fr; gap:32px">
+      <div>
+        <div style="padding:32px; background:#ffffff; border-radius:12px; position:sticky; top:96px; max-width:384px; display:flex; flex-direction:column">
+          <p style="margin:0; font-size:16px; font-weight:500; color:oklch(0.205 0 0)">The Process</p>
+          <h3 style="margin:48px 0 0; font-size:20px; font-weight:500; line-height:1.5; color:oklch(0.205 0 0)">We are invested in your success. Our 3-step process is designed to ensure you not only launch an automated business, but thrive.</h3>
+        </div>
+      </div>
+      <div style="border-top:1px solid oklch(0.922 0 0); border-bottom:1px solid oklch(0.922 0 0)">
+        <div style="display:grid; grid-template-columns:1fr 2fr 1fr; gap:16px; padding:32px 0; border-bottom:1px solid oklch(0.922 0 0); background:oklch(0.97 0 0)">
+          <p style="margin:0; font-size:clamp(44px, 3.8vw, 68px); font-weight:600; font-style:italic; letter-spacing:-0.02em; color:oklch(0.205 0 0)">01.</p>
+          <div>
+            <h3 style="margin:0; font-size:clamp(22px, 1.7vw, 30px); font-weight:500; letter-spacing:-0.02em; color:oklch(0.205 0 0)">Discovery Consultation</h3>
+            <p style="margin:8px 0 0; font-size:14px; line-height:1.6; color:oklch(0.4 0 0)">We start with a free call to understand your business goals, ideal locations, and budget. We assess your specific constraints—staffing, space, or throughput—to define the problem.</p>
+          </div>
+          <div style="width:100%; height:192px; background:oklch(0.922 0 0); border-radius:12px; overflow:hidden">
+            <img src="assets/solutions/1.png" alt="Discovery Consultation" style="width:100%; height:100%; object-fit:cover">
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 2fr 1fr; gap:16px; padding:32px 0; border-bottom:1px solid oklch(0.922 0 0); background:oklch(0.97 0 0)">
+          <p style="margin:0; font-size:clamp(44px, 3.8vw, 68px); font-weight:600; font-style:italic; letter-spacing:-0.02em; color:oklch(0.205 0 0)">02.</p>
+          <div>
+            <h3 style="margin:0; font-size:clamp(22px, 1.7vw, 30px); font-weight:500; letter-spacing:-0.02em; color:oklch(0.205 0 0)">Tailored Solution</h3>
+            <p style="margin:8px 0 0; font-size:14px; line-height:1.6; color:oklch(0.4 0 0)">We match you with the perfect robot from our Certified Range. No guesswork—just transparent pricing, clear ROI productions, and a system vetted for your specific use case.</p>
+          </div>
+          <div style="width:100%; height:192px; background:oklch(0.922 0 0); border-radius:12px; overflow:hidden">
+            <img src="assets/solutions/2.png" alt="Tailored Solution" style="width:100%; height:100%; object-fit:cover">
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 2fr 1fr; gap:16px; padding:32px 0; background:oklch(0.97 0 0)">
+          <p style="margin:0; font-size:clamp(44px, 3.8vw, 68px); font-weight:600; font-style:italic; letter-spacing:-0.02em; color:oklch(0.205 0 0)">03.</p>
+          <div>
+            <h3 style="margin:0; font-size:clamp(22px, 1.7vw, 30px); font-weight:500; letter-spacing:-0.02em; color:oklch(0.205 0 0)">Launch &amp; Support</h3>
+            <p style="margin:8px 0 0; font-size:14px; line-height:1.6; color:oklch(0.4 0 0)">We guide you through delivery, installation, customization, and training. We ensure your team is ready and your robot is calibrated for 24/7 reliability from Day 1.</p>
+          </div>
+          <div style="width:100%; height:192px; background:oklch(0.922 0 0); border-radius:12px; overflow:hidden">
+            <img src="assets/solutions/3.png" alt="Launch and Support" style="width:100%; height:100%; object-fit:cover">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Testimonials ===== -->
+  <section style="overflow:hidden; padding:48px 16px" data-screen-label="Testimonials">
+    <div style="display:grid; grid-template-columns:1fr 2fr; gap:16px; align-items:start; margin-left:16px">
+      <div style="padding:32px; background:#ffffff; border-radius:16px; display:flex; flex-direction:column; justify-content:space-between; height:500px; box-sizing:border-box">
+        <h2 style="margin:16px 0 0; font-size:20px; font-weight:500; line-height:1.5; color:oklch(0.205 0 0)">Real ROI, validated globally. See how Artidyn partners are uncapping their growth worldwide.</h2>
+        <div style="display:flex; align-items:center; gap:16px; margin-top:32px">
+          <button onClick="{{ prevTestimonial }}" aria-label="Previous testimonial" style="width:40px; height:40px; border-radius:9999px; border:none; background:oklch(0.922 0 0); color:oklch(0.205 0 0); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:16px">←</button>
+          <button onClick="{{ nextTestimonial }}" aria-label="Next testimonial" style="width:40px; height:40px; border-radius:9999px; border:none; background:oklch(0.922 0 0); color:oklch(0.205 0 0); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:16px">→</button>
+        </div>
+      </div>
+      <div style="overflow:hidden">
+        <div style="display:flex; gap:16px; transition:transform 0.5s cubic-bezier(0.22,1,0.36,1); transform:translateX({{ testimonialShift }})">
+          <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="2">
+            <div style="flex:0 0 calc(50% - 8px); box-sizing:border-box; display:flex; flex-direction:column; justify-content:space-between; border-radius:16px; overflow:hidden; background:#ffffff; padding:32px; min-height:436px">
+              <blockquote style="margin:0">
+                <span aria-hidden="true" style="font-size:96px; font-style:italic; font-weight:600; line-height:0.4; display:block; color:oklch(0.205 0 0)">"</span>
+                <p style="margin:24px 0 0; font-size:clamp(24px, 1.9vw, 34px); font-weight:500; font-style:italic; letter-spacing:-0.02em; line-height:1.25; color:oklch(0.205 0 0)">"{{ t.quote }}"</p>
+              </blockquote>
+              <div style="display:flex; align-items:center; gap:8px; margin-top:48px">
+                <img src="{{ t.avatar }}" alt="{{ t.author }}" style="width:48px; height:48px; border-radius:9999px; object-fit:cover">
+                <div>
+                  <p style="margin:0; font-size:18px; font-weight:500; color:oklch(0.205 0 0)">{{ t.author }}</p>
+                  <p style="margin:0; font-size:14px; color:oklch(0.4 0 0)">{{ t.roleLocation }}</p>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Blog preview ===== -->
+  <section style="padding:96px 32px" data-screen-label="Journal">
+    <div>
+      <p style="margin:0; font-size:16px; font-weight:500; color:oklch(0.205 0 0)">Journal</p>
+      <p style="margin:48px 0 0; font-size:clamp(30px, 2.7vw, 48px); font-weight:500; letter-spacing:-0.025em; line-height:1.2; color:oklch(0.205 0 0); max-width:1024px">Expert analysis, certified reviews, and ROI case studies to help you navigate the wild west of automation.</p>
+      <a href="#" style="display:inline-block; margin-top:24px; font-size:16px; font-weight:500; color:oklch(0.205 0 0); text-decoration:none">See all articles</a>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:32px 32px; margin-top:48px">
+      <article>
+        <div style="border-radius:8px; overflow:hidden; aspect-ratio:3/2; background:oklch(0.922 0 0)">
+          <img src="assets/blog/office-breakroom.jpeg" alt="Robotic pantry in a modern office" style="width:100%; height:100%; object-fit:cover">
+        </div>
+        <p style="margin:16px 0 0; font-size:12px; letter-spacing:0.05em; color:oklch(0.52 0 0); font-variant-numeric:tabular-nums">May 26, 2026</p>
+        <h3 style="margin:12px 0 0; font-size:22px; font-weight:600; line-height:1.3; color:oklch(0.205 0 0)">Why Top Talent Prefers Robotic Pantries: Corporate Perk Trends</h3>
+        <p style="margin:12px 0 0; font-size:16px; line-height:1.55; color:oklch(0.4 0 0)">How modern office perks like compact robot baristas encourage employees back to the workplace while reducing pantry costs.</p>
+        <a href="#" style="display:inline-block; margin-top:16px; font-size:16px; font-weight:500; color:oklch(0.205 0 0); text-decoration:none">Read this article</a>
+      </article>
+      <article>
+        <div style="border-radius:8px; overflow:hidden; aspect-ratio:3/2; background:oklch(0.922 0 0)">
+          <img src="assets/blog/airport-terminal.jpeg" alt="Robot barista at an airport terminal" style="width:100%; height:100%; object-fit:cover">
+        </div>
+        <p style="margin:16px 0 0; font-size:12px; letter-spacing:0.05em; color:oklch(0.52 0 0); font-variant-numeric:tabular-nums">May 25, 2026</p>
+        <h3 style="margin:12px 0 0; font-size:22px; font-weight:600; line-height:1.3; color:oklch(0.205 0 0)">Throughput Analysis: Can Robots Outpace Baristas in Airport Terminals?</h3>
+        <p style="margin:12px 0 0; font-size:16px; line-height:1.55; color:oklch(0.4 0 0)">Exploring the future of airport concessions automation and how to handle peak hour coffee demand without extra staff.</p>
+        <a href="#" style="display:inline-block; margin-top:16px; font-size:16px; font-weight:500; color:oklch(0.205 0 0); text-decoration:none">Read this article</a>
+      </article>
+      <article>
+        <div style="border-radius:8px; overflow:hidden; aspect-ratio:3/2; background:oklch(0.922 0 0)">
+          <img src="assets/blog/labor-shortage.png" alt="Hotel manager reviewing labor guide" style="width:100%; height:100%; object-fit:cover">
+        </div>
+        <p style="margin:16px 0 0; font-size:12px; letter-spacing:0.05em; color:oklch(0.52 0 0); font-variant-numeric:tabular-nums">May 24, 2026</p>
+        <h3 style="margin:12px 0 0; font-size:22px; font-weight:600; line-height:1.3; color:oklch(0.205 0 0)">The 2026 Labor Shortage Survival Guide for Hotel Managers</h3>
+        <p style="margin:12px 0 0; font-size:16px; line-height:1.55; color:oklch(0.4 0 0)">How to provide 24/7 coffee service in luxury hotels with minimal staff while increasing guest satisfaction scores.</p>
+        <a href="#" style="display:inline-block; margin-top:16px; font-size:16px; font-weight:500; color:oklch(0.205 0 0); text-decoration:none">Read this article</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer style="overflow:hidden; padding:16px" data-screen-label="Footer">
+    <div style="position:relative; border-radius:24px; height:calc(100vh - 32px); min-height:760px; overflow:hidden">
+      <video src="assets/footer.mp4" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="object-fit:cover; width:100%; height:100%; position:absolute; inset:0; object-position:center"></video>
+      <div style="position:relative; max-width:576px; margin-left:auto; display:flex; flex-direction:column; height:100%">
+        <div style="padding:32px; background:oklch(0.97 0 0); margin:16px; border-radius:16px; flex:1; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 20px 25px -5px rgba(0,0,0,0.1)">
+          <div>
+            <a href="#"><img src="assets/artidyn_corporate_green_logo.svg" alt="Artidyn Robotics" style="width:192px; height:auto"></a>
+            <div style="margin-top:48px; display:flex; flex-direction:column; gap:16px">
+              <div>
+                <h3 style="margin:0; font-size:18px; font-weight:500; line-height:1.6; color:oklch(0.205 0 0)">Head of Strategy &amp; Supply Chain</h3>
+                <p style="margin:0; font-size:13px; font-weight:500; letter-spacing:-0.01em; color:oklch(0.52 0 0)">Sylvia Wu</p>
+              </div>
+              <div>
+                <h3 style="margin:0; font-size:18px; font-weight:500; line-height:1.6; color:oklch(0.205 0 0)">Lead Applied Scientist</h3>
+                <p style="margin:0; font-size:13px; font-weight:500; letter-spacing:-0.01em; color:oklch(0.52 0 0)">Viktor Major</p>
+              </div>
+            </div>
+            <div style="margin-top:48px">
+              <p style="margin:0; font-size:18px; font-weight:500; letter-spacing:-0.01em; color:oklch(0.4 0 0)">Ready to Build Your New Automated Business?</p>
+              <p style="margin:16px 0 0; font-size:14px; line-height:1.65; color:oklch(0.52 0 0)">Let our experts help you choose the right certified robot for your goals. We don't just sell machines, we provide the business model to ensure you thrive.</p>
+            </div>
+            <div style="margin-top:32px; padding-top:32px; border-top:1px solid oklch(0.97 0 0)">
+              <p style="margin:0 0 8px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:oklch(0.205 0 0)">Connect</p>
+              <a href="#" style="display:block; color:oklch(0.52 0 0); font-size:12px; text-decoration:none; margin-bottom:8px">Contact Us</a>
+              <a href="#" style="display:block; color:oklch(0.52 0 0); font-size:12px; text-decoration:none">LinkedIn</a>
+            </div>
+          </div>
+          <div style="margin-top:32px">
+            <p style="margin:0; font-size:12px; color:oklch(0.6 0 0)">© 2026 Artidyn Robotics LLC, Sheridan Wyoming USA.</p>
+            <div style="display:flex; gap:16px; margin-top:8px">
+              <a href="#" style="font-size:10px; color:oklch(0.6 0 0); text-transform:uppercase; letter-spacing:-0.02em; text-decoration:none">Privacy Policy</a>
+              <a href="#" style="font-size:10px; color:oklch(0.6 0 0); text-transform:uppercase; letter-spacing:-0.02em; text-decoration:none">Terms of Service</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    menuOpen: false,
+    productIndex: 0,
+    solutionIndex: 0,
+    testimonialIndex: 0,
+  };
+
+  products = [
+    { title: "Argus Art | Latte Art Robot for Upscale Events", year: "2026", location: "Flagship Retail, Events", img: "assets/products/argus-art.png" },
+    { title: "Argus Axis | Automated Barista for Corporate HQs", year: "2026", location: "Mall Concourses, Luxury Lobbies", img: "assets/products/argus-axis.png" },
+    { title: "Iris Max | Robotic Coffee Station for Shopping Arcades", year: "2026", location: "24/7 Secure Environments", img: "assets/products/iris-max.png" },
+    { title: "Iris Pro | Compact Robot Barista for Tech Offices", year: "2026", location: "Narrow Alcoves, Institutions", img: "assets/products/iris-pro.png" },
+    { title: "Iris | High-Speed Cafe Robot for Airport Terminals", year: "2026", location: "Transit Hubs, Airports, Universities", img: "assets/products/iris.png" },
+  ];
+
+  solutionsData = [
+    { title: "Compact Robot Barista for Corporate & Hospitality", desc: "Sustainable office coffee solutions and compact robot baristas designed to reduce corporate pantry operational costs while providing premium employee perks.", img: "assets/solutions/1.png" },
+    { title: "Craft Coffee Robot Barista for Luxury Hotels", desc: "Latte art robots and robotic amenities for boutique hotels. provide 24/7 coffee service in luxury hotels with minimal staff and enhance guest satisfaction scores.", img: "assets/solutions/2.png" },
+    { title: "High-Volume Autonomous Coffee Kiosks", desc: "The future of airport concessions automation. High-volume coffee robots for international airport terminals and transit hubs designed for maximum throughput.", img: "assets/solutions/3.png" },
+  ];
+
+  testimonialsData = [
+    { quote: "We replaced three aging vending machines with one robotic kiosk and doubled our revenue in the first quarter. It turns a low-margin corner into a destination.", author: "David Park", roleLocation: "Vending Operator, Seoul, South Korea", avatar: "assets/testimonials/david.png" },
+    { quote: "Our guests demand premium coffee at 3 AM, but staffing a cafe overnight was financial suicide. Artidyn solved the 'off-peak' problem instantly.", author: "Emma Rodriguez", roleLocation: "General Manager, Barcelona, Spain", avatar: "assets/testimonials/emily.png" },
+    { quote: "Speed is everything in our terminal. The high-volume unit handles the morning rush flawlessly. It never calls in sick and the quality never drifts.", author: "Michael Chen", roleLocation: "Concessions Director, Singapore", avatar: "assets/testimonials/michael.png" },
+    { quote: "I was terrified of buying a 'science product' from an unverified vendor. The Artidyn Certified seal gave me the confidence to finally invest in automation.", author: "Sarah Johnson", roleLocation: "Franchise Owner, London, UK", avatar: "assets/testimonials/sara.png" },
+    { quote: "We needed a perk to get people back to the office. The compact bar fit perfectly in our lobby and became the hub of our company culture.", author: "Lisa Thompson", roleLocation: "Facilities Manager, Sydney, Australia", avatar: "assets/testimonials/lisa.png" },
+    { quote: "Artidyn didn't just sell me a robot; they gave me a business plan. We hit our ROI targets in month 9, exactly as they producted.", author: "Robert Martinez", roleLocation: "Operations Director, Dubai, UAE", avatar: "assets/testimonials/robert.png" },
+  ];
+
+  componentDidMount() {
+    // ensure videos autoplay muted
+    setTimeout(() => {
+      document.querySelectorAll("video").forEach((v) => {
+        v.muted = true;
+        const p = v.play();
+        if (p && p.catch) p.catch(() => {});
+      });
+    }, 300);
+  }
+
+  renderVals() {
+    const { menuOpen, productIndex, solutionIndex, testimonialIndex } = this.state;
+    const active = this.products[productIndex];
+    const activeSolution = this.solutionsData[solutionIndex];
+    const maxT = this.testimonialsData.length - 2;
+    return {
+      menuOpen,
+      toggleMenu: () => this.setState((s) => ({ menuOpen: !s.menuOpen })),
+      // products
+      products: this.products,
+      activeProductTitle: active.title,
+      activeProductYear: active.year,
+      activeProductLocation: active.location,
+      productShift: "-" + productIndex * 100 + "%",
+      prevProduct: () => this.setState((s) => ({ productIndex: (s.productIndex - 1 + this.products.length) % this.products.length })),
+      nextProduct: () => this.setState((s) => ({ productIndex: (s.productIndex + 1) % this.products.length })),
+      // solutions
+      solutions: this.solutionsData.map((s, i) => ({
+        ...s,
+        opacity: i === solutionIndex ? "1" : "0.5",
+        select: () => this.setState({ solutionIndex: i }),
+      })),
+      activeSolutionImg: activeSolution.img,
+      activeSolutionTitle: activeSolution.title,
+      activeSolutionDesc: activeSolution.desc,
+      // testimonials
+      testimonials: this.testimonialsData,
+      testimonialShift: "-" + testimonialIndex * 50 + "%",
+      prevTestimonial: () => this.setState((s) => ({ testimonialIndex: Math.max(0, s.testimonialIndex - 1) })),
+      nextTestimonial: () => this.setState((s) => ({ testimonialIndex: Math.min(maxT, s.testimonialIndex + 1) })),
+    };
+  }
+}
+</script>
+</body>
+</html>
