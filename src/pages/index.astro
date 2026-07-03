@@ -1,32 +1,384 @@
 ---
-// Foundations
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-// Sections
-import Hero from "@/components/landing/Hero.astro";
-import Intro from "@/components/landing/Intro.astro";
-import ProductPreview from "@/components/landing/ProductPreview.astro";
-import Stats from "@/components/landing/Stats.astro";
-import SolutionsPreview from "@/components/landing/SolutionsPreview.astro";
-import Philosophy from "@/components/landing/Philosophy.astro";
-import Process from "@/components/landing/Process.astro";
-import Testimonials from "@/components/landing/Testimonials.astro";
-import BlogPreview from "@/components/landing/BlogPreview.astro";
-// Scripts
-import KeenSliderTestimonials from "@/components/foundations/scripts/KeenSliderTestimonials.astro";
-import KeenSliderProductCardScript from "@/components/foundations/scripts/KeenSliderProductCardScript.astro";
+import RobotCard from "@/components/redesign/RobotCard.astro";
+import CtaPanel from "@/components/redesign/CtaPanel.astro";
+import { ROBOT_ORDER } from "@/data/robots";
+import { HOME_ENVIRONMENTS } from "@/data/environments";
+// Solution + testimonial imagery
+import sol1 from "@/assets/images/solutions/1.png";
+import sol2 from "@/assets/images/solutions/2.png";
+import sol3 from "@/assets/images/solutions/3.png";
+import davidImg from "@/assets/images/testimonials/david.png";
+import michaelImg from "@/assets/images/testimonials/michael.png";
+
+const solImg = { 1: sol1, 2: sol2, 3: sol3 } as const;
+
+// Products in catalog order; home shows the first three.
+const products = await getCollection("products");
+const ordered = ROBOT_ORDER.map((slug) => products.find((p) => p.slug === slug)).filter(
+  (p): p is (typeof products)[number] => Boolean(p)
+);
+const homeRobots = ordered.slice(0, 3);
+
+// Latest three posts for the Insights strip.
+const posts = (await getCollection("posts")).sort(
+  (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+);
+const insights = posts.slice(0, 3);
+const fmtDate = (d: Date) =>
+  new Date(d).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "2-digit" });
+
+const heroStats = [
+  { value: "< 12 mo", label: "typical break-even" },
+  { value: "70 cups/hr", label: "peak certified output" },
+  { value: "24/7", label: "unattended service" },
+  { value: "51 s", label: "fastest serve time" },
+  { value: "2×", label: "revenue vs. legacy vending" },
+  { value: "5 models", label: "certified after testing" },
+];
+
+const container = "mx-auto max-w-[1240px] px-8";
+const kicker = "text-[13px] font-semibold uppercase tracking-[0.1em] text-brand";
+const h2 = "mt-3 text-[clamp(28px,2.6vw,40px)] font-bold tracking-[-0.025em] text-ink";
 ---
 
-<BaseLayout>
-  <Hero />
-  <Intro />
-  <ProductPreview />
-  <Stats />
-  <SolutionsPreview />
-  <Philosophy />
-  <Process />
-  <Testimonials />
-  <BlogPreview />
+<BaseLayout title="Artidyn Robotics — The Beverage Automation Partner">
+  <!-- ===== Hero ===== -->
+  <section class="border-b border-line bg-surface">
+    <div class={`${container} pb-20 pt-[88px]`}>
+      <div class="grid items-center gap-16 lg:grid-cols-2">
+        <div>
+          <p
+            class="inline-flex items-center gap-2 rounded-md bg-brand-tint px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-brand"
+          >
+            Certified beverage automation
+          </p>
+          <h1
+            class="mt-6 text-balance text-[clamp(38px,3.6vw,56px)] font-bold leading-[1.08] tracking-[-0.03em] text-ink"
+          >
+            Robotic baristas that earn their keep.
+          </h1>
+          <p class="mt-[22px] max-w-[480px] text-[17px] leading-relaxed text-body">
+            Artidyn tests and certifies robotic beverage systems, then helps you
+            deploy them — with verified throughput, transparent pricing, and
+            support from day one.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-3.5">
+            <a
+              href="/contact/"
+              class="rounded-lg bg-ink px-6 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-black"
+              >Get a recommendation</a
+            >
+            <a
+              href="/products/"
+              class="rounded-lg border border-input px-6 py-3.5 text-[15px] font-semibold text-ink transition-colors hover:border-ink"
+              >Compare the robots</a
+            >
+          </div>
+        </div>
+        <div class="relative">
+          <div
+            class="aspect-[1280/608] overflow-hidden rounded-xl border border-line bg-surface shadow-[0_24px_48px_-24px_rgba(23,32,29,0.25)]"
+          >
+            <video
+              src="/hero.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="auto"
+              class="size-full object-cover"></video>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="mt-14 grid grid-cols-2 gap-8 border-t border-line pt-7 sm:grid-cols-3 lg:grid-cols-6"
+      >
+        {
+          heroStats.map((s) => (
+            <div>
+              <p class="text-[22px] font-bold tracking-[-0.01em] tabular-nums text-ink">
+                {s.value}
+              </p>
+              <p class="mt-0.5 text-[13px] text-muted">{s.label}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Certification bar ===== -->
+  <section class="border-b border-line">
+    <div class={`${container} flex flex-col items-start justify-between gap-4 py-5 sm:flex-row sm:items-center`}>
+      <p class="text-[13px] text-muted">
+        Every machine vetted, tested, and backed by the Artidyn Seal of Quality.
+      </p>
+      <div class="flex flex-wrap items-center gap-4 sm:gap-6">
+        {
+          ["CE", "FCC", "ISO 9001"].map((c) => (
+            <span class="rounded-md border border-line px-2.5 py-1.5 font-mono text-xs text-body">
+              {c}
+            </span>
+          ))
+        }
+        <span class="rounded-md border border-brand px-2.5 py-1.5 font-mono text-xs text-brand"
+          >Artidyn Certified</span
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Robots ===== -->
+  <section id="robots">
+    <div class={`${container} py-24`}>
+      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end sm:gap-8">
+        <div>
+          <p class={kicker}>The certified range</p>
+          <h2 class={h2}>Compare all five machines on real numbers.</h2>
+        </div>
+        <a href="/products/" class="whitespace-nowrap text-sm font-semibold text-brand hover:text-brand-hover"
+          >Full catalog →</a
+        >
+      </div>
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {homeRobots.map((product) => <RobotCard product={product} variant="home" />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Solutions tabs ===== -->
+  <section id="solutions" class="border-y border-line bg-surface">
+    <div class={`${container} py-24`}>
+      <p class={kicker}>Solutions by environment</p>
+      <h2 class={`${h2} max-w-[640px]`}>Start from where the machine will live.</h2>
+
+      <div class="mt-9 flex flex-wrap gap-2">
+        {
+          HOME_ENVIRONMENTS.map((e, i) => (
+            <button
+              type="button"
+              data-env-tab={i}
+              class:list={[
+                "rounded-lg border px-[18px] py-2.5 text-sm font-semibold transition-colors",
+                i === 0
+                  ? "border-ink bg-ink text-white"
+                  : "border-input bg-white text-body",
+              ]}
+            >
+              {e.label}
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="mt-10">
+        {
+          HOME_ENVIRONMENTS.map((e, i) => (
+            <div
+              data-env-panel={i}
+              class:list={["grid items-center gap-12 lg:grid-cols-2", i !== 0 && "hidden"]}
+            >
+              <div>
+                <h3 class="text-2xl font-bold tracking-[-0.015em] text-ink">{e.title}</h3>
+                <p class="mt-3.5 text-base leading-relaxed text-body">{e.desc}</p>
+                <div class="mt-6 flex flex-col gap-2.5">
+                  {e.points.map((pt) => (
+                    <div class="flex items-baseline gap-2.5">
+                      <span class="text-sm font-bold text-brand">→</span>
+                      <span class="text-[14.5px] leading-snug text-body">{pt}</span>
+                    </div>
+                  ))}
+                </div>
+                <a
+                  href={e.ctaHref}
+                  class="mt-7 inline-block text-sm font-semibold text-brand hover:text-brand-hover"
+                >
+                  {e.cta} →
+                </a>
+              </div>
+              <div class="aspect-[4/3] overflow-hidden rounded-xl border border-line">
+                <Image
+                  src={solImg[e.imgKey]}
+                  alt={e.title}
+                  width={720}
+                  height={540}
+                  loading="eager"
+                  class="size-full object-cover"
+                />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Process ===== -->
+  <section id="process">
+    <div class={`${container} py-24`}>
+      <p class={kicker}>How it works</p>
+      <h2 class={h2}>From first call to first cup in three steps.</h2>
+      <div class="mt-12 grid gap-5 md:grid-cols-3">
+        {
+          [
+            {
+              n: "01",
+              t: "Discovery call",
+              b: "Free, 30 minutes. We map your locations, power, space, and traffic to define what the machine actually has to do.",
+            },
+            {
+              n: "02",
+              t: "Data-backed recommendation",
+              b: "One machine from the certified range, transparent pricing, and an ROI projection you can verify before signing anything.",
+            },
+            {
+              n: "03",
+              t: "Launch & support",
+              b: "Delivery, installation, training, and calibration for 24/7 reliability — with support that continues after launch.",
+            },
+          ].map((s) => (
+            <div class="rounded-xl border border-line p-7">
+              <span class="font-mono text-[13px] text-brand">{s.n}</span>
+              <h3 class="mt-3.5 text-lg font-bold text-ink">{s.t}</h3>
+              <p class="mt-2.5 text-[14.5px] leading-relaxed text-body">{s.b}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Operator results ===== -->
+  <section class="bg-ink">
+    <div class={`${container} py-24`}>
+      <p class="text-[13px] font-semibold uppercase tracking-[0.1em] text-brand-light">
+        Operator results
+      </p>
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+        {
+          [
+            {
+              quote:
+                "We replaced three aging vending machines with one robotic kiosk and doubled our revenue in the first quarter. It turns a low-margin corner into a destination.",
+              img: davidImg,
+              name: "David Park",
+              role: "Vending Operator · Seoul",
+              chip: "2× revenue, Q1",
+            },
+            {
+              quote:
+                "Speed is everything in our terminal. The high-volume unit handles the morning rush flawlessly. It never calls in sick and the quality never drifts.",
+              img: michaelImg,
+              name: "Michael Chen",
+              role: "Concessions Director · Singapore",
+              chip: "70 cups/hr peak",
+            },
+          ].map((t) => (
+            <div class="flex flex-col justify-between gap-8 rounded-xl border border-white/12 p-8">
+              <p class="text-[19px] leading-snug text-[#eef4f1]">{`"${t.quote}"`}</p>
+              <div class="flex items-center gap-3">
+                <Image
+                  src={t.img}
+                  alt={t.name}
+                  width={80}
+                  height={80}
+                  class="size-10 rounded-full object-cover"
+                />
+                <div>
+                  <p class="text-sm font-semibold text-white">{t.name}</p>
+                  <p class="text-[13px] text-faint">{t.role}</p>
+                </div>
+                <span class="ml-auto font-mono text-[13px] text-brand-light">{t.chip}</span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Insights ===== -->
+  <section id="journal" class="border-b border-line">
+    <div class={`${container} py-24`}>
+      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-baseline sm:gap-8">
+        <div>
+          <p class={kicker}>Industry insights</p>
+          <h2 class="mt-3 text-[clamp(24px,2.2vw,34px)] font-bold tracking-[-0.02em] text-ink">
+            Analysis and case studies, not sales copy.
+          </h2>
+        </div>
+        <a href="/blog/" class="whitespace-nowrap text-sm font-semibold text-brand hover:text-brand-hover"
+          >All articles →</a
+        >
+      </div>
+      <div class="mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          insights.map((post) => (
+            <a
+              href={`/blog/posts/${post.slug}/`}
+              class="group block overflow-hidden rounded-xl border border-line transition-colors hover:border-brand"
+            >
+              <div class="aspect-video overflow-hidden border-b border-line">
+                <Image
+                  src={post.data.image.url}
+                  alt={post.data.image.alt}
+                  width={640}
+                  height={360}
+                  class="size-full object-cover"
+                />
+              </div>
+              <div class="p-5">
+                <p class="font-mono text-xs text-muted">{fmtDate(post.data.pubDate)}</p>
+                <h3 class="mt-2.5 text-[16.5px] font-semibold leading-snug text-ink">
+                  {post.data.title}
+                </h3>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <CtaPanel
+    class="py-24"
+    title={`Get a recommendation for your site — even if it's "wait."`}
+    body="One 30-minute call: your space, power, and traffic in; a specific machine, price, and ROI projection out."
+    primaryLabel="Book the call"
+    showEmail={true}
+  />
 </BaseLayout>
-<!-- Scripts -->
-<KeenSliderTestimonials />
-<KeenSliderProductCardScript />
+
+<script is:inline>
+  (() => {
+    const tabs = Array.from(document.querySelectorAll("[data-env-tab]"));
+    const panels = Array.from(document.querySelectorAll("[data-env-panel]"));
+    function activate(i) {
+      tabs.forEach((t) => {
+        const active = t.dataset.envTab === String(i);
+        t.classList.toggle("border-ink", active);
+        t.classList.toggle("bg-ink", active);
+        t.classList.toggle("text-white", active);
+        t.classList.toggle("border-input", !active);
+        t.classList.toggle("bg-white", !active);
+        t.classList.toggle("text-body", !active);
+      });
+      panels.forEach((p) => p.classList.toggle("hidden", p.dataset.envPanel !== String(i)));
+    }
+    tabs.forEach((t) => t.addEventListener("click", () => activate(Number(t.dataset.envTab))));
+  })();
+
+  // Nudge autoplay on browsers that defer muted video playback.
+  window.addEventListener("load", () => {
+    document.querySelectorAll("video").forEach((v) => {
+      v.muted = true;
+      const p = v.play();
+      if (p && p.catch) p.catch(() => {});
+    });
+  });
+</script>

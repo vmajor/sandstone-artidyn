@@ -1,42 +1,25 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 const { frontmatter } = Astro.props;
-// Foundations
-import Text from "@/components/foundations/elements/Text.astro";
-import Wrapper from "@/components/foundations/containers/Wrapper.astro";
+const container = "mx-auto max-w-[1240px] px-8";
+const updated = new Date(frontmatter.pubDate).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+});
 ---
 
-<BaseLayout>
-  <section>
-    <Wrapper variant="standard" class="pt-32 pb-2">
-      <Wrapper variant="narrow">
-        <Text tag="h1" variant="textLG" class="text-base-900 text-balance">
-          {frontmatter.page}
-        </Text>
-        <Text tag="p" variant="bodyLG" class="text-base-600 text-balance mt-2">
-          Last updated on <span>
-            <time
-              datetime={new Date(frontmatter.pubDate).toLocaleDateString(
-                "en-US",
-                {
-                  year: "numeric",
-                  month: "long",
-                }
-              )}
-            >
-              {
-                new Date(frontmatter.pubDate).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                })
-              }</time
-            ></span
-          >
-        </Text>
-        <Wrapper variant="prose" class="mt-12 lg:mt-24">
-          <slot />
-        </Wrapper>
-      </Wrapper>
-    </Wrapper>
+<BaseLayout title={`${frontmatter.page} — Artidyn Robotics`}>
+  <section class="border-b border-line bg-surface">
+    <div class={`${container} max-w-[820px] pb-14 pt-[72px]`}>
+      <h1 class="text-[clamp(30px,2.8vw,44px)] font-bold tracking-[-0.03em] text-ink">
+        {frontmatter.page}
+      </h1>
+      <p class="mt-3 text-[14.5px] text-muted">Last updated on <time>{updated}</time></p>
+    </div>
   </section>
+  <article class={`${container} max-w-[820px] py-12`}>
+    <div class="prose prose-neutral max-w-none text-body prose-headings:tracking-tight prose-headings:text-ink prose-strong:text-ink prose-a:text-brand prose-a:no-underline hover:prose-a:text-brand-hover">
+      <slot />
+    </div>
+  </article>
 </BaseLayout>

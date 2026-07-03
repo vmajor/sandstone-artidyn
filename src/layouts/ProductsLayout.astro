@@ -1,293 +1,222 @@
 ---
 import { Image } from "astro:assets";
-
-// Assets
-// Foundations
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import Text from "@/components/foundations/elements/Text.astro";
-import Wrapper from "@/components/foundations/containers/Wrapper.astro";
+import CtaPanel from "@/components/redesign/CtaPanel.astro";
 import ProductStructuredData from "@/components/foundations/head/ProductStructuredData.astro";
+import {
+  ROBOT_CONTENT,
+  TAG_STYLES,
+  fmtDimensions,
+  fmtFootprint,
+  fmtWeight,
+  fmtPower,
+  fmtCupCapacity,
+  type RobotSlug,
+} from "@/data/robots";
 
 const { frontmatter, slug } = Astro.props;
+const c = ROBOT_CONTENT[slug as RobotSlug];
+const tag = TAG_STYLES[c.tag];
+const fm = frontmatter;
 
-// 1. ALL SPECS (For the main 2-column table)
-const allSpecs = [
-  { label: "Price", value: frontmatter.price ? `$${frontmatter.price.toLocaleString()}` : null },
-  { label: "Dimensions", value: frontmatter.dimensions },
-  { label: "Weight", value: frontmatter.weight },
-  { label: "Kinematics", value: frontmatter.kinematics },
-  { label: "Espresso Unit", value: frontmatter.espressoUnit },
-  { label: "Power", value: frontmatter.power },
-  { label: "Production Time", value: frontmatter.productionTime },
-  { label: "Throughput", value: frontmatter.throughput },
-  { label: "Cup Capacity", value: frontmatter.cupCapacity },
-  { label: "Recipes", value: frontmatter.recipes },
-  { label: "Syrups", value: frontmatter.syrups },
-  { label: "Toppings", value: frontmatter.toppings },
-  { label: "Ice Capacity", value: frontmatter.iceCapacity },
-  { label: "Milk Refrigeration", value: frontmatter.milkRefrigeration },
-  { label: "Frothing Temp", value: frontmatter.milkFrothingTemp },
-  { label: "Cleaning System", value: frontmatter.cleaningSystem },
-  { label: "Latte Art / Print", value: frontmatter.latteArt },
-  { label: "Display", value: frontmatter.display },
-  { label: "Payment Systems", value: frontmatter.paymentSystems?.join(", ") },
-  { label: "Fleet Management", value: frontmatter.fleetManagement },
-  { label: "Mobility", value: frontmatter.mobility },
-  { label: "Certifications", value: frontmatter.certifications?.join(", ") },
-  { label: "Enclosure", value: frontmatter.enclosureType },
-].filter(spec => spec.value);
+const payments = fm.paymentSystems?.join(" · ");
+const specsLeft = [
+  { label: "Dimensions", value: fmtDimensions(fm.dimensions) },
+  { label: "Footprint", value: fmtFootprint(fm.area) },
+  { label: "Weight", value: fmtWeight(fm.weight) },
+  { label: "Power", value: fmtPower(fm.power) },
+  { label: "Kinematics", value: fm.kinematics },
+  { label: "Espresso unit", value: fm.espressoUnit },
+  { label: "Enclosure", value: fm.enclosureType },
+  { label: "Mobility", value: fm.mobility },
+].filter((s) => s.value && s.value !== "—");
 
-// 2. QUICK SPECS (For the sticky sidebar)
-const quickSpecLabels = ["Price", "Dimensions", "Weight", "Power", "Throughput"];
-const quickSpecs = allSpecs.filter(spec => quickSpecLabels.includes(spec.label));
+const specsRight = [
+  { label: "Throughput", value: fm.throughput },
+  { label: "Production time", value: fm.productionTime },
+  { label: "Recipes", value: fm.recipes },
+  { label: "Syrups", value: fm.syrups },
+  { label: "Cup capacity", value: fmtCupCapacity(fm.cupCapacity) },
+  { label: "Ice capacity", value: fm.iceCapacity },
+  { label: "Cleaning", value: fm.cleaningSystem },
+  { label: "Display / payment", value: [fm.display, payments].filter(Boolean).join(" · ") },
+].filter((s) => s.value && s.value !== "—");
 
-// 3. AUTO-HYDRATE GALLERY
-const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/images/products/*/gallery/*.{jpeg,jpg,png,gif,webp,svg}");
-const videos = import.meta.glob("/images/products/*/gallery/*.{mp4,webm,ogg}", { query: '?url', import: 'default' });
-
-const galleryImages = await Promise.all(
-  Object.keys(images)
-    .filter((key) => key.includes(`/${slug}/`))
-    .map(async (key) => {
-      const image = await images[key]();
-      const filename = key.split("/").pop().split(".")[0];
-      return {
-        url: image.default,
-        alt: `Gallery image for ${frontmatter.title} - ${filename}`,
-        isVideo: false,
-        type: "image"
-      };
-    })
-);
-
-const galleryVideos = Object.keys(videos)
-  .filter((key) => key.includes(`/${slug}/`))
-  .map((key) => {
-    return {
-      url: key.replace("/public", ""),
-      alt: `Gallery video for ${frontmatter.title}`,
-      isVideo: true,
-      type: "video"
-    };
-  });
-
-const gallery = [...galleryImages, ...galleryVideos];
+const container = "mx-auto max-w-[1240px] px-8";
+const specRow =
+  "flex justify-between gap-6 border-b border-line-faint py-3.5 last:border-0";
 ---
 
-<BaseLayout title={frontmatter.title} description={frontmatter.description}>
-  <ProductStructuredData product={frontmatter} slug={slug} />
-  <section>
-    <Wrapper variant="wide" class="pt-4 pb-8">
-      <div class="relative rounded-3xl min-h-[500px] h-fit overflow-hidden bg-base-100">
-        {frontmatter.cover && (
+<BaseLayout title={fm.title} description={fm.description} navActive="robots">
+  <ProductStructuredData product={fm} slug={slug} />
+
+  <!-- ===== Product hero ===== -->
+  <section class="border-b border-line bg-surface">
+    <div class={`${container} pb-[72px] pt-12`}>
+      <div class="flex items-center gap-2 text-[13px] text-faint">
+        <a href="/products/" class="text-muted hover:text-brand">Robot catalog</a>
+        <span>/</span>
+        <span class="font-medium text-ink">{c.name}</span>
+      </div>
+      <div class="mt-10 grid items-center gap-16 lg:grid-cols-2">
+        <div
+          class="flex aspect-[4/3] items-center justify-center rounded-xl border border-line bg-white p-10"
+        >
           <Image
-            width={1440}
-            height={1080}
+            src={fm.cover.url}
+            alt={fm.cover.alt}
+            width={800}
+            height={600}
             loading="eager"
-            decoding="async"
-            alt={frontmatter.cover.alt}
-            src={frontmatter.cover.url}
-            class="object-contain max-h-[800px] w-auto mx-auto object-center p-8 lg:p-16"
+            class="max-h-full w-auto max-w-[80%] object-contain"
           />
-        )}
-
-        <div class="absolute bottom-4 left-4 right-4 max-w-sm flex flex-col">
-          <div class="p-8 bg-white/80 backdrop-blur-md rounded-2xl w-fit border border-base-200 shadow-xl">
-            <div class="mb-4">
-               <a href="/products/" class="text-xs font-bold uppercase tracking-widest text-base-400 hover:text-base-900 transition-colors">← Back to Catalog</a>
-            </div>
-            <div>
-              <Text
-                tag="h1"
-                variant="textLG"
-                class="text-base-900 tracking-tight 2xl:text-2xl text-balance font-medium"
-              >
-                {frontmatter.title}
-              </Text>
-              <div class="space-y-1 mt-8">
-                <Text tag="p" variant="textSM" class="text-base-600 font-bold uppercase tracking-wider">
-                  {frontmatter.category?.replace("-", " ")}
-                </Text>
-                <Text tag="p" variant="textSM" class="text-base-500">
-                  {frontmatter.location}
-                </Text>
-              </div>
-            </div>
+        </div>
+        <div>
+          <span
+            class="inline-block rounded-[5px] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.06em]"
+            style={`color:${tag.color};background:${tag.bg}`}>{c.tier}</span
+          >
+          <h1
+            class="mt-4 text-[clamp(34px,3.2vw,48px)] font-bold leading-[1.05] tracking-[-0.03em] text-ink"
+          >
+            {c.name}
+          </h1>
+          <p class="mt-1.5 text-base text-muted">{c.subtitle}</p>
+          <p class="mt-5 max-w-[460px] text-[15.5px] leading-relaxed text-body">{c.heroPara}</p>
+          <div class="mt-7 flex gap-7 border-t border-line pt-5.5">
+            {
+              c.heroStats.map((s) => (
+                <div>
+                  <p class="text-[20px] font-bold tabular-nums text-ink">{s.value}</p>
+                  <p class="mt-0.5 text-[12.5px] text-muted">{s.label}</p>
+                </div>
+              ))
+            }
+          </div>
+          <div class="mt-8 flex flex-wrap gap-3.5">
+            <a
+              href="/contact/"
+              class="rounded-lg bg-brand px-6 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-brand-hover"
+              >Ask about {c.name}</a
+            >
+            <a
+              href="/products/"
+              class="rounded-lg border border-input px-6 py-3 text-[15px] font-semibold text-ink transition-colors hover:border-ink"
+              >Compare models</a
+            >
           </div>
         </div>
       </div>
-    </Wrapper>
+    </div>
   </section>
 
+  <!-- ===== Built for ===== -->
   <section>
-    <Wrapper variant="standard" class="py-12">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        
-        {/* LEFT COLUMN: Main Content & Full Specs */}
-        <div class="lg:col-span-2 space-y-12">
-          
-          <div class="prose prose-base max-w-none text-base-500">
-            <slot />
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {frontmatter.features && (
-              <div>
-                <Text tag="h3" variant="textBase" class="font-bold mb-4 uppercase tracking-wider text-base-900">Key Features</Text>
-                <ul class="space-y-2">
-                  {frontmatter.features.map(feature => (
-                    <li class="flex items-center gap-2 text-base-500">
-                      <span class="size-1.5 rounded-full bg-base-300"></span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            {frontmatter.scenarios && (
-              <div>
-                <Text tag="h3" variant="textBase" class="font-bold mb-4 uppercase tracking-wider text-base-900">Best For</Text>
-                <ul class="space-y-2">
-                  {frontmatter.scenarios.map(scenario => (
-                    <li class="flex items-center gap-2 text-base-500">
-                      <span class="size-1.5 rounded-full bg-base-300"></span>
-                      {scenario}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-
-          {/* Specifications Table */}
-          <div class="p-8 rounded-2xl bg-base-50 border border-base-200 mt-12 shadow-sm">
-            <Text tag="h3" variant="textBase" class="font-bold mb-6 uppercase tracking-wider text-base-900">Full Specifications</Text>
-            <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-              {allSpecs.map(spec => (
-                <div class="flex flex-col border-b border-base-200 pb-2">
-                  <dt class="text-xs text-base-400 uppercase font-medium">{spec.label}</dt>
-                  <dd class="text-sm text-base-700 font-medium">{spec.value}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-
-          {/* Enhanced Product Gallery */}
-          {gallery.length > 0 && (
-            <div class="space-y-8 mt-12">
-              <Text tag="h3" variant="textBase" class="font-bold uppercase tracking-wider text-base-900">Product Gallery</Text>
-              <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {gallery.map((item, index) => (
-                  <>
-                  <button
-                    class="group relative aspect-square overflow-hidden rounded-2xl bg-base-50 border border-base-100 p-2 cursor-zoom-in"
-                    onclick={`document.getElementById('gallery-dialog-${index}').showModal()` }
-                  >
-                    {item.isVideo ? (
-                      <div class="relative h-full w-full">
-                        <video
-                          src={item.url}
-                          class="h-full w-full object-cover rounded-xl"
-                          muted
-                          playsinline
-                        />
-                        <div class="absolute inset-0 flex items-center justify-center">
-                          <div class="size-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white border border-white/30 group-hover:scale-110 transition-transform">
-                            <span class="ml-1">▶</span>
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <Image
-                        alt={item.alt || `Product image ${index + 1}`}
-                        src={item.url}
-                        width={400}
-                        height={400}
-                        loading="lazy"
-                        decoding="async"
-                        class="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
-                      />
-                    )}
-                    <div class="absolute inset-0 bg-base-900/0 group-hover:bg-base-900/5 transition-colors duration-300"></div>
-                  </button>
-
-                  <dialog id={`gallery-dialog-${index}`} class="m-auto backdrop:bg-base-900/80 backdrop:backdrop-blur-sm p-0 rounded-3xl border-none bg-transparent max-w-[95vw] max-h-[95vh] overflow-hidden"
-                  >
-                    <div class="relative bg-white p-4 md:p-8 rounded-3xl shadow-2xl flex flex-col items-center">
-                      <button
-                        onclick={`this.closest('dialog').close()` }
-                        class="absolute top-4 right-4 size-10 flex items-center justify-center rounded-full bg-base-100 text-base-900 hover:bg-base-200 transition-colors z-10"
-                        aria-label="Close"
-                      >
-                        ✕
-                      </button>
-                      <div class="max-h-[80vh] overflow-auto flex items-center justify-center">
-                        {item.isVideo ? (
-                          <video
-                            src={item.url}
-                            controls
-                            autoplay
-                            class="max-h-[75vh] w-auto object-contain rounded-xl"
-                          />
-                        ) : (
-                          <Image
-                            alt={item.alt || `Product image ${index + 1}`}
-                            src={item.url}
-                            width={1600}
-                            height={1200}
-                            class="max-h-[75vh] w-auto object-contain rounded-xl"
-                          />
-                        )}
-                      </div>
-                      {item.alt && (
-                        <Text tag="p" variant="textSM" class="mt-4 text-base-500 font-medium">
-                          {item.alt}
-                        </Text>
-                      )}
-                    </div>
-                    <form method="dialog" class="fixed inset-0 -z-10">
-                      <button class="size-full cursor-default"><span class="sr-only">Close</span></button>
-                    </form>
-                  </dialog>
-                  </>
-                ))}
-              </div>
+    <div class={`${container} py-20`}>
+      <h2 class="text-[clamp(24px,2.2vw,32px)] font-bold tracking-[-0.02em] text-ink">
+        {c.builtForTitle}
+      </h2>
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        {
+          c.highlights.map((h) => (
+            <div class="rounded-xl border border-line p-6.5">
+              <h3 class="text-[16.5px] font-bold text-ink">{h.title}</h3>
+              <p class="mt-2.5 text-[14.5px] leading-relaxed text-body">{h.body}</p>
             </div>
-          )}
-        </div>
-
-        {/* RIGHT COLUMN: Sticky At-a-Glance Sidebar */}
-        <div class="lg:sticky lg:top-24 h-fit">
-          <div class="p-8 rounded-2xl bg-base-50 border border-base-200 shadow-sm">
-            <Text tag="h3" variant="textBase" class="font-bold mb-6 uppercase tracking-wider text-base-900">At A Glance</Text>
-            <dl class="space-y-4">
-              {quickSpecs.map(spec => (
-                <div class="flex flex-col border-b border-base-200 pb-2 last:border-0">
-                  <dt class="text-xs text-base-400 uppercase font-medium">{spec.label}</dt>
-                  <dd class="text-sm text-base-700 font-medium">{spec.value}</dd>
-                </div>
-              ))}
-            </dl>
-            
-            <div class="mt-8 pt-6 border-t border-base-200">
-              <a href="/contact/" class="flex w-full items-center justify-center rounded-xl bg-base-900 px-4 py-3 text-sm font-semibold text-white hover:bg-base-800 transition-all shadow-sm uppercase tracking-widest text-[10px] active:scale-[0.98]">
-                 Request More Information
-              </a>
-            </div>
-          </div>
-        </div>
-        
+          ))
+        }
       </div>
-    </Wrapper>
+
+      <!-- Overview prose (SEO copy from the product's markdown body) -->
+      <div class="prose-overview mt-14 max-w-[720px] text-[15.5px] leading-relaxed text-body">
+        <slot />
+      </div>
+    </div>
   </section>
-<script is:inline>
-  document.querySelectorAll("dialog").forEach(dialog => {
-    dialog.addEventListener("close", () => {
-      const video = dialog.querySelector("video");
-      if (video) {
-        video.pause();
-      }
-    });
-  });
-</script>
+
+  <!-- ===== Full specifications ===== -->
+  <section class="border-t border-line bg-surface">
+    <div class={`${container} pb-24 pt-20`}>
+      <h2 class="text-[clamp(24px,2.2vw,32px)] font-bold tracking-[-0.02em] text-ink">
+        Full specifications
+      </h2>
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+        {
+          [specsLeft, specsRight].map((col) => (
+            <div class="rounded-xl border border-line bg-white px-6 py-2">
+              {col.map((s) => (
+                <div class={specRow}>
+                  <span class="text-[13.5px] text-muted">{s.label}</span>
+                  <span class="text-right font-mono text-[13px] text-ink">{s.value}</span>
+                </div>
+              ))}
+            </div>
+          ))
+        }
+      </div>
+      <p class="mt-5 text-[13px] text-faint">{c.specFootnote}</p>
+    </div>
+  </section>
+
+  <!-- ===== Fit guidance ===== -->
+  <section>
+    <div class={`${container} py-20`}>
+      <div class="grid gap-5 md:grid-cols-2">
+        <div class="rounded-xl border border-fit-border bg-fit-bg p-7">
+          <h3 class="text-base font-bold text-brand">{c.chooseTitle}</h3>
+          <div class="mt-4 flex flex-col gap-2.5">
+            {
+              c.choosePoints.map((pt) => (
+                <div class="flex items-baseline gap-2.5">
+                  <span class="font-bold text-brand">→</span>
+                  <span class="text-[14.5px] leading-snug text-body">{pt}</span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        <div class="rounded-xl border border-line p-7">
+          <h3 class="text-base font-bold text-ink">Consider another model if</h3>
+          <div class="mt-4 flex flex-col gap-2.5">
+            {
+              c.considerPoints.map((pt) => (
+                <div class="flex items-baseline gap-2.5">
+                  <span class="font-bold text-faint">→</span>
+                  <span class="text-[14.5px] leading-snug text-body" set:html={pt} />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <CtaPanel
+    class="pb-20 pt-4"
+    title={`See if ${c.name} pays for itself at your site.`}
+    body="We'll model your traffic against verified throughput and give you a break-even estimate before you commit."
+  />
 </BaseLayout>
+
+<style>
+  /* Calm prose for the product overview markdown body */
+  .prose-overview :global(p) {
+    margin: 0 0 1rem;
+  }
+  .prose-overview :global(p:last-child) {
+    margin-bottom: 0;
+  }
+  .prose-overview :global(strong) {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+  .prose-overview :global(a) {
+    color: var(--color-brand);
+    text-decoration: none;
+  }
+  .prose-overview :global(a:hover) {
+    color: var(--color-brand-hover);
+  }
+</style>

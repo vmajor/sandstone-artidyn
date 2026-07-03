@@ -1,0 +1,144 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import CtaPanel from "@/components/redesign/CtaPanel.astro";
+
+// Curated About-page copy per founder; image + LinkedIn come from the team collection.
+const bios: Record<string, { roleDisplay: string; bio: string }> = {
+  "sylvia-wu": {
+    roleDisplay: "Founder · Head of Strategy & Supply Chain",
+    bio: "Over a decade in e-commerce and high-tech sourcing, with 8 years focused on robotics and AI. Sylvia bridges advanced vision technology and global market demands, and runs the supply chain that lets us vet machines first-hand.",
+  },
+  "viktor-major": {
+    roleDisplay: "Co-founder · Lead Applied Scientist",
+    bio: "17 years as CEO of Velocite, with patented automated manufacturing processes and full-stack expertise from hardware and embedded systems to AI. Viktor runs the certification testing behind every number we publish.",
+  },
+};
+const order = ["sylvia-wu", "viktor-major"];
+const team = (await getCollection("team")).sort(
+  (a, b) => order.indexOf(a.slug) - order.indexOf(b.slug)
+);
+
+const values = [
+  {
+    n: "01",
+    t: "We vet",
+    b: "We source machines through a supply chain we know first-hand, and reject far more than we certify.",
+  },
+  {
+    n: "02",
+    t: "We test",
+    b: "Throughput, serve time, and reliability figures on this site come from our own certification testing, not brochures.",
+  },
+  {
+    n: "03",
+    t: "We stay",
+    b: "Installation, training, calibration, and support after launch. A machine that stops earning is our problem too.",
+  },
+];
+
+const container = "mx-auto max-w-[1240px] px-8";
+---
+
+<BaseLayout title="About — Artidyn Robotics" navActive="about">
+  <!-- ===== Header ===== -->
+  <section class="border-b border-line bg-surface">
+    <div class={`${container} pb-16 pt-[72px]`}>
+      <p class="text-[13px] font-semibold uppercase tracking-[0.1em] text-brand">About Artidyn</p>
+      <h1 class="mt-3.5 max-w-[760px] text-[clamp(34px,3.2vw,48px)] font-bold leading-[1.12] tracking-[-0.03em] text-ink">
+        We test the machines so you don't have to.
+      </h1>
+      <p class="mt-4.5 max-w-[640px] text-[16.5px] leading-relaxed text-body">
+        Artidyn Robotics is a two-person engineering and sourcing firm with a
+        simple position: the beverage-robotics market is full of unverified
+        claims, and buyers deserve tested numbers, transparent pricing, and a
+        partner who stays after installation.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== What we do ===== -->
+  <section>
+    <div class={`${container} py-20`}>
+      <div class="grid gap-5 md:grid-cols-3">
+        {
+          values.map((v) => (
+            <div class="rounded-xl border border-line p-7">
+              <span class="font-mono text-[13px] text-brand">{v.n}</span>
+              <h3 class="mt-3.5 text-[17px] font-bold text-ink">{v.t}</h3>
+              <p class="mt-2.5 text-[14.5px] leading-relaxed text-body">{v.b}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Team ===== -->
+  <section id="team" class="border-t border-line bg-surface">
+    <div class={`${container} pb-24 pt-20`}>
+      <h2 class="text-[clamp(24px,2.2vw,32px)] font-bold tracking-[-0.02em] text-ink">The team</h2>
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+        {
+          team.map((member) => {
+            const meta = bios[member.slug];
+            const linkedin = member.data.socials?.linkedin;
+            return (
+              <div class="flex items-start gap-6 rounded-xl border border-line bg-white p-8">
+                <Image
+                  src={member.data.image.url}
+                  alt={member.data.image.alt}
+                  width={192}
+                  height={192}
+                  class="size-24 shrink-0 rounded-xl object-cover"
+                />
+                <div>
+                  <h3 class="text-[19px] font-bold text-ink">{member.data.name}</h3>
+                  <p class="mt-1 text-[13.5px] font-semibold text-brand">
+                    {meta?.roleDisplay ?? member.data.role}
+                  </p>
+                  <p class="mt-3.5 text-sm leading-relaxed text-body">
+                    {meta?.bio ?? member.data.bio}
+                  </p>
+                  {linkedin && (
+                    <a
+                      href={linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="mt-3.5 inline-block text-[13.5px] font-semibold text-brand hover:text-brand-hover"
+                    >
+                      LinkedIn →
+                    </a>
+                  )}
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+
+      <div class="mt-12 flex flex-wrap gap-12 border-t border-line pt-8">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.1em] text-faint">Registered</p>
+          <p class="mt-1.5 text-[14.5px] text-body">Sheridan, Wyoming, USA</p>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.1em] text-faint">Engineering &amp; sourcing</p>
+          <p class="mt-1.5 text-[14.5px] text-body">Taipei, Taiwan</p>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.1em] text-faint">Contact</p>
+          <p class="mt-1.5 text-[14.5px] text-body">hi@artidyn.ai</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <CtaPanel
+    class="py-20"
+    title="Talk to the people who tested the machines."
+    body="No sales team — your call is with Sylvia or Viktor."
+  />
+</BaseLayout>

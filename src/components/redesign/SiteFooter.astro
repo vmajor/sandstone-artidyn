@@ -1,0 +1,76 @@
+---
+// Tech Clarity — 4-column footer with legal row.
+const year = new Date().getFullYear();
+const productLinks = [
+  { href: "/products/", label: "Robot catalog" },
+  { href: "/solutions/", label: "Solutions" },
+  { href: "/#process", label: "Process" },
+];
+const companyLinks = [
+  { href: "/about/", label: "About" },
+  { href: "/about/#team", label: "Team" },
+  { href: "/blog/", label: "Insights" },
+];
+const colHeading = "mb-3 text-xs font-semibold uppercase tracking-[0.1em] text-faint";
+const colLink = "text-[13.5px] text-body transition-colors hover:text-brand";
+---
+
+<footer class="border-t border-line bg-white">
+  <div class="mx-auto max-w-[1240px] px-8 pb-10 pt-14">
+    <div class="grid grid-cols-2 gap-10 md:grid-cols-4 lg:grid-cols-[2fr_1fr_1fr_1fr] lg:gap-12">
+      <div class="col-span-2 md:col-span-4 lg:col-span-1">
+        <img
+          src="/artidyn_corporate_green_logo.svg"
+          alt="Artidyn Robotics"
+          width="1854"
+          height="1011"
+          class="h-auto w-32"
+        />
+        <p class="mt-4 max-w-[280px] text-[13.5px] leading-relaxed text-muted">
+          The beverage automation partner. Certified robotic baristas for
+          operators, hotels, airports, and offices.
+        </p>
+      </div>
+
+      <div>
+        <p class={colHeading}>Product</p>
+        <div class="flex flex-col gap-2.5">
+          {productLinks.map((l) => <a href={l.href} class={colLink}>{l.label}</a>)}
+        </div>
+      </div>
+
+      <div>
+        <p class={colHeading}>Company</p>
+        <div class="flex flex-col gap-2.5">
+          {companyLinks.map((l) => <a href={l.href} class={colLink}>{l.label}</a>)}
+        </div>
+      </div>
+
+      <div>
+        <p class={colHeading}>Contact</p>
+        <div class="flex flex-col gap-2.5">
+          <a href="mailto:hi@artidyn.ai" class={colLink}>hi@artidyn.ai</a>
+          <a
+            href="https://www.linkedin.com/company/artidyn-robotics-llc/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class={colLink}>LinkedIn</a
+          >
+          <span class="text-[13.5px] text-faint">Sheridan, WY · Taipei</span>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="mt-12 flex flex-col gap-4 border-t border-line pt-5 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p class="text-[12.5px] text-faint">
+        © {year} Artidyn Robotics LLC, Sheridan, Wyoming USA
+      </p>
+      <div class="flex gap-5">
+        <a href="/legal/privacy/" class="text-[12.5px] text-faint transition-colors hover:text-ink">Privacy policy</a>
+        <a href="/legal/terms/" class="text-[12.5px] text-faint transition-colors hover:text-ink">Terms of service</a>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,248 +1,155 @@
 ---
-import Logo from "@/components/assets/Logo.astro";
-// Foundations
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import Text from "@/components/foundations/elements/Text.astro";
-import Wrapper from "@/components/foundations/containers/Wrapper.astro";
-import Footer from "@/components/global/Footer.astro";
+
+const expectations = [
+  { n: "01", t: "We reply within one business day." },
+  { n: "02", t: "Your call is with a founder, not a sales team." },
+  { n: "03", t: "The recommendation is free, whether or not you buy." },
+];
+const container = "mx-auto max-w-[1240px] px-8";
+const inputCls =
+  "w-full rounded-lg border border-input bg-white px-3.5 py-2.5 text-[14.5px] text-ink focus:border-brand focus:outline-none";
+const labelCls = "mb-1.5 block text-[13px] font-semibold text-body";
 ---
 
-<BaseLayout hideFooter={Footer}>
-  <section class="overflow-hidden">
-    <Wrapper variant="wide" class="py-4">
-      <div class="relative rounded-3xl h-[calc(100vh-2rem)] overflow-hidden">
-        <video
-          autoplay
-          muted
-          loop
-          playsinline
-          class="object-cover size-full absolute inset-0 object-center"
-        >
-          <source src="/contact.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-
-        <div class="relative lg:max-w-xl lg:ml-auto flex flex-col h-full">
-          <div
-            class="p-8 bg-white m-4 rounded-2xl h-full overflow-y-auto"
-          >
-            <div>
-              <a href="/">
-                <Logo
-                  class="text-base tracking-tighter uppercase focus:outline-none text-base-900 font-semibold"
-                />
-              </a>
-              <Text
-                tag="h1"
-                variant="textLG"
-                class="text-base-600 tracking-tight 2xl:text-2xl text-balance mt-8 font-medium"
-              >
-                Schedule a Consultation
-              </Text>
-              <Text tag="p" variant="textSM" class="text-base-500 mt-2">
-                Let's discuss how Artidyn's beverage robots can uncap your business growth.
-              </Text>
-
-              <form
-                id="contact-form"
-                name="contact"
-                method="POST"
-                data-netlify="true"
-                class="mt-8 space-y-4"
-              >
-                <input type="hidden" name="form-name" value="contact" />
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label for="name" class="block text-xs font-bold text-base-900 uppercase tracking-wider mb-1">Full Name</label>
-                    <input type="text" name="name" id="name" required class="w-full bg-base-50 border border-base-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-base-900 transition-all" placeholder="John Doe" />
-                  </div>
-                  <div>
-                    <label for="company" class="block text-xs font-bold text-base-900 uppercase tracking-wider mb-1">Company</label>
-                    <input type="text" name="company" id="company" required class="w-full bg-base-50 border border-base-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-base-900 transition-all" placeholder="Artidyn Corp" />
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label for="email" class="block text-xs font-bold text-base-900 uppercase tracking-wider mb-1">Business Email</label>
-                    <input type="email" name="email" id="email" required class="w-full bg-base-50 border border-base-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-base-900 transition-all" placeholder="john@example.com" />
-                  </div>
-                  <div>
-                    <label for="industry" class="block text-xs font-bold text-base-900 uppercase tracking-wider mb-1">Industry</label>
-                    <select name="industry" id="industry" required class="w-full bg-base-50 border border-base-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-base-900 transition-all appearance-none">
-                      <option value="">Select Industry</option>
-                      <option value="hospitality">Hospitality</option>
-                      <option value="retail">Retail</option>
-                      <option value="corporate">Corporate Office</option>
-                      <option value="healthcare">Healthcare</option>
-                      <option value="education">Education</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label for="inquiry-type" class="block text-xs font-bold text-base-900 uppercase tracking-wider mb-1">Inquiry Type</label>
-                    <select name="inquiry-type" id="inquiry-type" required class="w-full bg-base-50 border border-base-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-base-900 transition-all appearance-none">
-                      <option value="">Select Type</option>
-                      <option value="demo">Request a Demo</option>
-                      <option value="wholesale">Wholesale & RFP Inquiry</option>
-                      <option value="lease">Leasing & ROI Analysis</option>
-                      <option value="technical">Technical Specifications</option>
-                      <option value="other">General Inquiry</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label for="timeline" class="block text-xs font-bold text-base-900 uppercase tracking-wider mb-1">Deployment Timeline</label>
-                    <select name="timeline" id="timeline" required class="w-full bg-base-50 border border-base-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-base-900 transition-all appearance-none">
-                      <option value="">Select Timeline</option>
-                      <option value="immediate">Immediate (1-3 months)</option>
-                      <option value="planning">Planning (3-6 months)</option>
-                      <option value="future">Future exploration (6+ months)</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label for="message" class="block text-xs font-bold text-base-900 uppercase tracking-wider mb-1">Message</label>
-                  <textarea name="message" id="message" rows="4" required class="w-full bg-base-50 border border-base-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-base-900 transition-all resize-none" placeholder="How can we help you?"></textarea>
-                </div>
-
-                <button type="submit" id="submit-button" class="w-full bg-base-900 text-white font-bold uppercase tracking-widest text-xs py-4 rounded-xl hover:bg-base-800 transition-all shadow-lg active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed">
-                  <span id="button-text">Send Inquiry</span>
-                  <span id="button-loader" class="hidden">Sending...</span>
-                </button>
-              </form>
-
-              <div class="mt-12 pt-8 border-t border-base-100 flex flex-col sm:flex-row justify-between items-start gap-8">
-                <div>
-                   <Text tag="p" variant="textXS" class="text-base-900 font-bold uppercase tracking-wider">Connect</Text>
-                   <a href="https://www.linkedin.com/company/artidyn-robotics-llc/" target="_blank" rel="noopener noreferrer" class="text-base-500 hover:text-base-900 block text-xs mt-2 transition-colors">
-                     LinkedIn
-                   </a>
-                </div>
-                <div>
-                   <Text tag="p" variant="textXS" class="text-base-900 font-bold uppercase tracking-wider">Email</Text>
-                   <a href="mailto:hi@artidyn.ai" class="text-base-500 hover:text-base-900 block text-xs mt-2 transition-colors">
-                     hi@artidyn.ai
-                   </a>
-                </div>
+<BaseLayout title="Contact — Artidyn Robotics" description="Tell us about your site and we'll recommend one machine, with the reasoning. Reply within one business day, straight from a founder.">
+  <section class="border-b border-line bg-surface">
+    <div class={`${container} grid items-start gap-16 pb-24 pt-[72px] lg:grid-cols-[1fr_1.2fr] lg:gap-20`}>
+      <!-- Left: pitch -->
+      <div>
+        <p class="text-[13px] font-semibold uppercase tracking-[0.1em] text-brand">Get a recommendation</p>
+        <h1 class="mt-3.5 text-[clamp(32px,3vw,44px)] font-bold leading-[1.12] tracking-[-0.03em] text-ink">
+          Tell us about your site.
+        </h1>
+        <p class="mt-4.5 text-base leading-relaxed text-body">
+          One 30-minute call: your space, power, and traffic in — a specific
+          machine, price, and ROI projection out. If a robot doesn't make sense
+          for your site, we'll say so.
+        </p>
+        <div class="mt-10 flex flex-col gap-6">
+          {
+            expectations.map((e) => (
+              <div class="flex items-baseline gap-3.5">
+                <span class="font-mono text-[13px] text-brand">{e.n}</span>
+                <p class="text-[14.5px] leading-relaxed text-body">{e.t}</p>
               </div>
-            </div>
-          </div>
+            ))
+          }
+        </div>
+        <div class="mt-12 border-t border-line pt-7">
+          <p class="text-xs font-semibold uppercase tracking-[0.1em] text-faint">Or write directly</p>
+          <a href="mailto:hi@artidyn.ai" class="mt-2 inline-block text-base font-semibold text-brand hover:text-brand-hover">
+            hi@artidyn.ai
+          </a>
+          <p class="mt-4 text-[13.5px] text-faint">Artidyn Robotics LLC · Sheridan, WY · Taipei, Taiwan</p>
         </div>
       </div>
-    </Wrapper>
-  </section>
 
-  <dialog id="status-modal" class="m-auto backdrop:bg-base-900/50 backdrop:backdrop-blur-sm rounded-2xl p-0 shadow-2xl border-0 overflow-hidden max-w-sm w-full">
-    <div class="p-8 text-center">
-      <div id="modal-icon-success" class="hidden mx-auto size-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-8">
-          <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-        </svg>
+      <!-- Right: form card -->
+      <div class="rounded-2xl border border-line bg-white p-8 sm:p-10">
+        <!-- Success state -->
+        <div id="contact-success" class="hidden py-12 text-center">
+          <p class="text-4xl text-brand">✓</p>
+          <h2 class="mt-4 text-[22px] font-bold text-ink">Thanks — we've got it.</h2>
+          <p class="mt-2.5 text-[15px] leading-relaxed text-body">
+            We'll reply within one business day to set up the call.
+          </p>
+        </div>
+
+        <!-- Form -->
+        <form
+          id="contact-form"
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          class="flex flex-col gap-5"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <p class="hidden">
+            <label>Don't fill this out: <input name="bot-field" /></label>
+          </p>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label for="c-name" class={labelCls}>Name</label>
+              <input id="c-name" name="name" type="text" required placeholder="Your name" class={inputCls} />
+            </div>
+            <div>
+              <label for="c-email" class={labelCls}>Work email</label>
+              <input id="c-email" name="email" type="email" required placeholder="you@company.com" class={inputCls} />
+            </div>
+          </div>
+
+          <div>
+            <label for="c-env" class={labelCls}>Where would the machine live?</label>
+            <select id="c-env" name="environment" class={inputCls}>
+              <option>Vending / kiosk location</option>
+              <option>Hotel or resort</option>
+              <option>Airport or transit hub</option>
+              <option>Corporate office</option>
+              <option>Somewhere else</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="c-msg" class={labelCls}>About the site</label>
+            <textarea
+              id="c-msg"
+              name="message"
+              rows="4"
+              placeholder="Location, expected traffic, space available, timeline…"
+              class={`${inputCls} resize-y`}></textarea>
+          </div>
+
+          <p id="contact-error" class="hidden text-[13px] text-red-600">
+            Something went wrong. Please try again or email hi@artidyn.ai.
+          </p>
+
+          <button
+            type="submit"
+            id="contact-submit"
+            class="rounded-lg bg-brand px-7 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-brand-hover disabled:opacity-60"
+          >
+            Request the call
+          </button>
+          <p class="text-[12.5px] text-faint">
+            No newsletter, no drip campaign — just a reply about your site.
+          </p>
+        </form>
       </div>
-      <div id="modal-icon-error" class="hidden mx-auto size-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-4">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-8">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-        </svg>
-      </div>
-
-      <h3 id="modal-title" class="text-xl font-bold text-base-900 mb-2">Message Sent</h3>
-      <p id="modal-message" class="text-base-500 text-sm mb-6">Thank you for reaching out. We'll get back to you shortly.</p>
-
-      <button id="dismiss-button" class="w-full bg-base-900 text-white font-bold uppercase tracking-widest text-xs py-3 rounded-xl hover:bg-base-800 transition-all">
-        Dismiss
-      </button>
     </div>
-  </dialog>
+  </section>
 </BaseLayout>
 
 <script is:inline>
-  const form = document.getElementById('contact-form');
-  const modal = document.getElementById('status-modal');
-  const modalTitle = document.getElementById('modal-title');
-  const modalMessage = document.getElementById('modal-message');
-  const modalIconSuccess = document.getElementById('modal-icon-success');
-  const modalIconError = document.getElementById('modal-icon-error');
-  const submitButton = document.getElementById('submit-button');
-  const buttonText = document.getElementById('button-text');
-  const buttonLoader = document.getElementById('button-loader');
+  const form = document.getElementById("contact-form");
+  const success = document.getElementById("contact-success");
+  const errorEl = document.getElementById("contact-error");
+  const submit = document.getElementById("contact-submit");
 
-  let autoCloseTimeout;
-
-  const showModal = (isSuccess) => {
-    modalIconSuccess.classList.toggle('hidden', !isSuccess);
-    modalIconError.classList.toggle('hidden', isSuccess);
-
-    if (isSuccess) {
-      modalTitle.innerText = "Inquiry Received";
-      modalMessage.innerText = "Thank you for reaching out. An Artidyn specialist will contact you shortly.";
-      form.reset();
-    } else {
-      modalTitle.innerText = "Submission Failed";
-      modalMessage.innerText = "We encountered an error. Please try again or email us directly at hi@artidyn.ai.";
-    }
-
-    modal.showModal();
-
-    // Auto-close after 5 seconds and redirect on success
-    clearTimeout(autoCloseTimeout);
-    autoCloseTimeout = setTimeout(() => {
-      modal.close();
-      if (isSuccess) window.location.href = "/";
-    }, 5000);
-  };
-
-  form.addEventListener('submit', async (e) => {
+  form?.addEventListener("submit", async (e) => {
     e.preventDefault();
-
-    // UI Loading State
-    submitButton.disabled = true;
-    buttonText.classList.add('hidden');
-    buttonLoader.classList.remove('hidden');
-
-    const formData = new FormData(form);
-
+    errorEl?.classList.add("hidden");
+    if (submit) {
+      submit.disabled = true;
+      submit.textContent = "Sending…";
+    }
     try {
-      const response = await fetch("/contact/", {
+      const res = await fetch("/contact/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString(),
+        body: new URLSearchParams(new FormData(form)).toString(),
       });
-
-      if (response.ok) {
-        showModal(true);
-      } else {
-        showModal(false);
+      if (!res.ok) throw new Error("Bad response");
+      form.classList.add("hidden");
+      success?.classList.remove("hidden");
+    } catch (err) {
+      errorEl?.classList.remove("hidden");
+      if (submit) {
+        submit.disabled = false;
+        submit.textContent = "Request the call";
       }
-    } catch (error) {
-      showModal(false);
-    } finally {
-      submitButton.disabled = false;
-      buttonText.classList.remove('hidden');
-      buttonLoader.classList.add('hidden');
-    }
-  });
-
-  // Dismiss button and Success handling
-  document.getElementById('dismiss-button').addEventListener('click', () => {
-    const isSuccess = !modalIconSuccess.classList.contains('hidden');
-    modal.close();
-    if (isSuccess) window.location.href = "/";
-  });
-
-  // Close modal when clicking backdrop
-  modal.addEventListener('click', (e) => {
-    const dialogDimensions = modal.getBoundingClientRect();
-    if (
-      e.clientX < dialogDimensions.left ||
-      e.clientX > dialogDimensions.right ||
-      e.clientY < dialogDimensions.top ||
-      e.clientY > dialogDimensions.bottom
-    ) {
-      modal.close();
     }
   });
 </script>

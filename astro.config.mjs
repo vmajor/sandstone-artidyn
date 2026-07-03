@@ -21,6 +21,11 @@ export default defineConfig({
   },
   site: "https://www.artidyn.ai",
   trailingSlash: "always",
+  redirects: {
+    "/studio": "/about/",
+    "/team": "/about/#team",
+    "/process": "/#process",
+  },
   integrations: [
     tailwindcss(), 
     sitemap(), 

@@ -1,0 +1,90 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import {
+  ROBOT_CONTENT,
+  TAG_STYLES,
+  fmtPrice,
+  fmtServeTime,
+  fmtFootprint,
+  type RobotSlug,
+} from "@/data/robots";
+
+interface Props {
+  product: CollectionEntry<"products">;
+  variant?: "home" | "catalog";
+  showPrice?: boolean;
+}
+const { product, variant = "home", showPrice = true } = Astro.props;
+const slug = product.slug as RobotSlug;
+const c = ROBOT_CONTENT[slug];
+const tag = TAG_STYLES[c.tag];
+const fm = product.data;
+
+const rows =
+  variant === "catalog"
+    ? [
+        { label: "Throughput", value: fm.throughput ?? "—" },
+        { label: "Serve time", value: fmtServeTime(fm.productionTime) },
+        { label: "Footprint", value: fmtFootprint(fm.area) },
+      ]
+    : [
+        { label: "Throughput", value: fm.throughput ?? "—" },
+        { label: "Serve time", value: fmtServeTime(fm.productionTime) },
+        { label: "Enclosure", value: c.tableEnclosure },
+      ];
+---
+
+<a
+  href={`/products/${slug}/`}
+  class="group block overflow-hidden rounded-xl border border-line bg-white transition-colors hover:border-brand"
+>
+  <div
+    class="relative flex aspect-[16/10] items-center justify-center border-b border-line bg-surface p-5"
+  >
+    <Image
+      src={fm.cover.url}
+      alt={fm.cover.alt}
+      width={600}
+      height={375}
+      class="max-h-full w-auto max-w-[78%] object-contain"
+    />
+    <span
+      class="absolute left-3.5 top-3.5 rounded-[5px] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.06em]"
+      style={`color:${tag.color};background:${tag.bg}`}>{c.tier}</span
+    >
+  </div>
+  <div class="p-5">
+    <div class="flex items-baseline justify-between gap-3">
+      <h3 class="text-[19px] font-bold tracking-[-0.01em] text-ink">{c.name}</h3>
+      {
+        showPrice && (
+          <span class="font-mono text-sm text-body">{fmtPrice(fm.price)}</span>
+        )
+      }
+    </div>
+    <p class="mt-1.5 text-[13.5px] leading-snug text-muted">{c.blurb}</p>
+    <div class="mt-4 border-t border-line-faint">
+      {
+        rows.map((r, i) => (
+          <div
+            class:list={[
+              "flex justify-between py-2",
+              i < rows.length - 1 && "border-b border-line-faint",
+            ]}
+          >
+            <span class="text-[12.5px] text-muted">{r.label}</span>
+            <span class="font-mono text-[12.5px] text-ink">{r.value}</span>
+          </div>
+        ))
+      }
+    </div>
+    {
+      variant === "catalog" && (
+        <span class="mt-3.5 inline-block text-[13.5px] font-semibold text-brand">
+          View details →
+        </span>
+      )
+    }
+  </div>
+</a>

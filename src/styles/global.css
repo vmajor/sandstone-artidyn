@@ -5,6 +5,26 @@
 @theme {
   /* Typography */
   --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* ===== Tech Clarity redesign tokens ===== */
+  --color-ink: #17201d;        /* headings, dark sections, primary dark button */
+  --color-body: #3d4a45;       /* paragraphs, nav links */
+  --color-muted: #6b7a74;      /* secondary text, captions */
+  --color-faint: #8fa39b;      /* footer meta, labels, breadcrumbs */
+  --color-brand: #0b7a6a;      /* accent: links, kickers, CTA, active nav */
+  --color-brand-hover: #096355;
+  --color-brand-tint: #e9f4f1; /* tag/badge backgrounds */
+  --color-brand-light: #5fbdaa;/* accent text on ink sections */
+  --color-surface: #fafbfa;    /* alternating sections, image wells */
+  --color-line: #e6e9e7;       /* all 1px borders */
+  --color-line-faint: #eef1ef; /* table row separators */
+  --color-input: #ccd4d0;      /* form fields, secondary button borders */
+  --color-tag-amber: #7a5a0b;
+  --color-tag-amber-bg: #f6f0e2;
+  --color-tag-purple: #5b3d7a;
+  --color-tag-purple-bg: #f0eaf6;
+  --color-fit-border: #d9e8e4;
+  --color-fit-bg: #f2f9f7;
   /* Colors */
   /* Base */
   --color-base-50: oklch(0.985 0 0);
@@ -77,6 +97,10 @@
 }
 .pause-on-hover:hover {
   animation-play-state: paused;
+}
+/* Tech Clarity: mono numerals get tabular figures + slashed zero */
+.font-mono {
+  font-feature-settings: "tnum" 1, "zero" 1;
 }
 .keen-slider__slide {
   overflow: visible;
