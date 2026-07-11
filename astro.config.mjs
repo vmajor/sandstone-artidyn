@@ -27,8 +27,11 @@ export default defineConfig({
     "/process": "/#process",
   },
   integrations: [
-    tailwindcss(), 
-    sitemap(), 
+    tailwindcss(),
+    sitemap({
+      // Keep the internal design-system styleguide (/system/*) out of the sitemap.
+      filter: (page) => !page.includes("/system/"),
+    }),
     mdx(),
     webmanifest({
       name: "Artidyn Robotics LLC",
