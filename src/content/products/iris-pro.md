@@ -1,5 +1,6 @@
 ---
-title: "Iris Pro | Compact Robot Barista for Tech Offices"
+title: "Iris Pro — Compact Robot Barista for Offices and Narrow Alcoves"
+description: "Iris Pro is a compact robot barista with a 1.89 m² footprint, the narrowest kiosk in the Artidyn range. 70 cups an hour, 24 presets, app-managed. $29,500."
 pubDate: 2026-03-23
 price: 29500
 dimensions: "1300x1450x2020 mm"

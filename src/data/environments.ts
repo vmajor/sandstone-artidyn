@@ -78,6 +78,8 @@ export const HOME_ENVIRONMENTS: HomeEnvironment[] = [
 export interface SolutionRow {
   num: string;
   title: string;
+  /** Detail page for this environment. */
+  href: string;
   desc: string;
   points: string[];
   robot: string;
@@ -90,6 +92,7 @@ export const SOLUTIONS: SolutionRow[] = [
   {
     num: "01",
     title: "Vending & kiosk operators",
+    href: "/solutions/vending-operators/",
     desc: "Replace aging vending banks with a robotic kiosk that serves specialty coffee at margin, around the clock. Operators in our case studies doubled quarterly revenue against legacy machines.",
     points: [
       "2× quarterly revenue vs. aging vending machines in case studies",
@@ -104,6 +107,7 @@ export const SOLUTIONS: SolutionRow[] = [
   {
     num: "02",
     title: "Hotels & resorts",
+    href: "/solutions/hotels/",
     desc: "Premium coffee for guests at any hour — including the overnight window no cafe can staff profitably. Craft machines with visible pours turn the lobby corner into an amenity.",
     points: [
       "24/7 service without overnight staffing cost",
@@ -118,6 +122,7 @@ export const SOLUTIONS: SolutionRow[] = [
   {
     num: "03",
     title: "Airports & transit hubs",
+    href: "/solutions/airports/",
     desc: "Verified 70 cups per hour through the morning rush, with consistency that doesn't drift between batches. Fully enclosed units rated for continuous public operation.",
     points: [
       "51-second serve time, certified in our testing",
@@ -132,6 +137,7 @@ export const SOLUTIONS: SolutionRow[] = [
   {
     num: "04",
     title: "Corporate offices",
+    href: "/solutions/offices/",
     desc: "A compact bar that fits a pantry corner, cuts catering spend, and gives people a reason to come in. The narrowest machine in the range fits alcoves other kiosks can't.",
     points: [
       "1.89 m² footprint fits standard vending spaces",

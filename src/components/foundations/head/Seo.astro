@@ -1,9 +1,10 @@
 ---
 import { AstroSeo } from "@astrolib/seo";
 
-// Define default metadata based on your Master Narrative & Storyboard
-const defaultTitle = "Artidyn Robotics | The Beverage Automation Partner";
-const defaultDescription = "Your growth is capped by staffing. We uncap it. Artidyn Robotics provides certified beverage automation solutions to unlock new revenue and premium experiences.";
+// Fallback metadata. Every indexable page should pass its own title AND
+// description — duplicate descriptions across the site suppress rankings.
+const defaultTitle = "Robot Barista Systems & Robotic Coffee Kiosks — Artidyn Robotics";
+const defaultDescription = "Artidyn Robotics tests and deploys commercial robot baristas — robotic coffee kiosks and automated espresso bars for hotels, airports, offices, and vending operators.";
 const defaultImage = "https://www.artidyn.ai/og-image.jpg"; // Absolute URL is safer for social sharing
 
 // Allow individual pages to override these

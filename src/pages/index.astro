@@ -44,7 +44,10 @@ const kicker = "text-[13px] font-semibold uppercase tracking-[0.1em] text-brand"
 const h2 = "mt-3 text-[clamp(28px,2.6vw,40px)] font-bold tracking-[-0.025em] text-ink";
 ---
 
-<BaseLayout title="Artidyn Robotics — The Beverage Automation Partner">
+<BaseLayout
+  title="Robot Baristas for Hotels, Airports & Offices — Artidyn Robotics"
+  description="Certified robot baristas and robotic coffee kiosks, tested by us before you buy. Five machines from $27,000, 40–70 cups an hour. Transparent specs, real throughput."
+>
   <!-- ===== Hero ===== -->
   <section class="border-b border-line bg-surface">
     <div class={`${container} pb-20 pt-[88px]`}>
@@ -61,9 +64,11 @@ const h2 = "mt-3 text-[clamp(28px,2.6vw,40px)] font-bold tracking-[-0.025em] tex
             Robotic baristas that earn their keep.
           </h1>
           <p class="mt-[22px] max-w-[480px] text-[17px] leading-relaxed text-body">
-            Artidyn tests and certifies robotic beverage systems, then helps you
-            deploy them — with verified throughput, transparent pricing, and
-            support from day one.
+            Artidyn tests and certifies <a
+              href="/robot-barista/"
+              class="font-semibold text-brand hover:text-brand-hover">robot barista</a
+            > systems, then helps you deploy them — with verified throughput,
+            transparent pricing, and support from day one.
           </p>
           <div class="mt-8 flex flex-wrap items-center gap-3.5">
             <a
@@ -75,6 +80,11 @@ const h2 = "mt-3 text-[clamp(28px,2.6vw,40px)] font-bold tracking-[-0.025em] tex
               href="/products/"
               class="rounded-lg border border-input px-6 py-3.5 text-[15px] font-semibold text-ink transition-colors hover:border-ink"
               >Compare the robots</a
+            >
+            <a
+              href="/robot-barista/"
+              class="text-[15px] font-semibold text-brand transition-colors hover:text-brand-hover"
+              >Read the buyer's guide &rarr;</a
             >
           </div>
         </div>

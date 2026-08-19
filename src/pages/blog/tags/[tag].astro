@@ -32,7 +32,11 @@ const displayTag = tag
   .join(" ");
 ---
 
-<BaseLayout>
+<BaseLayout
+  title={`${displayTag || tag} — Artidyn Robotics Insights`}
+  description={`Artidyn Robotics articles tagged ${displayTag || tag}.`}
+  noindex
+>
   <section>
     <Wrapper variant="standard" class="pt-32 pb-2">
       <Text

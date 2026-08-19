@@ -29,8 +29,9 @@ export default defineConfig({
   integrations: [
     tailwindcss(),
     sitemap({
-      // Keep the internal design-system styleguide (/system/*) out of the sitemap.
-      filter: (page) => !page.includes("/system/"),
+      // Keep the internal design-system styleguide and the noindexed tag
+      // archives out of the sitemap — both are thin and shouldn't be crawled.
+      filter: (page) => !page.includes("/system/") && !page.includes("/blog/tags/"),
     }),
     mdx(),
     webmanifest({

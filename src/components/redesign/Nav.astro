@@ -1,13 +1,14 @@
 ---
 // Tech Clarity — sticky top navigation with one persistent CTA.
 interface Props {
-  active?: "robots" | "solutions" | "about";
+  active?: "robots" | "solutions" | "guide" | "about";
 }
 const { active } = Astro.props;
 
 const links = [
   { href: "/products/", label: "Robots", key: "robots" },
   { href: "/solutions/", label: "Solutions", key: "solutions" },
+  { href: "/robot-barista/", label: "Guide", key: "guide" },
   { href: "/#process", label: "Process", key: "process" },
   { href: "/about/", label: "About", key: "about" },
 ];

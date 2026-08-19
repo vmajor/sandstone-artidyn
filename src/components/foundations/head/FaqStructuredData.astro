@@ -1,0 +1,22 @@
+---
+// Emits FAQPage JSON-LD. Pass the same Q&A array the page renders visibly —
+// Google requires the answers to be present in the page body, not schema-only.
+import type { FaqItem } from "@/data/seo";
+
+interface Props {
+  items: FaqItem[];
+}
+const { items } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: items.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

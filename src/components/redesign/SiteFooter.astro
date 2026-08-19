@@ -4,7 +4,16 @@ const year = new Date().getFullYear();
 const productLinks = [
   { href: "/products/", label: "Robot catalog" },
   { href: "/solutions/", label: "Solutions" },
+  { href: "/solutions/hotels/", label: "For hotels" },
+  { href: "/solutions/airports/", label: "For airports" },
+  { href: "/solutions/offices/", label: "For offices" },
+  { href: "/solutions/vending-operators/", label: "For operators" },
   { href: "/#process", label: "Process" },
+];
+const guideLinks = [
+  { href: "/robot-barista/", label: "Robot barista guide" },
+  { href: "/robot-barista/cost/", label: "What they cost" },
+  { href: "/robot-barista/vs-human-barista/", label: "vs. a human barista" },
 ];
 const companyLinks = [
   { href: "/about/", label: "About" },
@@ -17,7 +26,7 @@ const colLink = "text-[13.5px] text-body transition-colors hover:text-brand";
 
 <footer class="border-t border-line bg-white">
   <div class="mx-auto max-w-[1240px] px-8 pb-10 pt-14">
-    <div class="grid grid-cols-2 gap-10 md:grid-cols-4 lg:grid-cols-[2fr_1fr_1fr_1fr] lg:gap-12">
+    <div class="grid grid-cols-2 gap-10 md:grid-cols-4 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1fr] lg:gap-12">
       <div class="col-span-2 md:col-span-4 lg:col-span-1">
         <img
           src="/artidyn_corporate_green_logo.svg"
@@ -36,6 +45,13 @@ const colLink = "text-[13.5px] text-body transition-colors hover:text-brand";
         <p class={colHeading}>Product</p>
         <div class="flex flex-col gap-2.5">
           {productLinks.map((l) => <a href={l.href} class={colLink}>{l.label}</a>)}
+        </div>
+      </div>
+
+      <div>
+        <p class={colHeading}>Guide</p>
+        <div class="flex flex-col gap-2.5">
+          {guideLinks.map((l) => <a href={l.href} class={colLink}>{l.label}</a>)}
         </div>
       </div>
 

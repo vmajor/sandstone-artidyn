@@ -1,0 +1,25 @@
+---
+// Emits BreadcrumbList JSON-LD. `items` runs root-first; the last entry is the
+// current page. Hrefs are site-relative and get absolutised here.
+const SITE = "https://www.artidyn.ai";
+
+import type { Crumb } from "@/data/seo";
+
+interface Props {
+  items: Crumb[];
+}
+const { items } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: items.map((item, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: item.name,
+    item: new URL(item.href, SITE).toString(),
+  })),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

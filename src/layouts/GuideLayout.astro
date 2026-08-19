@@ -1,0 +1,129 @@
+---
+// Long-form guide layout (Tech Clarity). Used by the /robot-barista/ cluster.
+// Pages supply their own section markup inside the default slot; the body is
+// wrapped in `prose`, so break out with `not-prose` for tables and panels.
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import CtaPanel from "@/components/redesign/CtaPanel.astro";
+import BreadcrumbStructuredData from "@/components/foundations/head/BreadcrumbStructuredData.astro";
+import type { Crumb, TocEntry } from "@/data/seo";
+
+interface Props {
+  /** <title> */
+  title: string;
+  /** meta description */
+  description: string;
+  /** small uppercase eyebrow above the H1 */
+  kicker: string;
+  /** visible H1 — may differ from the meta title */
+  heading: string;
+  /** standfirst paragraph under the H1 */
+  standfirst: string;
+  /** ISO date shown as "Last reviewed" */
+  updated: string;
+  toc: TocEntry[];
+  crumbs: Crumb[];
+  ctaTitle?: string;
+  ctaBody?: string;
+}
+
+const {
+  title,
+  description,
+  kicker,
+  heading,
+  standfirst,
+  updated,
+  toc,
+  crumbs,
+  ctaTitle = "Tell us about your site and we'll name one machine.",
+  ctaBody =
+    "Throughput target, footprint, and hours — that's usually enough for a straight recommendation, including when the answer is that automation isn't worth it yet.",
+} = Astro.props;
+
+const container = "mx-auto max-w-[1240px] px-8";
+const fmtDate = (d: string) =>
+  new Date(d).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "2-digit",
+  });
+---
+
+<BaseLayout title={title} description={description} navActive="guide">
+  <BreadcrumbStructuredData items={crumbs} />
+
+  <!-- ===== Header ===== -->
+  <section class="border-b border-line bg-surface">
+    <div class={`${container} pb-14 pt-[72px]`}>
+      <nav aria-label="Breadcrumb">
+        <ol class="flex flex-wrap items-center gap-2 text-[13px] text-faint">
+          {
+            crumbs.map((c, i) => (
+              <li class="flex items-center gap-2">
+                {i > 0 && <span aria-hidden="true">/</span>}
+                {i < crumbs.length - 1 ? (
+                  <a href={c.href} class="text-muted hover:text-brand">
+                    {c.name}
+                  </a>
+                ) : (
+                  <span class="font-medium text-ink" aria-current="page">
+                    {c.name}
+                  </span>
+                )}
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+
+      <p class="mt-6 text-[13px] font-semibold uppercase tracking-[0.1em] text-brand">
+        {kicker}
+      </p>
+      <h1
+        class="mt-3.5 max-w-[820px] text-[clamp(34px,3.2vw,48px)] font-bold leading-[1.1] tracking-[-0.03em] text-ink"
+      >
+        {heading}
+      </h1>
+      <p class="mt-4.5 max-w-[680px] text-[16.5px] leading-relaxed text-body">
+        {standfirst}
+      </p>
+      <p class="mt-5 font-mono text-[12.5px] text-faint">
+        Last reviewed {fmtDate(updated)} · Artidyn Robotics engineering
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== Body ===== -->
+  <div class={`${container} py-14`}>
+    <div class="grid gap-14 lg:grid-cols-[220px_minmax(0,1fr)]">
+      <!-- Table of contents -->
+      <aside class="lg:sticky lg:top-[92px] lg:self-start">
+        <p class="text-xs font-semibold uppercase tracking-[0.1em] text-faint">
+          On this page
+        </p>
+        <ul class="mt-4 flex flex-col gap-2.5 border-l border-line pl-4">
+          {
+            toc.map((t) => (
+              <li>
+                <a
+                  href={`#${t.id}`}
+                  class="text-[13.5px] leading-snug text-muted hover:text-brand"
+                >
+                  {t.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </aside>
+
+      <article
+        class="prose prose-neutral max-w-none text-body prose-headings:scroll-mt-24 prose-headings:tracking-tight prose-headings:text-ink prose-h2:mt-14 prose-h2:text-[clamp(24px,2.2vw,30px)] prose-h3:text-[19px] prose-strong:text-ink prose-a:text-brand prose-a:font-medium prose-a:no-underline hover:prose-a:text-brand-hover"
+      >
+        <slot />
+      </article>
+    </div>
+  </div>
+
+  <CtaPanel class="pb-20 pt-4" title={ctaTitle} body={ctaBody} />
+</BaseLayout>

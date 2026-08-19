@@ -1,5 +1,6 @@
 ---
-title: "Iris | High-Speed Cafe Robot for Airport Terminals"
+title: "Iris — High-Volume Robot Barista Kiosk for Airports & Transit"
+description: "Iris is a fully enclosed robot barista serving 70 cups an hour at 51 seconds a cup, with 32 recipe presets. Built for airport terminals and transit hubs. $27,000."
 pubDate: 2026-03-23
 price: 27000
 dimensions: "1500x1450x2020 mm"

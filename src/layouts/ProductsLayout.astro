@@ -43,6 +43,16 @@ const specsRight = [
 ].filter((s) => s.value && s.value !== "—");
 
 const container = "mx-auto max-w-[1240px] px-8";
+
+// The environment each machine is primarily sold into — used for further reading.
+const ENVIRONMENT: Record<string, { href: string; label: string }> = {
+  iris: { href: "/solutions/airports/", label: "Robot baristas for airports and transit" },
+  "iris-pro": { href: "/solutions/offices/", label: "Robot baristas for corporate offices" },
+  "iris-max": { href: "/solutions/vending-operators/", label: "Robotic coffee kiosks for operators" },
+  "argus-axis": { href: "/solutions/hotels/", label: "Robot baristas for hotels and resorts" },
+  "argus-art": { href: "/solutions/hotels/", label: "Robot baristas for hotels and resorts" },
+};
+const env = ENVIRONMENT[slug as string];
 const specRow =
   "flex justify-between gap-6 border-b border-line-faint py-3.5 last:border-0";
 ---
@@ -76,12 +86,17 @@ const specRow =
             class="inline-block rounded-[5px] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.06em]"
             style={`color:${tag.color};background:${tag.bg}`}>{c.tier}</span
           >
+          {/* Subtitle sits inside the H1: same visual result, but the page's
+              strongest heading carries the descriptive phrase, not just "Iris". */}
           <h1
             class="mt-4 text-[clamp(34px,3.2vw,48px)] font-bold leading-[1.05] tracking-[-0.03em] text-ink"
           >
             {c.name}
+            <span
+              class="mt-1.5 block text-base font-normal leading-snug tracking-normal text-muted"
+              >{c.subtitle}</span
+            >
           </h1>
-          <p class="mt-1.5 text-base text-muted">{c.subtitle}</p>
           <p class="mt-5 max-w-[460px] text-[15.5px] leading-relaxed text-body">{c.heroPara}</p>
           <div class="mt-7 flex gap-7 border-t border-line pt-5.5">
             {
@@ -188,6 +203,30 @@ const specRow =
             }
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Further reading ===== -->
+  <section class="border-t border-line bg-surface">
+    <div class={`${container} py-12`}>
+      <p class="text-xs font-semibold uppercase tracking-[0.1em] text-faint">
+        Further reading
+      </p>
+      <div class="mt-4 flex flex-wrap gap-x-8 gap-y-3">
+        <a href="/robot-barista/" class="text-[14.5px] font-semibold text-brand hover:text-brand-hover"
+          >Robot barista buyer's guide &rarr;</a
+        >
+        <a href="/robot-barista/cost/" class="text-[14.5px] font-semibold text-brand hover:text-brand-hover"
+          >What a robot barista costs &rarr;</a
+        >
+        {
+          env && (
+            <a href={env.href} class="text-[14.5px] font-semibold text-brand hover:text-brand-hover">
+              {env.label} &rarr;
+            </a>
+          )
+        }
       </div>
     </div>
   </section>

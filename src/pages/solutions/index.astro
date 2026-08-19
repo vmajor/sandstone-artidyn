@@ -11,7 +11,11 @@ const solImg = { 1: sol1, 2: sol2, 3: sol3 } as const;
 const container = "mx-auto max-w-[1240px] px-8";
 ---
 
-<BaseLayout title="Solutions — Artidyn Robotics" navActive="solutions">
+<BaseLayout
+  title="Robot Barista Solutions by Environment — Artidyn Robotics"
+  description="Which robot barista suits a hotel lobby, an airport concourse, an office pantry, or a vending route — and why. Machine recommendations matched to each environment."
+  navActive="solutions"
+>
   <!-- ===== Header ===== -->
   <section class="border-b border-line bg-surface">
     <div class={`${container} pb-16 pt-[72px]`}>
@@ -49,7 +53,7 @@ const container = "mx-auto max-w-[1240px] px-8";
               <div class:list={[!imageLeft && "lg:order-1"]}>
                 <p class="font-mono text-[13px] text-brand">{s.num}</p>
                 <h2 class="mt-3 text-[clamp(24px,2.2vw,32px)] font-bold tracking-[-0.02em] text-ink">
-                  {s.title}
+                  <a href={s.href} class="hover:text-brand">{s.title}</a>
                 </h2>
                 <p class="mt-3.5 text-[15.5px] leading-relaxed text-body">{s.desc}</p>
                 <div class="mt-5.5 flex flex-col gap-2.5">
@@ -60,7 +64,13 @@ const container = "mx-auto max-w-[1240px] px-8";
                     </div>
                   ))}
                 </div>
-                <div class="mt-6.5 flex w-fit items-center gap-2.5 rounded-[10px] border border-line bg-surface px-4.5 py-3.5">
+                <a
+                  href={s.href}
+                  class="mt-6 inline-block text-[14.5px] font-semibold text-brand hover:text-brand-hover"
+                >
+                  {s.title} in depth &rarr;
+                </a>
+                <div class="mt-5 flex w-fit items-center gap-2.5 rounded-[10px] border border-line bg-surface px-4.5 py-3.5">
                   <span class="text-[13px] text-muted">Recommended:</span>
                   <a href={s.robotHref} class="text-sm font-bold text-brand hover:text-brand-hover">
                     {s.robot}

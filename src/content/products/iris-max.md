@@ -1,5 +1,6 @@
 ---
-title: "Iris Max | Robotic Coffee Station for Shopping Arcades"
+title: "Iris Max — Robotic Coffee Station with Latte Art Printing"
+description: "Iris Max is an enclosed robotic coffee station with six syrups and custom latte-art image printing. 50 cups an hour at 72 seconds a cup. $31,500."
 pubDate: 2026-03-23
 price: 31500
 dimensions: "1500x1450x2020 mm"

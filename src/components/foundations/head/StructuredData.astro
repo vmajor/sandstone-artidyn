@@ -1,20 +1,50 @@
 ---
+// Sitewide Organization + WebSite JSON-LD. Emitted on every page via BaseHead.
+const SITE = "https://www.artidyn.ai";
+
 const organization = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "Artidyn Robotics",
-  "url": "https://www.artidyn.ai",
-  "logo": "https://www.artidyn.ai/artidyn_corporate_green_logo.svg",
-  "sameAs": [
-    "https://www.linkedin.com/company/artidyn-robotics-llc/"
+  "@id": `${SITE}/#organization`,
+  name: "Artidyn Robotics",
+  legalName: "Artidyn Robotics LLC",
+  url: SITE,
+  logo: `${SITE}/artidyn_corporate_green_logo.svg`,
+  email: "hi@artidyn.ai",
+  description:
+    "Artidyn Robotics tests, certifies, and deploys commercial robot baristas — robotic coffee kiosks and automated espresso bars for hotels, airports, offices, and vending operators.",
+  knowsAbout: [
+    "Robot barista",
+    "Robotic coffee kiosk",
+    "Beverage automation",
+    "Automated espresso bar",
+    "Coffee vending automation",
   ],
-  "address": {
+  sameAs: ["https://www.linkedin.com/company/artidyn-robotics-llc/"],
+  address: {
     "@type": "PostalAddress",
-    "addressLocality": "Sheridan",
-    "addressRegion": "WY",
-    "addressCountry": "US"
-  }
+    addressLocality: "Sheridan",
+    addressRegion: "WY",
+    addressCountry: "US",
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "sales",
+    email: "hi@artidyn.ai",
+    url: `${SITE}/contact/`,
+    availableLanguage: ["en"],
+  },
+};
+
+const website = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${SITE}/#website`,
+  url: SITE,
+  name: "Artidyn Robotics",
+  publisher: { "@id": `${SITE}/#organization` },
 };
 ---
 
 <script type="application/ld+json" set:html={JSON.stringify(organization)} />
+<script type="application/ld+json" set:html={JSON.stringify(website)} />
