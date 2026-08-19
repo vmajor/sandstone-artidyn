@@ -1,0 +1,504 @@
+---
+// Pillar page for the head term "robot barista".
+//
+// Intent check: the SERP for this term is informational — explainers and
+// comparisons, not product pages. So this page answers the question first and
+// sells second, and links down into the catalog and the cluster pages.
+//
+// Every spec figure is read from src/content/products/*.md at build time so the
+// guide can never drift from the catalog.
+import { getCollection } from "astro:content";
+import GuideLayout from "@/layouts/GuideLayout.astro";
+import FaqStructuredData from "@/components/foundations/head/FaqStructuredData.astro";
+import {
+  ROBOT_ORDER,
+  ROBOT_CONTENT,
+  fmtPrice,
+  fmtFootprint,
+  fmtServeTime,
+  type RobotSlug,
+} from "@/data/robots";
+import type { FaqItem, TocEntry } from "@/data/seo";
+import {
+  ATTENDANT_PER_DAY,
+  CONSUMABLE_PER_CUP,
+  PROCESSING_RATE,
+  REFERENCE_PRICE,
+  SITE_SHARE_RATE,
+  UTILITIES_PER_DAY,
+  breakEvenCups,
+  contributionPerCup,
+  daily,
+  monthsLabel,
+  usd,
+  usd2,
+} from "@/data/economics";
+
+const products = await getCollection("products");
+const rows = ROBOT_ORDER.map((slug) => {
+  const p = products.find((x) => x.slug === slug)!;
+  const c = ROBOT_CONTENT[slug as RobotSlug];
+  return {
+    slug,
+    name: c.name,
+    tier: c.tier,
+    enclosure: c.tableEnclosure,
+    throughput: p.data.throughput ?? "—",
+    serve: fmtServeTime(p.data.productionTime),
+    footprint: fmtFootprint(p.data.area),
+    latteArt: c.tableLatteArt,
+    price: fmtPrice(p.data.price),
+  };
+});
+
+const footprints = products
+  .map((p) => parseFloat(p.data.area ?? ""))
+  .filter((n) => !Number.isNaN(n));
+const footprintLow = `${Math.min(...footprints)} m²`;
+const footprintHigh = `${Math.max(...footprints)} m²`;
+
+const prices = products
+  .map((p) => p.data.price)
+  .filter((n): n is number => typeof n === "number");
+const priceLow = `$${Math.min(...prices).toLocaleString("en-US")}`;
+const priceHigh = `$${Math.max(...prices).toLocaleString("en-US")}`;
+
+// --- Modelled unit economics ------------------------------------------------
+// The model lives in src/data/economics.ts so the pillar, the cost page and the
+// environment pages all quote the same assumptions.
+const scenarios = [
+  { label: "Busy concourse or hotel lobby", ...daily(80, 4.25) },
+  { label: "Mid-size office or secondary retail", ...daily(30, 4.0) },
+  { label: "Quiet lobby, low footfall", ...daily(12, 4.0) },
+];
+
+const ticketRef = 4.25;
+const contribution = contributionPerCup(ticketRef);
+const fixedDaily = ATTENDANT_PER_DAY + UTILITIES_PER_DAY;
+const capexPerDay3yr = REFERENCE_PRICE / (365 * 3);
+const breakEven = breakEvenCups(ticketRef);
+
+const toc: TocEntry[] = [
+  { id: "what-is-a-robot-barista", label: "What a robot barista is" },
+  { id: "how-they-work", label: "How they work" },
+  { id: "formats", label: "The three formats" },
+  { id: "throughput", label: "Throughput, honestly" },
+  { id: "cost", label: "What they cost" },
+  { id: "economics", label: "The economics" },
+  { id: "vs-human", label: "Versus a human barista" },
+  { id: "where-they-fail", label: "Where they don't work" },
+  { id: "buying", label: "What to ask a vendor" },
+  { id: "faq", label: "FAQ" },
+];
+
+const crumbs = [
+  { name: "Home", href: "/" },
+  { name: "Robot barista guide", href: "/robot-barista/" },
+];
+
+const faqs: FaqItem[] = [
+  {
+    q: "What is a robot barista?",
+    a: "A robot barista is an automated espresso system that takes a customer order, grinds and extracts the shot, textures milk, assembles the drink, and hands it over without a person involved. Most commercial units pair a professional espresso module with a 6-axis robotic arm that handles cups and pouring, inside either a sealed kiosk or an open bar.",
+  },
+  {
+    q: "How much does a robot barista cost?",
+    a: `Commercial robot baristas typically run from about ${priceLow} to ${priceHigh} for the machine itself. Shipping, customs, site preparation, power and plumbing work, and payment integration are usually additional. Running costs are dominated by consumables at roughly $0.35 to $0.70 per cup and by the daily service visit, not by electricity.`,
+  },
+  {
+    q: "How many cups per hour can a robot barista make?",
+    a: "Rated throughput on commercial units runs from about 40 to 70 cups an hour, which is simply 3,600 divided by the machine's serve time. That figure assumes a continuous queue and no interruption for restocking. Sustained real-world throughput is lower, because cup magazines and milk reservoirs run out well before the hour does.",
+  },
+  {
+    q: "Can a robot barista make latte art?",
+    a: "Some can. There are two distinct methods: a physical pour, where the arm executes a real free-pour pattern into textured milk, and image printing, where an edible-ink printhead lays a pattern onto the crema. Physical pour looks like a barista made it; printing can reproduce a logo or a photograph. Most machines offer neither, so check the specification rather than assuming.",
+  },
+  {
+    q: "Do robot baristas replace human baristas?",
+    a: "Rarely one-for-one. In practice they cover shifts a human cannot be staffed for profitably — overnight hours, low-density sites, and peak surges — and they still need a person for restocking, cleaning, and exceptions. The realistic framing is coverage extension rather than headcount replacement.",
+  },
+  {
+    q: "How much space does a robot barista need?",
+    a: `Enclosed kiosks in this class occupy roughly ${footprintLow} to ${footprintHigh} of floor area and stand about two metres tall, with clearance needed at the back for service access. Open-bar units are lower but wider. Weight matters as much as area: units run from 500 kg to 750 kg, which rules out some mezzanines and raised floors.`,
+  },
+  {
+    q: "What maintenance does a robot barista need?",
+    a: "Budget a daily visit of roughly 20 to 40 minutes for restocking beans, milk, cups and syrups, emptying waste, and wiping down surfaces. Automated rinse cycles handle the milk lines between serves, but they do not eliminate the daily human visit. Beyond that, expect periodic descaling, grinder burr replacement, and a parts reserve of a few percent of purchase price per year.",
+  },
+  {
+    q: "Are robot baristas profitable?",
+    a: `Profitability is driven almost entirely by cups sold per day, because the daily service visit is a fixed cost regardless of volume. On the assumptions modelled in this guide, a site needs roughly ${breakEven} cups a day to pay back a ${usd(REFERENCE_PRICE)} machine across a three-year life. Well below that, the machine loses money no matter how well it performs.`,
+  },
+];
+
+const th = "px-4 py-3 text-left text-[12.5px] font-semibold uppercase tracking-[0.06em] text-faint";
+const td = "border-t border-line-faint px-4 py-3.5 text-[14.5px] text-body";
+const tdNum = `${td} font-mono tabular-nums whitespace-nowrap`;
+---
+
+<GuideLayout
+  title="Robot Barista Guide 2026 — Costs, Throughput and Real Economics"
+  description="What a robot barista actually costs, how many cups an hour it really serves, and the volume a site needs before one pays for itself. Written by the engineers who test them."
+  kicker="Buyer's guide"
+  heading="Robot barista: what they cost, what they actually serve, and where they pay off"
+  standfirst="Most of what is written about robot baristas is either a press release or a novelty story. This guide is neither. It uses measured specifications from five machines we test and sell, and it is explicit about the sites where automation is the wrong answer."
+  updated="2026-08-19"
+  toc={toc}
+  crumbs={crumbs}
+>
+  <FaqStructuredData items={faqs} />
+
+  <h2 id="what-is-a-robot-barista">What a robot barista is</h2>
+  <p>
+    A <strong>robot barista</strong> is an automated espresso system that takes a
+    customer's order, grinds and extracts the shot, textures the milk, assembles the
+    drink, and hands it over — with no person in the loop. The category name is
+    loose, and that looseness is where buyers get burned. It covers three quite
+    different things:
+  </p>
+  <ul>
+    <li>
+      <strong>Bean-to-cup machines with a touchscreen.</strong> No arm, no cup
+      handling. Cheap and reliable, but someone still has to place the cup.
+    </li>
+    <li>
+      <strong>Robotic coffee kiosks.</strong> A professional espresso module plus a
+      6-axis arm that picks cups, positions them, pours, adds syrup and lids, and
+      presents the finished drink. This is what the term usually means commercially,
+      and what this guide covers.
+    </li>
+    <li>
+      <strong>Humanoid demonstrators.</strong> Two-armed robots operating
+      human-designed equipment. Excellent on video, poor on cost per cup, and
+      essentially absent from working deployments.
+    </li>
+  </ul>
+  <p>
+    Everything below refers to the middle category — the machines that are actually
+    installed and taking money in airports, hotels, offices, and retail.
+  </p>
+
+  <h2 id="how-they-work">How they work</h2>
+  <p>
+    A commercial unit is five subsystems in a frame, and every specification
+    argument comes back to one of them:
+  </p>
+  <ol>
+    <li>
+      <strong>The espresso module.</strong> A commercial bean-to-cup unit —
+      grinder, boiler, group head, milk system. This determines drink quality, and
+      it is the part that wears. Ask which module is inside; it is a more useful
+      question than any figure on the brochure.
+    </li>
+    <li>
+      <strong>The arm.</strong> A 6-axis collaborative robot that moves cups
+      between stations. Six axes matters because pouring at an angle — the motion
+      that makes latte art possible — needs wrist articulation a 4-axis arm
+      doesn't have.
+    </li>
+    <li>
+      <strong>Cup and lid handling.</strong> A magazine that dispenses cups and, on
+      better machines, seats lids. This is the most common source of jams and the
+      first thing to run out.
+    </li>
+    <li>
+      <strong>Cold chain.</strong> Refrigerated milk held at 2–4 °C with pumped
+      lines to the frother. Reservoir volume, not the arm, is usually what caps a
+      morning rush.
+    </li>
+    <li>
+      <strong>Payment and telemetry.</strong> Touchscreen or QR ordering, card and
+      mobile payment, and a fleet dashboard reporting stock, sales, and faults.
+      Without remote telemetry, a fleet becomes a driving job.
+    </li>
+  </ol>
+
+  <h2 id="formats">The three formats</h2>
+  <p>
+    Machines in this class split into three formats, and the choice is driven by
+    where the machine lives rather than by budget.
+  </p>
+  <ul>
+    <li>
+      <strong>Enclosed kiosk.</strong> Everything behind glass and steel. Rated for
+      unattended public operation, resistant to tampering and spills, and the only
+      sensible choice for a concourse or a 24-hour lobby. Taller and heavier.
+    </li>
+    <li>
+      <strong>Open bar.</strong> A low-profile arm on an exposed counter. The pour
+      is visible, which is the entire point in a hotel lobby or a flagship store,
+      but it needs a supervised environment.
+    </li>
+    <li>
+      <strong>Craft.</strong> An open bar with latte-art capability — either a real
+      free-pour pattern or edible-ink image printing on the crema. Slower per cup by
+      design, because the theatre <em>is</em> the product.
+    </li>
+  </ul>
+
+  <div class="not-prose my-8 overflow-x-auto rounded-xl border border-line">
+    <table class="w-full min-w-[760px] border-collapse bg-white">
+      <caption class="border-b border-line px-4 py-3 text-left text-[13px] text-muted">
+        Five machines we test and certify. Figures verified during Artidyn
+        certification testing, March 2026.
+      </caption>
+      <thead class="bg-surface">
+        <tr>
+          <th class={th} scope="col">Machine</th>
+          <th class={th} scope="col">Format</th>
+          <th class={th} scope="col">Throughput</th>
+          <th class={th} scope="col">Serve time</th>
+          <th class={th} scope="col">Footprint</th>
+          <th class={th} scope="col">Latte art</th>
+          <th class={th} scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          rows.map((r) => (
+            <tr>
+              <th scope="row" class={`${td} font-semibold text-ink`}>
+                <a href={`/products/${r.slug}/`} class="text-brand hover:text-brand-hover">
+                  {r.name}
+                </a>
+              </th>
+              <td class={td}>{r.enclosure}</td>
+              <td class={tdNum}>{r.throughput}</td>
+              <td class={tdNum}>{r.serve}</td>
+              <td class={tdNum}>{r.footprint}</td>
+              <td class={td}>{r.latteArt}</td>
+              <td class={tdNum}>{r.price}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    Full specifications for each are in the <a href="/products/">robot catalog</a>,
+    and the <a href="/solutions/">solutions pages</a> map formats to environments.
+  </p>
+
+  <h2 id="throughput">Throughput, honestly</h2>
+  <p>
+    Rated throughput is not a measurement. It is arithmetic: 3,600 divided by the
+    serve time. A machine that produces a drink in {rows[0].serve.replace(" s", " seconds")}
+    is rated at {rows[0].throughput}, and one at 90 seconds is rated at 40. That is
+    all the number means.
+  </p>
+  <p>Three things reduce it in the real world:</p>
+  <ul>
+    <li>
+      <strong>Consumables run out first.</strong> A 150-cup magazine at 70 cups an
+      hour is about two hours of uninterrupted service. Milk usually binds sooner.
+      Nobody's rated figure includes a restock.
+    </li>
+    <li>
+      <strong>Ordering time is not serve time.</strong> A customer at the
+      touchscreen adds 15–40 seconds that the rated figure ignores. Pre-ordering by
+      QR removes most of this and is the single cheapest throughput improvement
+      available.
+    </li>
+    <li>
+      <strong>Drink mix matters.</strong> Milk drinks take longer than an
+      americano. A rush of flat whites will not hit the rated number.
+    </li>
+  </ul>
+  <p>
+    Practical planning rule: assume roughly 70% of the rated figure as sustained
+    throughput across a real hour, and confirm the milk reservoir volume against
+    your peak before you commit. If your morning peak is 120 drinks in 60 minutes,
+    one machine is the wrong answer regardless of what the brochure claims.
+  </p>
+
+  <h2 id="cost">What they cost</h2>
+  <p>
+    Machine prices in this class run from {priceLow} to {priceHigh}. That is the
+    unit only. Budget separately for:
+  </p>
+  <ul>
+    <li>Freight, customs, and duty — material on a 500–750 kg machine</li>
+    <li>Site preparation: a dedicated power circuit, and plumbing if the unit is plumbed rather than tanked</li>
+    <li>Payment integration and network connectivity</li>
+    <li>Installation, commissioning, and operator training</li>
+    <li>A parts reserve — plan on a few percent of purchase price per year</li>
+  </ul>
+  <p>
+    Running cost is dominated by two lines, and electricity is not one of them.
+    Consumables land around $0.35–$0.70 per cup depending on drink mix and buying
+    power, and the daily service visit costs whatever half an hour of someone's time
+    costs you. The
+    <a href="/robot-barista/cost/">full cost breakdown</a> works through capital,
+    operating, and five-year total cost of ownership.
+  </p>
+
+  <h2 id="economics">The economics</h2>
+  <p>
+    Below is the same unit-economics model applied to three sites. It assumes
+    ${CONSUMABLE_PER_CUP.toFixed(2)} per cup in consumables, {(PROCESSING_RATE * 100).toFixed(1)}%
+    card processing, a {(SITE_SHARE_RATE * 100).toFixed(0)}% site rent or revenue share,
+    {" "}{usd(ATTENDANT_PER_DAY)} a day for a 30-minute service visit, and {usd(UTILITIES_PER_DAY)} a
+    day for power and connectivity. Payback is against a {usd(REFERENCE_PRICE)} machine.
+  </p>
+  <p>
+    <strong>These are modelled illustrations, not measured results.</strong> Your
+    ticket price, site share, and labour rate will differ — the point is the shape
+    of the curve, not the decimals.
+  </p>
+
+  <div class="not-prose my-8 overflow-x-auto rounded-xl border border-line">
+    <table class="w-full min-w-[720px] border-collapse bg-white">
+      <thead class="bg-surface">
+        <tr>
+          <th class={th} scope="col">Site</th>
+          <th class={th} scope="col">Cups/day</th>
+          <th class={th} scope="col">Ticket</th>
+          <th class={th} scope="col">Gross/day</th>
+          <th class={th} scope="col">Net/day</th>
+          <th class={th} scope="col">Net/month</th>
+          <th class={th} scope="col">Payback</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          scenarios.map((s) => (
+            <tr>
+              <th scope="row" class={`${td} font-semibold text-ink`}>{s.label}</th>
+              <td class={tdNum}>{s.cups}</td>
+              <td class={tdNum}>${s.ticket.toFixed(2)}</td>
+              <td class={tdNum}>{usd(s.gross)}</td>
+              <td class={tdNum}>{usd(s.net)}</td>
+              <td class={tdNum}>{usd(s.monthly)}</td>
+              <td class={tdNum}>{monthsLabel(s.paybackDays)}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    The interesting result is the third row. The service visit costs the same
+    whether the machine sells 12 cups or 80, so a quiet site is punished twice —
+    less revenue against an unchanged fixed cost. On these assumptions a cup
+    contributes about {usd2(contribution)} after consumables, processing, and site
+    share, against {usd(fixedDaily)} a day of fixed cost and {usd2(capexPerDay3yr)} a
+    day of capital recovery over three years.
+  </p>
+  <p>
+    That gives a usable rule of thumb: <strong>a site needs roughly {breakEven}
+    cups a day</strong> before a {usd(REFERENCE_PRICE)} machine pays for itself over a
+    three-year life. That is the break-even, not the target — leave headroom for
+    a slower quarter, and treat a site that can't clear about 20 cups a day as a
+    site to revisit later rather than automate now.
+  </p>
+
+  <h2 id="vs-human">Versus a human barista</h2>
+  <p>
+    The comparison is less lopsided than either side of the argument claims. A
+    robot wins on hours, consistency, and marginal cost. A person wins on
+    throughput at peak, drink range, recovery from the unexpected, and the part of
+    the experience that is not the coffee.
+  </p>
+
+  <div class="not-prose my-8 overflow-x-auto rounded-xl border border-line">
+    <table class="w-full min-w-[680px] border-collapse bg-white">
+      <thead class="bg-surface">
+        <tr>
+          <th class={th} scope="col" />
+          <th class={th} scope="col">Robot barista</th>
+          <th class={th} scope="col">Trained human barista</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          ["Sustained throughput", "40–70 cups/hr rated; ~70% of that in practice", "Higher at peak on a well-run two-group bar"],
+          ["Hours covered", "24/7, including overnight", "Limited by shift cost and availability"],
+          ["Consistency", "Identical shot to shot, indefinitely", "Excellent when fresh, drifts across a long shift"],
+          ["Marginal cost per cup", "Consumables only", "Consumables plus wage for the minute"],
+          ["Drink range", "5–32 presets, fixed", "Effectively unlimited, adapts on request"],
+          ["Handles the unexpected", "Poorly — jams need a person", "Well"],
+          ["Fixed daily cost", "Service visit, regardless of volume", "Wage for the whole shift, regardless of volume"],
+          ["Upfront capital", "Machine price", "Espresso equipment and fit-out"],
+        ].map(([k, robot, human]) => (
+          <tr>
+            <th scope="row" class={`${td} font-semibold text-ink`}>{k}</th>
+            <td class={td}>{robot}</td>
+            <td class={td}>{human}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    The full head-to-head, including what happens to service quality when a
+    machine faults at 3 a.m., is in
+    <a href="/robot-barista/vs-human-barista/">robot barista vs human barista</a>.
+  </p>
+
+  <h2 id="where-they-fail">Where they don't work</h2>
+  <p>
+    We sell these machines and we still turn sites down. The recurring failure
+    modes:
+  </p>
+  <ul>
+    <li>
+      <strong>Too little volume.</strong> Covered above. This is the most common
+      reason a deployment disappoints, and it is knowable before you buy.
+    </li>
+    <li>
+      <strong>A peak the machine physically cannot clear.</strong> A 300-person
+      office that all wants coffee between 08:45 and 09:15 needs about 10 drinks a
+      minute. No single unit in this class does that.
+    </li>
+    <li>
+      <strong>No one to service it.</strong> If nobody on site owns the daily
+      restock, the machine will be out of milk by week three. Automation removes
+      the barista, not the operator.
+    </li>
+    <li>
+      <strong>Site constraints discovered late.</strong> Floor loading for a 750 kg
+      unit, a dedicated circuit, service clearance at the rear, a lift that fits the
+      crate. These kill more installations than any specification.
+    </li>
+    <li>
+      <strong>The coffee is the differentiator.</strong> If your café's reputation
+      rests on a named roaster and a barista who remembers regulars, a robot is a
+      downgrade, not an upgrade.
+    </li>
+  </ul>
+
+  <h2 id="buying">What to ask a vendor</h2>
+  <p>
+    Most specification sheets in this market are copied from the manufacturer
+    without verification. These questions separate the ones worth taking seriously:
+  </p>
+  <ul>
+    <li><strong>Which espresso module is inside, by model number?</strong> If they won't say, that is the answer.</li>
+    <li><strong>Was the throughput figure measured, or is it 3,600 divided by serve time?</strong> Ask for the test conditions.</li>
+    <li><strong>What is the milk reservoir volume, and how many milk drinks does that serve?</strong></li>
+    <li><strong>What certifications does the unit actually carry?</strong> CE, FCC, and ISO 9001 are claimed more often than they are held.</li>
+    <li><strong>Where do spare parts ship from, and what is the lead time on the arm controller?</strong></li>
+    <li><strong>What does the telemetry report, and can it be exported?</strong></li>
+    <li><strong>Who does the daily service — you, us, or a third party?</strong></li>
+    <li><strong>What is the failure rate you have observed in the field?</strong> A vendor with deployments has this number.</li>
+  </ul>
+  <p>
+    Artidyn certifies every machine in the catalog against its manufacturer's
+    claims before listing it, and publishes the measured figures — including where
+    they came in under the claim. That is the whole reason the company exists;
+    <a href="/about/">the background is here</a>.
+  </p>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  {
+    faqs.map((f) => (
+      <>
+        <h3>{f.q}</h3>
+        <p>{f.a}</p>
+      </>
+    ))
+  }
+</GuideLayout>

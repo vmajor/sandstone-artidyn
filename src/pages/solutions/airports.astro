@@ -1,0 +1,194 @@
+---
+// Environment page: "robot barista airport" / automated coffee kiosk for transit.
+import GuideLayout from "@/layouts/GuideLayout.astro";
+import FaqStructuredData from "@/components/foundations/head/FaqStructuredData.astro";
+import type { FaqItem, TocEntry } from "@/data/seo";
+import { daily, monthsLabel, usd, usd2 } from "@/data/economics";
+
+// Airport concession fees are well above a standard retail share.
+const IRIS = 27000;
+const CONCESSION = 0.18;
+const m = daily(90, 5.0, { price: IRIS, siteShareRate: CONCESSION });
+
+const toc: TocEntry[] = [
+  { id: "the-problem", label: "The 4 a.m. problem" },
+  { id: "throughput", label: "Sizing the peak" },
+  { id: "numbers", label: "What the numbers look like" },
+  { id: "which-machine", label: "Which machine" },
+  { id: "siting", label: "Siting and compliance" },
+  { id: "watch-out", label: "What to watch for" },
+  { id: "faq", label: "FAQ" },
+];
+const crumbs = [
+  { name: "Home", href: "/" },
+  { name: "Solutions", href: "/solutions/" },
+  { name: "Airports & transit", href: "/solutions/airports/" },
+];
+
+const faqs: FaqItem[] = [
+  {
+    q: "Can a robot barista handle an airport morning rush?",
+    a: "One machine handles roughly 70 cups an hour rated, and about 70% of that sustained once ordering time and restocking are counted — call it 45 to 50 real cups an hour. If your peak is 150 drinks in an hour, that is three machines or a staffed bar, and no single unit will do it.",
+  },
+  {
+    q: "Are robot baristas allowed airside?",
+    a: "They are deployed airside in several markets, but approval is site-specific rather than product-specific. Expect scrutiny on fire loading, the electrical connection, floor loading over a structural deck, cleaning and waste routes, and how the unit behaves in an evacuation. Start that conversation with the authority before selecting a machine.",
+  },
+  {
+    q: "What happens when a robot barista faults overnight at an airport?",
+    a: "It stops serving until someone attends, which is the central operational risk of an unattended site. Mitigate it with telemetry that alerts on fault rather than on complaint, an enclosure rated for continuous public operation, and a local spare-parts position so a controller failure is a day of downtime rather than weeks.",
+  },
+];
+---
+
+<GuideLayout
+  title="Robot Barista for Airports — Automated Coffee Kiosks for Transit"
+  description="Sizing an automated coffee kiosk to an airport peak, what concession fees do to the economics, and the compliance questions that decide whether a robot barista can go airside."
+  kicker="Solutions by environment"
+  heading="Robot baristas for airports and transit hubs"
+  standfirst="Airside retail has the longest trading hours and the least willing labour market in food service. It is the environment where automation makes the most obvious sense — and the one where sizing mistakes are most expensive."
+  updated="2026-08-19"
+  toc={toc}
+  crumbs={crumbs}
+  ctaTitle="Send us your footfall curve."
+  ctaBody="Peak hour, trading hours, and concession terms are enough for us to say how many machines a pitch needs — or that it needs a staffed bar instead."
+>
+  <FaqStructuredData items={faqs} />
+
+  <h2 id="the-problem">The 4 a.m. problem</h2>
+  <p>
+    The first wave of departures leaves before any concession can profitably open.
+    Passengers are awake, hold money, and have nowhere to spend it — and the
+    operator loses the sale not through lack of demand but because a shift at that
+    hour costs more than it returns. The same gap reappears after the last
+    scheduled arrival.
+  </p>
+  <p>
+    A <a href="/robot-barista/">robot barista</a> trades through both windows at
+    the same daily cost it already carries. That is the whole case: not that the
+    machine is faster than a person, but that its cost is indifferent to the clock.
+  </p>
+  <p>
+    Transit sites also have the recruitment problem in its sharpest form. Airside
+    roles need background checks, unsociable start times, and a commute past
+    security. Sites that cannot fill a rota get automated first, whatever the
+    spreadsheet says.
+  </p>
+
+  <h2 id="throughput">Sizing the peak</h2>
+  <p>
+    This is where transit deployments go wrong. Rated throughput is
+    3,600 divided by the machine's serve time, and nothing more — a 51-second serve
+    time is a 70 cups/hour rating. That figure assumes a continuous queue, no
+    restock, and no time spent at the touchscreen.
+  </p>
+  <p>
+    Plan on roughly <strong>70% of the rated figure</strong> as sustained
+    throughput, and check two constraints against your peak rather than your daily
+    total:
+  </p>
+  <ul>
+    <li>
+      <strong>Cup magazine.</strong> 150 cups at 70 an hour is about two hours of
+      uninterrupted service. A 05:00–08:00 rush needs a restock inside the peak.
+    </li>
+    <li>
+      <strong>Milk volume.</strong> Usually the binding constraint before the
+      magazine, and the number least often quoted. Ask for reservoir volume in
+      litres, not a cup count.
+    </li>
+  </ul>
+  <p>
+    QR pre-ordering from the gate is the cheapest throughput improvement available,
+    because it moves customer decision time off the machine entirely.
+  </p>
+
+  <h2 id="numbers">What the numbers look like</h2>
+  <p>
+    A worked illustration for a concourse pitch, with an
+    {(CONCESSION * 100).toFixed(0)}% concession fee — well above a standard retail
+    revenue share, and the line that most changes airport economics.
+  </p>
+  <div class="not-prose my-8 overflow-hidden rounded-xl border border-line">
+    <dl class="grid grid-cols-2 divide-x divide-y divide-line-faint sm:grid-cols-4">
+      {
+        [
+          ["Cups per day", m.cups.toString()],
+          ["Average ticket", usd2(m.ticket)],
+          ["Net per day", usd(m.net)],
+          ["Payback", monthsLabel(m.paybackDays)],
+        ].map(([k, v]) => (
+          <div class="p-5">
+            <dt class="text-[12.5px] uppercase tracking-[0.06em] text-faint">{k}</dt>
+            <dd class="mt-1.5 font-mono text-[19px] font-bold tabular-nums text-ink">{v}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+  <p>
+    Even at {(CONCESSION * 100).toFixed(0)}% to the authority, high footfall and a
+    transit ticket price carry the site comfortably. Note that the concession fee
+    costs more per year here than the machine does — which is why pitch selection
+    dominates machine selection. Assumptions are in the
+    <a href="/robot-barista/cost/">cost model</a>; these are modelled figures, not
+    audited results.
+  </p>
+
+  <h2 id="which-machine">Which machine</h2>
+  <ul>
+    <li>
+      <strong><a href="/products/iris/">Iris</a></strong> — the default transit
+      unit. Fully enclosed, 750 kg, 70 cups an hour at a 51-second serve time, 32
+      recipe presets, rated for continuous public operation. {usd(IRIS)}.
+    </li>
+    <li>
+      <strong><a href="/products/iris-max/">Iris Max</a></strong> — where the pitch
+      wants a differentiated offer: six syrup lines and custom latte-art image
+      printing, at a slower 72-second serve. Better for a lounge than a concourse.
+    </li>
+    <li>
+      <strong><a href="/products/iris-pro/">Iris Pro</a></strong> — the same
+      throughput in a narrower cabinet, for pitches where frontage is the
+      constraint rather than volume.
+    </li>
+  </ul>
+  <p>
+    Open-bar and craft formats are the wrong answer airside. An unsupervised
+    exposed arm in a public concourse is a tamper and spill problem, not a feature.
+  </p>
+
+  <h2 id="siting">Siting and compliance</h2>
+  <ul>
+    <li><strong>Floor loading</strong> for 750 kg, particularly over a structural deck or a basement void</li>
+    <li><strong>A dedicated electrical circuit</strong>, and a route for it that estates will actually approve</li>
+    <li><strong>Water and drainage</strong>, or an accepted tanked operation with the refill written into the round</li>
+    <li><strong>Fire and evacuation</strong> behaviour, including what the unit does on alarm</li>
+    <li><strong>Waste and cleaning routes</strong> that work within airside movement restrictions</li>
+    <li><strong>Delivery access</strong>: crate dimensions against the goods lift and the airside gate</li>
+    <li><strong>Network</strong> that the telemetry can rely on — an unmonitored unattended machine is a liability</li>
+  </ul>
+
+  <h2 id="watch-out">What to watch for</h2>
+  <ul>
+    <li>
+      <strong>Sizing to the daily total instead of the peak.</strong> The most
+      expensive mistake in this environment. Size to the busiest hour.
+    </li>
+    <li>
+      <strong>No local spares.</strong> A controller on a six-week lead time turns
+      one fault into a lost quarter.
+    </li>
+    <li>
+      <strong>Restock windows that ignore security.</strong> If the milk delivery
+      cannot clear the checkpoint before the rush, the peak is already lost.
+    </li>
+    <li>
+      <strong>Concession terms modelled at retail rates.</strong> Run the numbers
+      at the fee you will actually be charged, not a generic 15%.
+    </li>
+  </ul>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  {faqs.map((f) => (<><h3>{f.q}</h3><p>{f.a}</p></>))}
+</GuideLayout>

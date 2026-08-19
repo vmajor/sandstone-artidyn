@@ -46,6 +46,9 @@ const legal = defineCollection({
 const products = defineCollection({
   schema: ({ image }) => z.object({
       title: z.string(),
+      // Meta description for the product page — required so no two pages
+      // ship the sitewide fallback description.
+      description: z.string(),
       pubDate: z.date().optional(),
       price: z.number().optional(),
       dimensions: z.string().optional(),

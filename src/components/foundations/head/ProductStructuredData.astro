@@ -1,23 +1,40 @@
 ---
+// Product JSON-LD for a robot detail page.
+//
+// `product.cover.url` is an ImageMetadata object, not a string — passing it
+// straight to new URL() produced "https://www.artidyn.ai/[object%20Object]" in
+// every product's schema. Resolve it through getImage() instead.
+import { getImage } from "astro:assets";
+import { ROBOT_CONTENT, type RobotSlug } from "@/data/robots";
+
+const SITE = "https://www.artidyn.ai";
 const { product, slug } = Astro.props;
+
+const cover = product.cover?.url;
+let image: string | undefined;
+if (cover) {
+  image =
+    typeof cover === "string"
+      ? new URL(cover, SITE).toString()
+      : new URL((await getImage({ src: cover, width: 1200, format: "webp" })).src, SITE).toString();
+}
 
 const productSchema = {
   "@context": "https://schema.org",
   "@type": "Product",
-  "name": product.title,
-  "description": product.description || "Certified Beverage Robot from Artidyn",
-  "image": product.cover?.url ? new URL(product.cover.url, "https://www.artidyn.ai").toString() : undefined,
-  "brand": {
-    "@type": "Brand",
-    "name": "Artidyn"
-  },
-  "offers": {
+  name: ROBOT_CONTENT[slug as RobotSlug]?.name ?? product.title,
+  description: product.description,
+  image,
+  brand: { "@type": "Brand", name: "Artidyn Robotics" },
+  category: "Robot barista",
+  offers: {
     "@type": "Offer",
-    "price": product.price,
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock",
-    "url": new URL(`/products/${slug}/`, "https://www.artidyn.ai").toString()
-  }
+    price: product.price,
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+    url: new URL(`/products/${slug}/`, SITE).toString(),
+    seller: { "@id": `${SITE}/#organization` },
+  },
 };
 ---
 

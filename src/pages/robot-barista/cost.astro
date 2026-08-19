@@ -1,0 +1,352 @@
+---
+// Cluster page: "robot barista cost" / "how much does a robot barista cost".
+// The commercial-investigation query that sits under the pillar. Everything
+// numeric comes from the shared model in src/data/economics.ts.
+import { getCollection } from "astro:content";
+import GuideLayout from "@/layouts/GuideLayout.astro";
+import FaqStructuredData from "@/components/foundations/head/FaqStructuredData.astro";
+import { ROBOT_ORDER, ROBOT_CONTENT, fmtPrice, type RobotSlug } from "@/data/robots";
+import type { FaqItem, TocEntry } from "@/data/seo";
+import {
+  ATTENDANT_PER_DAY,
+  CONSUMABLE_PER_CUP,
+  LANDED_EXTRAS,
+  MAINTENANCE_RATE,
+  PROCESSING_RATE,
+  REFERENCE_PRICE,
+  SITE_SHARE_RATE,
+  UTILITIES_PER_DAY,
+  breakEvenCups,
+  tco,
+  usd,
+  usd2,
+} from "@/data/economics";
+
+const products = await getCollection("products");
+const priceRows = ROBOT_ORDER.map((slug) => {
+  const p = products.find((x) => x.slug === slug)!;
+  const c = ROBOT_CONTENT[slug as RobotSlug];
+  return {
+    slug,
+    name: c.name,
+    tier: c.tier,
+    enclosure: c.tableEnclosure,
+    throughput: p.data.throughput ?? "—",
+    price: fmtPrice(p.data.price),
+  };
+});
+const prices = products.map((p) => p.data.price).filter((n): n is number => typeof n === "number");
+const priceLow = usd(Math.min(...prices));
+const priceHigh = usd(Math.max(...prices));
+
+// Two volumes, same machine, five years — the spread is the whole argument.
+const busy = tco(80, 4.25);
+const modest = tco(30, 4.0);
+
+const tcoLines: { label: string; note: string; a: number; b: number }[] = [
+  { label: "Machine", note: "list price of the reference unit", a: busy.capex, b: modest.capex },
+  { label: "Landing the machine", note: "freight, duty, site prep, install", a: busy.landed, b: modest.landed },
+  { label: "Consumables", note: `${usd2(CONSUMABLE_PER_CUP)} per cup`, a: busy.consumables, b: modest.consumables },
+  { label: "Daily service", note: `${usd(ATTENDANT_PER_DAY)}/day, every day`, a: busy.service, b: modest.service },
+  { label: "Power and connectivity", note: `${usd(UTILITIES_PER_DAY)}/day`, a: busy.utilities, b: modest.utilities },
+  { label: "Parts and maintenance", note: `${(MAINTENANCE_RATE * 100).toFixed(0)}% of price per year`, a: busy.maintenance, b: modest.maintenance },
+  { label: "Card processing", note: `${(PROCESSING_RATE * 100).toFixed(1)}% of gross`, a: busy.processing, b: modest.processing },
+  { label: "Site rent or revenue share", note: `${(SITE_SHARE_RATE * 100).toFixed(0)}% of gross`, a: busy.siteShare, b: modest.siteShare },
+];
+
+const toc: TocEntry[] = [
+  { id: "short-answer", label: "The short answer" },
+  { id: "machine-price", label: "Machine prices" },
+  { id: "landed-cost", label: "What the price excludes" },
+  { id: "running-cost", label: "Cost per cup" },
+  { id: "tco", label: "Five-year cost of ownership" },
+  { id: "buy-lease", label: "Buy, lease, or RaaS" },
+  { id: "vs-staffing", label: "Against staffing a bar" },
+  { id: "faq", label: "FAQ" },
+];
+
+const crumbs = [
+  { name: "Home", href: "/" },
+  { name: "Robot barista guide", href: "/robot-barista/" },
+  { name: "Cost", href: "/robot-barista/cost/" },
+];
+
+const faqs: FaqItem[] = [
+  {
+    q: "How much does a robot barista cost to buy?",
+    a: `Commercial robot baristas in this class list between ${priceLow} and ${priceHigh}. Enclosed high-volume kiosks start at the lower end; craft machines with latte-art capability sit at the top. Expect roughly ${usd(LANDED_EXTRAS)} more to land and commission the unit once freight, duty, site preparation and installation are counted.`,
+  },
+  {
+    q: "What does a robot barista cost per cup?",
+    a: `On the model used here, all-in cost per cup — including the machine amortised across five years — is about ${usd2(modest.costPerCup)} at 30 cups a day and about ${usd2(busy.costPerCup)} at 80 cups a day. Consumables alone are roughly ${usd2(CONSUMABLE_PER_CUP)}. The gap between the two is the fixed daily service cost being spread over more cups.`,
+  },
+  {
+    q: "Is electricity a significant cost for a robot barista?",
+    a: "No. These machines draw 3.5 kW to 5.2 kW at peak, but they spend most of the day idling with the boiler cycling rather than pulling rated load. Power and connectivity together are a rounding error next to consumables and the daily service visit.",
+  },
+  {
+    q: "Can you lease a robot barista instead of buying one?",
+    a: "Yes. Three structures are common: a straight equipment lease, robotics-as-a-service with a fixed monthly fee that bundles support, and a revenue-share placement where the operator takes a cut of sales instead of a fee. Leasing costs more in total but converts a capital decision into an operating one and shifts obsolescence risk off your balance sheet.",
+  },
+  {
+    q: "How many cups a day does a robot barista need to sell to be worth it?",
+    a: `Roughly ${breakEvenCups(4.25)} cups a day covers a ${usd(REFERENCE_PRICE)} machine over a three-year life on these assumptions, because the daily service visit is a fixed cost whether the machine sells 10 cups or 100. Sites that cannot clear about 20 cups a day are usually better served by a bean-to-cup machine.`,
+  },
+];
+
+const th = "px-4 py-3 text-left text-[12.5px] font-semibold uppercase tracking-[0.06em] text-faint";
+const td = "border-t border-line-faint px-4 py-3.5 text-[14.5px] text-body";
+const tdNum = `${td} font-mono tabular-nums whitespace-nowrap text-right`;
+---
+
+<GuideLayout
+  title="How Much Does a Robot Barista Cost? Prices and 5-Year TCO"
+  description="Robot barista prices run from $27,000 to $42,000 for the machine — but the machine is under a fifth of five-year cost. Full breakdown of capital, landed, and running cost per cup."
+  kicker="Robot barista guide"
+  heading="How much does a robot barista cost?"
+  standfirst="The purchase price is the number everyone asks for and the least useful one. Over five years the machine is under a fifth of what a robot barista costs to run — this page prices the other four fifths."
+  updated="2026-08-19"
+  toc={toc}
+  crumbs={crumbs}
+  ctaTitle="Want this modelled for your site?"
+  ctaBody="Send us your footfall, ticket price, and site share and we'll run the same model against real numbers — including when it says don't buy."
+>
+  <FaqStructuredData items={faqs} />
+
+  <h2 id="short-answer">The short answer</h2>
+  <p>
+    A commercial <a href="/robot-barista/">robot barista</a> costs
+    <strong>{priceLow} to {priceHigh}</strong> for the machine, plus roughly
+    {usd(LANDED_EXTRAS)} to land and commission it. Running it costs about
+    {usd2(CONSUMABLE_PER_CUP)} a cup in consumables and around
+    {usd(ATTENDANT_PER_DAY + UTILITIES_PER_DAY)} a day in service and utilities
+    regardless of how much it sells.
+  </p>
+  <p>
+    Across five years at 30 cups a day, all-in cost lands near
+    <strong>{usd2(modest.costPerCup)} per cup</strong>. At 80 cups a day it falls to
+    about <strong>{usd2(busy.costPerCup)} per cup</strong>. That spread — not the
+    sticker price — is the decision.
+  </p>
+
+  <h2 id="machine-price">Machine prices</h2>
+  <p>
+    List prices for the five machines Artidyn tests and certifies. Price tracks
+    format and capability rather than throughput: the most expensive unit here is
+    also one of the slowest, because latte art is deliberately unhurried.
+  </p>
+
+  <div class="not-prose my-8 overflow-x-auto rounded-xl border border-line">
+    <table class="w-full min-w-[640px] border-collapse bg-white">
+      <thead class="bg-surface">
+        <tr>
+          <th class={th} scope="col">Machine</th>
+          <th class={th} scope="col">Tier</th>
+          <th class={th} scope="col">Format</th>
+          <th class={th} scope="col">Throughput</th>
+          <th class={`${th} text-right`} scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          priceRows.map((r) => (
+            <tr>
+              <th scope="row" class={`${td} font-semibold`}>
+                <a href={`/products/${r.slug}/`} class="text-brand hover:text-brand-hover">{r.name}</a>
+              </th>
+              <td class={td}>{r.tier}</td>
+              <td class={td}>{r.enclosure}</td>
+              <td class={`${td} font-mono tabular-nums`}>{r.throughput}</td>
+              <td class={tdNum}>{r.price}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="landed-cost">What the price excludes</h2>
+  <p>
+    Quoted prices are ex-works for the unit. Between the quote and a working
+    machine sit costs that are easy to underestimate on a 500–750 kg crate:
+  </p>
+  <ul>
+    <li>
+      <strong>Freight and duty.</strong> Weight and volume both bite, and tariff
+      classification for robotic beverage equipment is not always obvious. Get this
+      quoted, not estimated.
+    </li>
+    <li>
+      <strong>Power.</strong> These units want a dedicated circuit. Retro-fitting one
+      into a finished concourse or a listed hotel lobby is often the largest single
+      line outside the machine.
+    </li>
+    <li>
+      <strong>Water.</strong> Plumbed units need a supply and a drain; tanked units
+      trade that for a manual fill in the daily service round.
+    </li>
+    <li>
+      <strong>Access.</strong> Lift dimensions, floor loading, and door widths. A
+      750 kg unit that cannot reach the intended floor is a total loss.
+    </li>
+    <li>
+      <strong>Payments and network.</strong> Merchant account setup, terminal
+      certification, and a connection the machine can rely on.
+    </li>
+    <li>
+      <strong>Commissioning and training.</strong> Someone has to calibrate the
+      grinder to your beans and teach the site team the daily round.
+    </li>
+  </ul>
+  <p>
+    {usd(LANDED_EXTRAS)} is a reasonable planning figure for a straightforward
+    installation. A difficult site can double it.
+  </p>
+
+  <h2 id="running-cost">Cost per cup</h2>
+  <p>
+    Running cost splits cleanly into costs that scale with cups and costs that
+    don't — and the ones that don't are what sink low-volume sites.
+  </p>
+  <ul>
+    <li>
+      <strong>Scales with volume:</strong> consumables at roughly
+      {usd2(CONSUMABLE_PER_CUP)} a cup for beans, milk, cup, lid and syrup; card
+      processing at {(PROCESSING_RATE * 100).toFixed(1)}% of gross; and any site
+      revenue share, here {(SITE_SHARE_RATE * 100).toFixed(0)}%.
+    </li>
+    <li>
+      <strong>Fixed, whatever happens:</strong> the daily service visit at about
+      {usd(ATTENDANT_PER_DAY)}, and power and connectivity at roughly
+      {usd(UTILITIES_PER_DAY)} a day. Together {usd(ATTENDANT_PER_DAY + UTILITIES_PER_DAY)}
+      a day, or about {usd((ATTENDANT_PER_DAY + UTILITIES_PER_DAY) * 365)} a year,
+      before a single cup is sold.
+    </li>
+  </ul>
+  <p>
+    That fixed floor is why the same machine can look like an excellent investment
+    and a poor one depending only on where it stands. Automation removes the
+    barista; it does not remove the operator.
+  </p>
+
+  <h2 id="tco">Five-year cost of ownership</h2>
+  <p>
+    The same {usd(REFERENCE_PRICE)} machine over five years, at two volumes. Every
+    line uses the assumptions stated above.
+  </p>
+
+  <div class="not-prose my-8 overflow-x-auto rounded-xl border border-line">
+    <table class="w-full min-w-[720px] border-collapse bg-white">
+      <thead class="bg-surface">
+        <tr>
+          <th class={th} scope="col">Five-year line item</th>
+          <th class={`${th} text-right`} scope="col">80 cups/day</th>
+          <th class={`${th} text-right`} scope="col">30 cups/day</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          tcoLines.map((l) => (
+            <tr>
+              <th scope="row" class={`${td} font-medium text-ink`}>
+                {l.label}
+                <span class="mt-0.5 block text-[13px] font-normal text-faint">{l.note}</span>
+              </th>
+              <td class={tdNum}>{usd(l.a)}</td>
+              <td class={tdNum}>{usd(l.b)}</td>
+            </tr>
+          ))
+        }
+        <tr class="bg-surface">
+          <th scope="row" class={`${td} font-bold text-ink`}>Total five-year cost</th>
+          <td class={`${tdNum} font-bold text-ink`}>{usd(busy.total)}</td>
+          <td class={`${tdNum} font-bold text-ink`}>{usd(modest.total)}</td>
+        </tr>
+        <tr>
+          <th scope="row" class={`${td} font-medium text-ink`}>Cups sold</th>
+          <td class={tdNum}>{busy.cups.toLocaleString("en-US")}</td>
+          <td class={tdNum}>{modest.cups.toLocaleString("en-US")}</td>
+        </tr>
+        <tr>
+          <th scope="row" class={`${td} font-medium text-ink`}>All-in cost per cup</th>
+          <td class={`${tdNum} font-semibold text-ink`}>{usd2(busy.costPerCup)}</td>
+          <td class={`${tdNum} font-semibold text-ink`}>{usd2(modest.costPerCup)}</td>
+        </tr>
+        <tr class="bg-surface">
+          <th scope="row" class={`${td} font-bold text-ink`}>Net over five years</th>
+          <td class={`${tdNum} font-bold text-ink`}>{usd(busy.net)}</td>
+          <td class={`${tdNum} font-bold text-ink`}>{usd(modest.net)}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    Two things stand out. The machine is
+    {((busy.capex / busy.total) * 100).toFixed(0)}% of five-year cost at the busy
+    site and {((modest.capex / modest.total) * 100).toFixed(0)}% at the quiet one —
+    so haggling over the purchase price is close to irrelevant next to picking the
+    right location. And consumables plus the daily service visit together dominate
+    both columns.
+  </p>
+  <p>
+    <strong>These are modelled figures, not audited results.</strong> Change the
+    ticket price or the site share and the totals move sharply; the structure of
+    the cost, which is the useful part, does not.
+  </p>
+
+  <h2 id="buy-lease">Buy, lease, or robotics-as-a-service</h2>
+  <ul>
+    <li>
+      <strong>Outright purchase.</strong> Lowest total cost, all the risk. Sensible
+      when you have a proven site and the volume to justify it.
+    </li>
+    <li>
+      <strong>Equipment lease.</strong> Converts capital into a monthly line and
+      preserves cash. Costs more overall; you still own the operational risk.
+    </li>
+    <li>
+      <strong>Robotics-as-a-service.</strong> A fixed monthly fee bundling machine,
+      support, and parts. Most expensive per cup, but obsolescence and breakdown
+      risk sit with the supplier — which matters in a market where machines are
+      still changing quickly.
+    </li>
+    <li>
+      <strong>Revenue share.</strong> The supplier places the machine and takes a
+      cut. Nearly free to start and the most expensive at volume. Useful for
+      proving a site before committing.
+    </li>
+  </ul>
+  <p>
+    The honest test: if you are unsure the site clears
+    {breakEvenCups(4.25)} cups a day, do not buy. Prove it on a revenue-share or
+    short lease first.
+  </p>
+
+  <h2 id="vs-staffing">Against staffing an espresso bar</h2>
+  <p>
+    The comparison people expect is machine price against barista salary, and it is
+    the wrong one. A staffed bar carries its own fit-out capital, and a robot still
+    carries a daily human visit. The real difference is shape: a barista costs a
+    full shift's wage whether five customers come or fifty, while a machine costs
+    its fixed daily service plus consumables.
+  </p>
+  <p>
+    So automation wins decisively in exactly two situations — long opening hours
+    with thin demand, such as the overnight window no café can staff profitably,
+    and sites too small to justify a person at all. It wins far less clearly at a
+    busy daytime café, where a trained barista out-produces the machine and sells
+    more per customer. The
+    <a href="/robot-barista/vs-human-barista/">full comparison is here</a>.
+  </p>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  {
+    faqs.map((f) => (
+      <>
+        <h3>{f.q}</h3>
+        <p>{f.a}</p>
+      </>
+    ))
+  }
+</GuideLayout>

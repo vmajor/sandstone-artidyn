@@ -1,0 +1,367 @@
+---
+// Cluster page: "robot barista vs human barista" / "can robots replace baristas".
+// Deliberately even-handed — the pages that rank for this query are advocacy
+// pieces, and a genuinely balanced answer is the differentiator.
+import GuideLayout from "@/layouts/GuideLayout.astro";
+import FaqStructuredData from "@/components/foundations/head/FaqStructuredData.astro";
+import type { FaqItem, TocEntry } from "@/data/seo";
+import {
+  ATTENDANT_PER_DAY,
+  CONSUMABLE_PER_CUP,
+  REFERENCE_PRICE,
+  UTILITIES_PER_DAY,
+  usd,
+  usd2,
+} from "@/data/economics";
+
+const toc: TocEntry[] = [
+  { id: "short-answer", label: "The short answer" },
+  { id: "throughput", label: "Throughput" },
+  { id: "consistency", label: "Consistency" },
+  { id: "cost-shape", label: "The shape of the cost" },
+  { id: "hours", label: "Hours and coverage" },
+  { id: "range", label: "Drink range" },
+  { id: "failure", label: "When things go wrong" },
+  { id: "experience", label: "The customer experience" },
+  { id: "hybrid", label: "What actually happens" },
+  { id: "decide", label: "How to decide" },
+  { id: "faq", label: "FAQ" },
+];
+
+const crumbs = [
+  { name: "Home", href: "/" },
+  { name: "Robot barista guide", href: "/robot-barista/" },
+  { name: "Versus a human barista", href: "/robot-barista/vs-human-barista/" },
+];
+
+const comparison: { dim: string; robot: string; human: string; edge: "robot" | "human" | "even" }[] = [
+  {
+    dim: "Peak throughput",
+    robot: "40–70 cups/hr rated; roughly 70% of that sustained",
+    human: "Higher on a well-drilled two-group bar, and it scales by adding a second person",
+    edge: "human",
+  },
+  {
+    dim: "Throughput at 3 a.m.",
+    robot: "Unchanged",
+    human: "Zero, unless you are paying for the shift",
+    edge: "robot",
+  },
+  {
+    dim: "Shot-to-shot consistency",
+    robot: "Identical indefinitely",
+    human: "Excellent when fresh; drifts across a long shift",
+    edge: "robot",
+  },
+  {
+    dim: "Marginal cost of one more cup",
+    robot: `About ${usd2(CONSUMABLE_PER_CUP)} in consumables`,
+    human: "Consumables plus the wage for that minute",
+    edge: "robot",
+  },
+  {
+    dim: "Cost when nobody comes",
+    robot: `About ${usd(ATTENDANT_PER_DAY + UTILITIES_PER_DAY)}/day in service and utilities`,
+    human: "The full shift wage",
+    edge: "robot",
+  },
+  {
+    dim: "Drink range",
+    robot: "5–32 fixed presets",
+    human: "Effectively unlimited, and adapts to a request mid-order",
+    edge: "human",
+  },
+  {
+    dim: "Handling the unexpected",
+    robot: "Poor — a jam stops service until someone arrives",
+    human: "Improvises",
+    edge: "human",
+  },
+  {
+    dim: "Upselling and regulars",
+    robot: "Screen prompts only",
+    human: "Substantially better ticket and repeat rate",
+    edge: "human",
+  },
+  {
+    dim: "Hygiene auditability",
+    robot: "Logged rinse cycles and telemetry",
+    human: "Depends on the shift and the checklist",
+    edge: "robot",
+  },
+  {
+    dim: "Staffing risk",
+    robot: "None — but you still need someone to service it",
+    human: "Recruitment, sickness, turnover, training",
+    edge: "robot",
+  },
+];
+
+const faqs: FaqItem[] = [
+  {
+    q: "Can a robot barista replace a human barista?",
+    a: "Not usually one-for-one. A commercial robot barista matches a person on consistency and beats one on cost per cup and hours covered, but loses on peak throughput, drink range, and recovering from anything unplanned. In practice robots take shifts that cannot be staffed profitably rather than displacing a working barista.",
+  },
+  {
+    q: "Is a robot barista faster than a human barista?",
+    a: "Per cup, often yes — 51 to 90 seconds is typical and it never varies. Over a busy hour, usually no. A skilled barista on a two-group machine batches steps, works several drinks in parallel, and can be joined by a second person. A robot works one drink at a time and cannot be scaled by adding staff.",
+  },
+  {
+    q: "Does coffee from a robot barista taste as good?",
+    a: "It tastes the same every time, which is not identical to tasting best. A robot holds grind, dose, temperature and timing to a tolerance a person cannot sustain across a shift, so the floor is high. The ceiling is lower: it will not taste the shot and adjust the grind as beans change through the day, and it will not read a customer's preference.",
+  },
+  {
+    q: "Do robot baristas cause job losses?",
+    a: "The observed pattern in beverage automation is coverage extension rather than redundancy — overnight hours, low-density sites, and surge capacity that was never staffed in the first place. Where a robot does displace work, it is typically the least skilled part of the role. The daily restock, cleaning, and exception handling remain human jobs.",
+  },
+  {
+    q: "Which is cheaper, a robot barista or a barista?",
+    a: `It depends entirely on volume and hours. A robot's cost is roughly ${usd(ATTENDANT_PER_DAY + UTILITIES_PER_DAY)} a day fixed plus ${usd2(CONSUMABLE_PER_CUP)} a cup; a barista's is a full shift wage regardless of how many cups sell. Automation therefore wins decisively on long, thin trading hours and loses on short, busy ones.`,
+  },
+];
+
+const th = "px-4 py-3 text-left text-[12.5px] font-semibold uppercase tracking-[0.06em] text-faint";
+const td = "border-t border-line-faint px-4 py-3.5 text-[14.5px] text-body align-top";
+const badge: Record<string, { label: string; cls: string }> = {
+  robot: { label: "Robot", cls: "bg-brand-tint text-brand" },
+  human: { label: "Human", cls: "bg-tag-amber-bg text-tag-amber" },
+  even: { label: "Even", cls: "bg-surface text-muted" },
+};
+---
+
+<GuideLayout
+  title="Robot Barista vs Human Barista — An Honest Comparison"
+  description="Where a robot barista genuinely beats a trained barista, where it plainly loses, and the volume and opening-hours test that decides which one your site should have."
+  kicker="Robot barista guide"
+  heading="Robot barista vs human barista"
+  standfirst="We sell robot baristas, so treat the conclusion accordingly — but a comparison that only flatters the machine is useless to a buyer. Here is where each one genuinely wins."
+  updated="2026-08-19"
+  toc={toc}
+  crumbs={crumbs}
+  ctaTitle="Not sure which your site needs?"
+  ctaBody="Send us your opening hours and your busiest hour. If the answer is a person rather than a machine, we'll say so."
+>
+  <FaqStructuredData items={faqs} />
+
+  <h2 id="short-answer">The short answer</h2>
+  <p>
+    A <a href="/robot-barista/">robot barista</a> wins on hours, consistency, and
+    marginal cost. A trained human barista wins on peak throughput, drink range,
+    and everything that happens when something goes wrong. Neither statement is
+    controversial, and the choice between them comes down to one question:
+    <strong>are your trading hours long and thin, or short and busy?</strong>
+  </p>
+  <p>
+    Long and thin — a hotel lobby open around the clock, an office with steady
+    trickle demand, a transit site with a dead overnight window — is where
+    automation is clearly correct. Short and busy, where 200 people want coffee in
+    45 minutes and then nobody does, is where a person still wins.
+  </p>
+
+  <div class="not-prose my-8 overflow-x-auto rounded-xl border border-line">
+    <table class="w-full min-w-[780px] border-collapse bg-white">
+      <thead class="bg-surface">
+        <tr>
+          <th class={th} scope="col">Dimension</th>
+          <th class={th} scope="col">Robot barista</th>
+          <th class={th} scope="col">Trained human barista</th>
+          <th class={th} scope="col">Edge</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          comparison.map((c) => (
+            <tr>
+              <th scope="row" class={`${td} font-semibold text-ink`}>{c.dim}</th>
+              <td class={td}>{c.robot}</td>
+              <td class={td}>{c.human}</td>
+              <td class={td}>
+                <span
+                  class:list={[
+                    "inline-block rounded-[5px] px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.06em]",
+                    badge[c.edge].cls,
+                  ]}
+                >
+                  {badge[c.edge].label}
+                </span>
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="throughput">Throughput</h2>
+  <p>
+    This is the comparison most often reported backwards. A robot's serve time —
+    51 to 90 seconds depending on the machine — is faster than most people assume,
+    and it does not degrade. But serve time is not throughput.
+  </p>
+  <p>
+    A barista working a two-group machine overlaps operations: grinding the next
+    dose while the current shot pulls, steaming milk for two drinks at once,
+    calling orders ahead. That parallelism is why a practised operator can clear a
+    rush faster than a machine rated at 70 cups an hour, and why the gap widens as
+    the queue grows. Add a second person and human throughput roughly doubles.
+    Adding a second machine costs another {usd(REFERENCE_PRICE)}.
+  </p>
+  <p>
+    The robot's throughput argument is not that it is faster. It is that its rate
+    is the same at 03:00 as at 09:00, and it needs no rota to achieve that.
+  </p>
+
+  <h2 id="consistency">Consistency</h2>
+  <p>
+    Here the machine wins without qualification. Grind, dose, water temperature,
+    pressure, extraction time, and milk temperature are held to a tolerance no
+    person sustains across an eight-hour shift. The hundredth flat white is the
+    first flat white.
+  </p>
+  <p>
+    The caveat is that consistency raises the floor rather than the ceiling. A good
+    barista tastes the coffee, notices the grind drifting as humidity changes
+    through the day, and corrects. A robot repeats its settings faithfully,
+    including when those settings have stopped being right — which is one of the
+    reasons the daily service visit exists.
+  </p>
+
+  <h2 id="cost-shape">The shape of the cost</h2>
+  <p>
+    Comparing a machine price to a salary is the wrong comparison. What matters is
+    how each cost behaves as volume changes.
+  </p>
+  <ul>
+    <li>
+      <strong>A barista is a fixed cost per shift and a variable cost per cup.</strong>
+      You pay the wage whether five customers come or fifty, and cannot serve the
+      fifty-first without another shift.
+    </li>
+    <li>
+      <strong>A robot is a fixed cost per day and a small variable cost per cup.</strong>
+      About {usd(ATTENDANT_PER_DAY + UTILITIES_PER_DAY)} a day for service and
+      utilities, plus roughly {usd2(CONSUMABLE_PER_CUP)} a cup — and that daily
+      figure does not change if the site trades 24 hours instead of eight.
+    </li>
+  </ul>
+  <p>
+    That is the entire economic case, and it explains both where automation wins
+    and where it fails. Spreading one fixed daily cost over 20 opening hours is
+    excellent. Spreading it over 12 cups a day is not. The
+    <a href="/robot-barista/cost/">cost breakdown</a> works the numbers through.
+  </p>
+
+  <h2 id="hours">Hours and coverage</h2>
+  <p>
+    The strongest case for a robot barista has nothing to do with replacing anyone.
+    It is the hours nobody is working. An overnight café shift rarely pays for
+    itself; a hotel that closes its coffee offer at 22:00 is not choosing to lose
+    that revenue, it is choosing not to lose more on wages.
+  </p>
+  <p>
+    A machine covers that window at the same daily cost it already incurs. Whatever
+    the overnight window sells is close to pure incremental contribution — which is
+    why hotels and transit sites are usually the first environments where the
+    numbers work.
+  </p>
+
+  <h2 id="range">Drink range</h2>
+  <p>
+    Machines in this class carry between 5 and 32 presets. That covers the drinks
+    most sites actually sell, and preset counts are a poor proxy for usefulness —
+    a machine with 32 presets and one syrup line is less flexible than it sounds.
+  </p>
+  <p>
+    What a robot cannot do is take an instruction. Extra hot, half shot, oat milk
+    only in the second cup, the regular's usual without being asked — all of that
+    is human territory, and in venues where those requests are common, automation
+    reads as a downgrade regardless of coffee quality.
+  </p>
+
+  <h2 id="failure">When things go wrong</h2>
+  <p>
+    The failure modes are asymmetric and worth planning for explicitly. A barista
+    who drops a cup makes another one. A robot that mis-seats a lid at 02:40 stops
+    serving until somebody attends, and unattended sites are precisely the ones
+    where nobody is there to attend.
+  </p>
+  <p>
+    Three things materially reduce that risk, and they are worth insisting on:
+    remote telemetry that alerts on fault rather than waiting for a complaint, an
+    enclosure rated for unattended operation, and a spare-parts position local
+    enough that a controller failure is a day of downtime rather than six weeks.
+    Ask about all three before signing.
+  </p>
+
+  <h2 id="experience">The customer experience</h2>
+  <p>
+    Two effects pull in opposite directions, and both are real. A visible robotic
+    pour draws people who would have walked past — the theatre is genuinely part of
+    the product, which is why open-bar and craft formats exist at all. Against
+    that, a queue behind a machine feels longer than a queue behind a person,
+    because there is nobody to acknowledge you.
+  </p>
+  <p>
+    The novelty effect also decays. Plan for the machine to earn its place on
+    availability and consistency once it stops being interesting, because at a
+    permanent installation it will.
+  </p>
+
+  <h2 id="hybrid">What actually happens</h2>
+  <p>
+    In working deployments the split is rarely all-or-nothing. The common patterns:
+  </p>
+  <ul>
+    <li>
+      <strong>Staffed by day, automated overnight.</strong> Hotels and transit
+      sites. The machine covers the window the rota cannot.
+    </li>
+    <li>
+      <strong>Automation at the satellite, people at the flagship.</strong> One
+      staffed bar plus machines at sites that could never support a person.
+    </li>
+    <li>
+      <strong>The machine absorbs the simple orders.</strong> Americanos and
+      straight lattes go to the kiosk; the bar handles everything else.
+    </li>
+  </ul>
+  <p>
+    The realistic framing is that automation extends coverage. Every deployment we
+    have worked on still needs a person — just not for the eight hours in the
+    middle of the night.
+  </p>
+
+  <h2 id="decide">How to decide</h2>
+  <p><strong>A robot barista is probably right if:</strong></p>
+  <ul>
+    <li>You want to trade materially more hours than you can staff</li>
+    <li>Demand is steady rather than spiky, and clears roughly 20 cups a day</li>
+    <li>The drink mix is standard and requests are rare</li>
+    <li>Someone on site will own a daily 30-minute service round</li>
+    <li>Recruitment for the site is genuinely difficult</li>
+  </ul>
+  <p><strong>A person is probably right if:</strong></p>
+  <ul>
+    <li>Your peak needs more than about 70 drinks in an hour</li>
+    <li>Customisation and regulars are the reason people come</li>
+    <li>Trading hours are short and concentrated</li>
+    <li>Coffee quality at the top end is your differentiator</li>
+    <li>Nobody can be made responsible for the daily round</li>
+  </ul>
+  <p>
+    If your answer is a mix — most are — the useful next step is to size the
+    machine against your quietest hours rather than your busiest.
+    <a href="/solutions/">Solutions by environment</a> sets out how that lands for
+    hotels, airports, offices, and vending routes.
+  </p>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  {
+    faqs.map((f) => (
+      <>
+        <h3>{f.q}</h3>
+        <p>{f.a}</p>
+      </>
+    ))
+  }
+</GuideLayout>

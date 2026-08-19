@@ -1,0 +1,181 @@
+---
+// Environment page: robotic coffee kiosks for vending and kiosk route operators.
+import GuideLayout from "@/layouts/GuideLayout.astro";
+import FaqStructuredData from "@/components/foundations/head/FaqStructuredData.astro";
+import type { FaqItem, TocEntry } from "@/data/seo";
+import { daily, monthsLabel, usd, usd2, SITE_SHARE_RATE } from "@/data/economics";
+
+const IRIS = 27000;
+const m = daily(55, 4.0, { price: IRIS });
+
+const toc: TocEntry[] = [
+  { id: "the-case", label: "The case against a vending bank" },
+  { id: "numbers", label: "What the numbers look like" },
+  { id: "route", label: "Route economics" },
+  { id: "which-machine", label: "Which machine" },
+  { id: "siting", label: "Qualifying a site" },
+  { id: "watch-out", label: "What to watch for" },
+  { id: "faq", label: "FAQ" },
+];
+const crumbs = [
+  { name: "Home", href: "/" },
+  { name: "Solutions", href: "/solutions/" },
+  { name: "Vending & kiosk operators", href: "/solutions/vending-operators/" },
+];
+
+const faqs: FaqItem[] = [
+  {
+    q: "Is a robotic coffee kiosk better than a coffee vending machine?",
+    a: "At the right site, materially — because it sells a specialty-grade drink at a specialty price rather than a commodity drink at a commodity price, and the gap in ticket is much larger than the gap in consumable cost. At the wrong site it is worse, because the machine costs an order of magnitude more and still needs a daily visit. Volume decides it.",
+  },
+  {
+    q: "How often does a robotic coffee kiosk need servicing?",
+    a: "Daily at any real volume. Beans, milk, cups, lids and syrups need replenishing, waste needs emptying, and surfaces need wiping. Automated rinse cycles handle the milk lines between serves but do not remove the visit. For a route operator this is the number that matters — it is a fixed cost per machine per day regardless of what the machine sells.",
+  },
+  {
+    q: "Can one operator manage a fleet of robot baristas remotely?",
+    a: "Partly. Fleet telemetry reports stock levels, sales, and faults across every unit, which lets you plan a route against real data instead of a fixed schedule and stops you driving to a machine that does not need you. It does not remove the visit itself, and a fleet without telemetry becomes an unplannable driving job.",
+  },
+];
+---
+
+<GuideLayout
+  title="Robotic Coffee Kiosks for Vending Operators — Route Economics"
+  description="When a robot barista beats a vending bank on a route, what the per-site numbers look like at a 15% site share, and the route-density arithmetic that decides whether a fleet works."
+  kicker="Solutions by environment"
+  heading="Robotic coffee kiosks for vending and kiosk operators"
+  standfirst="You already know the daily-visit maths better than we do. The question is whether a machine costing twenty times a vending unit returns enough more per site to justify the same visit."
+  updated="2026-08-19"
+  toc={toc}
+  crumbs={crumbs}
+  ctaTitle="Send us two sites — your best and your median."
+  ctaBody="We'll model both against the same assumptions and tell you which tier of machine, if any, the route can carry."
+>
+  <FaqStructuredData items={faqs} />
+
+  <h2 id="the-case">The case against a vending bank</h2>
+  <p>
+    A coffee vending machine sells a commodity drink at a commodity price. A
+    <a href="/robot-barista/">robot barista</a> sells a specialty drink at a
+    specialty price — and the difference in ticket is far larger than the
+    difference in consumable cost, which is where the whole argument lives.
+  </p>
+  <p>
+    The offsetting facts are equally plain. The machine costs roughly twenty times
+    a vending unit, occupies more floor, needs a dedicated circuit, and requires the
+    same daily visit. So the swap makes sense at sites where footfall can carry a
+    higher ticket, and nowhere else. Replacing a low-traffic bank with a robot
+    reliably converts a small profit into a large loss.
+  </p>
+
+  <h2 id="numbers">What the numbers look like</h2>
+  <p>
+    A worked illustration for a placement at a {(SITE_SHARE_RATE * 100).toFixed(0)}%
+    site share — the ordinary structure for an operator-owned machine on someone
+    else's floor.
+  </p>
+  <div class="not-prose my-8 overflow-hidden rounded-xl border border-line">
+    <dl class="grid grid-cols-2 divide-x divide-y divide-line-faint sm:grid-cols-4">
+      {
+        [
+          ["Cups per day", m.cups.toString()],
+          ["Average ticket", usd2(m.ticket)],
+          ["Net per day", usd(m.net)],
+          ["Payback", monthsLabel(m.paybackDays)],
+        ].map(([k, v]) => (
+          <div class="p-5">
+            <dt class="text-[12.5px] uppercase tracking-[0.06em] text-faint">{k}</dt>
+            <dd class="mt-1.5 font-mono text-[19px] font-bold tabular-nums text-ink">{v}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+  <p>
+    That is {usd(m.monthly)} a month net from one placement, after consumables,
+    card processing, the site share, the daily visit, and utilities. Full
+    assumptions are in the <a href="/robot-barista/cost/">cost model</a>. These are
+    modelled figures, not audited results.
+  </p>
+
+  <h2 id="route">Route economics</h2>
+  <p>
+    The per-site number is not the interesting one for an operator. Two effects
+    dominate a fleet:
+  </p>
+  <ul>
+    <li>
+      <strong>The visit is fixed per machine, not per cup.</strong> A robot at 55
+      cups a day and a vending unit at 15 both consume a stop. Higher revenue per
+      stop is the entire reason to carry the more expensive machine.
+    </li>
+    <li>
+      <strong>Telemetry changes the route, not the visit.</strong> Stock and fault
+      reporting lets you plan against real consumption instead of a fixed
+      timetable, which is where fleet-level savings actually come from. It does not
+      let you skip the round.
+    </li>
+  </ul>
+  <p>
+    The practical consequence: robot placements want to be clustered. One machine
+    at the far end of a route carries the whole drive time against a single site's
+    contribution. Three within a few miles change the arithmetic completely.
+  </p>
+
+  <h2 id="which-machine">Which machine</h2>
+  <ul>
+    <li>
+      <strong><a href="/products/iris/">Iris</a></strong> — the route default.
+      Fully enclosed, 70 cups an hour, 32 presets, rated for unattended public
+      operation. {usd(IRIS)}.
+    </li>
+    <li>
+      <strong><a href="/products/iris-max/">Iris Max</a></strong> — where a site
+      justifies a differentiated offer: six syrup lines and custom latte-art image
+      printing, at a slower 72-second serve.
+    </li>
+    <li>
+      <strong><a href="/products/iris-pro/">Iris Pro</a></strong> — the narrowest
+      cabinet, for placements where the existing vending alcove sets the width.
+    </li>
+  </ul>
+  <p>
+    Open-bar craft machines are the wrong format for unattended placements. Keep
+    them for supervised sites.
+  </p>
+
+  <h2 id="siting">Qualifying a site</h2>
+  <p>Before you commit a machine to a pitch, confirm:</p>
+  <ul>
+    <li><strong>Realistic cups per day</strong> — measured or evidenced, not the site's estimate</li>
+    <li><strong>A ticket the location supports</strong> — the specialty price is doing the work</li>
+    <li><strong>A dedicated circuit</strong>, and who pays to install it</li>
+    <li><strong>Floor loading</strong> for 720–750 kg, and a delivery route the crate fits</li>
+    <li><strong>Water</strong>, or an accepted tanked operation with refill in the round</li>
+    <li><strong>Network coverage</strong> good enough for telemetry and card authorisation</li>
+    <li><strong>Site share and contract length</strong> — a short term on a capital machine is a bad trade</li>
+  </ul>
+
+  <h2 id="watch-out">What to watch for</h2>
+  <ul>
+    <li>
+      <strong>Taking the site's footfall claim at face value.</strong> Meter it, or
+      place on revenue share until you have your own data.
+    </li>
+    <li>
+      <strong>Isolated placements.</strong> Drive time is the hidden cost that
+      turns a profitable site into a marginal one.
+    </li>
+    <li>
+      <strong>Buying before proving.</strong> Revenue-share placement costs more
+      per cup and is far cheaper than a stranded machine.
+    </li>
+    <li>
+      <strong>No spares position.</strong> One controller on a long lead time can
+      strand a site for a quarter. Ask where parts ship from before you order.
+    </li>
+  </ul>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  {faqs.map((f) => (<><h3>{f.q}</h3><p>{f.a}</p></>))}
+</GuideLayout>

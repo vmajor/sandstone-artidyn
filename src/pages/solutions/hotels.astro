@@ -1,0 +1,193 @@
+---
+// Environment page: "robot barista for hotels" / 24-hour hotel coffee service.
+// Replaces the /solutions/3/ page the redesign removed, on a readable slug.
+import GuideLayout from "@/layouts/GuideLayout.astro";
+import FaqStructuredData from "@/components/foundations/head/FaqStructuredData.astro";
+import type { FaqItem, TocEntry } from "@/data/seo";
+import { daily, monthsLabel, usd, usd2, CONSUMABLE_PER_CUP } from "@/data/economics";
+
+// A hotel running its own machine on its own floor pays no concession fee, so
+// the site share comes out of the model entirely.
+const ARGUS_ART = 42000;
+const m = daily(45, 5.5, { price: ARGUS_ART, siteShareRate: 0 });
+
+const toc: TocEntry[] = [
+  { id: "the-problem", label: "The overnight problem" },
+  { id: "numbers", label: "What the numbers look like" },
+  { id: "which-machine", label: "Which machine" },
+  { id: "siting", label: "Siting and services" },
+  { id: "watch-out", label: "What to watch for" },
+  { id: "faq", label: "FAQ" },
+];
+const crumbs = [
+  { name: "Home", href: "/" },
+  { name: "Solutions", href: "/solutions/" },
+  { name: "Hotels & resorts", href: "/solutions/hotels/" },
+];
+
+const faqs: FaqItem[] = [
+  {
+    q: "Can a robot barista serve hotel guests overnight?",
+    a: "Yes — the overnight window is the strongest case for one. An enclosed or supervised unit runs unattended through the hours no café can staff profitably, at the same daily service cost it already incurs during the day. Whatever it sells between midnight and six is close to pure incremental contribution.",
+  },
+  {
+    q: "Does a robot barista fit in a hotel lobby?",
+    a: "Open-bar craft machines are designed for exactly that: a low-profile arm on an exposed counter, roughly 1.9 m² of floor, with the pour visible to the room. Enclosed kiosks suit back-of-house and breakfast rooms better. Floor loading matters — units run 500 kg to 750 kg — so check the structure before the design.",
+  },
+  {
+    q: "Will guests accept a robot instead of a barista?",
+    a: "In lobby and breakfast settings the visible pour reads as an amenity rather than a substitution, particularly where the alternative was a filter urn or nothing at all. Guest acceptance drops sharply where a staffed bar was removed to make room for the machine — automation lands best as an extension of hours, not a replacement for service.",
+  },
+];
+---
+
+<GuideLayout
+  title="Robot Barista for Hotels — 24/7 Guest Coffee Without Night Staff"
+  description="How hotels use a robot barista to cover the overnight window no café can staff profitably: lobby siting, machine choice, floor loading, and the volume that makes it pay."
+  kicker="Solutions by environment"
+  heading="Robot baristas for hotels and resorts"
+  standfirst="Hotels rarely close their coffee offer because they want to. They close it because the overnight shift does not pay for itself. That is precisely the gap a machine fills at no extra daily cost."
+  updated="2026-08-19"
+  toc={toc}
+  crumbs={crumbs}
+  ctaTitle="Send us your lobby plan and your overnight covers."
+  ctaBody="We'll come back with one machine, the floor loading it needs, and the volume it has to clear to make sense."
+>
+  <FaqStructuredData items={faqs} />
+
+  <h2 id="the-problem">The overnight problem</h2>
+  <p>
+    A hotel that stops serving coffee at 22:00 is not choosing to forgo the
+    revenue. It is choosing not to lose more on wages. An overnight F&amp;B shift
+    against thin, unpredictable demand is a reliable way to turn a profitable
+    daypart into a subsidised one, so the offer shrinks to a filter urn, a pod
+    machine in the room, or nothing.
+  </p>
+  <p>
+    A <a href="/robot-barista/">robot barista</a> changes the arithmetic because
+    its cost does not scale with opening hours. The daily service round is the same
+    whether the machine trades 12 hours or 24. Every cup sold in the window that
+    used to be closed carries only its consumable cost — about
+    {usd2(CONSUMABLE_PER_CUP)} — against a room-service or lobby price.
+  </p>
+  <p>
+    The same logic covers the other two gaps hotels routinely have: the pre-06:00
+    departure rush that starts before the kitchen brigade does, and event overflow
+    where the banqueting team cannot be in two rooms at once.
+  </p>
+
+  <h2 id="numbers">What the numbers look like</h2>
+  <p>
+    A worked illustration for an in-house lobby machine. Because the hotel owns the
+    floor, there is no concession fee — which makes hotel economics materially
+    better than a rented retail pitch at the same volume.
+  </p>
+  <div class="not-prose my-8 overflow-hidden rounded-xl border border-line">
+    <dl class="grid grid-cols-2 divide-x divide-y divide-line-faint sm:grid-cols-4">
+      {
+        [
+          ["Cups per day", m.cups.toString()],
+          ["Average ticket", usd2(m.ticket)],
+          ["Net per day", usd(m.net)],
+          ["Payback", monthsLabel(m.paybackDays)],
+        ].map(([k, v]) => (
+          <div class="p-5">
+            <dt class="text-[12.5px] uppercase tracking-[0.06em] text-faint">{k}</dt>
+            <dd class="mt-1.5 font-mono text-[19px] font-bold tabular-nums text-ink">{v}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+  <p>
+    That is {m.cups} cups a day at {usd2(m.ticket)} on a {usd(ARGUS_ART)} craft
+    machine, with consumables, card processing, a 30-minute daily service round and
+    utilities deducted, and no site share. It is a modelled illustration, not a
+    measured result — but it shows the shape: a modest cup count works at a hotel
+    ticket price, where the same count would struggle on a leased retail pitch.
+    The <a href="/robot-barista/cost/">full cost model</a> sets out every
+    assumption.
+  </p>
+
+  <h2 id="which-machine">Which machine</h2>
+  <p>
+    Hotels almost always want the pour to be visible, which points at the open-bar
+    craft format rather than an enclosed kiosk.
+  </p>
+  <ul>
+    <li>
+      <strong><a href="/products/argus-art/">Argus Art</a></strong> — the lobby and
+      events machine. Physical latte-art pours plus custom image printing, so a
+      property logo or an event mark can go on the crema. 40 cups an hour, which is
+      ample for a lobby and deliberately unhurried.
+    </li>
+    <li>
+      <strong><a href="/products/argus-axis/">Argus Axis</a></strong> — the same
+      open-bar theatre without latte art, at a materially lower price, with a
+      21.5-inch ordering screen and a wider recipe list. The right choice where the
+      machine is a service point rather than a centrepiece.
+    </li>
+    <li>
+      <strong><a href="/products/iris-pro/">Iris Pro</a></strong> — enclosed and
+      compact, for breakfast rooms, staff areas, and corridors where an open bar is
+      not appropriate. The narrowest unit we carry.
+    </li>
+  </ul>
+
+  <h2 id="siting">Siting and services</h2>
+  <p>Settle these before the interior designer draws anything:</p>
+  <ul>
+    <li>
+      <strong>Floor loading.</strong> 500–750 kg on a small footprint. Mezzanines,
+      raised access floors, and older timber structures need checking.
+    </li>
+    <li>
+      <strong>Power.</strong> A dedicated circuit. Retro-fitting one across a
+      finished lobby is frequently the largest cost outside the machine.
+    </li>
+    <li>
+      <strong>Water and drainage.</strong> Plumbed operation is preferable at any
+      real volume; a tanked unit shifts that burden into the daily round.
+    </li>
+    <li>
+      <strong>Service access.</strong> Clearance at the rear, and a route from the
+      loading bay that a crate actually fits through, lift included.
+    </li>
+    <li>
+      <strong>Acoustics.</strong> Grinders are loud. A lobby installation near
+      seating or reception needs that considered rather than discovered.
+    </li>
+    <li>
+      <strong>Payment.</strong> Room charging usually matters more than card
+      acceptance. Confirm the machine can post to your PMS, or accept that it
+      cannot.
+    </li>
+  </ul>
+
+  <h2 id="watch-out">What to watch for</h2>
+  <ul>
+    <li>
+      <strong>Nobody owns the daily round.</strong> The most common failure in
+      hospitality deployments. If the restock is not written into a named
+      department's checklist, the machine will be out of milk within a month.
+    </li>
+    <li>
+      <strong>Breakfast peak sizing.</strong> A 40 cups/hour machine will not clear
+      a 200-cover breakfast service. It supplements the buffet urns; it does not
+      replace them.
+    </li>
+    <li>
+      <strong>Novelty decay.</strong> Guests find it remarkable for a season. Judge
+      the investment on availability and consistency, which is what it will be
+      delivering in year two.
+    </li>
+    <li>
+      <strong>Replacing service rather than extending it.</strong> Removing a
+      staffed bar to install a machine reads as a downgrade. Covering hours that
+      were previously dark does not.
+    </li>
+  </ul>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  {faqs.map((f) => (<><h3>{f.q}</h3><p>{f.a}</p></>))}
+</GuideLayout>

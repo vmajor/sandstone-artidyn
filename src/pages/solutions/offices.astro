@@ -1,0 +1,181 @@
+---
+// Environment page: "robot barista for offices" / corporate pantry automation.
+// Offices are the one environment where the machine usually earns nothing, so
+// the economics here are cost-per-cup against alternatives, not payback.
+import GuideLayout from "@/layouts/GuideLayout.astro";
+import FaqStructuredData from "@/components/foundations/head/FaqStructuredData.astro";
+import type { FaqItem, TocEntry } from "@/data/seo";
+import {
+  ATTENDANT_PER_DAY,
+  CONSUMABLE_PER_CUP,
+  UTILITIES_PER_DAY,
+  usd,
+  usd2,
+} from "@/data/economics";
+
+const IRIS_PRO = 29500;
+const CUPS = 60;
+const YEARS = 5;
+
+// Free-vend: no revenue line, so the useful figure is all-in cost per cup.
+const capexPerDay = IRIS_PRO / (365 * YEARS);
+const fixedPerDay = ATTENDANT_PER_DAY + UTILITIES_PER_DAY;
+const consumablesPerDay = CUPS * CONSUMABLE_PER_CUP;
+const costPerDay = capexPerDay + fixedPerDay + consumablesPerDay;
+const costPerCup = costPerDay / CUPS;
+const HIGH_STREET = 4.75;
+
+const toc: TocEntry[] = [
+  { id: "the-problem", label: "The pantry problem" },
+  { id: "numbers", label: "Cost per cup, free-vend" },
+  { id: "which-machine", label: "Which machine" },
+  { id: "siting", label: "Siting and services" },
+  { id: "watch-out", label: "What to watch for" },
+  { id: "faq", label: "FAQ" },
+];
+const crumbs = [
+  { name: "Home", href: "/" },
+  { name: "Solutions", href: "/solutions/" },
+  { name: "Corporate offices", href: "/solutions/offices/" },
+];
+
+const faqs: FaqItem[] = [
+  {
+    q: "How much does a robot barista cost an office per cup?",
+    a: `On a free-vend model at ${CUPS} cups a day, all-in cost lands near ${usd2(costPerCup)} a cup — that is consumables, the daily service round, power, and the machine amortised across ${YEARS} years, with no revenue line at all. The comparison that matters is against a nearby café at ${usd2(HIGH_STREET)} or against your existing catering contract, not against a payback period.`,
+  },
+  {
+    q: "Can a robot barista handle a whole office's morning coffee?",
+    a: "It depends on how concentrated the demand is. A 70 cups/hour machine sustains roughly 45 to 50 real cups an hour. A 300-person office that all wants coffee between 08:45 and 09:15 needs about 10 drinks a minute, which no single machine in this class delivers. Offices with staggered arrival patterns are much better candidates than those with a fixed start time.",
+  },
+  {
+    q: "Does a robot barista fit in a standard office pantry?",
+    a: "Compact enclosed units occupy roughly 1.89 m², which fits the space a bank of vending machines already occupies, but they stand about two metres tall and weigh over 700 kg. Floor loading on an upper storey and clearance at the rear for service access are the two constraints that most often rule a pantry out.",
+  },
+];
+---
+
+<GuideLayout
+  title="Robot Barista for Offices — Cost Per Cup vs the Café Downstairs"
+  description="What a robot barista actually costs an office per cup on a free-vend model, whether one machine can clear a morning peak, and the pantry constraints that decide the answer."
+  kicker="Solutions by environment"
+  heading="Robot baristas for corporate offices"
+  standfirst="Offices are the one environment where the machine usually sells nothing, so payback is the wrong measure. The question is what a cup costs all-in, and whether one unit can survive 09:00."
+  updated="2026-08-19"
+  toc={toc}
+  crumbs={crumbs}
+  ctaTitle="Tell us your headcount and your arrival pattern."
+  ctaBody="Those two numbers decide whether one machine works, whether you need two, or whether a bean-to-cup unit is the honest answer."
+>
+  <FaqStructuredData items={faqs} />
+
+  <h2 id="the-problem">The pantry problem</h2>
+  <p>
+    Office coffee sits awkwardly between a cost line and a retention line. Filter
+    urns and pod machines are cheap and nobody values them. A staffed micro-café is
+    valued and rarely survives a budget review. Meanwhile a meaningful share of the
+    working day is spent walking to a café and back, and the employer pays for that
+    time without recording it anywhere.
+  </p>
+  <p>
+    A <a href="/robot-barista/">robot barista</a> is an unusual fit here because
+    the usual argument — that it trades hours a person cannot — matters less than
+    the fact that it delivers café-grade espresso at a cost that is nowhere near
+    café pricing.
+  </p>
+
+  <h2 id="numbers">Cost per cup on a free-vend model</h2>
+  <p>
+    Most office deployments are free-vend: no payment, no revenue, no card
+    processing. That removes payback from the conversation entirely and leaves one
+    number that matters.
+  </p>
+  <div class="not-prose my-8 overflow-hidden rounded-xl border border-line">
+    <dl class="grid grid-cols-2 divide-x divide-y divide-line-faint sm:grid-cols-4">
+      {
+        [
+          ["Cups per day", CUPS.toString()],
+          ["Consumables/cup", usd2(CONSUMABLE_PER_CUP)],
+          ["All-in cost/cup", usd2(costPerCup)],
+          ["Cost per year", usd(costPerDay * 365)],
+        ].map(([k, v]) => (
+          <div class="p-5">
+            <dt class="text-[12.5px] uppercase tracking-[0.06em] text-faint">{k}</dt>
+            <dd class="mt-1.5 font-mono text-[19px] font-bold tabular-nums text-ink">{v}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+  <p>
+    At {CUPS} cups a day, a {usd(IRIS_PRO)} machine amortised over {YEARS} years —
+    plus consumables at {usd2(CONSUMABLE_PER_CUP)}, a 30-minute daily service round
+    at {usd(ATTENDANT_PER_DAY)}, and {usd(UTILITIES_PER_DAY)} of power and
+    connectivity — delivers a cup at about <strong>{usd2(costPerCup)}</strong>.
+    Against roughly {usd2(HIGH_STREET)} at a nearby café, the same drink costs the
+    business around {((costPerCup / HIGH_STREET) * 100).toFixed(0)}% of what a
+    subsidised café allowance would.
+  </p>
+  <p>
+    The sensitivity worth understanding: the service round and the machine are
+    fixed, so cost per cup falls sharply with volume and rises sharply without it.
+    Halve the cups and the all-in figure roughly doubles. Sizing this against real
+    headcount rather than hope is the whole exercise — the
+    <a href="/robot-barista/cost/">cost model</a> shows the same effect across
+    every environment. These are modelled figures, not audited results.
+  </p>
+
+  <h2 id="which-machine">Which machine</h2>
+  <ul>
+    <li>
+      <strong><a href="/products/iris-pro/">Iris Pro</a></strong> — the office
+      default. 1.89 m², the narrowest cabinet we carry, 70 cups an hour, 24
+      presets, app-managed. Fits the footprint a vending bank already occupies.
+    </li>
+    <li>
+      <strong><a href="/products/iris/">Iris</a></strong> — the same throughput
+      with a wider recipe list and a larger frontage, for floors with the room and
+      the headcount to use it.
+    </li>
+    <li>
+      <strong><a href="/products/argus-axis/">Argus Axis</a></strong> — the
+      open-bar option for a reception or a client-facing floor, where the visible
+      pour is doing a job that a closed cabinet cannot.
+    </li>
+  </ul>
+
+  <h2 id="siting">Siting and services</h2>
+  <ul>
+    <li><strong>Floor loading</strong> — over 700 kg, which is a real question above ground level</li>
+    <li><strong>A dedicated circuit</strong> — these are not a spare-socket appliance</li>
+    <li><strong>Water and drainage</strong>, or a tanked unit with the refill written into the round</li>
+    <li><strong>Rear clearance</strong> for service access, and a goods lift the crate fits</li>
+    <li><strong>Noise</strong> — grinders next to a desk bank or a meeting room will generate complaints</li>
+    <li><strong>Milk logistics</strong> — fridge capacity and a delivery cadence that survives a Monday</li>
+  </ul>
+
+  <h2 id="watch-out">What to watch for</h2>
+  <ul>
+    <li>
+      <strong>A synchronised arrival peak.</strong> The single most common reason
+      an office machine disappoints. Fixed start times concentrate demand into
+      fifteen minutes and no single unit clears that.
+    </li>
+    <li>
+      <strong>Unowned service.</strong> Office facilities teams absorb the daily
+      round or the machine dies quietly. Name the owner before you order.
+    </li>
+    <li>
+      <strong>Hybrid-working volume.</strong> Model on real attendance, not
+      headcount. A 300-person office at 40% attendance is a 120-person office.
+    </li>
+    <li>
+      <strong>Too little volume for the format.</strong> Below roughly 25 cups a
+      day the fixed costs dominate and a good bean-to-cup machine is the honest
+      recommendation. We will tell you when that is the case.
+    </li>
+  </ul>
+
+  <h2 id="faq">Frequently asked questions</h2>
+  {faqs.map((f) => (<><h3>{f.q}</h3><p>{f.a}</p></>))}
+</GuideLayout>

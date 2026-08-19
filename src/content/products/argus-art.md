@@ -1,5 +1,6 @@
 ---
-title: "Argus Art | Latte Art Robot for Upscale Events"
+title: "Argus Art — Latte Art Robot Barista for Hotels and Events"
+description: "Argus Art is a latte art robot barista: 4–6 physical pour patterns plus custom image printing, 40 cups an hour, cash and card payment. CE, FCC, ISO 9001. $42,000."
 pubDate: 2026-03-23
 price: 42000
 dimensions: "1600x1200x800 mm"

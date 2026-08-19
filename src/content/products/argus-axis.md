@@ -1,5 +1,6 @@
 ---
-title: "Argus Axis | Automated Barista for Corporate HQs"
+title: "Argus Axis — Open-Bar Automated Barista for Lobbies and HQs"
+description: "Argus Axis is an open-bar automated barista built for visible service: a 6-axis pour, 40 cups an hour, 21.5-inch ordering screen. CE, FCC, ISO 9001. $27,000."
 pubDate: 2026-03-23
 price: 27000
 dimensions: "1600x1200x800 mm"

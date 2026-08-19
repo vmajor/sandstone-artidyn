@@ -48,7 +48,11 @@ const specRows: { label: string; values: string[] }[] = [
 const container = "mx-auto max-w-[1240px] px-8";
 ---
 
-<BaseLayout title="Robot Catalog — Artidyn Robotics" navActive="robots">
+<BaseLayout
+  title="Robot Barista Catalog — 5 Machines Compared, Specs & Prices"
+  description="Compare five commercial robot baristas side by side: throughput, serve time, footprint, power, latte art, and price from $27,000 to $42,000. Figures from our own testing."
+  navActive="robots"
+>
   <!-- ===== Header ===== -->
   <section class="border-b border-line bg-surface">
     <div class={`${container} pb-14 pt-[72px]`}>
@@ -60,6 +64,15 @@ const container = "mx-auto max-w-[1240px] px-8";
         Every robot in this catalog has been vetted and certified by our
         engineering team. The numbers below come from our own testing, not the
         manufacturer's brochure.
+      </p>
+      <p class="mt-4 max-w-[600px] text-[16.5px] leading-relaxed text-body">
+        New to the category? The <a
+          href="/robot-barista/"
+          class="font-semibold text-brand hover:text-brand-hover">robot barista buyer's guide</a
+        > covers how these machines work, what rated throughput really means, and
+        <a href="/robot-barista/cost/" class="font-semibold text-brand hover:text-brand-hover"
+          >what they cost to run</a
+        >.
       </p>
       <div class="mt-9 flex flex-wrap gap-2">
         {
