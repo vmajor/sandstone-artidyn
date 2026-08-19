@@ -94,24 +94,9 @@ const products = defineCollection({
     }),
 });
 
-const solutions = defineCollection({
-  schema: ({ image }) => z.object({
-      title: z.string(),
-      description: z.string().optional(),
-      category: z.string().optional(),
-      image: z
-        .object({
-          url: image(),
-          alt: z.string(),
-        })
-        .optional(),
-    }),
-});
-
 export const collections = {
   team: team,
   legal: legal,
   posts: postsCollection,
   products: products,
-  solutions: solutions,
 };
