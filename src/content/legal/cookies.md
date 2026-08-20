@@ -1,83 +1,59 @@
 ---
 page: Cookies
-pubDate: 2025-11-12
+pubDate: 2026-08-20
 ---
 
 ## Cookie Policy
 
-_Last updated: November 12, 2025_
+_Last updated: August 20, 2026_
 
-This Cookie Policy explains how Artidyn Robotics LLC uses cookies and similar technologies on our website.
+This policy explains what this website stores on your device, and what it loads from other companies. It is short because the site does very little of either.
 
-## What Are Cookies?
+## What we do not do
 
-Cookies are small text files that are stored on your device when you visit our website. They help us provide you with a better browsing experience and allow certain features to work properly.
+We want to be specific about this, because most cookie policies are not:
 
-## Types of Cookies We Use
+- **We do not run analytics.** No Google Analytics, no tag manager, no tracking pixels. We cannot see which pages you visited.
+- **We do not advertise or retarget.** Nothing on this site feeds an advertising network.
+- **We do not have accounts.** There is nothing to log into, so there are no authentication cookies.
+- **We do not embed social media widgets.**
 
-### Essential Cookies
+## What loads when you open a page
 
-These cookies are necessary for the website to function properly. They enable core functionality such as page navigation and access to secure areas.
+Two font services, and nothing else:
 
-- **Session Cookies**: Temporary cookies that expire when you close your browser
-- **Authentication Cookies**: Help us remember your login status
+- **rsms.me** — serves the Inter typeface used for text
+- **fonts.googleapis.com and fonts.gstatic.com** — serve the JetBrains Mono typeface used for figures, prices, and specifications
 
-### Analytics Cookies
+Neither sets a cookie. Both necessarily receive your IP address and browser user-agent as part of the request, in the same way as any file your browser fetches. If you would rather they did not, blocking third-party fonts in your browser leaves this site fully readable in a fallback typeface.
 
-We use these cookies to understand how visitors interact with our website. This helps us improve our solutions and user experience.
+## What loads only if you ask for it
 
-- **Google Analytics**: Tracks page views, session duration, and traffic sources
-- **Usage Statistics**: Helps us understand which pages are most popular
+**Live chat (Crisp).** We use Crisp to answer questions. The chat software is **not loaded when you open a page.** It is only downloaded and started if you press the "Chat with us" button.
 
-### Functional Cookies
+If you press it, Crisp sets first-party cookies and local storage on your device so that a conversation survives a page reload and we can recognise you if you come back to an existing thread. It also processes the messages you send, and technical details such as your IP address, browser, and the page you started from.
 
-These cookies enable enhanced functionality and personalization.
+If you never press the button, none of that happens. That is why this site has no cookie banner: nothing non-essential loads until you take a deliberate action.
 
-- **Preference Cookies**: Remember your language and location preferences
-- **Form Cookies**: Save information you've entered in forms to prevent re-entry
+Crisp acts as a data processor for us. Their privacy documentation is at [crisp.chat/en/privacy](https://crisp.chat/en/privacy/).
 
-## Third-Party Cookies
+## Forms
 
-Some cookies are set by third-party solutions that appear on our pages:
+The contact form submits what you type to us so that we can reply. It does not store cookies to do this.
 
-- **Google Fonts**: For displaying our website typography
-- **Social Media Widgets**: For sharing content on social platforms
-- **Embedded Content**: For displaying videos or interactive elements
+## Managing what is stored
 
-## Managing Cookies
+You can clear or block all of the above through your browser settings — every major browser lets you view and delete stored cookies and site data, block third-party content, or clear everything on exit.
 
-You can control and manage cookies in several ways:
+Clearing Crisp's storage ends the continuity of an existing chat thread. Nothing else on this site depends on stored data, so blocking it does not break anything.
 
-### Browser Settings
+## Changes
 
-Most web browsers allow you to control cookies through their settings. You can:
+If we add anything that stores data or calls a third party, we will update this page and date it. If we ever add analytics, we will say which product and add a consent prompt before it loads.
 
-- View what cookies are stored and delete them individually
-- Block third-party cookies
-- Block cookies from specific sites
-- Block all cookies from being placed
-- Clear all cookies when you close the browser
+## Contact
 
-### Opt-Out Options
-
-- **Google Analytics**: Visit [Google Analytics Opt-out](https://tools.google.com/dlpage/gaoptout) to opt out of Google Analytics tracking
-- **Do Not Track**: Some browsers have a "Do Not Track" feature that signals websites not to track your activity
-
-## Impact of Disabling Cookies
-
-Please note that disabling cookies may affect the functionality of our website:
-
-- You may not be able to access certain areas or features
-- Some preferences may not be saved
-- The website may not work as expected
-
-## Updates to This Policy
-
-We may update this Cookie Policy from time to time to reflect changes in our practices or for legal reasons. We will notify you of any material changes by posting the new policy on this page.
-
-## Contact Us
-
-If you have any questions about our use of cookies, please contact us:
+Questions about this policy:
 
 **Artidyn Robotics LLC**
 Sheridan, Wyoming, USA

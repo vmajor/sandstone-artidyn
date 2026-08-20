@@ -11,7 +11,7 @@ const updated = new Date(frontmatter.pubDate).toLocaleDateString("en-US", {
 });
 ---
 
-<BaseLayout title={`${frontmatter.page} — Artidyn Robotics`} description={description}>
+<BaseLayout title={`${frontmatter.page} — Artidyn Robotics`} description={description} chat={false}>
   <section class="border-b border-line bg-surface">
     <div class={`${container} max-w-[820px] pb-14 pt-[72px]`}>
       <h1 class="text-[clamp(30px,2.8vw,44px)] font-bold tracking-[-0.03em] text-ink">

@@ -1,0 +1,8 @@
+# The redesign removed the numbered solution detail pages. These are the
+# environment pages that replaced them; 301 so any indexed URL keeps its equity.
+/solutions/1   /solutions/offices/    301
+/solutions/2   /solutions/airports/   301
+/solutions/3   /solutions/hotels/     301
+/solutions/1/  /solutions/offices/    301
+/solutions/2/  /solutions/airports/   301
+/solutions/3/  /solutions/hotels/     301
