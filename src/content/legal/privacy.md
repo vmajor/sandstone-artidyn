@@ -21,20 +21,30 @@ We may collect personal information that you provide directly to us, including:
 
 ### Usage Information
 
-We automatically collect certain information when you visit our website:
+We do not run analytics on this website. We do not automatically collect your
+IP address, the pages you visit, or how long you spend on them.
 
-- IP address and location data
-- Browser type and version
-- Pages visited and time spent on our site
-- Referring website information
+Our hosting provider and the font services the site loads receive standard
+request data — IP address and browser user-agent — as an unavoidable part of
+serving files to your browser.
+
+### Live Chat
+
+If you press the "Chat with us" button, our live chat provider Crisp loads and
+collects:
+
+- The messages you send us
+- Your IP address, browser, and the page you started the conversation from
+- Any name or email address you choose to give us in the conversation
+
+Crisp acts as a data processor on our behalf. The chat software is not loaded
+at all unless you press the button.
 
 ### Cookies and Tracking Technologies
 
-We use cookies and similar technologies to enhance your experience:
-
-- Essential cookies for website functionality
-- Analytics cookies to understand usage patterns
-- Preference cookies to remember your settings
+The site sets no cookies of its own and loads no advertising or analytics
+technologies. Crisp sets first-party cookies and local storage, but only after
+you have opened a chat. Full detail is in our [Cookie Policy](/legal/cookies/).
 
 ## How We Use Your Information
 
@@ -53,7 +63,7 @@ We do not sell, trade, or rent your personal information to third parties. We ma
 - With your explicit consent
 - To comply with legal obligations
 - To protect our rights and safety
-- With trusted service providers who assist our operations (under strict confidentiality agreements)
+- With service providers who process data on our behalf under contract, currently our website host (Netlify) and our live chat provider (Crisp)
 
 ## Data Security
 

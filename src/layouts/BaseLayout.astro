@@ -5,11 +5,17 @@ import BaseHead from "@/components/foundations/head/BaseHead.astro";
 // Components — Tech Clarity redesign
 import Nav from "@/components/redesign/Nav.astro";
 import SiteFooter from "@/components/redesign/SiteFooter.astro";
+import ChatLauncher from "@/components/redesign/ChatLauncher.astro";
 // Hide nav/footer with hideNav / hideFooter; highlight the active nav item
-// with navActive ("robots" | "solutions" | "about").
+// with navActive ("robots" | "solutions" | "guide" | "about").
+//
+// The chat launcher is on by default and switched off with chat={false} for
+// pages where chat isn't the right next step — the blog, legal, and the
+// internal styleguide.
 const {
   hideNav = false,
   hideFooter = false,
+  chat = true,
   navActive,
   ...seoProps
 } = Astro.props;
@@ -23,5 +29,6 @@ const {
     {!hideNav && <Nav active={navActive} />}
     <main class="grow"><slot /></main>
     {!hideFooter && <SiteFooter />}
+    {chat && <ChatLauncher />}
   </body>
 </html>
