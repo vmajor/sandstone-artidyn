@@ -8,6 +8,11 @@
 //      keeps us out of prior-consent territory without a banner
 //   3. no "we're away" bubble implying a live queue we don't staff
 //
+// The cost of loading late is that Crisp needs several seconds to boot, so the
+// button shows an explicit progress state and we warm the connection on the
+// first sign of intent (hover/focus/touch). Preconnect is a TCP+TLS handshake
+// only — no cookies, no script execution — so it doesn't undo point 2.
+//
 // Progressive enhancement: with JS off (or if Crisp is blocked) this stays an
 // ordinary link to the contact form.
 //
@@ -20,9 +25,9 @@ const CRISP_WEBSITE_ID = "56e97042-b439-4215-805b-bab65c80167b";
   href="/contact/"
   data-crisp-id={CRISP_WEBSITE_ID}
   aria-label="Chat with us, or open the contact form"
-  class="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2.5 rounded-full bg-brand px-5 py-3.5 text-[14.5px] font-semibold text-white shadow-[0_8px_24px_-8px_rgba(23,32,29,0.45)] transition-colors hover:bg-brand-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand aria-busy:opacity-70 print:hidden"
+  class="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2.5 rounded-full bg-brand px-5 py-3.5 text-[14.5px] font-semibold text-white shadow-[0_8px_24px_-8px_rgba(23,32,29,0.45)] transition-colors hover:bg-brand-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand print:hidden"
 >
-  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+  <svg data-chat-icon width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
     <path
       d="M17 12a2 2 0 0 1-2 2H7l-4 3V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v7Z"
       stroke="currentColor"
@@ -30,38 +35,98 @@ const CRISP_WEBSITE_ID = "56e97042-b439-4215-805b-bab65c80167b";
       stroke-linecap="round"
       stroke-linejoin="round"></path>
   </svg>
-  <span>Chat with us</span>
+  <svg
+    data-chat-spinner
+    hidden
+    width="18"
+    height="18"
+    viewBox="0 0 20 20"
+    fill="none"
+    class="animate-spin"
+    aria-hidden="true"
+  >
+    <circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.7" opacity="0.3"></circle>
+    <path d="M17.5 10a7.5 7.5 0 0 0-7.5-7.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>
+  </svg>
+  <span data-chat-label>Chat with us</span>
 </a>
 
 <script is:inline>
   (() => {
     const el = document.getElementById("chat-launcher");
     if (!el) return;
-    let started = false;
+
+    const icon = el.querySelector("[data-chat-icon]");
+    const spinner = el.querySelector("[data-chat-spinner]");
+    const label = el.querySelector("[data-chat-label]");
+    let warmed = false;
+    let booted = false;
+
+    // First sign of intent: open the connection so the click has less to wait
+    // for. A preconnect exchanges no data and sets no cookies.
+    const warm = () => {
+      if (warmed) return;
+      warmed = true;
+      const link = document.createElement("link");
+      link.rel = "preconnect";
+      link.href = "https://client.crisp.chat";
+      link.crossOrigin = "anonymous";
+      document.head.appendChild(link);
+    };
+    el.addEventListener("pointerenter", warm, { once: true });
+    el.addEventListener("focus", warm, { once: true });
+    el.addEventListener("touchstart", warm, { once: true, passive: true });
+
+    const busy = (on) => {
+      icon.hidden = on;
+      spinner.hidden = !on;
+      label.textContent = on ? "Opening chat…" : "Chat with us";
+      el.setAttribute("aria-busy", String(on));
+    };
 
     el.addEventListener("click", (ev) => {
       // Let modified clicks and non-primary buttons fall through to /contact/.
       if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey || ev.button !== 0) return;
       ev.preventDefault();
-      if (started) return;
-      started = true;
-      el.setAttribute("aria-busy", "true");
 
-      // Queue the open before the client loads; Crisp replays $crisp on boot.
+      // Already running (visitor closed the chat, then clicked again).
+      if (booted) {
+        window.$crisp.push(["do", "chat:open"]);
+        return;
+      }
+      booted = true;
+      busy(true);
+
       window.$crisp = [];
       window.CRISP_WEBSITE_ID = el.dataset.crispId;
-      window.$crisp.push(["do", "chat:open"]);
+
+      // Crisp fires this once the client is initialised and a session exists.
+      // Pushing ["do","chat:open"] onto $crisp before that point is accepted
+      // into the queue and then dropped, which leaves the visitor looking at
+      // Crisp's own bubble instead of an open window. Open from here, and only
+      // hand the launcher over to Crisp once its UI is actually up.
+      window.CRISP_READY_TRIGGER = () => {
+        window.$crisp.push(["do", "chat:open"]);
+        el.remove();
+      };
 
       const s = document.createElement("script");
       s.src = "https://client.crisp.chat/l.js";
       s.async = true;
-      // Once Crisp's own launcher is up, ours would be a duplicate.
-      s.onload = () => el.remove();
       // Blocked by an extension or offline — fall back to the contact form.
       s.onerror = () => {
         window.location.href = "/contact/";
       };
       document.head.appendChild(s);
+
+      // If Crisp never signals ready, give the visitor their button back
+      // rather than leaving a dead spinner.
+      setTimeout(() => {
+        if (document.getElementById("chat-launcher")) {
+          busy(false);
+          booted = false;
+        }
+      }, 15000);
     });
   })();
 </script>
