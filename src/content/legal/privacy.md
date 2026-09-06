@@ -5,7 +5,7 @@ pubDate: 2025-11-12
 
 ## Privacy Policy
 
-_Last updated: November 12, 2025_
+_Last updated: September 6, 2026_
 
 This Privacy Policy describes how Artidyn Robotics LLC ("we," "us," or "our") collects, uses, and protects your information when you use our website and solutions.
 
@@ -21,8 +21,11 @@ We may collect personal information that you provide directly to us, including:
 
 ### Usage Information
 
-We do not run analytics on this website. We do not automatically collect your
-IP address, the pages you visit, or how long you spend on them.
+We use Ahrefs Web Analytics to count page views. It is cookieless: it stores
+nothing on your device, sets no identifier that follows you between visits or
+between sites, and does not retain your IP address. It records the page loaded,
+the referring page, and coarse details derived from the request such as country,
+device type, and browser. We cannot tie any of it back to you as an individual.
 
 Our hosting provider and the font services the site loads receive standard
 request data — IP address and browser user-agent — as an unavoidable part of
@@ -42,9 +45,10 @@ at all unless you press the button.
 
 ### Cookies and Tracking Technologies
 
-The site sets no cookies of its own and loads no advertising or analytics
-technologies. Crisp sets first-party cookies and local storage, but only after
-you have opened a chat. Full detail is in our [Cookie Policy](/legal/cookies/).
+The site sets no cookies of its own and loads no advertising technologies. Our
+analytics are cookieless and store nothing on your device. Crisp sets first-party
+cookies and local storage, but only after you have opened a chat. Full detail is
+in our [Cookie Policy](/legal/cookies/).
 
 ## How We Use Your Information
 

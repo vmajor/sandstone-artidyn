@@ -5,7 +5,7 @@ pubDate: 2026-08-20
 
 ## Cookie Policy
 
-_Last updated: August 20, 2026_
+_Last updated: September 6, 2026_
 
 This policy explains what this website stores on your device, and what it loads from other companies. It is short because the site does very little of either.
 
@@ -13,19 +13,22 @@ This policy explains what this website stores on your device, and what it loads 
 
 We want to be specific about this, because most cookie policies are not:
 
-- **We do not run analytics.** No Google Analytics, no tag manager, no tracking pixels. We cannot see which pages you visited.
+- **We do not run cookie-based analytics.** No Google Analytics, no tag manager, no advertising or tracking pixels. We do run one cookieless page-view counter, described below.
 - **We do not advertise or retarget.** Nothing on this site feeds an advertising network.
 - **We do not have accounts.** There is nothing to log into, so there are no authentication cookies.
 - **We do not embed social media widgets.**
 
 ## What loads when you open a page
 
-Two font services, and nothing else:
+Two font services and one analytics script, and nothing else:
 
 - **rsms.me** — serves the Inter typeface used for text
 - **fonts.googleapis.com and fonts.gstatic.com** — serve the JetBrains Mono typeface used for figures, prices, and specifications
+- **analytics.ahrefs.com** — counts page views so we know which pages people find useful
 
-Neither sets a cookie. Both necessarily receive your IP address and browser user-agent as part of the request, in the same way as any file your browser fetches. If you would rather they did not, blocking third-party fonts in your browser leaves this site fully readable in a fallback typeface.
+None of the three sets a cookie. Both necessarily receive your IP address and browser user-agent as part of the request, in the same way as any file your browser fetches. If you would rather they did not, blocking third-party fonts in your browser leaves this site fully readable in a fallback typeface.
+
+**Ahrefs Web Analytics** stores nothing on your device: no cookies, no local storage, no identifier that follows you between visits or between sites. It records the page you loaded, the page that referred you, and coarse details derived from the request — country, device type, browser. It does not retain your IP address or build a profile of you, which is why it loads without a consent prompt. Ahrefs acts as a data processor for us; their privacy documentation is at [ahrefs.com/privacy](https://ahrefs.com/privacy). Any content blocker that blocks analytics will block it, and the site works identically without it.
 
 ## What loads only if you ask for it
 
@@ -49,7 +52,7 @@ Clearing Crisp's storage ends the continuity of an existing chat thread. Nothing
 
 ## Changes
 
-If we add anything that stores data or calls a third party, we will update this page and date it. If we ever add analytics, we will say which product and add a consent prompt before it loads.
+If we add anything that stores data or calls a third party, we will update this page and date it. If we ever add analytics that store data on your device or identify you, we will name the product and ask for consent before it loads.
 
 ## Contact
 
