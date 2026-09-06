@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import CtaPanel from "@/components/redesign/CtaPanel.astro";
 import ProductStructuredData from "@/components/foundations/head/ProductStructuredData.astro";
+import BreadcrumbStructuredData from "@/components/foundations/head/BreadcrumbStructuredData.astro";
 import {
   ROBOT_CONTENT,
   TAG_STYLES,
@@ -44,6 +45,12 @@ const specsRight = [
 
 const container = "mx-auto max-w-[1240px] px-8";
 
+const crumbs = [
+  { name: "Home", href: "/" },
+  { name: "Robots", href: "/products/" },
+  { name: fm.title, href: `/products/${slug}/` },
+];
+
 // The environment each machine is primarily sold into — used for further reading.
 const ENVIRONMENT: Record<string, { href: string; label: string }> = {
   iris: { href: "/solutions/airports/", label: "Robot baristas for airports and transit" },
@@ -59,6 +66,7 @@ const specRow =
 
 <BaseLayout title={fm.title} description={fm.description} navActive="robots">
   <ProductStructuredData product={fm} slug={slug} />
+  <BreadcrumbStructuredData items={crumbs} />
 
   <!-- ===== Product hero ===== -->
   <section class="border-b border-line bg-surface">

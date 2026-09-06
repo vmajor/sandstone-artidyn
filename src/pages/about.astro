@@ -105,16 +105,26 @@ const container = "mx-auto max-w-[1240px] px-8";
                   <p class="mt-3.5 text-sm leading-relaxed text-body">
                     {meta?.bio ?? member.data.bio}
                   </p>
-                  {linkedin && (
+                  <div class="mt-3.5 flex flex-wrap gap-5">
+                    {/* The bio pages are in the sitemap; without this they're
+                        reachable only from blog bylines. */}
                     <a
-                      href={linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="mt-3.5 inline-block text-[13.5px] font-semibold text-brand hover:text-brand-hover"
+                      href={`/team/${member.slug}/`}
+                      class="text-[13.5px] font-semibold text-brand hover:text-brand-hover"
                     >
-                      LinkedIn →
+                      Full profile →
                     </a>
-                  )}
+                    {linkedin && (
+                      <a
+                        href={linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-[13.5px] font-semibold text-brand hover:text-brand-hover"
+                      >
+                        LinkedIn →
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             );

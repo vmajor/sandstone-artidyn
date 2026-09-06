@@ -1,0 +1,52 @@
+---
+// BlogPosting JSON-LD for the /blog/ cluster. The sitewide Organization node
+// is emitted by StructuredData.astro, so publisher references it by @id rather
+// than repeating it.
+const SITE = "https://www.artidyn.ai";
+
+interface Props {
+  headline: string;
+  description: string;
+  url: string;
+  datePublished: Date;
+  authorName: string;
+  authorHref?: string;
+  image?: string;
+  tags?: string[];
+}
+
+const {
+  headline,
+  description,
+  url,
+  datePublished,
+  authorName,
+  authorHref,
+  image,
+  tags = [],
+} = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": `${url}#article`,
+  mainEntityOfPage: url,
+  headline,
+  description,
+  datePublished: new Date(datePublished).toISOString(),
+  // No editorial revision log yet, so the publication date is the honest
+  // answer for both fields.
+  dateModified: new Date(datePublished).toISOString(),
+  author: {
+    "@type": "Person",
+    name: authorName,
+    ...(authorHref ? { url: new URL(authorHref, SITE).toString() } : {}),
+  },
+  publisher: { "@id": `${SITE}/#organization` },
+  ...(image ? { image: new URL(image, SITE).toString() } : {}),
+  ...(tags.length ? { keywords: tags.join(", ") } : {}),
+  isPartOf: { "@id": `${SITE}/#website` },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

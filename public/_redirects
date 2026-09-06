@@ -6,3 +6,20 @@
 /solutions/1/  /solutions/offices/    301
 /solutions/2/  /solutions/airports/   301
 /solutions/3/  /solutions/hotels/     301
+
+# Blog posts moved from numeric filenames to keyword slugs. The numeric URLs
+# were live and in the sitemap, so these are permanent.
+/blog/posts/1/  /blog/posts/food-robotics-industry-maturity/    301
+/blog/posts/2/  /blog/posts/robot-point-solution-vs-platform/   301
+/blog/posts/3/  /blog/posts/hotel-robots-24-7-guest-service/    301
+/blog/posts/4/  /blog/posts/airport-coffee-automation/          301
+/blog/posts/5/  /blog/posts/hotel-labor-shortage-2026/          301
+/blog/posts/6/  /blog/posts/robot-barista-throughput-airports/  301
+/blog/posts/7/  /blog/posts/office-coffee-robot-cost/           301
+/blog/posts/1   /blog/posts/food-robotics-industry-maturity/    301
+/blog/posts/2   /blog/posts/robot-point-solution-vs-platform/   301
+/blog/posts/3   /blog/posts/hotel-robots-24-7-guest-service/    301
+/blog/posts/4   /blog/posts/airport-coffee-automation/          301
+/blog/posts/5   /blog/posts/hotel-labor-shortage-2026/          301
+/blog/posts/6   /blog/posts/robot-barista-throughput-airports/  301
+/blog/posts/7   /blog/posts/office-coffee-robot-cost/           301
